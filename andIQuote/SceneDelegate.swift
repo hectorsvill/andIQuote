@@ -12,11 +12,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
+    
+    var layout: UICollectionViewLayout {
+        let layout = UICollectionViewFlowLayout()
+        
+        layout.scrollDirection = .horizontal
+        
+        layout.minimumLineSpacing = 10
+        return layout
+    }
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let _ = (scene as? UIWindowScene) else { return }
-    
+        guard let windowScene = (scene as? UIWindowScene) else { return }
         
+        window = UIWindow(windowScene: windowScene)
+        window?.makeKeyAndVisible()
+        let vc = QuoteCollectionViewController(collectionViewLayout: layout)
+        window?.rootViewController = vc
     
     }
 }

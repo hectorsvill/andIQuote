@@ -68,8 +68,8 @@
 			isa = PBXGroup;
 			children = (
 				C43D445723A47018005B2458 /* Main.storyboard */,
-				C43D445A23A4701C005B2458 /* Assets.xcassets */,
 				C43D445C23A4701C005B2458 /* LaunchScreen.storyboard */,
+				C43D445A23A4701C005B2458 /* Assets.xcassets */,
 				C43D445F23A4701C005B2458 /* Info.plist */,
 			);
 			path = Resources;
