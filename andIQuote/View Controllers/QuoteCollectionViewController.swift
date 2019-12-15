@@ -37,11 +37,11 @@ class QuoteCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupTestData()
         setupViews()
         configureDataSource()
+        setupTestData()
         createSnapShot()
-        print(quotes)
+//        print(quotes)
         
     }
     
@@ -49,6 +49,7 @@ class QuoteCollectionViewController: UICollectionViewController {
         dataSource = QuoteDataSource(collectionView: collectionView)
             { (collectionView, indexPath, quote) -> UICollectionViewCell? in
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuoteCell.reuseId, for: indexPath) as? QuoteCell else { return UICollectionViewCell() }
+                print(quote)
                 cell.quote = quote
                 return cell
         }
@@ -93,4 +94,12 @@ class QuoteCollectionViewController: UICollectionViewController {
     }
     
     
+}
+
+
+extension QuoteCollectionViewController: UICollectionViewDelegateFlowLayout {
+ 
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: view.frame.height)
+    }
 }
