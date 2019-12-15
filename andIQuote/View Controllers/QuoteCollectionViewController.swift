@@ -25,9 +25,6 @@ class QuoteCollectionViewController: UICollectionViewController {
     var heartButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-//        let heartImage = UIImage(systemName: "heart")
-//        let heartImage = UIImage(systemName: "heart.fill")
-//        button.setImage(heartImage, for: .normal)
         button.tintColor = .label
         button.addTarget(self, action: #selector(heartButtonTapped), for: .touchUpInside)
         return button
@@ -41,20 +38,27 @@ class QuoteCollectionViewController: UICollectionViewController {
         configureDataSource()
         setupTestData()
         createSnapShot()
-//        print(quotes)
+
         
     }
     
     private func configureDataSource() {
         dataSource = QuoteDataSource(collectionView: collectionView)
             { (collectionView, indexPath, quote) -> UICollectionViewCell? in
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuoteCell.reuseId, for: indexPath) as? QuoteCell else { return UICollectionViewCell() }
-                print(quote)
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuoteCell.reuseId, for: indexPath) as! QuoteCell 
+                
                 cell.quote = quote
                 return cell
         }
     }
     
+//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+//        coordinator.animate(alongsideTransition: { (_) in
+//            self.collectionViewLayout.invalidateLayout()
+//            print("hrerherher")
+//        })
+//    }
+//
     private func createSnapShot() {
         var snapShot = NSDiffableDataSourceSnapshot<Section, Quote>()
         snapShot.appendSections([.main])
@@ -67,7 +71,7 @@ class QuoteCollectionViewController: UICollectionViewController {
         collectionView.backgroundColor = .systemBackground
         collectionView.register(QuoteCell.self, forCellWithReuseIdentifier: QuoteCell.reuseId)
         
-        
+        collectionView.isPagingEnabled = true
         collectionView.addSubview(heartButton)
         
         let config = UIImage.SymbolConfiguration(pointSize: 45, weight: .light, scale: .large)
@@ -79,13 +83,8 @@ class QuoteCollectionViewController: UICollectionViewController {
             heartButton.bottomAnchor.constraint(equalTo: collectionView.safeAreaLayoutGuide.bottomAnchor, constant: 0),
             
         ])
-        
-        
+    
     }
-    
-    
-    
-    
 
     @objc func heartButtonTapped() {
         let config = UIImage.SymbolConfiguration(pointSize: 45, weight: .medium, scale: .large)

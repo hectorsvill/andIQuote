@@ -13,28 +13,30 @@ class QuoteCell: UICollectionViewCell {
     
     var quote: Quote? { didSet { setupView()} }
 
-    var quoteTextView: UITextView {
+    let quoteTextView: UITextView = {
         let textview = UITextView()
         textview.translatesAutoresizingMaskIntoConstraints = false
         textview.textAlignment = .justified
         textview.textColor = .label
+        textview.isEditable = false
+        textview.isSelectable = false
+        textview.isScrollEnabled = false
         return textview
-    }
+    }()
     
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .green
-       
-        
+//        setupView()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     
     private func getAttributedText() -> NSAttributedString {
+        backgroundColor = .systemBackground
         guard let quote = quote else { return NSAttributedString(string: "") }
         let attributedString = NSMutableAttributedString(string: quote.str, attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 24)])
         let author = quote.author ?? ""
@@ -44,25 +46,30 @@ class QuoteCell: UICollectionViewCell {
     }
     
     private func setupView() {
-        let quoteContainerView = UIView()
-        quoteContainerView.translatesAutoresizingMaskIntoConstraints = false
-        quoteContainerView.backgroundColor = .red
+//        let quoteContainerView = UIView()
+//        addSubview(quoteTextView)
+//        quoteContainerView.translatesAutoresizingMaskIntoConstraints = false
+//        quoteContainerView.backgroundColor =  .blue//.systemBackground
         
-        addSubview(quoteTextView)
-        addSubview(quoteContainerView)
+        
+//        addSubview(quoteContainerView)
         quoteTextView.attributedText = getAttributedText()
-        
-//        NSLayoutConstraint.activate([
+        addSubview(quoteTextView)
+        NSLayoutConstraint.activate([
+            
 //            quoteContainerView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-//            quoteContainerView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor),
 //            quoteContainerView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
 //            quoteContainerView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+//            quoteContainerView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor),
+            
+            quoteTextView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            quoteTextView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            quoteTextView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 8),
+            quoteTextView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -8),
 //
-//            quoteTextView.centerYAnchor.constraint(equalTo: quoteContainerView.centerYAnchor),
-//            quoteTextView.centerXAnchor.constraint(equalTo: quoteContainerView.centerXAnchor),
-//            quoteContainerView
-//        ])
+        ])
         
+
     
 
         

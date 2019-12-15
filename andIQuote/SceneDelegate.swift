@@ -17,8 +17,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let layout = UICollectionViewFlowLayout()
         
         layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 0
+
         
-        layout.minimumLineSpacing = 10
         return layout
     }
 
