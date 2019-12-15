@@ -37,28 +37,21 @@ class QuoteCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupTestData()
         setupViews()
-        
-        
-        
-        
+        configureDataSource()
+        createSnapShot()
+        print(quotes)
         
     }
     
     private func configureDataSource() {
-        
         dataSource = QuoteDataSource(collectionView: collectionView)
             { (collectionView, indexPath, quote) -> UICollectionViewCell? in
-            
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-                
-                
-                
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuoteCell.reuseId, for: indexPath) as? QuoteCell else { return UICollectionViewCell() }
+                cell.quote = quote
                 return cell
-                
         }
-        
-        
     }
     
     private func createSnapShot() {
@@ -71,11 +64,13 @@ class QuoteCollectionViewController: UICollectionViewController {
     
     private func setupViews() {
         collectionView.backgroundColor = .systemBackground
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(QuoteCell.self, forCellWithReuseIdentifier: QuoteCell.reuseId)
         
         
         collectionView.addSubview(heartButton)
-        let heartImage = UIImage(systemName: "heart")
+        
+        let config = UIImage.SymbolConfiguration(pointSize: 45, weight: .light, scale: .large)
+        let heartImage = UIImage(systemName: "heart", withConfiguration: config)
         heartButton.setImage(heartImage, for: .normal)
         
         NSLayoutConstraint.activate([
@@ -92,7 +87,8 @@ class QuoteCollectionViewController: UICollectionViewController {
     
 
     @objc func heartButtonTapped() {
-        let heartImage = UIImage(systemName: "heart.fill")
+        let config = UIImage.SymbolConfiguration(pointSize: 45, weight: .medium, scale: .large)
+        let heartImage = UIImage(systemName: "heart.fill", withConfiguration: config)
         heartButton.setImage(heartImage, for: .normal)
     }
     

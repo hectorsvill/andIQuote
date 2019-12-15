@@ -12,8 +12,9 @@
 		C43D445923A47018005B2458 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C43D445723A47018005B2458 /* Main.storyboard */; };
 		C43D445B23A4701C005B2458 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C43D445A23A4701C005B2458 /* Assets.xcassets */; };
 		C43D445E23A4701C005B2458 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C43D445C23A4701C005B2458 /* LaunchScreen.storyboard */; };
-		C43D446723A47138005B2458 /* QuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D446623A47138005B2458 /* QuoteViewController.swift */; };
+		C43D446723A47138005B2458 /* QuoteCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D446623A47138005B2458 /* QuoteCollectionViewController.swift */; };
 		C43D446A23A47E67005B2458 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D446923A47E67005B2458 /* Quote.swift */; };
+		C43D446D23A48677005B2458 /* QuoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D446C23A48677005B2458 /* QuoteCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,8 +25,9 @@
 		C43D445A23A4701C005B2458 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C43D445D23A4701C005B2458 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C43D445F23A4701C005B2458 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C43D446623A47138005B2458 /* QuoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteViewController.swift; sourceTree = "<group>"; };
+		C43D446623A47138005B2458 /* QuoteCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteCollectionViewController.swift; sourceTree = "<group>"; };
 		C43D446923A47E67005B2458 /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
+		C43D446C23A48677005B2458 /* QuoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				C43D445123A47018005B2458 /* AppDelegate.swift */,
 				C43D445323A47018005B2458 /* SceneDelegate.swift */,
 				C43D446B23A47ED7005B2458 /* Model */,
+				C43D446E23A4867F005B2458 /* Views */,
 				C43D446823A4713F005B2458 /* View Controllers */,
 				C43D446523A4705C005B2458 /* Resources */,
 			);
@@ -81,7 +84,7 @@
 		C43D446823A4713F005B2458 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C43D446623A47138005B2458 /* QuoteViewController.swift */,
+				C43D446623A47138005B2458 /* QuoteCollectionViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -92,6 +95,14 @@
 				C43D446923A47E67005B2458 /* Quote.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		C43D446E23A4867F005B2458 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C43D446C23A48677005B2458 /* QuoteCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,7 +177,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C43D446A23A47E67005B2458 /* Quote.swift in Sources */,
-				C43D446723A47138005B2458 /* QuoteViewController.swift in Sources */,
+				C43D446723A47138005B2458 /* QuoteCollectionViewController.swift in Sources */,
+				C43D446D23A48677005B2458 /* QuoteCell.swift in Sources */,
 				C43D445223A47018005B2458 /* AppDelegate.swift in Sources */,
 				C43D445423A47018005B2458 /* SceneDelegate.swift in Sources */,
 			);
