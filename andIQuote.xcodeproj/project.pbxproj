@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C433640123A833ED00CE2BEA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C433640023A833ED00CE2BEA /* ViewController.swift */; };
+		C433640C23AA120E00CE2BEA /* QuotesLibrary.json in Resources */ = {isa = PBXBuildFile; fileRef = C433640B23AA120E00CE2BEA /* QuotesLibrary.json */; };
 		C43D445223A47018005B2458 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D445123A47018005B2458 /* AppDelegate.swift */; };
 		C43D445423A47018005B2458 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D445323A47018005B2458 /* SceneDelegate.swift */; };
 		C43D445923A47018005B2458 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C43D445723A47018005B2458 /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		C433640023A833ED00CE2BEA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C433640B23AA120E00CE2BEA /* QuotesLibrary.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = QuotesLibrary.json; sourceTree = "<group>"; };
 		C43D444E23A47018005B2458 /* andIQuote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = andIQuote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C43D445123A47018005B2458 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C43D445323A47018005B2458 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 				C43D445C23A4701C005B2458 /* LaunchScreen.storyboard */,
 				C43D445A23A4701C005B2458 /* Assets.xcassets */,
 				C43D445F23A4701C005B2458 /* Info.plist */,
+				C433640B23AA120E00CE2BEA /* QuotesLibrary.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -172,6 +175,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C433640C23AA120E00CE2BEA /* QuotesLibrary.json in Resources */,
 				C43D445E23A4701C005B2458 /* LaunchScreen.storyboard in Resources */,
 				C43D445B23A4701C005B2458 /* Assets.xcassets in Resources */,
 				C43D445923A47018005B2458 /* Main.storyboard in Resources */,
