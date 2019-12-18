@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftSoup
 
 class QuoteCell: UICollectionViewCell {
     static let reuseId: String = "QuoteCell"

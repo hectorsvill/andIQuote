@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C433640123A833ED00CE2BEA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C433640023A833ED00CE2BEA /* ViewController.swift */; };
+		C433640323A9A23A00CE2BEA /* andIQuote-QuotesLibrary.json in Resources */ = {isa = PBXBuildFile; fileRef = C433640223A9A23A00CE2BEA /* andIQuote-QuotesLibrary.json */; };
 		C43D445223A47018005B2458 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D445123A47018005B2458 /* AppDelegate.swift */; };
 		C43D445423A47018005B2458 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D445323A47018005B2458 /* SceneDelegate.swift */; };
 		C43D445923A47018005B2458 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C43D445723A47018005B2458 /* Main.storyboard */; };
@@ -15,9 +17,12 @@
 		C43D446723A47138005B2458 /* QuoteCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D446623A47138005B2458 /* QuoteCollectionViewController.swift */; };
 		C43D446A23A47E67005B2458 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D446923A47E67005B2458 /* Quote.swift */; };
 		C43D446D23A48677005B2458 /* QuoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D446C23A48677005B2458 /* QuoteCell.swift */; };
+		C47C06D923A75AA700F22EE8 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = C47C06D823A75AA700F22EE8 /* SwiftSoup */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C433640023A833ED00CE2BEA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C433640223A9A23A00CE2BEA /* andIQuote-QuotesLibrary.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "andIQuote-QuotesLibrary.json"; sourceTree = "<group>"; };
 		C43D444E23A47018005B2458 /* andIQuote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = andIQuote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C43D445123A47018005B2458 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C43D445323A47018005B2458 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -36,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C47C06D923A75AA700F22EE8 /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +85,7 @@
 				C43D445C23A4701C005B2458 /* LaunchScreen.storyboard */,
 				C43D445A23A4701C005B2458 /* Assets.xcassets */,
 				C43D445F23A4701C005B2458 /* Info.plist */,
+				C433640223A9A23A00CE2BEA /* andIQuote-QuotesLibrary.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -87,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				C43D446623A47138005B2458 /* QuoteCollectionViewController.swift */,
+				C433640023A833ED00CE2BEA /* ViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -123,6 +131,9 @@
 			dependencies = (
 			);
 			name = andIQuote;
+			packageProductDependencies = (
+				C47C06D823A75AA700F22EE8 /* SwiftSoup */,
+			);
 			productName = andIQuote;
 			productReference = C43D444E23A47018005B2458 /* andIQuote.app */;
 			productType = "com.apple.product-type.application";
@@ -151,6 +162,9 @@
 				Base,
 			);
 			mainGroup = C43D444523A47018005B2458;
+			packageReferences = (
+				C47C06D723A75AA700F22EE8 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+			);
 			productRefGroup = C43D444F23A47018005B2458 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -166,6 +180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C43D445E23A4701C005B2458 /* LaunchScreen.storyboard in Resources */,
+				C433640323A9A23A00CE2BEA /* andIQuote-QuotesLibrary.json in Resources */,
 				C43D445B23A4701C005B2458 /* Assets.xcassets in Resources */,
 				C43D445923A47018005B2458 /* Main.storyboard in Resources */,
 			);
@@ -178,6 +193,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C433640123A833ED00CE2BEA /* ViewController.swift in Sources */,
 				C43D446A23A47E67005B2458 /* Quote.swift in Sources */,
 				C43D446723A47138005B2458 /* QuoteCollectionViewController.swift in Sources */,
 				C43D446D23A48677005B2458 /* QuoteCell.swift in Sources */,
@@ -380,6 +396,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C47C06D723A75AA700F22EE8 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C47C06D823A75AA700F22EE8 /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C47C06D723A75AA700F22EE8 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C43D444623A47018005B2458 /* Project object */;
 }

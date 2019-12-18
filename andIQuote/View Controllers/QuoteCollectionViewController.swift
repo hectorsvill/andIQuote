@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SwiftSoup
+
 
 typealias QuoteDataSource = UICollectionViewDiffableDataSource<QuoteCollectionViewController.Section, Quote>
 
