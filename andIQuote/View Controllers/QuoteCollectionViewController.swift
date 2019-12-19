@@ -12,7 +12,7 @@ import UIKit
 typealias QuoteDataSource = UICollectionViewDiffableDataSource<QuoteCollectionViewController.Section, QuoteDetail>
 
 class QuoteCollectionViewController: UICollectionViewController {
-    let quoteController = QuoteController()
+    var quoteController: QuoteController!
     
     enum Section {
         case main

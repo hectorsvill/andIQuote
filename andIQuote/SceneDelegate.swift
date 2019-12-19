@@ -11,7 +11,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    let quoteController = QuoteController()
     
     var layout: UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
@@ -29,6 +29,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         window?.makeKeyAndVisible()
         let vc = QuoteCollectionViewController(collectionViewLayout: layout)
+        vc.quoteController = quoteController
         window?.rootViewController = vc
     
     }
