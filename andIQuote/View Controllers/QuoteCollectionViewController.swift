@@ -18,8 +18,6 @@ class QuoteCollectionViewController: UICollectionViewController {
         case main
     }
     
-    var quotes = [Quote]()
-    
     private var dataSource: QuoteDataSource!
     
     var heartButton: UIButton = {
@@ -35,10 +33,7 @@ class QuoteCollectionViewController: UICollectionViewController {
         
         setupViews()
         configureDataSource()
-        setupTestData()
         createSnapShot()
-
-        
     }
     
     private func configureDataSource() {

@@ -14,7 +14,6 @@
 		C43D445B23A4701C005B2458 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C43D445A23A4701C005B2458 /* Assets.xcassets */; };
 		C43D445E23A4701C005B2458 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C43D445C23A4701C005B2458 /* LaunchScreen.storyboard */; };
 		C43D446723A47138005B2458 /* QuoteCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D446623A47138005B2458 /* QuoteCollectionViewController.swift */; };
-		C43D446A23A47E67005B2458 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D446923A47E67005B2458 /* Quote.swift */; };
 		C43D446D23A48677005B2458 /* QuoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D446C23A48677005B2458 /* QuoteCell.swift */; };
 		C4F0E90E23AB3297005917A8 /* QuoteLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F0E90D23AB3297005917A8 /* QuoteLibrary.swift */; };
 		C4F0E91023AB330D005917A8 /* QuoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F0E90F23AB330D005917A8 /* QuoteController.swift */; };
@@ -30,7 +29,6 @@
 		C43D445D23A4701C005B2458 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C43D445F23A4701C005B2458 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C43D446623A47138005B2458 /* QuoteCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteCollectionViewController.swift; sourceTree = "<group>"; };
-		C43D446923A47E67005B2458 /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		C43D446C23A48677005B2458 /* QuoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteCell.swift; sourceTree = "<group>"; };
 		C4F0E90D23AB3297005917A8 /* QuoteLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteLibrary.swift; sourceTree = "<group>"; };
 		C4F0E90F23AB330D005917A8 /* QuoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteController.swift; sourceTree = "<group>"; };
@@ -102,7 +100,6 @@
 		C43D446B23A47ED7005B2458 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C43D446923A47E67005B2458 /* Quote.swift */,
 				C4F0E90D23AB3297005917A8 /* QuoteLibrary.swift */,
 			);
 			path = Model;
@@ -192,7 +189,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C43D446A23A47E67005B2458 /* Quote.swift in Sources */,
 				C4F0E91023AB330D005917A8 /* QuoteController.swift in Sources */,
 				C43D446723A47138005B2458 /* QuoteCollectionViewController.swift in Sources */,
 				C43D446D23A48677005B2458 /* QuoteCell.swift in Sources */,
