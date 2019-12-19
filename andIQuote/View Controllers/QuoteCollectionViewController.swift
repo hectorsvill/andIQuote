@@ -7,14 +7,12 @@
 //
 
 import UIKit
-import SwiftSoup
 
 
-typealias QuoteDataSource = UICollectionViewDiffableDataSource<QuoteCollectionViewController.Section, Quote>
+typealias QuoteDataSource = UICollectionViewDiffableDataSource<QuoteCollectionViewController.Section, QuoteDetail>
 
 class QuoteCollectionViewController: UICollectionViewController {
-    
-    
+    let quoteController = QuoteController()
     
     enum Section {
         case main
@@ -31,7 +29,6 @@ class QuoteCollectionViewController: UICollectionViewController {
         button.addTarget(self, action: #selector(heartButtonTapped), for: .touchUpInside)
         return button
     }()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,9 +59,9 @@ class QuoteCollectionViewController: UICollectionViewController {
 //    }
 //
     private func createSnapShot() {
-        var snapShot = NSDiffableDataSourceSnapshot<Section, Quote>()
+        var snapShot = NSDiffableDataSourceSnapshot<Section, QuoteDetail>()
         snapShot.appendSections([.main])
-        snapShot.appendItems(quotes)
+        snapShot.appendItems(quoteController.quotes)
         dataSource.apply(snapShot, animatingDifferences: true)
     }
     
