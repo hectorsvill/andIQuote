@@ -23,12 +23,20 @@ class QuoteCollectionViewController: UICollectionViewController {
     
     private var dataSource: QuoteDataSource!
     
+   
+    var squareButton: UIButton = {
+           let button = UIButton()
+           button.translatesAutoresizingMaskIntoConstraints = false
+           button.tintColor = .label
+//           button.addTarget(self, action: #selector(clockButtonTapped), for: .touchUpInside)
+           return button
+    }()
     
-    var clockButton: UIButton = {
+    var lineButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .label
-        button.addTarget(self, action: #selector(clockButtonTapped), for: .touchUpInside)
+//        button.addTarget(self, action: #selector(clockButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -81,11 +89,15 @@ class QuoteCollectionViewController: UICollectionViewController {
         collectionView.isPagingEnabled = true
         let config = UIImage.SymbolConfiguration(pointSize: 25, weight: .light, scale: .large)
         
-        // Clock button
-        collectionView.addSubview(clockButton)
+        // square and arrow up
+        collectionView.addSubview(squareButton)
+        let squareImage = UIImage(systemName: "square.and.arrow.up", withConfiguration: config)
+        squareButton.setImage(squareImage, for: .normal)
         
-        let clockImage = UIImage(systemName: "clock", withConfiguration: config)
-        clockButton.setImage(clockImage, for: .normal)
+        // line button
+        collectionView.addSubview(lineButton)
+        let lineImage = UIImage(systemName: "line.horizontal.3", withConfiguration: config)
+        lineButton.setImage(lineImage, for: .normal)
         
         // heart button
         let thumsupImage = UIImage(systemName: "hand.thumbsup", withConfiguration: config)
@@ -95,23 +107,24 @@ class QuoteCollectionViewController: UICollectionViewController {
         let bubleImage = UIImage(systemName: "text.bubble", withConfiguration: config)
         bubbleButton.setImage(bubleImage, for: .normal)
 
-        let stackView = UIStackView(arrangedSubviews: [bubbleButton, heartButton])
+        let lowerStackView = UIStackView(arrangedSubviews: [bubbleButton, heartButton])
 
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.spacing = 16
+        lowerStackView.translatesAutoresizingMaskIntoConstraints = false
+        lowerStackView.axis = .horizontal
+        lowerStackView.spacing = 16
         
-        collectionView.addSubview(stackView)
+        collectionView.addSubview(lowerStackView)
         
         NSLayoutConstraint.activate([
-            clockButton.topAnchor.constraint(equalTo: collectionView.safeAreaLayoutGuide.topAnchor, constant: 8),
-            clockButton.rightAnchor.constraint(equalTo: collectionView.safeAreaLayoutGuide.rightAnchor, constant: -8),
+            squareButton.topAnchor.constraint(equalTo: collectionView.safeAreaLayoutGuide.topAnchor, constant: 8),
+            squareButton.rightAnchor.constraint(equalTo: collectionView.safeAreaLayoutGuide.rightAnchor, constant: -8),
             
-            stackView.rightAnchor.constraint(equalTo: collectionView.safeAreaLayoutGuide.rightAnchor, constant: -8),
-            stackView.bottomAnchor.constraint(equalTo: collectionView.safeAreaLayoutGuide.bottomAnchor, constant: -8),
+            lineButton.topAnchor.constraint(equalTo: collectionView.safeAreaLayoutGuide.topAnchor, constant: 8),
+            lineButton.leftAnchor.constraint(equalTo: collectionView.safeAreaLayoutGuide.leftAnchor, constant: 8),
             
+            lowerStackView.rightAnchor.constraint(equalTo: collectionView.safeAreaLayoutGuide.rightAnchor, constant: -8),
+            lowerStackView.bottomAnchor.constraint(equalTo: collectionView.safeAreaLayoutGuide.bottomAnchor, constant: -8),
         ])
-    
     }
 
     @objc func heartButtonTapped() {
