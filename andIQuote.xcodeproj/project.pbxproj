@@ -68,7 +68,7 @@
 			children = (
 				C43D445123A47018005B2458 /* AppDelegate.swift */,
 				C43D445323A47018005B2458 /* SceneDelegate.swift */,
-				C4F0E90F23AB330D005917A8 /* QuoteController.swift */,
+				C4F0E91123AB3AFC005917A8 /* Model Controller */,
 				C43D446B23A47ED7005B2458 /* Model */,
 				C43D446E23A4867F005B2458 /* Views */,
 				C43D446823A4713F005B2458 /* View Controllers */,
@@ -111,6 +111,14 @@
 				C43D446C23A48677005B2458 /* QuoteCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		C4F0E91123AB3AFC005917A8 /* Model Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C4F0E90F23AB330D005917A8 /* QuoteController.swift */,
+			);
+			path = "Model Controller";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
