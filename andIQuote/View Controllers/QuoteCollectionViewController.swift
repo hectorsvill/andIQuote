@@ -28,7 +28,7 @@ class QuoteCollectionViewController: UICollectionViewController {
            let button = UIButton()
            button.translatesAutoresizingMaskIntoConstraints = false
            button.tintColor = .label
-//           button.addTarget(self, action: #selector(clockButtonTapped), for: .touchUpInside)
+           button.addTarget(self, action: #selector(squareButtonTapped), for: .touchUpInside)
            return button
     }()
     
@@ -144,13 +144,15 @@ class QuoteCollectionViewController: UICollectionViewController {
     }
     
     @objc func bubbleButtonTapped() {
-    //        let config = UIImage.SymbolConfiguration(pointSize: 45, weight: .medium, scale: .large)
-    //        let clockImage = UIImage(systemName: "clock.fill", withConfiguration: config)
-    //        clockButton.setImage(clockImage, for: .normal)
             
-        }
+    }
         
-    
+    @objc func squareButtonTapped() {
+        let index = collectionView.contentOffset.x / collectionView.frame.size.width
+        let quote = quoteController.quotes[Int(index)]
+        let vc = UIActivityViewController(activityItems: [quote.body], applicationActivities: [])
+        present(vc, animated: true)
+    }
 }
 
 

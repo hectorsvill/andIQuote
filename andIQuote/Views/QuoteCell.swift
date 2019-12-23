@@ -47,21 +47,9 @@ class QuoteCell: UICollectionViewCell {
     }
     
     private func setupView() {
-//        let quoteContainerView = UIView()
-//        addSubview(quoteTextView)
-//        quoteContainerView.translatesAutoresizingMaskIntoConstraints = false
-//        quoteContainerView.backgroundColor =  .blue//.systemBackground
-        
-        
-//        addSubview(quoteContainerView)
-        quoteTextView.attributedText = getAttributedText()
-        addSubview(quoteTextView)
-        NSLayoutConstraint.activate([
-            
-//            quoteContainerView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-//            quoteContainerView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-//            quoteContainerView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-//            quoteContainerView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor),
+            quoteTextView.attributedText = getAttributedText()
+            addSubview(quoteTextView)
+            NSLayoutConstraint.activate([
             
             quoteTextView.centerYAnchor.constraint(equalTo: centerYAnchor),
             quoteTextView.centerXAnchor.constraint(equalTo: centerXAnchor),
