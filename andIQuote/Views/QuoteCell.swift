@@ -39,8 +39,8 @@ class QuoteCell: UICollectionViewCell {
     private func getAttributedText() -> NSAttributedString {
         backgroundColor = .systemBackground
         guard let quote = quote else { return NSAttributedString(string: "") }
-        let attributedString = NSMutableAttributedString(string: quote.body, attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 24), NSAttributedString.Key.foregroundColor: UIColor.label])
-        let author = quote.author
+        let attributedString = NSMutableAttributedString(string: quote.quoteText, attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 24), NSAttributedString.Key.foregroundColor: UIColor.label])
+        let author = quote.quoteAuthor
         attributedString.append(NSAttributedString(string: "\n\n\(author)", attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.label]))
         
         return attributedString

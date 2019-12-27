@@ -24,6 +24,14 @@ class QuoteCollectionViewController: UICollectionViewController {
     private var dataSource: QuoteDataSource!
     
    
+    override func viewDidLoad() {
+           super.viewDidLoad()
+           
+           setupViews()
+           configureDataSource()
+           createSnapShot()
+    }
+    
     var squareButton: UIButton = {
            let button = UIButton()
            button.translatesAutoresizingMaskIntoConstraints = false
@@ -36,7 +44,7 @@ class QuoteCollectionViewController: UICollectionViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .label
-//        button.addTarget(self, action: #selector(clockButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(lineButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -56,13 +64,33 @@ class QuoteCollectionViewController: UICollectionViewController {
         return button
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setupViews()
-        configureDataSource()
-        createSnapShot()
+    @objc func heartButtonTapped() {
+        let config = UIImage.SymbolConfiguration(pointSize: 25, weight: .medium, scale: .large)
+        let heartImage = UIImage(systemName: "hand.thumbsup.fill", withConfiguration: config)
+        heartButton.setImage(heartImage, for: .normal)
     }
+    
+    
+    @objc func lineButtonTapped() {
+        let vc = QuoteReviewViewController()
+        present(vc, animated: true, completion: nil)
+    }
+        
+    @objc func bubbleButtonTapped() {
+        let vc = QuoteReviewViewController()
+        present(vc, animated: true, completion: nil)
+    }
+        
+    @objc func squareButtonTapped() {
+        let index = collectionView.contentOffset.x / collectionView.frame.size.width
+        let quote = quoteController.quotes[Int(index)]
+        let vc = UIActivityViewController(activityItems: [quote.quoteText], applicationActivities: [])
+        present(vc, animated: true, completion: nil)
+    }
+    
+}
+
+extension QuoteCollectionViewController {
     
     private func configureDataSource() {
         dataSource = QuoteDataSource(collectionView: collectionView) {
@@ -78,10 +106,10 @@ class QuoteCollectionViewController: UICollectionViewController {
     private func createSnapShot() {
         var snapShot = NSDiffableDataSourceSnapshot<Section, QuoteDetail>()
         snapShot.appendSections([.main])
-        snapShot.appendItems(quoteController.quotes)
-        dataSource.apply(snapShot, animatingDifferences: true)
+        print(self.quoteController.quotes)
+        snapShot.appendItems(self.quoteController.quotes)
+        self.dataSource.apply(snapShot, animatingDifferences: true)
     }
-    
     
     private func setupViews() {
         collectionView.backgroundColor = .systemBackground
@@ -127,32 +155,7 @@ class QuoteCollectionViewController: UICollectionViewController {
         ])
     }
 
-    @objc func heartButtonTapped() {
-        let config = UIImage.SymbolConfiguration(pointSize: 25, weight: .medium, scale: .large)
-        let heartImage = UIImage(systemName: "hand.thumbsup.fill", withConfiguration: config)
-        heartButton.setImage(heartImage, for: .normal)
-    }
-    
-    @objc func clockButtonTapped() {
-//        let config = UIImage.SymbolConfiguration(pointSize: 45, weight: .medium, scale: .large)
-//        let clockImage = UIImage(systemName: "clock.fill", withConfiguration: config)
-//        clockButton.setImage(clockImage, for: .normal)
-        
-        let e = EKEventViewController()
-        present(e, animated: true)
-        
-    }
-    
-    @objc func bubbleButtonTapped() {
-            
-    }
-        
-    @objc func squareButtonTapped() {
-        let index = collectionView.contentOffset.x / collectionView.frame.size.width
-        let quote = quoteController.quotes[Int(index)]
-        let vc = UIActivityViewController(activityItems: [quote.body], applicationActivities: [])
-        present(vc, animated: true)
-    }
+
 }
 
 

@@ -30,6 +30,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
         let vc = QuoteCollectionViewController(collectionViewLayout: layout)
         vc.quoteController = quoteController
+        vc.quoteController.fetchHappy { e in
+            if let e = e {
+               print(e)
+            }
+        }
+        
         window?.rootViewController = vc
     
     }
