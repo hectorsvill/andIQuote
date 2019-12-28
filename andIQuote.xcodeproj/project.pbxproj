@@ -14,6 +14,7 @@
 		C43D445E23A4701C005B2458 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C43D445C23A4701C005B2458 /* LaunchScreen.storyboard */; };
 		C43D446723A47138005B2458 /* QuoteCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D446623A47138005B2458 /* QuoteCollectionViewController.swift */; };
 		C43D446D23A48677005B2458 /* QuoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D446C23A48677005B2458 /* QuoteCell.swift */; };
+		C4A3941F23B72B04008E36BE /* 300Quotes.json in Resources */ = {isa = PBXBuildFile; fileRef = C4A3941E23B72B04008E36BE /* 300Quotes.json */; };
 		C4E4617823B0683E003A98D1 /* QuoteReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E4617723B0683E003A98D1 /* QuoteReviewViewController.swift */; };
 		C4F0E90E23AB3297005917A8 /* QuoteLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F0E90D23AB3297005917A8 /* QuoteLibrary.swift */; };
 		C4F0E91023AB330D005917A8 /* QuoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F0E90F23AB330D005917A8 /* QuoteController.swift */; };
@@ -29,6 +30,7 @@
 		C43D445F23A4701C005B2458 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C43D446623A47138005B2458 /* QuoteCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteCollectionViewController.swift; sourceTree = "<group>"; };
 		C43D446C23A48677005B2458 /* QuoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteCell.swift; sourceTree = "<group>"; };
+		C4A3941E23B72B04008E36BE /* 300Quotes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 300Quotes.json; sourceTree = "<group>"; };
 		C4E4617723B0683E003A98D1 /* QuoteReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteReviewViewController.swift; sourceTree = "<group>"; };
 		C4F0E90D23AB3297005917A8 /* QuoteLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteLibrary.swift; sourceTree = "<group>"; };
 		C4F0E90F23AB330D005917A8 /* QuoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteController.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 		C43D446523A4705C005B2458 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C4A3941E23B72B04008E36BE /* 300Quotes.json */,
 				C43D445723A47018005B2458 /* Main.storyboard */,
 				C43D445C23A4701C005B2458 /* LaunchScreen.storyboard */,
 				C43D445A23A4701C005B2458 /* Assets.xcassets */,
@@ -185,6 +188,7 @@
 			files = (
 				C43D445E23A4701C005B2458 /* LaunchScreen.storyboard in Resources */,
 				C43D445B23A4701C005B2458 /* Assets.xcassets in Resources */,
+				C4A3941F23B72B04008E36BE /* 300Quotes.json in Resources */,
 				C43D445923A47018005B2458 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
