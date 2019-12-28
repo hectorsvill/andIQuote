@@ -84,7 +84,7 @@ class QuoteCollectionViewController: UICollectionViewController {
     @objc func squareButtonTapped() {
         let index = collectionView.contentOffset.x / collectionView.frame.size.width
         let quote = quoteController.quotes[Int(index)]
-        let vc = UIActivityViewController(activityItems: [quote.quoteText], applicationActivities: [])
+        let vc = UIActivityViewController(activityItems: [quote.body], applicationActivities: [])
         present(vc, animated: true, completion: nil)
     }
     

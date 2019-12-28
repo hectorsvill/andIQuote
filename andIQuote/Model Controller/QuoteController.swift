@@ -13,29 +13,15 @@ class QuoteController {
     
     var quotes = [QuoteDetail]()
     
-    
-    func fetchHappy(completion: @escaping (Error?) -> ()) {
-        let url = URL(string: "https://quote-garden.herokuapp.com/quotes/search/happy")!
-        URLSession.shared.dataTask(with: url) { data, _, error  in
-            if let error = error {
-                completion(error)
-            }
-            
-            guard let data = data else { return }
-            
-            do {
-                let results = try JSONDecoder().decode(Results.self, from: data)
-                let quotes = results.results
-                self.quotes = quotes.shuffled()
-                print(quotes)
-                completion(nil)
-            }catch {
-                completion(error)
-                return
-            }
-            
-        }.resume()
+    init() {
         
+        let path = Bundle.main.path(forResource: "300Quotes", ofType: "json")!
+        let data = try! NSData(contentsOfFile: path) as Data
+        
+        let json = try! JSONDecoder().decode(Results.self, from: data)
+        
+        quotes = json.results
+        print(json.results.count)
     }
     
 }

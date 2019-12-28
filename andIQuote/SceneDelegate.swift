@@ -15,11 +15,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var layout: UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
-        
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
 
-        
         return layout
     }
 
@@ -30,12 +28,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
         let vc = QuoteCollectionViewController(collectionViewLayout: layout)
         vc.quoteController = quoteController
-        vc.quoteController.fetchHappy { e in
-            if let e = e {
-               print(e)
-            }
-        }
-        
         window?.rootViewController = vc
     
     }
