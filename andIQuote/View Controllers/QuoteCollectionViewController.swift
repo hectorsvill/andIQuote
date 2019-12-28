@@ -90,7 +90,11 @@ class QuoteCollectionViewController: UICollectionViewController {
     
 }
 
-extension QuoteCollectionViewController {
+extension QuoteCollectionViewController: UICollectionViewDelegateFlowLayout {
+ 
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: view.frame.height)
+    }
     
     private func configureDataSource() {
         dataSource = QuoteDataSource(collectionView: collectionView) {
@@ -158,10 +162,3 @@ extension QuoteCollectionViewController {
 
 }
 
-
-extension QuoteCollectionViewController: UICollectionViewDelegateFlowLayout {
- 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.height)
-    }
-}
