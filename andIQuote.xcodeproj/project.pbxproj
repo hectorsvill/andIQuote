@@ -18,7 +18,7 @@
 		C4E4617823B0683E003A98D1 /* QuoteReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E4617723B0683E003A98D1 /* QuoteReviewViewController.swift */; };
 		C4F0E90E23AB3297005917A8 /* QuoteLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F0E90D23AB3297005917A8 /* QuoteLibrary.swift */; };
 		C4F0E91023AB330D005917A8 /* QuoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F0E90F23AB330D005917A8 /* QuoteController.swift */; };
-		C4FB3EFF23BAE4A70041B1BD /* LayoutSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FB3EFE23BAE4A70041B1BD /* LayoutSettingsViewController.swift */; };
+		C4FB3EFF23BAE4A70041B1BD /* ThemeSettingsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FB3EFE23BAE4A70041B1BD /* ThemeSettingsCollectionViewController.swift */; };
 		C4FB3F0123BBA8300041B1BD /* UIButton+SimpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FB3F0023BBA8300041B1BD /* UIButton+SimpleButton.swift */; };
 		C4FB3F0323BBABE40041B1BD /* MainQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FB3F0223BBABE40041B1BD /* MainQuoteViewController.swift */; };
 		C4FB3F0523BBC37C0041B1BD /* UIImage+mainViewSymbolConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FB3F0423BBC37C0041B1BD /* UIImage+mainViewSymbolConfig.swift */; };
@@ -38,7 +38,7 @@
 		C4E4617723B0683E003A98D1 /* QuoteReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteReviewViewController.swift; sourceTree = "<group>"; };
 		C4F0E90D23AB3297005917A8 /* QuoteLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteLibrary.swift; sourceTree = "<group>"; };
 		C4F0E90F23AB330D005917A8 /* QuoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteController.swift; sourceTree = "<group>"; };
-		C4FB3EFE23BAE4A70041B1BD /* LayoutSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutSettingsViewController.swift; sourceTree = "<group>"; };
+		C4FB3EFE23BAE4A70041B1BD /* ThemeSettingsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSettingsCollectionViewController.swift; sourceTree = "<group>"; };
 		C4FB3F0023BBA8300041B1BD /* UIButton+SimpleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+SimpleButton.swift"; sourceTree = "<group>"; };
 		C4FB3F0223BBABE40041B1BD /* MainQuoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainQuoteViewController.swift; sourceTree = "<group>"; };
 		C4FB3F0423BBC37C0041B1BD /* UIImage+mainViewSymbolConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+mainViewSymbolConfig.swift"; sourceTree = "<group>"; };
@@ -103,7 +103,7 @@
 		C43D446823A4713F005B2458 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C4FB3EFE23BAE4A70041B1BD /* LayoutSettingsViewController.swift */,
+				C4FB3EFE23BAE4A70041B1BD /* ThemeSettingsCollectionViewController.swift */,
 				C4FB3F0223BBABE40041B1BD /* MainQuoteViewController.swift */,
 				C43D446623A47138005B2458 /* QuoteCollectionViewController.swift */,
 				C4E4617723B0683E003A98D1 /* QuoteReviewViewController.swift */,
@@ -230,7 +230,7 @@
 				C43D445223A47018005B2458 /* AppDelegate.swift in Sources */,
 				C4F0E90E23AB3297005917A8 /* QuoteLibrary.swift in Sources */,
 				C43D445423A47018005B2458 /* SceneDelegate.swift in Sources */,
-				C4FB3EFF23BAE4A70041B1BD /* LayoutSettingsViewController.swift in Sources */,
+				C4FB3EFF23BAE4A70041B1BD /* ThemeSettingsCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

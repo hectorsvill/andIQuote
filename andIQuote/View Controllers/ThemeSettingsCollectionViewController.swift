@@ -8,12 +8,12 @@
 
 import UIKit
 
-class LayoutSettingsViewController: UICollectionViewController {
+class ThemeSettingsCollectionViewController: UICollectionViewController {
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        collectionView.backgroundColor = .systemBackground
     }
     
     

@@ -97,7 +97,7 @@ class QuoteCollectionViewController: UICollectionViewController {
     
     @objc func gearButtonTapped() {
         
-        let vc = LayoutSettingsViewController()
+        let vc = ThemeSettingsCollectionViewController()
         present(vc, animated:  true)
         
         

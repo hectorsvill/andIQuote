@@ -13,7 +13,7 @@ class MainQuoteViewController: UIViewController {
     var menuButton: UIButton!
     var shareButton: UIButton!
     var themeButton: UIButton!
-    var commentButton: UIButton!
+    var ReviewButton: UIButton!
     var likeButton: UIButton!
     var quoteTextView: UITextView!
     
@@ -40,7 +40,7 @@ class MainQuoteViewController: UIViewController {
         upSwipe.direction = .up
         view.addGestureRecognizer(upSwipe)
         
-        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(commentButtonTapped))
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(ReviewButtonTapped))
         downSwipe.direction = .down
         view.addGestureRecognizer(downSwipe)
     }
@@ -92,12 +92,12 @@ class MainQuoteViewController: UIViewController {
     private func setupLayouts() {
         themeButton = UIButton().sfImageButton(systemName: "paintbrush")
         themeButton.addTarget(self, action: #selector(themeButtonTapped), for: .touchUpInside)
-        commentButton = UIButton().sfImageButton(systemName: "text.bubble")
-        commentButton.addTarget(self, action: #selector(commentButtonTapped), for: .touchUpInside)
+        ReviewButton = UIButton().sfImageButton(systemName: "text.bubble")
+        ReviewButton.addTarget(self, action: #selector(ReviewButtonTapped), for: .touchUpInside)
         likeButton = UIButton().sfImageButton(systemName: "hand.thumbsup")
-        likeButton.addTarget(self, action: #selector(commentButtonTapped), for: .touchUpInside)
+        likeButton.addTarget(self, action: #selector(ReviewButtonTapped), for: .touchUpInside)
         
-        let lowerStackView = UIStackView(arrangedSubviews: [themeButton, commentButton, likeButton])
+        let lowerStackView = UIStackView(arrangedSubviews: [themeButton, ReviewButton, likeButton])
         lowerStackView.translatesAutoresizingMaskIntoConstraints = false
         lowerStackView.axis = .horizontal
         lowerStackView.spacing = 32
@@ -127,11 +127,14 @@ class MainQuoteViewController: UIViewController {
     }
     
     @objc func themeButtonTapped() {
-        print("themebutton taped")
         impactGesture(style: .medium)
+        
+        let layout = UICollectionViewFlowLayout()
+        let vc = ThemeSettingsCollectionViewController(collectionViewLayout: layout)
+        present(vc, animated: true)
     }
     
-    @objc func commentButtonTapped() {
+    @objc func ReviewButtonTapped() {
         print("comments thread")
         impactGesture(style: .medium)
     }
