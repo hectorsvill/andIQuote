@@ -45,11 +45,18 @@ class MainQuoteViewController: UIViewController {
     
     @objc func handleSwipeAction(_ sender: UISwipeGestureRecognizer) {
         
-        print(sender.direction == .right )
         if sender.direction == .left {
             quoteTextView.text = quoteController.getNextQuote().body
+            
+
+            let g = UIImpactFeedbackGenerator(style: .medium)
+            g.impactOccurred()
+            
         } else if sender.direction == .right {
             quoteTextView.text = quoteController.getPreviousQuote().body
+
+            let g = UIImpactFeedbackGenerator(style: .light)
+            g.impactOccurred()
         }
     }
     
