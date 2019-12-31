@@ -91,8 +91,11 @@ class MainQuoteViewController: UIViewController {
     
     private func setupLayouts() {
         themeButton = UIButton().sfImageButton(systemName: "paintbrush")
+        themeButton.addTarget(self, action: #selector(themeButtonTapped), for: .touchUpInside)
         commentButton = UIButton().sfImageButton(systemName: "text.bubble")
+        commentButton.addTarget(self, action: #selector(commentButtonTapped), for: .touchUpInside)
         likeButton = UIButton().sfImageButton(systemName: "hand.thumbsup")
+        likeButton.addTarget(self, action: #selector(commentButtonTapped), for: .touchUpInside)
         
         let lowerStackView = UIStackView(arrangedSubviews: [themeButton, commentButton, likeButton])
         lowerStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -114,17 +117,27 @@ class MainQuoteViewController: UIViewController {
     
     @objc func menuButtonTapped() {
         print("menu button tapped")
-        impactGesture(style: .medium)
+        impactGesture(style: .rigid)
         
     }
     
     @objc func shareButtonTapped() {
         print("share button")
+        impactGesture(style: .rigid)
+    }
+    
+    @objc func themeButtonTapped() {
+        print("themebutton taped")
         impactGesture(style: .medium)
     }
     
     @objc func commentButtonTapped() {
         print("comments thread")
+        impactGesture(style: .medium)
+    }
+    
+    @objc func likeButtonTapped() {
+        print("like button")
         impactGesture(style: .medium)
     }
 
