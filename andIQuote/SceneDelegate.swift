@@ -24,11 +24,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        window = UIWindow(windowScene: windowScene)
-        window?.makeKeyAndVisible()
-        let vc = QuoteCollectionViewController(collectionViewLayout: layout)
-        vc.quoteController = quoteController
-        window?.rootViewController = vc
+//        window = UIWindow(windowScene: windowScene)
+//        window?.makeKeyAndVisible()
+////        let vc = QuoteCollectionViewController(collectionViewLayout: layout)
+////        vc.quoteController = quoteController
+//
+//        let vc = MainQuoteViewController()
+//        window?.rootViewController = vc
     
     }
 }

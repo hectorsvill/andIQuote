@@ -9,9 +9,18 @@
 import UIKit
 
 
+extension UIImage {
+    
+    func mainViewSymbolConfig() -> UIImage.SymbolConfiguration {
+        return UIImage.SymbolConfiguration(pointSize: 22, weight: .light, scale: .large)
+    }
+    
+}
+
+
 extension UIButton {
     
-    func sfImageButton(with systemName: String, configuration: UIImage.SymbolConfiguration = UIImage.SymbolConfiguration(pointSize: 16, weight: .light, scale: .large)) -> UIButton {
+    func sfImageButton(systemName: String, configuration: UIImage.SymbolConfiguration = UIImage().mainViewSymbolConfig()) -> UIButton {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .label
