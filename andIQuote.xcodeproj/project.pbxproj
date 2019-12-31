@@ -19,6 +19,7 @@
 		C4F0E90E23AB3297005917A8 /* QuoteLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F0E90D23AB3297005917A8 /* QuoteLibrary.swift */; };
 		C4F0E91023AB330D005917A8 /* QuoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F0E90F23AB330D005917A8 /* QuoteController.swift */; };
 		C4FB3EFF23BAE4A70041B1BD /* LayoutSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FB3EFE23BAE4A70041B1BD /* LayoutSettingsViewController.swift */; };
+		C4FB3F0123BBA8300041B1BD /* UIButton+SimpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FB3F0023BBA8300041B1BD /* UIButton+SimpleButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		C4F0E90D23AB3297005917A8 /* QuoteLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteLibrary.swift; sourceTree = "<group>"; };
 		C4F0E90F23AB330D005917A8 /* QuoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteController.swift; sourceTree = "<group>"; };
 		C4FB3EFE23BAE4A70041B1BD /* LayoutSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutSettingsViewController.swift; sourceTree = "<group>"; };
+		C4FB3F0023BBA8300041B1BD /* UIButton+SimpleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+SimpleButton.swift"; sourceTree = "<group>"; };
 		C4FF08B923A7221A00230111 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
@@ -72,6 +74,7 @@
 			children = (
 				C43D445123A47018005B2458 /* AppDelegate.swift */,
 				C43D445323A47018005B2458 /* SceneDelegate.swift */,
+				C4FB3F0023BBA8300041B1BD /* UIButton+SimpleButton.swift */,
 				C4F0E91123AB3AFC005917A8 /* Model Controller */,
 				C43D446B23A47ED7005B2458 /* Model */,
 				C43D446E23A4867F005B2458 /* Views */,
@@ -207,6 +210,7 @@
 				C43D446723A47138005B2458 /* QuoteCollectionViewController.swift in Sources */,
 				C4E4617823B0683E003A98D1 /* QuoteReviewViewController.swift in Sources */,
 				C43D446D23A48677005B2458 /* QuoteCell.swift in Sources */,
+				C4FB3F0123BBA8300041B1BD /* UIButton+SimpleButton.swift in Sources */,
 				C43D445223A47018005B2458 /* AppDelegate.swift in Sources */,
 				C4F0E90E23AB3297005917A8 /* QuoteLibrary.swift in Sources */,
 				C43D445423A47018005B2458 /* SceneDelegate.swift in Sources */,
