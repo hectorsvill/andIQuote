@@ -12,6 +12,7 @@ import Foundation
 class QuoteController {
     
     var quotes = [QuoteDetail]()
+    var index = 0
     
     init() {
         
@@ -21,6 +22,17 @@ class QuoteController {
         let json = try! JSONDecoder().decode(Results.self, from: data)
         
         quotes = json.results.shuffled()
+    }
+    
+    
+    func getNextQuote() -> QuoteDetail {
+        index += 1
+        return quotes[index]
+    }
+    
+    func getPreviousQuote() -> QuoteDetail {
+        index = index > 0 ? index - 1 : index
+        return quotes[index]
     }
     
 }

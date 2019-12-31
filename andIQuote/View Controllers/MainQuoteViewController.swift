@@ -44,7 +44,13 @@ class MainQuoteViewController: UIViewController {
     
     
     @objc func handleSwipeAction(_ sender: UISwipeGestureRecognizer) {
-        print(sender.direction)
+        
+        print(sender.direction == .right )
+        if sender.direction == .left {
+            quoteTextView.text = quoteController.getNextQuote().body
+        } else if sender.direction == .right {
+            quoteTextView.text = quoteController.getPreviousQuote().body
+        }
     }
     
     
