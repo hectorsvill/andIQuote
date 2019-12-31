@@ -32,26 +32,28 @@ class MainQuoteViewController: UIViewController {
         rightSwipe.direction = .right
         view.addGestureRecognizer(rightSwipe)
         
-        
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeAction(_:)))
         rightSwipe.direction = .left
         view.addGestureRecognizer(leftSwipe)
         
-        // up - share
+        let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(shareButtonTapped))
+        upSwipe.direction = .up
+        view.addGestureRecognizer(upSwipe)
         
-        // down - comments
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(commentButtonTapped))
+        downSwipe.direction = .down
+        view.addGestureRecognizer(downSwipe)
     }
     
-    
     @objc func handleSwipeAction(_ sender: UISwipeGestureRecognizer) {
-        
-        let impactFeedback = UIImpactFeedbackGenerator(style: .light)
-        impactFeedback.impactOccurred()
-        
         if sender.direction == .left {
-            quoteTextView.text = quoteController.getNextQuote().body
+            impactGesture(style: .light)
+            quoteController.getNextQuote()
+            quoteTextView.attributedText = quoteController.attributedString
         } else if sender.direction == .right {
-            quoteTextView.text = quoteController.getPreviousQuote().body
+            impactGesture(style: .soft)
+            quoteController.getPreviousQuote()
+            quoteTextView.attributedText = quoteController.attributedString
         }
     }
     
@@ -64,7 +66,7 @@ class MainQuoteViewController: UIViewController {
         quoteTextView.isSelectable = false
         quoteTextView.isScrollEnabled = false
         
-        quoteTextView.text = quoteController.quotes[0].body
+        quoteTextView.attributedText = quoteController.attributedString
         
         view.addSubview(quoteTextView)
         
@@ -88,7 +90,7 @@ class MainQuoteViewController: UIViewController {
     }
     
     private func setupLayouts() {
-        themeButton = UIButton().sfImageButton(systemName: "gear")
+        themeButton = UIButton().sfImageButton(systemName: "paintbrush")
         commentButton = UIButton().sfImageButton(systemName: "text.bubble")
         likeButton = UIButton().sfImageButton(systemName: "hand.thumbsup")
         
@@ -105,12 +107,25 @@ class MainQuoteViewController: UIViewController {
         ])
     }
     
+    private func impactGesture(style: UIImpactFeedbackGenerator.FeedbackStyle = .light) {
+        let impactFeedback = UIImpactFeedbackGenerator(style: style)
+        impactFeedback.impactOccurred()
+    }
+    
     @objc func menuButtonTapped() {
+        print("menu button tapped")
+        impactGesture(style: .medium)
         
     }
     
     @objc func shareButtonTapped() {
-        
+        print("share button")
+        impactGesture(style: .medium)
+    }
+    
+    @objc func commentButtonTapped() {
+        print("comments thread")
+        impactGesture(style: .medium)
     }
 
 }

@@ -47,15 +47,13 @@ class QuoteCell: UICollectionViewCell {
     }
     
     private func setupView() {
-            quoteTextView.attributedText = getAttributedText()
-            addSubview(quoteTextView)
-            NSLayoutConstraint.activate([
-            
+        quoteTextView.attributedText = getAttributedText()
+        addSubview(quoteTextView)
+        NSLayoutConstraint.activate([
             quoteTextView.centerYAnchor.constraint(equalTo: centerYAnchor),
             quoteTextView.centerXAnchor.constraint(equalTo: centerXAnchor),
             quoteTextView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 8),
             quoteTextView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -8),
-//
         ])
         
 

@@ -6,7 +6,7 @@
 //  Copyright © 2019 Hector. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 
 class QuoteController {
@@ -18,25 +18,28 @@ class QuoteController {
         return quotes[index]
     }
     
+    var attributedString: NSMutableAttributedString {
+        let attributedString = NSMutableAttributedString(string: quote.body, attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 24), NSAttributedString.Key.foregroundColor: UIColor.label])
+        attributedString.append(NSAttributedString(string: "\n\n\(quote.author)", attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.label]))
+        return attributedString
+    }
+    
     init() {
         
         let path = Bundle.main.path(forResource: "300Quotes", ofType: "json")!
         let data = try! NSData(contentsOfFile: path) as Data
-        
         let json = try! JSONDecoder().decode(Results.self, from: data)
         
         quotes = json.results.shuffled()
     }
     
     
-    func getNextQuote() -> QuoteDetail {
+    func getNextQuote() {
         index += 1
-        return quote
     }
     
-    func getPreviousQuote() -> QuoteDetail {
+    func getPreviousQuote() {
         index = index > 0 ? index - 1 : index
-        return quote
     }
     
 }
