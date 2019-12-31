@@ -103,11 +103,13 @@ class QuoteCollectionViewController: UICollectionViewController {
         
     }
     
-    
     private func setupViews() {
         collectionView.backgroundColor = .systemBackground
         collectionView.register(QuoteCell.self, forCellWithReuseIdentifier: QuoteCell.reuseId)
         collectionView.isPagingEnabled = true
+        
+        
+        // configure button
         let config = UIImage.SymbolConfiguration(pointSize: 25, weight: .light, scale: .large)
         
         // square and arrow up
