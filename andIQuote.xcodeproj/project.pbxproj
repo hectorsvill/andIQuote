@@ -15,7 +15,7 @@
 		C43D446723A47138005B2458 /* QuoteCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D446623A47138005B2458 /* QuoteCollectionViewController.swift */; };
 		C43D446D23A48677005B2458 /* QuoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D446C23A48677005B2458 /* QuoteCell.swift */; };
 		C4A3941F23B72B04008E36BE /* 300Quotes.json in Resources */ = {isa = PBXBuildFile; fileRef = C4A3941E23B72B04008E36BE /* 300Quotes.json */; };
-		C4E4617823B0683E003A98D1 /* QuoteReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E4617723B0683E003A98D1 /* QuoteReviewViewController.swift */; };
+		C4E4617823B0683E003A98D1 /* QuoteReviewCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E4617723B0683E003A98D1 /* QuoteReviewCollectionViewController.swift */; };
 		C4F0E90E23AB3297005917A8 /* QuoteLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F0E90D23AB3297005917A8 /* QuoteLibrary.swift */; };
 		C4F0E91023AB330D005917A8 /* QuoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F0E90F23AB330D005917A8 /* QuoteController.swift */; };
 		C4FB3EFF23BAE4A70041B1BD /* ThemeSettingsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FB3EFE23BAE4A70041B1BD /* ThemeSettingsCollectionViewController.swift */; };
@@ -35,7 +35,7 @@
 		C43D446623A47138005B2458 /* QuoteCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteCollectionViewController.swift; sourceTree = "<group>"; };
 		C43D446C23A48677005B2458 /* QuoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteCell.swift; sourceTree = "<group>"; };
 		C4A3941E23B72B04008E36BE /* 300Quotes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 300Quotes.json; sourceTree = "<group>"; };
-		C4E4617723B0683E003A98D1 /* QuoteReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteReviewViewController.swift; sourceTree = "<group>"; };
+		C4E4617723B0683E003A98D1 /* QuoteReviewCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteReviewCollectionViewController.swift; sourceTree = "<group>"; };
 		C4F0E90D23AB3297005917A8 /* QuoteLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteLibrary.swift; sourceTree = "<group>"; };
 		C4F0E90F23AB330D005917A8 /* QuoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteController.swift; sourceTree = "<group>"; };
 		C4FB3EFE23BAE4A70041B1BD /* ThemeSettingsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSettingsCollectionViewController.swift; sourceTree = "<group>"; };
@@ -103,10 +103,10 @@
 		C43D446823A4713F005B2458 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C4FB3EFE23BAE4A70041B1BD /* ThemeSettingsCollectionViewController.swift */,
 				C4FB3F0223BBABE40041B1BD /* MainQuoteViewController.swift */,
 				C43D446623A47138005B2458 /* QuoteCollectionViewController.swift */,
-				C4E4617723B0683E003A98D1 /* QuoteReviewViewController.swift */,
+				C4E4617723B0683E003A98D1 /* QuoteReviewCollectionViewController.swift */,
+				C4FB3EFE23BAE4A70041B1BD /* ThemeSettingsCollectionViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -223,7 +223,7 @@
 				C4F0E91023AB330D005917A8 /* QuoteController.swift in Sources */,
 				C43D446723A47138005B2458 /* QuoteCollectionViewController.swift in Sources */,
 				C4FB3F0323BBABE40041B1BD /* MainQuoteViewController.swift in Sources */,
-				C4E4617823B0683E003A98D1 /* QuoteReviewViewController.swift in Sources */,
+				C4E4617823B0683E003A98D1 /* QuoteReviewCollectionViewController.swift in Sources */,
 				C43D446D23A48677005B2458 /* QuoteCell.swift in Sources */,
 				C4FB3F0123BBA8300041B1BD /* UIButton+SimpleButton.swift in Sources */,
 				C4FB3F0523BBC37C0041B1BD /* UIImage+mainViewSymbolConfig.swift in Sources */,

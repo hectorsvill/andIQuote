@@ -79,12 +79,12 @@ class QuoteCollectionViewController: UICollectionViewController {
     
     
     @objc func lineButtonTapped() {
-        let vc = QuoteReviewViewController()
+        let vc = QuoteReviewCollectionViewController()
         present(vc, animated: true, completion: nil)
     }
         
     @objc func bubbleButtonTapped() {
-        let vc = QuoteReviewViewController()
+        let vc = QuoteReviewCollectionViewController()
         present(vc, animated: true, completion: nil)
     }
         

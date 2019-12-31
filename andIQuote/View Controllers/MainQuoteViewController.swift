@@ -124,6 +124,9 @@ class MainQuoteViewController: UIViewController {
     @objc func shareButtonTapped() {
         print("share button")
         impactGesture(style: .rigid)
+        
+        let activityVC = UIActivityViewController(activityItems: [quoteController.attributedString], applicationActivities: [])
+        present(activityVC, animated: true)
     }
     
     @objc func themeButtonTapped() {
@@ -137,6 +140,10 @@ class MainQuoteViewController: UIViewController {
     @objc func ReviewButtonTapped() {
         print("comments thread")
         impactGesture(style: .medium)
+        
+        let layout = UICollectionViewFlowLayout()
+        let vc = QuoteReviewCollectionViewController(collectionViewLayout: layout)
+        present(vc, animated: true)
     }
     
     @objc func likeButtonTapped() {

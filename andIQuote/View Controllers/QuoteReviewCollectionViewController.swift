@@ -8,13 +8,11 @@
 
 import UIKit
 
-class QuoteReviewViewController: UIViewController {
+class QuoteReviewCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-        
-
+        collectionView.backgroundColor = .systemBackground
     }
     
 
