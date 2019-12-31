@@ -28,27 +28,25 @@ class MainQuoteViewController: UIViewController {
     }
     
     private func setupGestureRecogniser() {
-        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(rightSwipeAction))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeAction(_:)))
         rightSwipe.direction = .right
         view.addGestureRecognizer(rightSwipe)
         
         
-        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(rightSwipeAction))
-        rightSwipe.direction = .right
-        view.addGestureRecognizer(rightSwipe)
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeAction(_:)))
+        rightSwipe.direction = .left
+        view.addGestureRecognizer(leftSwipe)
+        
+        // up - share
+        
+        // down - comments
     }
     
     
-    @objc func rightSwipeAction() {
-    //        get next quote
-        print("right Swipe")
+    @objc func handleSwipeAction(_ sender: UISwipeGestureRecognizer) {
+        print(sender.direction)
     }
     
-
-    @objc func lastSwipeAction() {
-    //        get last quote
-        print("right Swipe")
-    }
     
     private func setupQuoteText() {
         quoteTextView = UITextView()
