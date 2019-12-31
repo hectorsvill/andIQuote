@@ -26,7 +26,6 @@ class QuoteCollectionViewController: UICollectionViewController {
    
     override func viewDidLoad() {
            super.viewDidLoad()
-           
            setupViews()
            configureDataSource()
            createSnapShot()
@@ -64,6 +63,14 @@ class QuoteCollectionViewController: UICollectionViewController {
         return button
     }()
     
+    var gearButton: UIButton = {
+         let button = UIButton()
+         button.translatesAutoresizingMaskIntoConstraints = false
+         button.tintColor = .label
+         button.addTarget(self, action: #selector(gearButtonTapped), for: .touchUpInside)
+         return button
+     }()
+    
     @objc func heartButtonTapped() {
         let config = UIImage.SymbolConfiguration(pointSize: 25, weight: .medium, scale: .large)
         let heartImage = UIImage(systemName: "hand.thumbsup.fill", withConfiguration: config)
@@ -88,32 +95,14 @@ class QuoteCollectionViewController: UICollectionViewController {
         present(vc, animated: true, completion: nil)
     }
     
-}
-
-extension QuoteCollectionViewController: UICollectionViewDelegateFlowLayout {
- 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.height)
+    @objc func gearButtonTapped() {
+        
+        let vc = LayoutSettingsViewController()
+        present(vc, animated:  true)
+        
+        
     }
     
-    private func configureDataSource() {
-        dataSource = QuoteDataSource(collectionView: collectionView) {
-            (collectionView, indexPath, quote) -> UICollectionViewCell? in
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuoteCell.reuseId, for: indexPath) as! QuoteCell 
-                
-                cell.quote = quote
-            
-                return cell
-        }
-    }
-
-    private func createSnapShot() {
-        var snapShot = NSDiffableDataSourceSnapshot<Section, QuoteDetail>()
-        snapShot.appendSections([.main])
-        print(self.quoteController.quotes)
-        snapShot.appendItems(self.quoteController.quotes)
-        self.dataSource.apply(snapShot, animatingDifferences: true)
-    }
     
     private func setupViews() {
         collectionView.backgroundColor = .systemBackground
@@ -138,27 +127,55 @@ extension QuoteCollectionViewController: UICollectionViewDelegateFlowLayout {
         // bubble button
         let bubleImage = UIImage(systemName: "text.bubble", withConfiguration: config)
         bubbleButton.setImage(bubleImage, for: .normal)
-
-        let lowerStackView = UIStackView(arrangedSubviews: [bubbleButton, heartButton])
-
+        
+        
+        // gear button
+        let gearImage = UIImage(systemName: "gear", withConfiguration: config)
+        gearButton.setImage(gearImage, for: .normal)
+        
+        
+        let lowerStackView = UIStackView(arrangedSubviews: [gearButton, bubbleButton, heartButton])
+        
         lowerStackView.translatesAutoresizingMaskIntoConstraints = false
         lowerStackView.axis = .horizontal
         lowerStackView.spacing = 16
-        
+          
         collectionView.addSubview(lowerStackView)
-        
+          
         NSLayoutConstraint.activate([
             squareButton.topAnchor.constraint(equalTo: collectionView.safeAreaLayoutGuide.topAnchor, constant: 8),
             squareButton.rightAnchor.constraint(equalTo: collectionView.safeAreaLayoutGuide.rightAnchor, constant: -8),
-            
+              
             lineButton.topAnchor.constraint(equalTo: collectionView.safeAreaLayoutGuide.topAnchor, constant: 8),
             lineButton.leftAnchor.constraint(equalTo: collectionView.safeAreaLayoutGuide.leftAnchor, constant: 8),
-            
+              
             lowerStackView.rightAnchor.constraint(equalTo: collectionView.safeAreaLayoutGuide.rightAnchor, constant: -8),
             lowerStackView.bottomAnchor.constraint(equalTo: collectionView.safeAreaLayoutGuide.bottomAnchor, constant: -8),
         ])
+      }
+}
+
+extension QuoteCollectionViewController: UICollectionViewDelegateFlowLayout {
+ 
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: view.frame.height)
+    }
+    
+    private func configureDataSource() {
+        dataSource = QuoteDataSource(collectionView: collectionView) {
+            (collectionView, indexPath, quote) -> UICollectionViewCell? in
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuoteCell.reuseId, for: indexPath) as! QuoteCell
+                cell.quote = quote
+
+                return cell
+        }
     }
 
-
+    private func createSnapShot() {
+        var snapShot = NSDiffableDataSourceSnapshot<Section, QuoteDetail>()
+        snapShot.appendSections([.main])
+        snapShot.appendItems(self.quoteController.quotes)
+        self.dataSource.apply(snapShot, animatingDifferences: true)
+    }
 }
 

@@ -20,8 +20,7 @@ class QuoteController {
         
         let json = try! JSONDecoder().decode(Results.self, from: data)
         
-        quotes = json.results
-        print(json.results.count)
+        quotes = json.results.shuffled()
     }
     
 }
