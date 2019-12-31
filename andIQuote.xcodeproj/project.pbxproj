@@ -78,8 +78,7 @@
 			children = (
 				C43D445123A47018005B2458 /* AppDelegate.swift */,
 				C43D445323A47018005B2458 /* SceneDelegate.swift */,
-				C4FB3F0023BBA8300041B1BD /* UIButton+SimpleButton.swift */,
-				C4FB3F0423BBC37C0041B1BD /* UIImage+mainViewSymbolConfig.swift */,
+				C4FB3F0623BBCC120041B1BD /* Extensions */,
 				C4F0E91123AB3AFC005917A8 /* Model Controller */,
 				C43D446B23A47ED7005B2458 /* Model */,
 				C43D446E23A4867F005B2458 /* Views */,
@@ -134,6 +133,15 @@
 				C4F0E90F23AB330D005917A8 /* QuoteController.swift */,
 			);
 			path = "Model Controller";
+			sourceTree = "<group>";
+		};
+		C4FB3F0623BBCC120041B1BD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C4FB3F0023BBA8300041B1BD /* UIButton+SimpleButton.swift */,
+				C4FB3F0423BBC37C0041B1BD /* UIImage+mainViewSymbolConfig.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
