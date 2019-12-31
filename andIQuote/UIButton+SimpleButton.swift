@@ -8,18 +8,7 @@
 
 import UIKit
 
-
-extension UIImage {
-    
-    func mainViewSymbolConfig() -> UIImage.SymbolConfiguration {
-        return UIImage.SymbolConfiguration(pointSize: 22, weight: .light, scale: .large)
-    }
-    
-}
-
-
 extension UIButton {
-    
     func sfImageButton(systemName: String, configuration: UIImage.SymbolConfiguration = UIImage().mainViewSymbolConfig()) -> UIButton {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
