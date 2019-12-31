@@ -9,6 +9,7 @@
 import UIKit
 
 class MainQuoteViewController: UIViewController {
+    let quoteController = QuoteController()
     var menuButton: UIButton!
     var shareButton: UIButton!
     var themeButton: UIButton!
@@ -16,14 +17,37 @@ class MainQuoteViewController: UIViewController {
     var likeButton: UIButton!
     var quoteTextView: UITextView!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setupNavButtons()
         setupLayouts()
         setupQuoteText()
+        setupGestureRecogniser()
         
+    }
+    
+    private func setupGestureRecogniser() {
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(rightSwipeAction))
+        rightSwipe.direction = .right
+        view.addGestureRecognizer(rightSwipe)
+        
+        
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(rightSwipeAction))
+        rightSwipe.direction = .right
+        view.addGestureRecognizer(rightSwipe)
+    }
+    
+    
+    @objc func rightSwipeAction() {
+    //        get next quote
+        print("right Swipe")
+    }
+    
+
+    @objc func lastSwipeAction() {
+    //        get last quote
+        print("right Swipe")
     }
     
     private func setupQuoteText() {
@@ -33,7 +57,7 @@ class MainQuoteViewController: UIViewController {
         quoteTextView.isEditable = false
         quoteTextView.isScrollEnabled = false
         
-        quoteTextView.text = "text"
+        quoteTextView.text = quoteController.quotes[0].body
         
         view.addSubview(quoteTextView)
         
@@ -44,7 +68,6 @@ class MainQuoteViewController: UIViewController {
             quoteTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8)
         ])
     }
-    
     
     private func setupNavButtons() {
         let menuImage = UIImage(systemName: "line.horizontal.3", withConfiguration: UIImage().mainViewSymbolConfig())
