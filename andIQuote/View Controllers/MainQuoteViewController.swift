@@ -61,6 +61,7 @@ class MainQuoteViewController: UIViewController {
         quoteTextView.translatesAutoresizingMaskIntoConstraints = false
         quoteTextView.textAlignment = .justified
         quoteTextView.isEditable = false
+        quoteTextView.isSelectable = false
         quoteTextView.isScrollEnabled = false
         
         quoteTextView.text = quoteController.quotes[0].body

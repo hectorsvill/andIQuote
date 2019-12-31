@@ -14,6 +14,10 @@ class QuoteController {
     var quotes = [QuoteDetail]()
     var index = 0
     
+    var quote: QuoteDetail {
+        return quotes[index]
+    }
+    
     init() {
         
         let path = Bundle.main.path(forResource: "300Quotes", ofType: "json")!
@@ -27,12 +31,12 @@ class QuoteController {
     
     func getNextQuote() -> QuoteDetail {
         index += 1
-        return quotes[index]
+        return quote
     }
     
     func getPreviousQuote() -> QuoteDetail {
         index = index > 0 ? index - 1 : index
-        return quotes[index]
+        return quote
     }
     
 }
