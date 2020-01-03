@@ -32,6 +32,9 @@ class MainQuoteViewController: UIViewController {
         quoteTextView = UITextView()
         quoteTextView.translatesAutoresizingMaskIntoConstraints = false
         quoteTextView.backgroundColor = .clear
+        
+        quoteTextView.textColor = quoteController.background == quoteController.backgrounds[0] ? .label : .black
+        
         quoteTextView.textAlignment = .justified
         quoteTextView.isEditable = false
         quoteTextView.isSelectable = false

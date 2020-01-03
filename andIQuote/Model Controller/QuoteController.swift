@@ -13,7 +13,7 @@ class QuoteController {
     var quoteThemeIsActive = false // theme selecting to inactive
     var backgroundName = "systemBackground"
     var quotes = [QuoteDetail]() // list of quotes
-    let backgrounds = ["systembackground", "red", "green", "blue"]
+    let backgrounds = ["systembackground","green", "blue", "grey", "pink", "red", "teal", "indigo", "orange", "yellow", "purple"]
     private var _quoteIndex = 0 // current index of quote
     private var _backgroundIndex = 0
     
@@ -44,7 +44,7 @@ class QuoteController {
     }
     
     func getPreviousQuote() {
-        _quoteIndex = _quoteIndex > 0 ? _quoteIndex - 1 : _quoteIndex
+        _quoteIndex = _quoteIndex > 0 ? _quoteIndex - 1 : quotes.count - 1
     }
     
     func getNextBackground() {
@@ -52,7 +52,7 @@ class QuoteController {
     }
     
     func getPreviousBackground() {
-        _backgroundIndex = _backgroundIndex > 0 ? _backgroundIndex - 1 : _backgroundIndex
+        _backgroundIndex = _backgroundIndex > 0 ? _backgroundIndex - 1 : backgrounds.count - 1
     }
     
 }
