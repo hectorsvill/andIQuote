@@ -107,7 +107,9 @@ extension MainQuoteViewController {
         quoteController.quoteThemeIsActive.toggle()
         
         let buttonImageName = quoteController.quoteThemeIsActive ? "paintbrush.fill" : "paintbrush"
-        themeButton.setImage(UIImage(systemName: buttonImageName, withConfiguration: UIImage().mainViewSymbolConfig()), for: .normal)
+        let configuration = UIImage().mainViewSymbolConfig()
+        let image = UIImage(systemName: buttonImageName, withConfiguration: configuration)
+        themeButton.setImage(image, for: .normal)
     }
     
     @objc func ReviewButtonTapped() {
@@ -119,8 +121,9 @@ extension MainQuoteViewController {
     }
     
     @objc func likeButtonTapped() {
-        print("like button")
         impactGesture(style: .medium)
+        
+        // add to liked and im
     }
 
 }

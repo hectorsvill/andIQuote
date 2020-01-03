@@ -32,14 +32,23 @@ extension MainQuoteViewController {
     }
     
     @objc func handleSwipeAction(_ sender: UISwipeGestureRecognizer) {
-        if sender.direction == .left {
-            impactGesture(style: .light)
-            quoteController.getNextQuote()
-            quoteTextView.attributedText = quoteController.attributedString
-        } else if sender.direction == .right {
-            impactGesture(style: .soft)
-            quoteController.getPreviousQuote()
-            quoteTextView.attributedText = quoteController.attributedString
+        
+        if !quoteController.quoteThemeIsActive {
+            if sender.direction == .left {
+                // get next quote
+                impactGesture(style: .light)
+                quoteController.getNextQuote()
+                quoteTextView.attributedText = quoteController.attributedString
+            } else if sender.direction == .right {
+                // get previous quote
+                impactGesture(style: .soft)
+                quoteController.getPreviousQuote()
+                quoteTextView.attributedText = quoteController.attributedString
+            }
+        } else {
+            
+            
+            
         }
     }
     
