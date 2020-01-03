@@ -27,36 +27,6 @@ class MainQuoteViewController: UIViewController {
         
     }
     
-    private func setupGestureRecogniser() {
-        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeAction(_:)))
-        rightSwipe.direction = .right
-        view.addGestureRecognizer(rightSwipe)
-        
-        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeAction(_:)))
-        rightSwipe.direction = .left
-        view.addGestureRecognizer(leftSwipe)
-        
-        let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(shareButtonTapped))
-        upSwipe.direction = .up
-        view.addGestureRecognizer(upSwipe)
-        
-        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(ReviewButtonTapped))
-        downSwipe.direction = .down
-        view.addGestureRecognizer(downSwipe)
-    }
-    
-    @objc func handleSwipeAction(_ sender: UISwipeGestureRecognizer) {
-        if sender.direction == .left {
-            impactGesture(style: .light)
-            quoteController.getNextQuote()
-            quoteTextView.attributedText = quoteController.attributedString
-        } else if sender.direction == .right {
-            impactGesture(style: .soft)
-            quoteController.getPreviousQuote()
-            quoteTextView.attributedText = quoteController.attributedString
-        }
-    }
-    
     
     private func setupQuoteText() {
         quoteTextView = UITextView()
@@ -110,19 +80,22 @@ class MainQuoteViewController: UIViewController {
         ])
     }
     
+    // MARK: Impact Gesture
     private func impactGesture(style: UIImpactFeedbackGenerator.FeedbackStyle = .light) {
         let impactFeedback = UIImpactFeedbackGenerator(style: style)
         impactFeedback.impactOccurred()
     }
     
+    
+}
+
+// MARK: Button actions
+extension MainQuoteViewController {
     @objc func menuButtonTapped() {
-        print("menu button tapped")
         impactGesture(style: .rigid)
-        
     }
     
     @objc func shareButtonTapped() {
-        print("share button")
         impactGesture(style: .rigid)
         
         let activityVC = UIActivityViewController(activityItems: [quoteController.attributedString], applicationActivities: [])
@@ -131,19 +104,14 @@ class MainQuoteViewController: UIViewController {
     
     @objc func themeButtonTapped() {
         impactGesture(style: .medium)
-        
-        let layout = UICollectionViewFlowLayout()
-        let vc = ThemeSettingsCollectionViewController(collectionViewLayout: layout)
-        present(vc, animated: true)
     }
     
     @objc func ReviewButtonTapped() {
-        print("comments thread")
         impactGesture(style: .medium)
         
-        let layout = UICollectionViewFlowLayout()
-        let vc = QuoteReviewCollectionViewController(collectionViewLayout: layout)
-        present(vc, animated: true)
+//        let layout = UICollectionViewFlowLayout()
+//        let vc = QuoteReviewCollectionViewController(collectionViewLayout: layout)
+//        present(vc, animated: true)
     }
     
     @objc func likeButtonTapped() {
@@ -151,4 +119,39 @@ class MainQuoteViewController: UIViewController {
         impactGesture(style: .medium)
     }
 
+}
+
+// MARK: MainQuoteViewController + UISwipeGestureRecognizer
+extension MainQuoteViewController {
+    
+    private func setupGestureRecogniser() {
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeAction(_:)))
+        rightSwipe.direction = .right
+        view.addGestureRecognizer(rightSwipe)
+        
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeAction(_:)))
+        rightSwipe.direction = .left
+        view.addGestureRecognizer(leftSwipe)
+        
+        let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(shareButtonTapped))
+        upSwipe.direction = .up
+        view.addGestureRecognizer(upSwipe)
+        
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(ReviewButtonTapped))
+        downSwipe.direction = .down
+        view.addGestureRecognizer(downSwipe)
+    }
+    
+    @objc func handleSwipeAction(_ sender: UISwipeGestureRecognizer) {
+        if sender.direction == .left {
+            impactGesture(style: .light)
+            quoteController.getNextQuote()
+            quoteTextView.attributedText = quoteController.attributedString
+        } else if sender.direction == .right {
+            impactGesture(style: .soft)
+            quoteController.getPreviousQuote()
+            quoteTextView.attributedText = quoteController.attributedString
+        }
+    }
+    
 }

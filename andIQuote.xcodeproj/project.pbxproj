@@ -60,6 +60,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C42EE0F523BECD780045DF02 /* Trash */ = {
+			isa = PBXGroup;
+			children = (
+				C4E4617723B0683E003A98D1 /* QuoteReviewCollectionViewController.swift */,
+				C4FB3EFE23BAE4A70041B1BD /* ThemeSettingsCollectionViewController.swift */,
+				C43D446623A47138005B2458 /* QuoteCollectionViewController.swift */,
+			);
+			path = Trash;
+			sourceTree = "<group>";
+		};
 		C43D444523A47018005B2458 = {
 			isa = PBXGroup;
 			children = (
@@ -95,6 +105,7 @@
 		C43D446523A4705C005B2458 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C42EE0F523BECD780045DF02 /* Trash */,
 				C4A3941E23B72B04008E36BE /* 300Quotes.json */,
 				C43D445723A47018005B2458 /* Main.storyboard */,
 				C43D445C23A4701C005B2458 /* LaunchScreen.storyboard */,
@@ -108,9 +119,6 @@
 			isa = PBXGroup;
 			children = (
 				C4FB3F0223BBABE40041B1BD /* MainQuoteViewController.swift */,
-				C43D446623A47138005B2458 /* QuoteCollectionViewController.swift */,
-				C4E4617723B0683E003A98D1 /* QuoteReviewCollectionViewController.swift */,
-				C4FB3EFE23BAE4A70041B1BD /* ThemeSettingsCollectionViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";

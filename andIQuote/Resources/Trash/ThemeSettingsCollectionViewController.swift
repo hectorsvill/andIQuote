@@ -31,11 +31,11 @@ class ThemeSettingsCollectionViewController: UICollectionViewController {
         collectionView.isPagingEnabled = true
         
         configureDataSource()
+        createSnapShot()
     }
     
     
     private func configureDataSource() {
-        
         dataSource = BackgroundDatSource(collectionView: collectionView, cellProvider: {
             collectionView, indexPath, background -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BackgroundCell.reuseId, for: indexPath) as! BackgroundCell
@@ -43,6 +43,10 @@ class ThemeSettingsCollectionViewController: UICollectionViewController {
             
             return cell
         })
+    }
+    
+    private func createSnapShot() {
+        
         
         
     }
