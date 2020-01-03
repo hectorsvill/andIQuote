@@ -46,9 +46,16 @@ extension MainQuoteViewController {
                 quoteTextView.attributedText = quoteController.attributedString
             }
         } else {
+            if sender.direction == .left {
+                
+                
+                
+                
+            } else if sender.direction == .right {
+                
+            }
             
-            
-            
+            // up down for font
         }
     }
     

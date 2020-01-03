@@ -13,10 +13,12 @@ class QuoteController {
     var quoteThemeIsActive = false // theme selecting to inactive
     var backgroundName = "systemBackground"
     var quotes = [QuoteDetail]() // list of quotes
-    var index = 0 // current index of quote
+    let backgrounds = ["systembackground", "red", "green", "blue"]
+    private var _quoteIndex = 0 // current index of quote
+    private var _backgroundIndex = 0
     
     var quote: QuoteDetail {
-        return quotes[index]
+        return quotes[_quoteIndex]
     }
     
     var attributedString: NSMutableAttributedString {
@@ -26,21 +28,28 @@ class QuoteController {
     }
     
     init() {
-        
         let path = Bundle.main.path(forResource: "300Quotes", ofType: "json")!
         let data = try! NSData(contentsOfFile: path) as Data
         let json = try! JSONDecoder().decode(Results.self, from: data)
         
         quotes = json.results.shuffled()
+        
     }
     
-    
     func getNextQuote() {
-        index += 1
+        _quoteIndex = _quoteIndex >= quotes.count ? 0 : _quoteIndex + 1
     }
     
     func getPreviousQuote() {
-        index = index > 0 ? index - 1 : index
+        _quoteIndex = _quoteIndex > 0 ? _quoteIndex - 1 : _quoteIndex
+    }
+    
+    func getNextBackground() {
+        _backgroundIndex = _backgroundIndex >= backgrounds.count ? 0 : _backgroundIndex + 1
+    }
+    
+    func getPreviousBackground() {
+        _backgroundIndex = _backgroundIndex > 0 ? _backgroundIndex - 1 : _backgroundIndex
     }
     
 }
