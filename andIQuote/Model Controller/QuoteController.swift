@@ -13,7 +13,7 @@ class QuoteController {
     var quoteThemeIsActive = false // theme selecting to inactive
     var quotes = [QuoteDetail]() // list of quotes
     let backgrounds = ["systembackground","green", "blue", "grey", "pink", "red", "teal", "indigo", "orange", "yellow", "purple"]
-    private var _quoteIndex = 0 // current index of quote
+    private var _quoteIndex = UserDefaults().integer(forKey: "QIndex") // current index of quote
     private var _backgroundIndex = UserDefaults().integer(forKey: "BgIndex") // current index of background
     
     var quote: QuoteDetail {
@@ -39,7 +39,7 @@ class QuoteController {
         let data = try! NSData(contentsOfFile: path) as Data
         let json = try! JSONDecoder().decode(Results.self, from: data)
         
-        quotes = json.results.shuffled()
+        quotes = json.results
         
 
         
@@ -62,7 +62,11 @@ class QuoteController {
         _backgroundIndex = _backgroundIndex > 0 ? _backgroundIndex - 1 : backgrounds.count - 1
     }
     
-    func saveBackground() {
+    func saveQuoteIndex() {
+        UserDefaults().set(_quoteIndex, forKey: "QIndex")
+    }
+    
+    func saveBackgroundIndex() {
         UserDefaults().set(_backgroundIndex, forKey: "BgIndex")
     }
     

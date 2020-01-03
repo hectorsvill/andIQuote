@@ -28,19 +28,6 @@ class MainQuoteViewController: UIViewController {
         setupQuoteText()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        print("viewDidDisappear")
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        print("viewWillDisappear")
-       
-        
-    }
-    
-    
     private func setupQuoteText() {
         quoteTextView = UITextView()
         quoteTextView.translatesAutoresizingMaskIntoConstraints = false
@@ -124,7 +111,7 @@ extension MainQuoteViewController {
         let configuration = UIImage().mainViewSymbolConfig()
         let image = UIImage(systemName: buttonImageName, withConfiguration: configuration)
         themeButton.setImage(image, for: .normal)
-        quoteController.saveBackground()
+        quoteController.saveBackgroundIndex()
     }
     
     @objc func ReviewButtonTapped() {

@@ -58,6 +58,8 @@ extension MainQuoteViewController {
             
             // up down for font
         }
+        
+        quoteController.saveQuoteIndex()
     }
     
     func setBackground(_ backgroundString: String) {
