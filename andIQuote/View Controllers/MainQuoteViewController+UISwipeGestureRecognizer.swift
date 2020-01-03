@@ -46,18 +46,14 @@ extension MainQuoteViewController {
                 quoteTextView.attributedText = quoteController.attributedString
             }
         } else {
+            impactGesture(style: .medium)
+            
+            quoteController.getNextBackground()
+            let backgroundString = quoteController.background
             if sender.direction == .left {
-                
-                quoteController.getNextBackground()
-                let backgroundString = quoteController.background
                 setBackground(backgroundString)
-                
             } else if sender.direction == .right {
-                quoteController.getPreviousBackground()
-                let backgroundString = quoteController.background
                 setBackground(backgroundString)
-                
-                
             }
             
             // up down for font
