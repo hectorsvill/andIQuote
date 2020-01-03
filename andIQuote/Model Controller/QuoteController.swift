@@ -10,9 +10,10 @@ import UIKit
 
 
 class QuoteController {
+    var quoteThemeIsActive = false // theme selecting to inactive
     var backgroundName = "systemBackground"
-    var quotes = [QuoteDetail]()
-    var index = 0
+    var quotes = [QuoteDetail]() // list of quotes
+    var index = 0 // current index of quote
     
     var quote: QuoteDetail {
         return quotes[index]

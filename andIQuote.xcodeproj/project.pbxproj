@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C42EE0F223BEC4F20045DF02 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0F123BEC4F20045DF02 /* Background.swift */; };
 		C42EE0F423BEC6230045DF02 /* BackgroundCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0F323BEC6230045DF02 /* BackgroundCell.swift */; };
+		C42EE0F723BED18C0045DF02 /* MainQuoteViewController+UISwipeGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0F623BED18C0045DF02 /* MainQuoteViewController+UISwipeGestureRecognizer.swift */; };
 		C43D445223A47018005B2458 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D445123A47018005B2458 /* AppDelegate.swift */; };
 		C43D445423A47018005B2458 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D445323A47018005B2458 /* SceneDelegate.swift */; };
 		C43D445923A47018005B2458 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C43D445723A47018005B2458 /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 /* Begin PBXFileReference section */
 		C42EE0F123BEC4F20045DF02 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		C42EE0F323BEC6230045DF02 /* BackgroundCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCell.swift; sourceTree = "<group>"; };
+		C42EE0F623BED18C0045DF02 /* MainQuoteViewController+UISwipeGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainQuoteViewController+UISwipeGestureRecognizer.swift"; sourceTree = "<group>"; };
 		C43D444E23A47018005B2458 /* andIQuote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = andIQuote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C43D445123A47018005B2458 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C43D445323A47018005B2458 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				C4FB3F0223BBABE40041B1BD /* MainQuoteViewController.swift */,
+				C42EE0F623BED18C0045DF02 /* MainQuoteViewController+UISwipeGestureRecognizer.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -239,6 +242,7 @@
 				C4FB3F0323BBABE40041B1BD /* MainQuoteViewController.swift in Sources */,
 				C4E4617823B0683E003A98D1 /* QuoteReviewCollectionViewController.swift in Sources */,
 				C43D446D23A48677005B2458 /* QuoteCell.swift in Sources */,
+				C42EE0F723BED18C0045DF02 /* MainQuoteViewController+UISwipeGestureRecognizer.swift in Sources */,
 				C4FB3F0123BBA8300041B1BD /* UIButton+SimpleButton.swift in Sources */,
 				C4FB3F0523BBC37C0041B1BD /* UIImage+mainViewSymbolConfig.swift in Sources */,
 				C43D445223A47018005B2458 /* AppDelegate.swift in Sources */,
