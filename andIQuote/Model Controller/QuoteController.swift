@@ -21,6 +21,10 @@ class QuoteController {
         return quotes[_quoteIndex]
     }
     
+    var background: String {
+        return backgrounds[_backgroundIndex]
+    }
+    
     var attributedString: NSMutableAttributedString {
         let attributedString = NSMutableAttributedString(string: quote.body, attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 24), NSAttributedString.Key.foregroundColor: UIColor.label])
         attributedString.append(NSAttributedString(string: "\n\n\(quote.author)", attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.label]))
@@ -45,7 +49,7 @@ class QuoteController {
     }
     
     func getNextBackground() {
-        _backgroundIndex = _backgroundIndex >= backgrounds.count ? 0 : _backgroundIndex + 1
+        _backgroundIndex = _backgroundIndex >= backgrounds.count - 1 ? 0 : _backgroundIndex + 1
     }
     
     func getPreviousBackground() {

@@ -48,8 +48,19 @@ extension MainQuoteViewController {
         } else {
             if sender.direction == .left {
                 
+                quoteController.getNextBackground()
+                let backgroundString = quoteController.background
                 
                 
+                if backgroundString ==  quoteController.backgrounds[0] {
+                    view.backgroundColor = .systemBackground
+                } else if backgroundString ==  quoteController.backgrounds[1] {
+                    view.backgroundColor = .systemRed
+                } else if backgroundString ==  quoteController.backgrounds[2] {
+                    view.backgroundColor = .systemGreen
+                } else if backgroundString ==  quoteController.backgrounds[3] {
+                    view.backgroundColor = .systemBlue
+                }
                 
             } else if sender.direction == .right {
                 
