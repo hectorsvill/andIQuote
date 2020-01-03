@@ -95,7 +95,7 @@ class MainQuoteViewController: UIViewController {
         ReviewButton = UIButton().sfImageButton(systemName: "text.bubble")
         ReviewButton.addTarget(self, action: #selector(ReviewButtonTapped), for: .touchUpInside)
         likeButton = UIButton().sfImageButton(systemName: "hand.thumbsup")
-        likeButton.addTarget(self, action: #selector(ReviewButtonTapped), for: .touchUpInside)
+        likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         
         let lowerStackView = UIStackView(arrangedSubviews: [themeButton, ReviewButton, likeButton])
         lowerStackView.translatesAutoresizingMaskIntoConstraints = false

@@ -10,7 +10,7 @@ import UIKit
 
 
 class QuoteController {
-    
+    var backgroundName = "systemBackground"
     var quotes = [QuoteDetail]()
     var index = 0
     

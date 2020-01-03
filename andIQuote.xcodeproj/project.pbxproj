@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C42EE0F223BEC4F20045DF02 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0F123BEC4F20045DF02 /* Background.swift */; };
+		C42EE0F423BEC6230045DF02 /* BackgroundCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0F323BEC6230045DF02 /* BackgroundCell.swift */; };
 		C43D445223A47018005B2458 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D445123A47018005B2458 /* AppDelegate.swift */; };
 		C43D445423A47018005B2458 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D445323A47018005B2458 /* SceneDelegate.swift */; };
 		C43D445923A47018005B2458 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C43D445723A47018005B2458 /* Main.storyboard */; };
@@ -25,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C42EE0F123BEC4F20045DF02 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
+		C42EE0F323BEC6230045DF02 /* BackgroundCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCell.swift; sourceTree = "<group>"; };
 		C43D444E23A47018005B2458 /* andIQuote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = andIQuote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C43D445123A47018005B2458 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C43D445323A47018005B2458 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				C4F0E90D23AB3297005917A8 /* QuoteLibrary.swift */,
+				C42EE0F123BEC4F20045DF02 /* Background.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -123,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				C43D446C23A48677005B2458 /* QuoteCell.swift */,
+				C42EE0F323BEC6230045DF02 /* BackgroundCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -229,8 +235,10 @@
 				C4FB3F0523BBC37C0041B1BD /* UIImage+mainViewSymbolConfig.swift in Sources */,
 				C43D445223A47018005B2458 /* AppDelegate.swift in Sources */,
 				C4F0E90E23AB3297005917A8 /* QuoteLibrary.swift in Sources */,
+				C42EE0F423BEC6230045DF02 /* BackgroundCell.swift in Sources */,
 				C43D445423A47018005B2458 /* SceneDelegate.swift in Sources */,
 				C4FB3EFF23BAE4A70041B1BD /* ThemeSettingsCollectionViewController.swift in Sources */,
+				C42EE0F223BEC4F20045DF02 /* Background.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
