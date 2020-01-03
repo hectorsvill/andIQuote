@@ -37,11 +37,10 @@ class QuoteController {
         let json = try! JSONDecoder().decode(Results.self, from: data)
         
         quotes = json.results.shuffled()
-        
     }
     
     func getNextQuote() {
-        _quoteIndex = _quoteIndex >= quotes.count ? 0 : _quoteIndex + 1
+        _quoteIndex = _quoteIndex >= quotes.count - 1 ? 0 : _quoteIndex + 1
     }
     
     func getPreviousQuote() {

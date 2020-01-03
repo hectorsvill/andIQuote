@@ -31,6 +31,7 @@ class MainQuoteViewController: UIViewController {
     private func setupQuoteText() {
         quoteTextView = UITextView()
         quoteTextView.translatesAutoresizingMaskIntoConstraints = false
+        quoteTextView.backgroundColor = .clear
         quoteTextView.textAlignment = .justified
         quoteTextView.isEditable = false
         quoteTextView.isSelectable = false
