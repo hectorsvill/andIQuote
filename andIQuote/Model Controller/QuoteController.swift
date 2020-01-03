@@ -11,11 +11,10 @@ import UIKit
 
 class QuoteController {
     var quoteThemeIsActive = false // theme selecting to inactive
-    var backgroundName = "systemBackground"
     var quotes = [QuoteDetail]() // list of quotes
     let backgrounds = ["systembackground","green", "blue", "grey", "pink", "red", "teal", "indigo", "orange", "yellow", "purple"]
     private var _quoteIndex = 0 // current index of quote
-    private var _backgroundIndex = 0
+    private var _backgroundIndex = UserDefaults().integer(forKey: "BgIndex") // current index of background
     
     var quote: QuoteDetail {
         return quotes[_quoteIndex]
@@ -25,9 +24,13 @@ class QuoteController {
         return backgrounds[_backgroundIndex]
     }
     
+    var quoteForegroundColor: UIColor {
+        return background == backgrounds[0] ? UIColor.label : UIColor.white
+    }
+    
     var attributedString: NSMutableAttributedString {
-        let attributedString = NSMutableAttributedString(string: quote.body, attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 24), NSAttributedString.Key.foregroundColor: UIColor.label])
-        attributedString.append(NSAttributedString(string: "\n\n\(quote.author)", attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.label]))
+        let attributedString = NSMutableAttributedString(string: quote.body, attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 24), NSAttributedString.Key.foregroundColor: quoteForegroundColor])
+        attributedString.append(NSAttributedString(string: "\n\n\(quote.author)", attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: quoteForegroundColor]))
         return attributedString
     }
     
@@ -37,6 +40,10 @@ class QuoteController {
         let json = try! JSONDecoder().decode(Results.self, from: data)
         
         quotes = json.results.shuffled()
+        
+
+        
+        
     }
     
     func getNextQuote() {
@@ -53,6 +60,10 @@ class QuoteController {
     
     func getPreviousBackground() {
         _backgroundIndex = _backgroundIndex > 0 ? _backgroundIndex - 1 : backgrounds.count - 1
+    }
+    
+    func saveBackground() {
+        UserDefaults().set(_backgroundIndex, forKey: "BgIndex")
     }
     
 }

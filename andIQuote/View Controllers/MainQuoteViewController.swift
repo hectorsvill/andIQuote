@@ -19,11 +19,24 @@ class MainQuoteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        
         setupNavButtons()
         setupLayouts()
-        setupQuoteText()
         setupGestureRecogniser()
+        
+        setBackground(quoteController.background)
+        setupQuoteText()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        print("viewDidDisappear")
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("viewWillDisappear")
+       
         
     }
     
@@ -32,14 +45,11 @@ class MainQuoteViewController: UIViewController {
         quoteTextView = UITextView()
         quoteTextView.translatesAutoresizingMaskIntoConstraints = false
         quoteTextView.backgroundColor = .clear
-        
-        quoteTextView.textColor = quoteController.background == quoteController.backgrounds[0] ? .label : .black
-        
+        quoteTextView.textColor = quoteController.background == quoteController.backgrounds[0] ? .label : .white
         quoteTextView.textAlignment = .justified
         quoteTextView.isEditable = false
         quoteTextView.isSelectable = false
         quoteTextView.isScrollEnabled = false
-        
         quoteTextView.attributedText = quoteController.attributedString
         
         view.addSubview(quoteTextView)
@@ -114,6 +124,7 @@ extension MainQuoteViewController {
         let configuration = UIImage().mainViewSymbolConfig()
         let image = UIImage(systemName: buttonImageName, withConfiguration: configuration)
         themeButton.setImage(image, for: .normal)
+        quoteController.saveBackground()
     }
     
     @objc func ReviewButtonTapped() {
@@ -127,7 +138,10 @@ extension MainQuoteViewController {
     @objc func likeButtonTapped() {
         impactGesture(style: .medium)
         
-        // add to liked and im
+        let buttonImageName = quoteController.quoteThemeIsActive ? "hand.thumbsup.fill" : "hand.thumbsup.fill"
+        let configuration = UIImage().mainViewSymbolConfig()
+        let image = UIImage(systemName: buttonImageName, withConfiguration: configuration)
+        likeButton.setImage(image, for: .normal)
     }
 
 }

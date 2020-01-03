@@ -60,8 +60,7 @@ extension MainQuoteViewController {
         }
     }
     
-    private func setBackground(_ backgroundString: String) {
-        
+    func setBackground(_ backgroundString: String) {
         if backgroundString ==  quoteController.backgrounds[0] {
             view.backgroundColor = .systemBackground
         } else if backgroundString ==  quoteController.backgrounds[1] {
@@ -86,9 +85,6 @@ extension MainQuoteViewController {
             view.backgroundColor = .systemPurple
         }
         
-        quoteTextView.textColor = quoteController.background == quoteController.backgrounds[0] ? .label : .white
-        
+        quoteTextView?.textColor = quoteController.background == quoteController.backgrounds[0] ? .label : .white
     }
-    
-    
 }
