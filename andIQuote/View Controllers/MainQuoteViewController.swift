@@ -19,13 +19,10 @@ class MainQuoteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupNavButtons()
         setupLayouts()
         setupGestureRecogniser()
-        
         setBackground(quoteController.background)
-        print(quoteController.background)
         setupQuoteText()
     }
     
@@ -33,7 +30,6 @@ class MainQuoteViewController: UIViewController {
         quoteTextView = UITextView()
         quoteTextView.translatesAutoresizingMaskIntoConstraints = false
         quoteTextView.backgroundColor = .clear
-        quoteTextView.textColor = quoteController.background == quoteController.backgrounds[0] ? .label : .white
         quoteTextView.textAlignment = .justified
         quoteTextView.isEditable = false
         quoteTextView.isSelectable = false

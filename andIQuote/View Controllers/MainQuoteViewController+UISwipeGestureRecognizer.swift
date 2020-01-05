@@ -87,6 +87,6 @@ extension MainQuoteViewController {
             view.backgroundColor = .systemPurple
         }
         
-        quoteTextView?.textColor = quoteController.background == quoteController.backgrounds[0] ? .label : .white
+        quoteTextView?.textColor = quoteController.background == "systemBackground" ? .label : .white
     }
 }

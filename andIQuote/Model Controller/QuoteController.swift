@@ -25,7 +25,7 @@ class QuoteController {
     }
     
     var quoteForegroundColor: UIColor {
-        return background == backgrounds[0] ? UIColor.label : UIColor.white
+        return background == "systemBackground" ? UIColor.label : UIColor.white
     }
     
     var attributedString: NSMutableAttributedString {
@@ -40,10 +40,6 @@ class QuoteController {
         let json = try! JSONDecoder().decode(Results.self, from: data)
         
         quotes = json.results
-        
-
-        
-        
     }
     
     func getNextQuote() {
