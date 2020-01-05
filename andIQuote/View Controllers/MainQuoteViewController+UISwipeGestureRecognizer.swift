@@ -8,9 +8,6 @@
 
 import UIKit
 
-
-
-// MARK: MainQuoteViewController + UISwipeGestureRecognizer
 extension MainQuoteViewController {
     
     func setupGestureRecogniser() {
@@ -32,7 +29,6 @@ extension MainQuoteViewController {
     }
     
     @objc func handleSwipeAction(_ sender: UISwipeGestureRecognizer) {
-        
         if !quoteController.quoteThemeIsActive {
             if sender.direction == .left {
                 // get next quote
@@ -87,6 +83,6 @@ extension MainQuoteViewController {
             view.backgroundColor = .systemPurple
         }
         
-        quoteTextView?.textColor = quoteController.background == "systemBackground" ? .label : .white
+        quoteTextView.textColor = quoteController.background == "systemBackground" ? .label : .white
     }
 }

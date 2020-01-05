@@ -15,7 +15,7 @@ class MainQuoteViewController: UIViewController {
     var themeButton: UIButton!
     var ReviewButton: UIButton!
     var likeButton: UIButton!
-    var quoteTextView: UITextView!
+//    var quoteTextView: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,16 +26,19 @@ class MainQuoteViewController: UIViewController {
         setupQuoteText()
     }
     
+    var quoteTextView: UITextView  = {
+        let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.backgroundColor = .clear
+        textView.textAlignment = .justified
+        textView.isEditable = false
+        textView.isSelectable = false
+        textView.isScrollEnabled = false
+        return textView
+    }()
+    
     private func setupQuoteText() {
-        quoteTextView = UITextView()
-        quoteTextView.translatesAutoresizingMaskIntoConstraints = false
-        quoteTextView.backgroundColor = .clear
-        quoteTextView.textAlignment = .justified
-        quoteTextView.isEditable = false
-        quoteTextView.isSelectable = false
-        quoteTextView.isScrollEnabled = false
         quoteTextView.attributedText = quoteController.attributedString
-        
         view.addSubview(quoteTextView)
         
         NSLayoutConstraint.activate([
