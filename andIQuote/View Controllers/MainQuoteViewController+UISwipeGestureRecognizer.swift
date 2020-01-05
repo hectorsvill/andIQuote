@@ -41,6 +41,17 @@ extension MainQuoteViewController {
                 quoteController.getPreviousQuote()
                 quoteTextView.attributedText = quoteController.attributedString
             }
+            
+            let quoteID = quoteController.quote.id
+            var buttonImageName =  "hand.thumbsup.fill"
+            if !quoteController.favorites.contains(quoteID) {
+                buttonImageName =  "hand.thumbsup"
+            }
+            let configuration = UIImage().mainViewSymbolConfig()
+            let image = UIImage(systemName: buttonImageName, withConfiguration: configuration)
+            likeButton.setImage(image, for: .normal)
+            
+            
         } else {
             impactGesture(style: .medium)
             

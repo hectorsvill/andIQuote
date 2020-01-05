@@ -15,7 +15,6 @@ class MainQuoteViewController: UIViewController {
     var themeButton: UIButton!
     var ReviewButton: UIButton!
     var likeButton: UIButton!
-//    var quoteTextView: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +22,6 @@ class MainQuoteViewController: UIViewController {
         setupLayouts()
         setupGestureRecogniser()
         setBackground(quoteController.background)
-        setupQuoteText()
     }
     
     var quoteTextView: UITextView  = {
@@ -37,18 +35,6 @@ class MainQuoteViewController: UIViewController {
         return textView
     }()
     
-    private func setupQuoteText() {
-        quoteTextView.attributedText = quoteController.attributedString
-        view.addSubview(quoteTextView)
-        
-        NSLayoutConstraint.activate([
-            quoteTextView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            quoteTextView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            quoteTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
-            quoteTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8)
-        ])
-    }
-    
     private func setupNavButtons() {
         let menuImage = UIImage(systemName: "line.horizontal.3", withConfiguration: UIImage().mainViewSymbolConfig())
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: menuImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(menuButtonTapped))
@@ -61,6 +47,9 @@ class MainQuoteViewController: UIViewController {
     }
     
     private func setupLayouts() {
+        quoteTextView.attributedText = quoteController.attributedString
+        view.addSubview(quoteTextView)
+        
         themeButton = UIButton().sfImageButton(systemName: "paintbrush")
         themeButton.addTarget(self, action: #selector(themeButtonTapped), for: .touchUpInside)
         ReviewButton = UIButton().sfImageButton(systemName: "text.bubble")
@@ -78,6 +67,10 @@ class MainQuoteViewController: UIViewController {
         NSLayoutConstraint.activate([
             lowerStackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16),
             lowerStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            quoteTextView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            quoteTextView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            quoteTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
+            quoteTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8)
         ])
     }
     
@@ -125,7 +118,17 @@ extension MainQuoteViewController {
     @objc func likeButtonTapped() {
         impactGesture(style: .medium)
         
-        let buttonImageName = quoteController.quoteThemeIsActive ? "hand.thumbsup.fill" : "hand.thumbsup.fill"
+        let quoteID = quoteController.quote.id
+        var buttonImageName =  "hand.thumbsup"
+        if quoteController.favorites.contains(quoteID) {
+            if let index = quoteController.favorites.firstIndex(of: quoteID) {
+                quoteController.favorites.remove(at: index)
+            }
+        } else {
+            quoteController.favorites.append(quoteID)
+            buttonImageName =  "hand.thumbsup.fill"
+        }
+        
         let configuration = UIImage().mainViewSymbolConfig()
         let image = UIImage(systemName: buttonImageName, withConfiguration: configuration)
         likeButton.setImage(image, for: .normal)
