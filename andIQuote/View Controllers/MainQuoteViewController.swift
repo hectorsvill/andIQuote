@@ -25,6 +25,7 @@ class MainQuoteViewController: UIViewController {
         setupGestureRecogniser()
         
         setBackground(quoteController.background)
+        print(quoteController.background)
         setupQuoteText()
     }
     

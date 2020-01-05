@@ -63,27 +63,27 @@ extension MainQuoteViewController {
     }
     
     func setBackground(_ backgroundString: String) {
-        if backgroundString ==  quoteController.backgrounds[0] {
+        if backgroundString == "systemBackground" {
             view.backgroundColor = .systemBackground
-        } else if backgroundString ==  quoteController.backgrounds[1] {
+        } else if backgroundString ==  "red" {
             view.backgroundColor = .systemRed
-        } else if backgroundString ==  quoteController.backgrounds[2] {
+        } else if backgroundString == "green" {
             view.backgroundColor = .systemGreen
-        } else if backgroundString ==  quoteController.backgrounds[3] {
+        } else if backgroundString ==  "blue" {
             view.backgroundColor = .systemBlue
-        } else if backgroundString ==  quoteController.backgrounds[4] {
+        } else if backgroundString ==  "gray" {
             view.backgroundColor = .systemGray
-        } else if backgroundString ==  quoteController.backgrounds[5] {
+        } else if backgroundString ==  "pink" {
             view.backgroundColor = .systemPink
-        }else if backgroundString ==  quoteController.backgrounds[6] {
+        }else if backgroundString ==  "teal" {
             view.backgroundColor = .systemTeal
-        } else if backgroundString ==  quoteController.backgrounds[7] {
+        } else if backgroundString == "indigo" {
             view.backgroundColor = .systemIndigo
-        } else if backgroundString ==  quoteController.backgrounds[8] {
+        } else if backgroundString ==  "orange" {
             view.backgroundColor = .systemOrange
-        } else if backgroundString ==  quoteController.backgrounds[9] {
+        } else if backgroundString == "yellow" {
             view.backgroundColor = .systemYellow
-        } else if backgroundString ==  quoteController.backgrounds[10] {
+        } else if backgroundString ==  "purple" {
             view.backgroundColor = .systemPurple
         }
         

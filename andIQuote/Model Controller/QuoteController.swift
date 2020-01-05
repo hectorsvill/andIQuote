@@ -12,7 +12,7 @@ import UIKit
 class QuoteController {
     var quoteThemeIsActive = false // theme selecting to inactive
     var quotes = [QuoteDetail]() // list of quotes
-    let backgrounds = ["systembackground","green", "blue", "grey", "pink", "red", "teal", "indigo", "orange", "yellow", "purple"]
+    let backgrounds = ["green", "blue", "gray", "pink", "red", "teal", "indigo", "orange", "yellow", "purple", "systemBackground"]
     private var _quoteIndex = UserDefaults().integer(forKey: "QIndex") // current index of quote
     private var _backgroundIndex = UserDefaults().integer(forKey: "BgIndex") // current index of background
     
