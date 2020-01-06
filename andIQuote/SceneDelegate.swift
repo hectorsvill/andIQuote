@@ -11,27 +11,9 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    let quoteController = QuoteController()
-    
-//    var layout: UICollectionViewLayout {
-//        let layout = UICollectionViewFlowLayout()
-//        layout.scrollDirection = .horizontal
-//        layout.minimumLineSpacing = 0
-//
-//        return layout
-//    }
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let _ = (scene as? UIWindowScene) else { return }
-        
-//        window = UIWindow(windowScene: windowScene)
-//        window?.makeKeyAndVisible()
-////        let vc = QuoteCollectionViewController(collectionViewLayout: layout)
-////        vc.quoteController = quoteController
-//
-//        let vc = MainQuoteViewController()
-//        window?.rootViewController = vc
-    
     }
 }
 

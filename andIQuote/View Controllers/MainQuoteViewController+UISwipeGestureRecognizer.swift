@@ -23,9 +23,9 @@ extension MainQuoteViewController {
         upSwipe.direction = .up
         view.addGestureRecognizer(upSwipe)
         
-        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(ReviewButtonTapped))
-        downSwipe.direction = .down
-        view.addGestureRecognizer(downSwipe)
+//        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(ReviewButtonTapped))
+//        downSwipe.direction = .down
+//        view.addGestureRecognizer(downSwipe)
         
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(likeButtonTapped))
         doubleTap.numberOfTapsRequired = 2
