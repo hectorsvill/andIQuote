@@ -102,6 +102,8 @@ extension MainQuoteViewController {
     @objc func shareButtonTapped() {
         impactGesture(style: .rigid)
         
+        lowerStackView.isHidden = true
+        
         let render = UIGraphicsImageRenderer(size: view.bounds.size)
         let image = render.image { _ in
             view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
@@ -109,6 +111,8 @@ extension MainQuoteViewController {
 
         let activityVC = UIActivityViewController(activityItems: [quoteController.attributedString, image], applicationActivities: [])
         present(activityVC, animated: true)
+        
+        lowerStackView.isHidden = false
     }
     
     // MARK: themeButtonTapped
