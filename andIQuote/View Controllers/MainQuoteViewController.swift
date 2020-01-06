@@ -35,10 +35,11 @@ class MainQuoteViewController: UIViewController {
         return textView
     }()
     
+    // MARK: setupNavButtons
     private func setupNavButtons() {
-        let menuImage = UIImage(systemName: "line.horizontal.3", withConfiguration: UIImage().mainViewSymbolConfig())
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: menuImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(menuButtonTapped))
-        navigationItem.leftBarButtonItem?.tintColor = .label
+//        let menuImage = UIImage(systemName: "line.horizontal.3", withConfiguration: UIImage().mainViewSymbolConfig())
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(image: menuImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(menuButtonTapped))
+//        navigationItem.leftBarButtonItem?.tintColor = .label
         
         let shareImage = UIImage(systemName: "square.and.arrow.up", withConfiguration: UIImage().mainViewSymbolConfig())
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: shareImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(shareButtonTapped))
@@ -46,6 +47,7 @@ class MainQuoteViewController: UIViewController {
         
     }
     
+    // MARK: setupLayouts
     private func setupLayouts() {
         quoteTextView.attributedText = quoteController.attributedString
         view.addSubview(quoteTextView)
@@ -61,7 +63,6 @@ class MainQuoteViewController: UIViewController {
         lowerStackView.translatesAutoresizingMaskIntoConstraints = false
         lowerStackView.axis = .horizontal
         lowerStackView.spacing = 32
-        
         view.addSubview(lowerStackView)
         
         NSLayoutConstraint.activate([
@@ -73,6 +74,9 @@ class MainQuoteViewController: UIViewController {
             quoteTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8)
         ])
     }
+}
+
+extension MainQuoteViewController {
     
     // MARK: Impact Gesture
     func impactGesture(style: UIImpactFeedbackGenerator.FeedbackStyle = .light) {
@@ -80,15 +84,12 @@ class MainQuoteViewController: UIViewController {
         impactFeedback.impactOccurred()
     }
     
-    
-}
-
-// MARK: Button actions
-extension MainQuoteViewController {
+    // MARK: menuButtonTapped
     @objc func menuButtonTapped() {
         impactGesture(style: .rigid)
     }
     
+    // MARK: shareButtonTapped
     @objc func shareButtonTapped() {
         impactGesture(style: .rigid)
         
@@ -96,6 +97,7 @@ extension MainQuoteViewController {
         present(activityVC, animated: true)
     }
     
+    // MARK: themeButtonTapped
     @objc func themeButtonTapped() {
         impactGesture(style: .medium)
         quoteController.quoteThemeIsActive.toggle()
@@ -107,6 +109,7 @@ extension MainQuoteViewController {
         quoteController.saveBackgroundIndex()
     }
     
+    // MARK: ReviewButtonTapped
     @objc func ReviewButtonTapped() {
         impactGesture(style: .medium)
         
@@ -115,6 +118,7 @@ extension MainQuoteViewController {
 //        present(vc, animated: true)
     }
     
+    // MARK: likeButtonTapped
     @objc func likeButtonTapped() {
         impactGesture(style: .medium)
         
@@ -132,7 +136,7 @@ extension MainQuoteViewController {
         let configuration = UIImage().mainViewSymbolConfig()
         let image = UIImage(systemName: buttonImageName, withConfiguration: configuration)
         likeButton.setImage(image, for: .normal)
+        
+        quoteController.likeButtonpressed()
     }
-
 }
-

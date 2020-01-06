@@ -16,7 +16,7 @@ class QuoteController {
     private var _quoteIndex = UserDefaults().integer(forKey: "QIndex") // current index of quote
     private var _backgroundIndex = UserDefaults().integer(forKey: "BgIndex") // current index of background
     
-    var favorites: [String] = []
+    var favorites = [String]() //: [String] = UserDefaults().array(forKey: "FavoriteList") as? [String] ?? []
     
     var quote: QuoteDetail {
         return quotes[_quoteIndex]
@@ -69,7 +69,7 @@ class QuoteController {
     }
     
     func likeButtonpressed() {
-        
+        UserDefaults().set(favorites, forKey: "FavoriteList")
     }
     
 }
