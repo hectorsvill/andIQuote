@@ -26,6 +26,10 @@ extension MainQuoteViewController {
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(ReviewButtonTapped))
         downSwipe.direction = .down
         view.addGestureRecognizer(downSwipe)
+        
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(likeButtonTapped))
+        doubleTap.numberOfTapsRequired = 2
+        view.addGestureRecognizer(doubleTap)
     }
     
     @objc func handleSwipeAction(_ sender: UISwipeGestureRecognizer) {
