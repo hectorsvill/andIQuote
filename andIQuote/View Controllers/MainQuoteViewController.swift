@@ -15,7 +15,7 @@ class MainQuoteViewController: UIViewController {
     var themeButton: UIButton!
     var ReviewButton: UIButton!
     var likeButton: UIButton!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavButtons()
@@ -23,6 +23,14 @@ class MainQuoteViewController: UIViewController {
         setupGestureRecogniser()
         setBackground(quoteController.background)
     }
+    
+    var lowerStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.spacing = 32
+        return stackView
+    }()
     
     var quoteTextView: UITextView  = {
         let textView = UITextView()
@@ -37,9 +45,9 @@ class MainQuoteViewController: UIViewController {
     
     // MARK: setupNavButtons
     private func setupNavButtons() {
-//        let menuImage = UIImage(systemName: "line.horizontal.3", withConfiguration: UIImage().mainViewSymbolConfig())
-//        navigationItem.leftBarButtonItem = UIBarButtonItem(image: menuImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(menuButtonTapped))
-//        navigationItem.leftBarButtonItem?.tintColor = .label
+        let menuImage = UIImage(systemName: "line.horizontal.3", withConfiguration: UIImage().mainViewSymbolConfig())
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: menuImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(menuButtonTapped))
+        navigationItem.leftBarButtonItem?.tintColor = .label
         
         let shareImage = UIImage(systemName: "square.and.arrow.up", withConfiguration: UIImage().mainViewSymbolConfig())
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: shareImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(shareButtonTapped))
@@ -54,15 +62,16 @@ class MainQuoteViewController: UIViewController {
         
         themeButton = UIButton().sfImageButton(systemName: "paintbrush")
         themeButton.addTarget(self, action: #selector(themeButtonTapped), for: .touchUpInside)
+        lowerStackView.addArrangedSubview(themeButton)
+        
         ReviewButton = UIButton().sfImageButton(systemName: "text.bubble")
         ReviewButton.addTarget(self, action: #selector(ReviewButtonTapped), for: .touchUpInside)
+        lowerStackView.addArrangedSubview(ReviewButton)
+        
         likeButton = UIButton().sfImageButton(systemName: "hand.thumbsup")
         likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
+        lowerStackView.addArrangedSubview(likeButton)
         
-        let lowerStackView = UIStackView(arrangedSubviews: [themeButton, ReviewButton, likeButton])
-        lowerStackView.translatesAutoresizingMaskIntoConstraints = false
-        lowerStackView.axis = .horizontal
-        lowerStackView.spacing = 32
         view.addSubview(lowerStackView)
         
         NSLayoutConstraint.activate([
@@ -93,7 +102,12 @@ extension MainQuoteViewController {
     @objc func shareButtonTapped() {
         impactGesture(style: .rigid)
         
-        let activityVC = UIActivityViewController(activityItems: [quoteController.attributedString], applicationActivities: [])
+        let render = UIGraphicsImageRenderer(size: view.bounds.size)
+        let image = render.image { _ in
+            view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+        }
+
+        let activityVC = UIActivityViewController(activityItems: [quoteController.attributedString, image], applicationActivities: [])
         present(activityVC, animated: true)
     }
     
