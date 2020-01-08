@@ -10,13 +10,9 @@ import Foundation
 import Firebase
 
 
-struct FirestoreController {
+class FirebaseController {
     let db = Firestore.firestore()
     
-    var quoteCollection: DocumentReference {
-        db.document("quotes")
-    }
+    
     
 }
-
-
