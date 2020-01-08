@@ -8,14 +8,20 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        FirebaseApp.configure()
+        
+        Auth.auth().signInAnonymously { _, error in
+            if let error = error {
+                NSLog("\(error)")
+            }
+        }
+        
         return true
     }
 

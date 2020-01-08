@@ -7,9 +7,11 @@
 //
 
 import UIKit
-
+import Firebase
 
 class QuoteController {
+    let firestore = FirestoreController()
+    
     var quoteThemeIsActive = false // theme selecting to inactive
     var quotes = [QuoteDetail]() // list of quotes
     let backgrounds = ["green", "blue", "gray", "pink", "red", "teal", "indigo", "orange", "yellow", "purple", "systemBackground"]
@@ -42,6 +44,19 @@ class QuoteController {
         let json = try! JSONDecoder().decode(Results.self, from: data)
         
         quotes = json.results
+        
+        
+        for q in quotes {
+            
+            firestore.db.collection("quotes").document(q.id).setData([
+                "id": q.id,
+                "author": q.author,
+                "body": q.body,
+                "tags": [q.author]
+            ])
+            
+        }
+        
     }
     
     func getNextQuote() {
