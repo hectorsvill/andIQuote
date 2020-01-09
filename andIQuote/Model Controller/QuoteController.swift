@@ -15,7 +15,7 @@ class QuoteController {
     var quoteThemeIsActive = false // theme selecting to inactive
     var quotes = [QuoteDetail]() // list of quotes
     let backgrounds = ["green", "blue", "gray", "pink", "red", "teal", "indigo", "orange", "yellow", "purple", "systemBackground"]
-    private var _quoteIndex = UserDefaults().integer(forKey: "QIndex") // current index of quote
+    private var _quoteIndex = 0//UserDefaults().integer(forKey: "QIndex") // current index of quote
     private var _backgroundIndex = UserDefaults().integer(forKey: "BgIndex") // current index of background
     
     var favorites = [String]() //: [String] = UserDefaults().array(forKey: "FavoriteList") as? [String] ?? []
@@ -39,24 +39,29 @@ class QuoteController {
     }
     
     init() {
-        let path = Bundle.main.path(forResource: "300Quotes", ofType: "json")!
+        let path = Bundle.main.path(forResource: "OffLineQuotes", ofType: "json")!
         let data = try! NSData(contentsOfFile: path) as Data
         let json = try! JSONDecoder().decode(Results.self, from: data)
+
+        quotes = json.results.shuffled()
+        print(quotes.count)
         
-        quotes = json.results
-        
-        
-        for q in quotes {
+        firestore.quoteQuery.limit(to: 100).getDocuments { snapshot, error in
+            if let error = error {
+                NSLog("\(error)")
+            }
             
-            firestore.db.collection("quotes").document(q.id).setData([
-                "id": q.id,
-                "author": q.author,
-                "body": q.body,
-                "tags": [q.author]
-            ])
+            guard let snapshot = snapshot else { return }
             
+            for doc in snapshot.documents {
+                let data = doc.data() as [String: Any]
+                let id = data["id"] as! String
+                let body = data["body"] as! String
+                let author = data["author"] as! String
+                let q = QuoteDetail(id: id, body: body, author: author)
+                self.quotes.append(q)
+            }
         }
-        
     }
     
     func getNextQuote() {

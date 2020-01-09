@@ -15,7 +15,7 @@ struct Results: Codable, Hashable {
 
 
 struct QuoteDetail: Codable, Hashable {
-    let id = UUID().uuidString
+    let id: String
     let body: String
     let author: String
 }
