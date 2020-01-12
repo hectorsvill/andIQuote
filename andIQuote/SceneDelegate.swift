@@ -13,10 +13,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        window = UIWindow(windowScene: windowScene)
+        
+        let vc = MainQuoteViewController()
+        vc.quoteController = QuoteController()
+        
+        vc.quoteController.fetchQuote {
+            let nav = UINavigationController(rootViewController: vc)
+            nav.navigationBar.tintColor = .clear
+            self.window?.makeKeyAndVisible()
+            self.window?.rootViewController = nav
+        }
     }
 }
-
 
 extension SceneDelegate {
     

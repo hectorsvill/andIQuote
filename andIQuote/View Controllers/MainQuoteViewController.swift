@@ -9,7 +9,7 @@
 import UIKit
 
 class MainQuoteViewController: UIViewController {
-    let quoteController = QuoteController()
+    var quoteController: QuoteController!
     var menuButton: UIButton!
     var shareButton: UIButton!
     var themeButton: UIButton!
@@ -57,7 +57,7 @@ class MainQuoteViewController: UIViewController {
     
     // MARK: setupLayouts
     private func setupLayouts() {
-        quoteTextView.attributedText = quoteController.attributedString
+        self.quoteTextView.attributedText = self.quoteController.attributedString
         view.addSubview(quoteTextView)
         
         themeButton = UIButton().sfImageButton(systemName: "paintbrush")

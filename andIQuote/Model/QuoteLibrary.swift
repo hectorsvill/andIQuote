@@ -8,11 +8,9 @@
 
 import Foundation
 
-
 struct Results: Codable, Hashable {
     let results: [QuoteDetail]
 }
-
 
 struct QuoteDetail: Codable, Hashable {
     let id: String

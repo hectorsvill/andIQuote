@@ -12,5 +12,4 @@ struct User: Codable {
     let id = UUID().uuidString
     let name = ""
     let favorites: [String] = []
-    
 }

@@ -13,24 +13,21 @@ import Firebase
 class FirestoreController {
     let db = Firestore.firestore()
     
-    
-    
     var quoteQuery: Query {
         db.collectionGroup("quotes")
     }
     
-    func fetchQuotesFromFireStore(completion: @escaping ([QuoteDetail]?, Error?) -> ()) {
-        quoteQuery.limit(to: 300).getDocuments { snapShot, error in
+    func fetchQuotesFromFireStore(limit: Int, completion: @escaping ([QuoteDetail]?, Error?) -> ()) {
+        quoteQuery.limit(to: limit).getDocuments { snapShot, error in
             if let error = error {
                 completion(nil, error)
             }
-            
+
             guard let snapShot = snapShot else { return }
             let quotes = self.fetchQuotesFromSnapShot(snapShot.documents)
             completion(quotes, nil)
         }
     }
-    
     
     private func fetchQuotesFromSnapShot( _ documents: [QueryDocumentSnapshot]) -> [QuoteDetail] {
         var quotes = [QuoteDetail]()

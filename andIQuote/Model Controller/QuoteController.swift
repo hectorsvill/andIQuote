@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+
 
 class QuoteController {
     let firestore = FirestoreController()
@@ -39,29 +39,17 @@ class QuoteController {
     }
     
     init() {
-        let path = Bundle.main.path(forResource: "OffLineQuotes", ofType: "json")!
-        let data = try! NSData(contentsOfFile: path) as Data
-        let json = try! JSONDecoder().decode(Results.self, from: data)
-
-        quotes = json.results.shuffled()
-        print(quotes.count)
         
-        firestore.quoteQuery.limit(to: 100).getDocuments { snapshot, error in
-            if let error = error {
-                NSLog("\(error)")
-            }
-            
-            guard let snapshot = snapshot else { return }
-            
-            for doc in snapshot.documents {
-                let data = doc.data() as [String: Any]
-                let id = data["id"] as! String
-                let body = data["body"] as! String
-                let author = data["author"] as! String
-                let q = QuoteDetail(id: id, body: body, author: author)
-                self.quotes.append(q)
-            }
+    
+    }
+    
+    func fetchQuote(completion: @escaping () -> ())  {
+        firestore.fetchQuotesFromFireStore(limit: 100) { quotes, error in
+            guard let quotes = quotes else { return }
+            self.quotes = quotes
+            completion()
         }
+        
     }
     
     func getNextQuote() {
