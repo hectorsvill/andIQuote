@@ -9,7 +9,6 @@
 import Foundation
 import Firebase
 
-
 class FirestoreController {
     var lastQueryDocumentSnapshot: QueryDocumentSnapshot?
     

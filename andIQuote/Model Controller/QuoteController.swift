@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 
+
 class QuoteController {
     let firestore = FirestoreController()
     
@@ -20,6 +21,12 @@ class QuoteController {
     
     var favorites = [String]() //: [String] = UserDefaults().array(forKey: "FavoriteList") as? [String] ?? []
     
+    init() {
+        
+    }
+}
+
+extension QuoteController {
     var quote: QuoteDetail {
         return quotes[_quoteIndex]
     }
@@ -37,13 +44,6 @@ class QuoteController {
         attributedString.append(NSAttributedString(string: "\n\n\(quote.author)", attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: quoteForegroundColor]))
         return attributedString
     }
-    
-    init() {
-        
-    
-    }
-    
-    
     
     func fetchQuote(completion: @escaping () -> ())  {
         firestore.fetchQuotesFromFireStore(limit: 10) { quotes, error in
