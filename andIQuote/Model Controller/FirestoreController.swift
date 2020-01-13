@@ -11,13 +11,32 @@ import Firebase
 
 
 class FirestoreController {
+    var lastQueryDocumentSnapshot: QueryDocumentSnapshot?
+    
     let db = Firestore.firestore()
     
     var quoteQuery: Query {
         db.collectionGroup("quotes")
     }
     
-    func fetchQuotesFromFireStore(limit: Int, completion: @escaping ([QuoteDetail]?, Error?) -> ()) {
+    // MARK: getNext(limit:,
+    func getNext(limit: Int = 10, completion: @escaping ([QuoteDetail]?, Error?) -> ()) {
+        guard let lastDoc = lastQueryDocumentSnapshot else { return }
+        
+        quoteQuery.start(atDocument: lastDoc).limit(to: limit).getDocuments { snapShot, error in
+            if let error = error {
+                completion(nil, error)
+            }
+            
+            guard let snapShot = snapShot else { return }
+            let quotes = self.fetchQuotesFromSnapShot(snapShot.documents)
+            completion(quotes, nil)
+            
+        }
+    }
+    
+    // MARK: fetchQuotesFromFireStore
+    func fetchQuotesFromFireStore(limit: Int = 10, completion: @escaping ([QuoteDetail]?, Error?) -> ()) {
         quoteQuery.limit(to: limit).getDocuments { snapShot, error in
             if let error = error {
                 completion(nil, error)
@@ -25,10 +44,13 @@ class FirestoreController {
 
             guard let snapShot = snapShot else { return }
             let quotes = self.fetchQuotesFromSnapShot(snapShot.documents)
+            // get last query for paging
+            self.lastQueryDocumentSnapshot = snapShot.documents.last!
             completion(quotes, nil)
         }
     }
     
+    // MARK: fetchQuotesFromSnapShot
     private func fetchQuotesFromSnapShot( _ documents: [QueryDocumentSnapshot]) -> [QuoteDetail] {
         var quotes = [QuoteDetail]()
         

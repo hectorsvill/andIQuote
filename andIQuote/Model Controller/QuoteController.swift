@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Firebase
 
 class QuoteController {
     let firestore = FirestoreController()
@@ -43,8 +43,10 @@ class QuoteController {
     
     }
     
+    
+    
     func fetchQuote(completion: @escaping () -> ())  {
-        firestore.fetchQuotesFromFireStore(limit: 100) { quotes, error in
+        firestore.fetchQuotesFromFireStore(limit: 10) { quotes, error in
             guard let quotes = quotes else { return }
             self.quotes = quotes
             completion()
