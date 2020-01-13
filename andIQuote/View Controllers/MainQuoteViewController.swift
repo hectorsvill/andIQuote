@@ -42,7 +42,9 @@ class MainQuoteViewController: UIViewController {
         textView.isScrollEnabled = false
         return textView
     }()
-    
+}
+
+extension MainQuoteViewController {
     // MARK: setupNavButtons
     private func setupNavButtons() {
         let menuImage = UIImage(systemName: "line.horizontal.3", withConfiguration: UIImage().mainViewSymbolConfig())

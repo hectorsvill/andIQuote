@@ -16,4 +16,5 @@ struct QuoteDetail: Codable, Hashable {
     let id: String
     let body: String
     let author: String
+    var viewed = false
 }
