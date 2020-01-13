@@ -24,6 +24,7 @@ class MainQuoteViewController: UIViewController {
         setBackground(quoteController.background)
     }
     
+    // MARK: lowerStackView
     var lowerStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -32,6 +33,7 @@ class MainQuoteViewController: UIViewController {
         return stackView
     }()
     
+    // MARK: quoteTextView
     var quoteTextView: UITextView  = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -59,7 +61,10 @@ extension MainQuoteViewController {
     
     // MARK: setupLayouts
     private func setupLayouts() {
-        self.quoteTextView.attributedText = self.quoteController.attributedString
+        quoteController.fetchQuote {
+            self.quoteTextView.attributedText = self.quoteController.attributedString
+        }
+        
         view.addSubview(quoteTextView)
         
         themeButton = UIButton().sfImageButton(systemName: "paintbrush")

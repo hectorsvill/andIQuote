@@ -56,6 +56,19 @@ extension QuoteController {
     
     func getNextQuote() {
         _quoteIndex = _quoteIndex >= quotes.count - 1 ? 0 : _quoteIndex + 1
+        if _quoteIndex % 7 == 0 {
+            firestore.getNext { quotes, error in
+                if let error = error {
+                    NSLog("\(error)")
+                }
+                
+                guard let quotes = quotes else { return }
+                
+                for q in quotes {
+                    self.quotes.append(q)
+                }
+            }
+        }
     }
     
     func getPreviousQuote() {

@@ -9,7 +9,6 @@
 import UIKit
 
 extension MainQuoteViewController {
-    
     func setupGestureRecogniser() {
         let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeAction(_:)))
         rightSwipe.direction = .right
