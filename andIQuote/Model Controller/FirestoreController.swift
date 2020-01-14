@@ -51,17 +51,21 @@ class FirestoreController {
     
     // MARK: fetchQuotesFromSnapShot
     private func fetchQuotesFromSnapShot( _ documents: [QueryDocumentSnapshot]) -> [QuoteDetail] {
-        var quotes = [QuoteDetail]()
+//        var quotes = [QuoteDetail]()
         
         for doc in documents {
             let data = doc.data() as [String: Any]
             let id = data["id"] as! String
             let body = data["body"] as! String
             let author = data["author"] as! String
-            let q = QuoteDetail(id: id, body: body, author: author)
-            quotes.append(q)
+//            let q = QuoteDetail(id: id, body: body, author: author)
+//            quotes.append(q)
+            let _ = Quote(body: body, author: author, id: id, like: false)
+            
+            let moc = CoreDataStack.shared.mainContext
+            try! moc.save()
         }
         
-        return quotes
+        return []
     }
 }
