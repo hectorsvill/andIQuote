@@ -16,8 +16,8 @@ class QuoteController {
     var quoteThemeIsActive = false // theme selecting to inactive
     var quotes = [QuoteDetail]() // list of quotes
     let backgrounds = ["green", "blue", "gray", "pink", "red", "teal", "indigo", "orange", "yellow", "purple", "systemBackground"]
-    private var _quoteIndex = 0//UserDefaults().integer(forKey: "QIndex") // current index of quote
-    private var _backgroundIndex = UserDefaults().integer(forKey: "BgIndex") // current index of background
+    var _quoteIndex = 0//UserDefaults().integer(forKey: "QIndex") // current index of quote
+    private (set) var _backgroundIndex = UserDefaults().integer(forKey: "BgIndex") // current index of background
     
     var favorites = [String]() //: [String] = UserDefaults().array(forKey: "FavoriteList") as? [String] ?? []
     
@@ -56,6 +56,7 @@ extension QuoteController {
     
     func getNextQuote() {
         _quoteIndex = _quoteIndex >= quotes.count - 1 ? 0 : _quoteIndex + 1
+       
         if _quoteIndex % 7 == 0 {
             firestore.getNext { quotes, error in
                 if let error = error {
@@ -72,7 +73,7 @@ extension QuoteController {
     }
     
     func getPreviousQuote() {
-        _quoteIndex = _quoteIndex != 0 && _quoteIndex > 0 ? _quoteIndex - 1 : quotes.count - 1
+        _quoteIndex = _quoteIndex > 0 ? _quoteIndex - 1 : quotes.count - 1
     }
     
     func getNextBackground() {

@@ -40,6 +40,7 @@ extension MainQuoteViewController {
                 quoteTextView.attributedText = quoteController.attributedString
             } else if sender.direction == .right {
                 // get previous quote
+                guard quoteController._quoteIndex != 0 else { return }
                 impactGesture(style: .soft)
                 quoteController.getPreviousQuote()
                 quoteTextView.attributedText = quoteController.attributedString

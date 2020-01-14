@@ -11,6 +11,9 @@
 		0788B03C23C5693B001D00E3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0788B03B23C5693B001D00E3 /* GoogleService-Info.plist */; };
 		0788B03E23C569C2001D00E3 /* OffLineQuotes.json in Resources */ = {isa = PBXBuildFile; fileRef = 0788B03D23C569C2001D00E3 /* OffLineQuotes.json */; };
 		12B3DAA623CAE18E00B6358E /* DatabaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B3DAA523CAE18E00B6358E /* DatabaseController.swift */; };
+		12D72AAC23CD41C4000BECDC /* Quote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AAA23CD41C4000BECDC /* Quote.xcdatamodeld */; };
+		12D72AAF23CD42F7000BECDC /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AAE23CD42F7000BECDC /* Quote.swift */; };
+		12D72AB123CD4554000BECDC /* Quote+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AB023CD4554000BECDC /* Quote+Convenience.swift */; };
 		A202E35A755FB094217DC89B /* Pods_andIQuote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79D12627DD0C2007F1C7F923 /* Pods_andIQuote.framework */; };
 		C42EE0F423BEC6230045DF02 /* BackgroundCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0F323BEC6230045DF02 /* BackgroundCell.swift */; };
 		C42EE0F723BED18C0045DF02 /* MainQuoteViewController+UISwipeGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0F623BED18C0045DF02 /* MainQuoteViewController+UISwipeGestureRecognizer.swift */; };
@@ -37,6 +40,9 @@
 		0788B03B23C5693B001D00E3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0788B03D23C569C2001D00E3 /* OffLineQuotes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = OffLineQuotes.json; sourceTree = "<group>"; };
 		12B3DAA523CAE18E00B6358E /* DatabaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseController.swift; sourceTree = "<group>"; };
+		12D72AAB23CD41C4000BECDC /* Quote.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Quote.xcdatamodel; sourceTree = "<group>"; };
+		12D72AAE23CD42F7000BECDC /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
+		12D72AB023CD4554000BECDC /* Quote+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Quote+Convenience.swift"; sourceTree = "<group>"; };
 		1BB3DABBB0667D35BF858725 /* Pods-andIQuote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-andIQuote.release.xcconfig"; path = "Target Support Files/Pods-andIQuote/Pods-andIQuote.release.xcconfig"; sourceTree = "<group>"; };
 		410A8ADF26336FBEB51DA16B /* Pods-andIQuote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-andIQuote.debug.xcconfig"; path = "Target Support Files/Pods-andIQuote/Pods-andIQuote.debug.xcconfig"; sourceTree = "<group>"; };
 		79D12627DD0C2007F1C7F923 /* Pods_andIQuote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_andIQuote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,6 +80,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		12D72AAD23CD42C8000BECDC /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				12D72AAA23CD41C4000BECDC /* Quote.xcdatamodeld */,
+				12D72AAE23CD42F7000BECDC /* Quote.swift */,
+				12D72AB023CD4554000BECDC /* Quote+Convenience.swift */,
+			);
+			path = "Core Data";
+			sourceTree = "<group>";
+		};
 		3D858A6172EAE387DF38FA05 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				C4F0E90D23AB3297005917A8 /* QuoteLibrary.swift */,
+				12D72AAD23CD42C8000BECDC /* Core Data */,
 				C42EE0F823C285C50045DF02 /* User.swift */,
 			);
 			path = Model;
@@ -314,6 +331,7 @@
 			files = (
 				C4F0E91023AB330D005917A8 /* QuoteController.swift in Sources */,
 				C43D446723A47138005B2458 /* QuoteCollectionViewController.swift in Sources */,
+				12D72AAC23CD41C4000BECDC /* Quote.xcdatamodeld in Sources */,
 				C4FB3F0323BBABE40041B1BD /* MainQuoteViewController.swift in Sources */,
 				C4E4617823B0683E003A98D1 /* QuoteReviewCollectionViewController.swift in Sources */,
 				C43D446D23A48677005B2458 /* QuoteCell.swift in Sources */,
@@ -322,6 +340,8 @@
 				C42EE0FB23C2E1D00045DF02 /* UIView+screenShot.swift in Sources */,
 				C4FB3F0123BBA8300041B1BD /* UIButton+SimpleButton.swift in Sources */,
 				C4FB3F0523BBC37C0041B1BD /* UIImage+mainViewSymbolConfig.swift in Sources */,
+				12D72AAF23CD42F7000BECDC /* Quote.swift in Sources */,
+				12D72AB123CD4554000BECDC /* Quote+Convenience.swift in Sources */,
 				C43D445223A47018005B2458 /* AppDelegate.swift in Sources */,
 				0788B03A23C56820001D00E3 /* FirestoreController.swift in Sources */,
 				C4F0E90E23AB3297005917A8 /* QuoteLibrary.swift in Sources */,
@@ -528,6 +548,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		12D72AAA23CD41C4000BECDC /* Quote.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				12D72AAB23CD41C4000BECDC /* Quote.xcdatamodel */,
+			);
+			currentVersion = 12D72AAB23CD41C4000BECDC /* Quote.xcdatamodel */;
+			path = Quote.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = C43D444623A47018005B2458 /* Project object */;
 }
