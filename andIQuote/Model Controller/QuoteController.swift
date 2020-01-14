@@ -45,26 +45,38 @@ extension QuoteController {
         return attributedString
     }
     
-    func fetchQuote(completion: @escaping () -> ())  {
+    var fetchResultController: NSFetchedResultsController<Quote> {
         let fetchRequest: NSFetchRequest<Quote> = Quote.fetchRequest()
         fetchRequest.sortDescriptors = []
+        
         let moc = CoreDataStack.shared.mainContext
         let fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: "id", cacheName: nil)
         
-        try! fetchResultController.performFetch()
-        print(fetchResultController.fetchedObjects!.count)
+        return fetchResultController
+    }
+    
+    func fetchQuote(completion: @escaping (Error?) -> ())  {
+        do {
+            try fetchResultController.performFetch()
+        }catch {
+            completion(error)
+        }
+        
         guard let fetchedObjects = fetchResultController.fetchedObjects else { return }
         
         if (fetchedObjects.isEmpty) {
             
             firestore.fetchQuotesFromFireStore(limit: 10) { error in
                 if let error = error {
-                    NSLog("\(error)")
+                    completion(error)
                 }
             }
             
         } else {
-            quotes = fetchResultController.fetchedObjects!
+            DispatchQueue.main.async {
+                self.quotes = fetchedObjects
+                completion(nil)
+            }
         }
         
         

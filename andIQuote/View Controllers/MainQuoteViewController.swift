@@ -56,12 +56,15 @@ extension MainQuoteViewController {
         let shareImage = UIImage(systemName: "square.and.arrow.up", withConfiguration: UIImage().mainViewSymbolConfig())
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: shareImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(shareButtonTapped))
         navigationItem.rightBarButtonItem?.tintColor = .label
-        
     }
     
     // MARK: setupLayouts
     private func setupLayouts() {
-        quoteController.fetchQuote {
+        quoteController.fetchQuote { error in
+            if let error = error {
+                NSLog("\(error)")
+            }
+            
             self.quoteTextView.attributedText = self.quoteController.attributedString
         }
         
