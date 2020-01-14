@@ -48,7 +48,7 @@ extension MainQuoteViewController {
             
             let quoteID = quoteController.quote.id
             var buttonImageName =  "hand.thumbsup.fill"
-            if !quoteController.favorites.contains(quoteID) {
+            if !quoteController.favorites.contains(quoteID!) {
                 buttonImageName =  "hand.thumbsup"
             }
             let configuration = UIImage().mainViewSymbolConfig()

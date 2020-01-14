@@ -141,12 +141,12 @@ extension MainQuoteViewController {
         
         let quoteID = quoteController.quote.id
         var buttonImageName =  "hand.thumbsup"
-        if quoteController.favorites.contains(quoteID) {
-            if let index = quoteController.favorites.firstIndex(of: quoteID) {
+        if quoteController.favorites.contains(quoteID!) {
+            if let index = quoteController.favorites.firstIndex(of: quoteID!) {
                 quoteController.favorites.remove(at: index)
             }
         } else {
-            quoteController.favorites.append(quoteID)
+            quoteController.favorites.append(quoteID!)
             buttonImageName =  "hand.thumbsup.fill"
         }
         
