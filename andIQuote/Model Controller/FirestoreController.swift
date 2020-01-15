@@ -18,6 +18,20 @@ class FirestoreController {
         db.collectionGroup("quotes")
     }
     
+    // MARK: fetchQuotesFromFireStore
+    func fetchQuotesFromFireStore(limit: Int = 10, completion: @escaping ([QuoteDetail]?, Error?) -> ()) {
+        quoteQuery.limit(to: limit).getDocuments { snapShot, error in
+            if let error = error {
+                completion(nil, error)
+            }
+
+            guard let snapShot = snapShot else { return }
+            let quotes = self.fetchQuotesFromSnapShot(snapShot.documents)
+            self.lastQueryDocumentSnapshot = snapShot.documents.last!
+            completion(quotes, nil)
+        }
+    }
+    
     // MARK: getNext(limit:,
     func getNext(limit: Int = 10, completion: @escaping (Error?) -> ()) {
         guard let lastDoc = lastQueryDocumentSnapshot else { return }
@@ -34,22 +48,6 @@ class FirestoreController {
 //            let quotes = self.fetchQuotesFromSnapShot(snapShot.documents)
 //            completion(quotes, nil)
             
-        }
-    }
-    
-    // MARK: fetchQuotesFromFireStore
-    func fetchQuotesFromFireStore(limit: Int = 10, completion: @escaping (Error?) -> ()) {
-        quoteQuery.limit(to: limit).getDocuments { snapShot, error in
-            if let error = error {
-                completion(error)
-            }
-
-            guard let snapShot = snapShot else { return }
-//            let quotes = self.fetchQuotesFromSnapShot(snapShot.documents)
-            // get last query for paging
-            self.fetchQuotesFromSnapShotSaveToCoreData(snapShot.documents)
-            self.lastQueryDocumentSnapshot = snapShot.documents.last!
-            completion(nil)
         }
     }
     

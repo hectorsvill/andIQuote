@@ -10,6 +10,7 @@
 		0788B03A23C56820001D00E3 /* FirestoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0788B03923C56820001D00E3 /* FirestoreController.swift */; };
 		0788B03C23C5693B001D00E3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0788B03B23C5693B001D00E3 /* GoogleService-Info.plist */; };
 		0788B03E23C569C2001D00E3 /* OffLineQuotes.json in Resources */ = {isa = PBXBuildFile; fileRef = 0788B03D23C569C2001D00E3 /* OffLineQuotes.json */; };
+		1285339923CE421200F9648A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1285339823CE421200F9648A /* GoogleService-Info.plist */; };
 		12B3DAA623CAE18E00B6358E /* DatabaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B3DAA523CAE18E00B6358E /* DatabaseController.swift */; };
 		12D72AAC23CD41C4000BECDC /* Quote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AAA23CD41C4000BECDC /* Quote.xcdatamodeld */; };
 		12D72AAF23CD42F7000BECDC /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AAE23CD42F7000BECDC /* Quote.swift */; };
@@ -39,6 +40,7 @@
 		0788B03923C56820001D00E3 /* FirestoreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreController.swift; sourceTree = "<group>"; };
 		0788B03B23C5693B001D00E3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0788B03D23C569C2001D00E3 /* OffLineQuotes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = OffLineQuotes.json; sourceTree = "<group>"; };
+		1285339823CE421200F9648A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		12B3DAA523CAE18E00B6358E /* DatabaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseController.swift; sourceTree = "<group>"; };
 		12D72AAB23CD41C4000BECDC /* Quote.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Quote.xcdatamodel; sourceTree = "<group>"; };
 		12D72AAE23CD42F7000BECDC /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 		C43D446523A4705C005B2458 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1285339823CE421200F9648A /* GoogleService-Info.plist */,
 				0788B03D23C569C2001D00E3 /* OffLineQuotes.json */,
 				C42EE0F523BECD780045DF02 /* Trash */,
 				C43D445723A47018005B2458 /* Main.storyboard */,
@@ -277,6 +280,7 @@
 				C43D445923A47018005B2458 /* Main.storyboard in Resources */,
 				0788B03C23C5693B001D00E3 /* GoogleService-Info.plist in Resources */,
 				0788B03E23C569C2001D00E3 /* OffLineQuotes.json in Resources */,
+				1285339923CE421200F9648A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

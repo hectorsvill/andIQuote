@@ -17,26 +17,30 @@ class QuoteController {
     var quotes = [Quote]() // list of quotes
     let backgrounds = ["green", "blue", "gray", "pink", "red", "teal", "indigo", "orange", "yellow", "purple", "systemBackground"]
     var _quoteIndex = UserDefaults().integer(forKey: "QIndex") // current index of quote
-    private (set) var _backgroundIndex = UserDefaults().integer(forKey: "BgIndex") // current index of background
+    
+    var _backgroundIndex = UserDefaults().integer(forKey: "BgIndex") // current index of background
     
     var favorites = [String]() //: [String] = UserDefaults().array(forKey: "FavoriteList") as? [String] ?? []
     
     init() {
+        print(_quoteIndex)
+        
+        
         
     }
 }
 
 extension QuoteController {
     var quote: Quote {
-        return quotes[_quoteIndex]
+        quotes[_quoteIndex]
     }
     
     var background: String {
-        return backgrounds[_backgroundIndex]
+        backgrounds[_backgroundIndex]
     }
     
     var quoteForegroundColor: UIColor {
-        return background == "systemBackground" ? UIColor.label : UIColor.white
+        background == "systemBackground" ? UIColor.label : UIColor.white
     }
     
     var attributedString: NSMutableAttributedString {
@@ -56,29 +60,58 @@ extension QuoteController {
     }
     
     func fetchQuote(completion: @escaping (Error?) -> ())  {
-        do {
-            try fetchResultController.performFetch()
-        }catch {
-            completion(error)
-        }
-        
-        guard let fetchedObjects = fetchResultController.fetchedObjects else { return }
-        
-        if (fetchedObjects.isEmpty) {
+        firestore.fetchQuotesFromFireStore { quotes, error in
+            if let error = error {
+                completion(error)
+            }
+            guard let quotes = quotes else { return }
             
-            firestore.fetchQuotesFromFireStore(limit: 10) { error in
-                if let error = error {
-                    completion(error)
-                }
+            for q in quotes {
+                let q = Quote(body: q.body, author: q.author, id: q.id, like: false)
+                self.quotes.append(q)
+                
+                let moc = CoreDataStack.shared.mainContext
+                try! moc.save()
             }
             
-        } else {
-            DispatchQueue.main.async {
-                self.quotes = fetchedObjects
-                completion(nil)
-            }
+            completion(nil)
+            
         }
         
+        
+        
+//        do {
+//            try fetchResultController.performFetch()
+//        }catch {
+//            completion(nil, error)
+//        }
+//
+//       if let _ = fetchResultController.fetchedObjects {
+//
+//       } else {
+//            NSLog("!!objects are empty!!!!")
+//            firestore.fetchQuotesFromFireStore(limit: 10) { error in
+//                if let error = error {
+//                    completion(nil, error)
+//                }
+//
+//            }
+//
+//            do {
+//                try fetchResultController.performFetch()
+//            }catch {
+//                completion(nil, error)
+//            }
+//            return
+//        }
+//
+//        guard let fetchedObjects = fetchResultController.fetchedObjects else { return }
+//
+//
+//        DispatchQueue.main.async {
+//            self.quotes = fetchedObjects
+//            completion(self.quote, nil)
+//        }
         
     }
     

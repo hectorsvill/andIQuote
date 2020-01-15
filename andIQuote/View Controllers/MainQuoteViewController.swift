@@ -9,7 +9,7 @@
 import UIKit
 
 class MainQuoteViewController: UIViewController {
-    var quoteController: QuoteController!
+    var quoteController = QuoteController()
     var menuButton: UIButton!
     var shareButton: UIButton!
     var themeButton: UIButton!
@@ -64,10 +64,10 @@ extension MainQuoteViewController {
             if let error = error {
                 NSLog("\(error)")
             }
-            
+
             self.quoteTextView.attributedText = self.quoteController.attributedString
         }
-        
+
         view.addSubview(quoteTextView)
         
         themeButton = UIButton().sfImageButton(systemName: "paintbrush")
