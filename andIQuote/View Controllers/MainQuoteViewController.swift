@@ -60,7 +60,7 @@ extension MainQuoteViewController {
     
     // MARK: setupLayouts
     private func setupLayouts() {
-        quoteController.fetchQuote { error in
+        quoteController.fetchQuotes { error in
             if let error = error {
                 NSLog("\(error)")
             }

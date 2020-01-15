@@ -59,13 +59,13 @@ extension QuoteController {
         return fetchResultController
     }
     
-    func fetchQuote(completion: @escaping (Error?) -> ())  {
+    func fetchQuotes(completion: @escaping (Error?) -> ())  {
         firestore.fetchQuotesFromFireStore { quotes, error in
             if let error = error {
                 completion(error)
             }
             guard let quotes = quotes else { return }
-            
+            print(quotes)
             for q in quotes {
                 let q = Quote(body: q.body, author: q.author, id: q.id, like: false)
                 self.quotes.append(q)

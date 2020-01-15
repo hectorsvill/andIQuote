@@ -6,6 +6,7 @@
 //  Copyright © 2019 Hector. All rights reserved.
 //
 
+import Network
 import UIKit
 import Firebase
 import FirebaseAuth
@@ -16,9 +17,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
+//        setupNetworkMonitor()
         return true
     }
 
+    private func setupNetworkMonitor() {
+        // note: read docs on on cashing data
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler =  { path in
+            if path.status == .satisfied {
+                print("internet connection 😀")
+            } else {
+                print("no internet 😳")
+            }
+            
+        }
+        
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
+    }
+    
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {

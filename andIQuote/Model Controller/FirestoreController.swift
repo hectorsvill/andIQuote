@@ -27,7 +27,9 @@ class FirestoreController {
 
             guard let snapShot = snapShot else { return }
             let quotes = self.fetchQuotesFromSnapShot(snapShot.documents)
-            self.lastQueryDocumentSnapshot = snapShot.documents.last!
+            if let last = snapShot.documents.last {
+                self.lastQueryDocumentSnapshot = last
+            }
             completion(quotes, nil)
         }
     }
