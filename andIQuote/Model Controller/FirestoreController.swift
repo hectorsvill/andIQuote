@@ -67,6 +67,7 @@ class FirestoreController {
         
         return quotes
     }
+    
     @discardableResult
     private func fetchQuotesFromSnapShotSaveToCoreData( _ documents: [QueryDocumentSnapshot]) -> [Quote]{
         var quotes = [Quote]()

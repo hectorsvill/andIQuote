@@ -119,7 +119,7 @@ extension QuoteController {
     }
     
     func getNextQuote() {
-//        _quoteIndex = _quoteIndex >= quotes.count - 1 ? 0 : _quoteIndex + 1
+        _quoteIndex = _quoteIndex < quotes.count - 1 ? _quoteIndex + 1: _quoteIndex
         _quoteIndex += 1
         if _quoteIndex % 7 == 0 && _quoteIndex + 10 > quotes.count {
             firestore.getNext { quotes, error in
