@@ -77,30 +77,31 @@ extension MainQuoteViewController {
     }
     
     func setBackground(_ backgroundString: String) {
-        if backgroundString == "systemBackground" {
-            view.backgroundColor = .systemBackground
-        } else if backgroundString ==  "red" {
-            view.backgroundColor = .systemRed
-        } else if backgroundString == "green" {
-            view.backgroundColor = .systemGreen
-        } else if backgroundString ==  "blue" {
-            view.backgroundColor = .systemBlue
-        } else if backgroundString ==  "gray" {
-            view.backgroundColor = .systemGray
-        } else if backgroundString ==  "pink" {
-            view.backgroundColor = .systemPink
-        }else if backgroundString ==  "teal" {
-            view.backgroundColor = .systemTeal
-        } else if backgroundString == "indigo" {
-            view.backgroundColor = .systemIndigo
-        } else if backgroundString ==  "orange" {
-            view.backgroundColor = .systemOrange
-        } else if backgroundString == "yellow" {
-            view.backgroundColor = .systemYellow
-        } else if backgroundString ==  "purple" {
-            view.backgroundColor = .systemPurple
-        }
-        
+//        if backgroundString == "systemBackground" {
+//            view.backgroundColor = .systemBackground
+//        } else if backgroundString ==  "red" {
+//            view.backgroundColor = .systemRed
+//        } else if backgroundString == "green" {
+//            view.backgroundColor = .systemGreen
+//        } else if backgroundString ==  "blue" {
+//            view.backgroundColor = .systemBlue
+//        } else if backgroundString ==  "gray" {
+//            view.backgroundColor = .systemGray
+//        } else if backgroundString ==  "pink" {
+//            view.backgroundColor = .systemPink
+//        }else if backgroundString ==  "teal" {
+//            view.backgroundColor = .systemTeal
+//        } else if backgroundString == "indigo" {
+//            view.backgroundColor = .systemIndigo
+//        } else if backgroundString ==  "orange" {
+//            view.backgroundColor = .systemOrange
+//        } else if backgroundString == "yellow" {
+//            view.backgroundColor = .systemYellow
+//        } else if backgroundString ==  "purple" {
+//            view.backgroundColor = .systemPurple
+//        }
+//
+        view.setBackground(to: backgroundString)
         quoteTextView.textColor = quoteController.background == "systemBackground" ? .label : .white
     }
 }

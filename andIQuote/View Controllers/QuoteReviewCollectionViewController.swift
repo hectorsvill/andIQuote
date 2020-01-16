@@ -9,11 +9,13 @@
 import UIKit
 
 class QuoteReviewCollectionViewController: UICollectionViewController {
-
+    var quoteController: QuoteController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.backgroundColor = .systemPurple
+        collectionView.setBackground(to: quoteController.background)
     }
     
 
 }
+

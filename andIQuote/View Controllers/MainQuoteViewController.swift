@@ -133,8 +133,9 @@ extension MainQuoteViewController {
     @objc func ReviewButtonTapped() {
         impactGesture(style: .medium)
         let layout = UICollectionViewFlowLayout()
-        let vc = QuoteReviewCollectionViewController(collectionViewLayout: layout)
-        present(vc, animated: true)
+        let quoteReviewCollectionViewController = QuoteReviewCollectionViewController(collectionViewLayout: layout)
+        quoteReviewCollectionViewController.quoteController = quoteController
+        present(quoteReviewCollectionViewController, animated: true)
     }
     
     // MARK: likeButtonTapped
