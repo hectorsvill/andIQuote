@@ -18,7 +18,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
 //        setupNetworkMonitor()
+        signAnonnamously()
         return true
+    }
+    
+    private func signAnonnamously() {
+        Auth.auth().signInAnonymously { authResult, error in
+            if let error = error {
+                NSLog("Erro with signInAnonymously: \(error)")
+            }
+            
+            guard let authResult = authResult else { return }
+            let user = authResult.user
+            
+            print(user.uid)
+        }
     }
 
     private func setupNetworkMonitor() {

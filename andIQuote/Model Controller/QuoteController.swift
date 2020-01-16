@@ -20,10 +20,12 @@ class QuoteController {
     
     var _backgroundIndex = UserDefaults().integer(forKey: "BgIndex") // current index of background
     
-    var favorites = [String]() //: [String] = UserDefaults().array(forKey: "FavoriteList") as? [String] ?? []
+    var favorites = [String]() // should be part of user
     
     init() {
        print(_backgroundIndex)
+        print(Auth.auth().currentUser!.uid)
+        
     }
 }
 
@@ -75,7 +77,6 @@ extension QuoteController {
     
     
     func fetchQuotes(completion: @escaping (Error?) -> ())  {
-        
         if UserDefaults().bool(forKey: "Startup") == false {
             firestore.fetchFirstQuotes { quotesDetail, error in
                 if let error = error {
@@ -120,7 +121,7 @@ extension QuoteController {
     
     func getNextQuote() {
         _quoteIndex = _quoteIndex < quotes.count - 1 ? _quoteIndex + 1: _quoteIndex
-        _quoteIndex += 1
+        
         if _quoteIndex % 7 == 0 && _quoteIndex + 10 > quotes.count {
             firestore.getNext { quotes, error in
                 if let error = error {

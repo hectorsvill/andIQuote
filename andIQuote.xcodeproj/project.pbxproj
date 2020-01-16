@@ -102,7 +102,6 @@
 			isa = PBXGroup;
 			children = (
 				C42EE0F323BEC6230045DF02 /* BackgroundCell.swift */,
-				C4E4617723B0683E003A98D1 /* QuoteReviewCollectionViewController.swift */,
 				C4FB3EFE23BAE4A70041B1BD /* ThemeSettingsCollectionViewController.swift */,
 				C43D446623A47138005B2458 /* QuoteCollectionViewController.swift */,
 			);
@@ -161,6 +160,7 @@
 			children = (
 				C4FB3F0223BBABE40041B1BD /* MainQuoteViewController.swift */,
 				C42EE0F623BED18C0045DF02 /* MainQuoteViewController+UISwipeGestureRecognizer.swift */,
+				C4E4617723B0683E003A98D1 /* QuoteReviewCollectionViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";

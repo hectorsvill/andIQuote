@@ -12,7 +12,7 @@ class QuoteReviewCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.backgroundColor = .systemBackground
+        collectionView.backgroundColor = .systemPurple
     }
     
 
