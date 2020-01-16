@@ -19,7 +19,7 @@ class FirestoreController {
     }
     
     // MARK: fetchQuotesFromFireStore
-    func fetchQuotesFromFireStore(limit: Int = 10, completion: @escaping ([QuoteDetail]?, Error?) -> ()) {
+    func fetchFirstQuotes(limit: Int = 10, completion: @escaping ([QuoteDetail]?, Error?) -> ()) {
         quoteQuery.limit(to: limit).getDocuments { snapShot, error in
             if let error = error {
                 completion(nil, error)
@@ -47,9 +47,7 @@ class FirestoreController {
             
             self.fetchQuotesFromSnapShotSaveToCoreData(snapShot.documents)
             completion(nil)
-//            let quotes = self.fetchQuotesFromSnapShot(snapShot.documents)
-//            completion(quotes, nil)
-            
+            print("got netxt\n")
         }
     }
     

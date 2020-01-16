@@ -13,7 +13,7 @@
 		12D72AAC23CD41C4000BECDC /* Quote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AAA23CD41C4000BECDC /* Quote.xcdatamodeld */; };
 		12D72AAF23CD42F7000BECDC /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AAE23CD42F7000BECDC /* Quote.swift */; };
 		12D72AB123CD4554000BECDC /* Quote+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AB023CD4554000BECDC /* Quote+Convenience.swift */; };
-		12F85FDE23CF742500BC74B0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12F85FDD23CF742500BC74B0 /* GoogleService-Info.plist */; };
+		12F85FE023CFD34300BC74B0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12F85FDF23CFD34300BC74B0 /* GoogleService-Info.plist */; };
 		A202E35A755FB094217DC89B /* Pods_andIQuote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79D12627DD0C2007F1C7F923 /* Pods_andIQuote.framework */; };
 		C42EE0F423BEC6230045DF02 /* BackgroundCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0F323BEC6230045DF02 /* BackgroundCell.swift */; };
 		C42EE0F723BED18C0045DF02 /* MainQuoteViewController+UISwipeGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0F623BED18C0045DF02 /* MainQuoteViewController+UISwipeGestureRecognizer.swift */; };
@@ -42,7 +42,7 @@
 		12D72AAB23CD41C4000BECDC /* Quote.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Quote.xcdatamodel; sourceTree = "<group>"; };
 		12D72AAE23CD42F7000BECDC /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		12D72AB023CD4554000BECDC /* Quote+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Quote+Convenience.swift"; sourceTree = "<group>"; };
-		12F85FDD23CF742500BC74B0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		12F85FDF23CFD34300BC74B0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1BB3DABBB0667D35BF858725 /* Pods-andIQuote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-andIQuote.release.xcconfig"; path = "Target Support Files/Pods-andIQuote/Pods-andIQuote.release.xcconfig"; sourceTree = "<group>"; };
 		410A8ADF26336FBEB51DA16B /* Pods-andIQuote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-andIQuote.debug.xcconfig"; path = "Target Support Files/Pods-andIQuote/Pods-andIQuote.debug.xcconfig"; sourceTree = "<group>"; };
 		79D12627DD0C2007F1C7F923 /* Pods_andIQuote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_andIQuote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,7 +150,7 @@
 				C43D445723A47018005B2458 /* Main.storyboard */,
 				C43D445C23A4701C005B2458 /* LaunchScreen.storyboard */,
 				C43D445A23A4701C005B2458 /* Assets.xcassets */,
-				12F85FDD23CF742500BC74B0 /* GoogleService-Info.plist */,
+				12F85FDF23CFD34300BC74B0 /* GoogleService-Info.plist */,
 				C43D445F23A4701C005B2458 /* Info.plist */,
 			);
 			path = Resources;
@@ -274,7 +274,7 @@
 			files = (
 				C43D445E23A4701C005B2458 /* LaunchScreen.storyboard in Resources */,
 				C43D445B23A4701C005B2458 /* Assets.xcassets in Resources */,
-				12F85FDE23CF742500BC74B0 /* GoogleService-Info.plist in Resources */,
+				12F85FE023CFD34300BC74B0 /* GoogleService-Info.plist in Resources */,
 				C43D445923A47018005B2458 /* Main.storyboard in Resources */,
 				0788B03E23C569C2001D00E3 /* OffLineQuotes.json in Resources */,
 			);

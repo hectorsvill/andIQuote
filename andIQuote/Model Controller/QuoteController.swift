@@ -14,7 +14,7 @@ class QuoteController {
     let firestore = FirestoreController()
     
     var quoteThemeIsActive = false // theme selecting to inactive
-    var quotes = [Quote]() // list of quotes
+    private (set) var quotes = [Quote]() // list of quotes
     let backgrounds = ["green", "blue", "gray", "pink", "red", "teal", "indigo", "orange", "yellow", "purple", "systemBackground"]
     var _quoteIndex = UserDefaults().integer(forKey: "QIndex") // current index of quote
     
@@ -23,10 +23,7 @@ class QuoteController {
     var favorites = [String]() //: [String] = UserDefaults().array(forKey: "FavoriteList") as? [String] ?? []
     
     init() {
-        print(_quoteIndex)
-        
-        
-        
+       
     }
 }
 
@@ -59,32 +56,69 @@ extension QuoteController {
         return fetchResultController
     }
     
-    func fetchQuotes(completion: @escaping (Error?) -> ())  {
-        firestore.fetchQuotesFromFireStore { quotes, error in
+    private func fetchFireQuotes() {
+        firestore.fetchFirstQuotes { quotesDetail, error in
             if let error = error {
-                completion(error)
+                NSLog("error: \(error)")
             }
-            guard let quotes = quotes else { return }
-            print(quotes)
-            for q in quotes {
+            
+            guard let qd = quotesDetail else { return }
+            for q in qd {
                 let q = Quote(body: q.body, author: q.author, id: q.id, like: false)
                 self.quotes.append(q)
-                
+                            
                 let moc = CoreDataStack.shared.mainContext
                 try! moc.save()
             }
-            
-            completion(nil)
-            
+        }
+    }
+    
+    
+    func fetchQuotes(completion: @escaping (Error?) -> ())  {
+        
+        if UserDefaults().bool(forKey: "Startup") == false {
+            firestore.fetchFirstQuotes { quotesDetail, error in
+                if let error = error {
+                    completion(error)
+                }
+                
+                guard let quotesDetail = quotesDetail else { return }
+                
+                for quote in quotesDetail {
+                    let quote = Quote(body: quote.body, author: quote.author, id: quote.id, like: false, context: CoreDataStack.shared.mainContext)
+                    self.quotes.append(quote)
+                }
+                
+                do {
+                    try CoreDataStack.shared.save()
+                    print("save")
+                } catch {
+                    NSLog("error")
+                }
+                completion(nil)
+                UserDefaults().set(true, forKey: "Startup")
+            }
+                   
+        } else {
+            let moc = CoreDataStack.shared.mainContext
+            moc.performAndWait {
+                let quoteFetch: NSFetchRequest<Quote> = Quote.fetchRequest()
+                quoteFetch.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
+                
+                do {
+                    _ = try moc.fetch(quoteFetch)
+                    let quotes = try quoteFetch.execute()
+                    self.quotes = quotes
+                    completion(nil)
+                    
+                }catch {
+                    completion(error)
+                }
+            }
+
         }
         
         
-        
-//        do {
-//            try fetchResultController.performFetch()
-//        }catch {
-//            completion(nil, error)
-//        }
 //
 //       if let _ = fetchResultController.fetchedObjects {
 //
