@@ -18,7 +18,7 @@
 		C42EE0F423BEC6230045DF02 /* BackgroundCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0F323BEC6230045DF02 /* BackgroundCell.swift */; };
 		C42EE0F723BED18C0045DF02 /* MainQuoteViewController+UISwipeGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0F623BED18C0045DF02 /* MainQuoteViewController+UISwipeGestureRecognizer.swift */; };
 		C42EE0F923C285C50045DF02 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0F823C285C50045DF02 /* User.swift */; };
-		C42EE0FB23C2E1D00045DF02 /* UIView+screenShot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0FA23C2E1D00045DF02 /* UIView+screenShot.swift */; };
+		C42EE0FB23C2E1D00045DF02 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0FA23C2E1D00045DF02 /* UIView+Extensions.swift */; };
 		C43D445223A47018005B2458 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D445123A47018005B2458 /* AppDelegate.swift */; };
 		C43D445423A47018005B2458 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D445323A47018005B2458 /* SceneDelegate.swift */; };
 		C43D445923A47018005B2458 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C43D445723A47018005B2458 /* Main.storyboard */; };
@@ -49,7 +49,7 @@
 		C42EE0F323BEC6230045DF02 /* BackgroundCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCell.swift; sourceTree = "<group>"; };
 		C42EE0F623BED18C0045DF02 /* MainQuoteViewController+UISwipeGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainQuoteViewController+UISwipeGestureRecognizer.swift"; sourceTree = "<group>"; };
 		C42EE0F823C285C50045DF02 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		C42EE0FA23C2E1D00045DF02 /* UIView+screenShot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+screenShot.swift"; sourceTree = "<group>"; };
+		C42EE0FA23C2E1D00045DF02 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		C43D444E23A47018005B2458 /* andIQuote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = andIQuote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C43D445123A47018005B2458 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C43D445323A47018005B2458 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -198,7 +198,7 @@
 			children = (
 				C4FB3F0023BBA8300041B1BD /* UIButton+SimpleButton.swift */,
 				C4FB3F0423BBC37C0041B1BD /* UIImage+mainViewSymbolConfig.swift */,
-				C42EE0FA23C2E1D00045DF02 /* UIView+screenShot.swift */,
+				C42EE0FA23C2E1D00045DF02 /* UIView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -337,7 +337,7 @@
 				C43D446D23A48677005B2458 /* QuoteCell.swift in Sources */,
 				C42EE0F723BED18C0045DF02 /* MainQuoteViewController+UISwipeGestureRecognizer.swift in Sources */,
 				C42EE0F923C285C50045DF02 /* User.swift in Sources */,
-				C42EE0FB23C2E1D00045DF02 /* UIView+screenShot.swift in Sources */,
+				C42EE0FB23C2E1D00045DF02 /* UIView+Extensions.swift in Sources */,
 				C4FB3F0123BBA8300041B1BD /* UIButton+SimpleButton.swift in Sources */,
 				C4FB3F0523BBC37C0041B1BD /* UIImage+mainViewSymbolConfig.swift in Sources */,
 				12D72AAF23CD42F7000BECDC /* Quote.swift in Sources */,
