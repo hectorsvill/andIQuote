@@ -23,7 +23,7 @@ class QuoteController {
     var favorites = [String]() //: [String] = UserDefaults().array(forKey: "FavoriteList") as? [String] ?? []
     
     init() {
-       
+       print(_backgroundIndex)
     }
 }
 
@@ -115,54 +115,23 @@ extension QuoteController {
                     completion(error)
                 }
             }
-
         }
-        
-        
-//
-//       if let _ = fetchResultController.fetchedObjects {
-//
-//       } else {
-//            NSLog("!!objects are empty!!!!")
-//            firestore.fetchQuotesFromFireStore(limit: 10) { error in
-//                if let error = error {
-//                    completion(nil, error)
-//                }
-//
-//            }
-//
-//            do {
-//                try fetchResultController.performFetch()
-//            }catch {
-//                completion(nil, error)
-//            }
-//            return
-//        }
-//
-//        guard let fetchedObjects = fetchResultController.fetchedObjects else { return }
-//
-//
-//        DispatchQueue.main.async {
-//            self.quotes = fetchedObjects
-//            completion(self.quote, nil)
-//        }
-        
     }
     
     func getNextQuote() {
-        _quoteIndex = _quoteIndex >= quotes.count - 1 ? 0 : _quoteIndex + 1
-       
-        if _quoteIndex % 7 == 0 {
-            firestore.getNext { error in
+//        _quoteIndex = _quoteIndex >= quotes.count - 1 ? 0 : _quoteIndex + 1
+        _quoteIndex += 1
+        if _quoteIndex % 7 == 0 && _quoteIndex + 10 > quotes.count {
+            firestore.getNext { quotes, error in
                 if let error = error {
                     NSLog("\(error)")
                 }
                 
-//                guard let quotes = quotes else { return }
-//                
-//                for q in quotes {
-//                    self.quotes.append(q)
-//                }
+                guard let quotes = quotes else { return }
+
+                for q in quotes {
+                    self.quotes.append(q)
+                }
             }
         }
     }
@@ -180,6 +149,7 @@ extension QuoteController {
     }
     
     func saveQuoteIndex() {
+        print("SaveQuoteINdex: \(_quoteIndex)")
         UserDefaults().set(_quoteIndex, forKey: "QIndex")
     }
     

@@ -35,18 +35,19 @@ class FirestoreController {
     }
     
     // MARK: getNext(limit:,
-    func getNext(limit: Int = 10, completion: @escaping (Error?) -> ()) {
+    func getNext(limit: Int = 10, completion: @escaping ([Quote]?, Error?) -> ()) {
+        
         guard let lastDoc = lastQueryDocumentSnapshot else { return }
         
         quoteQuery.start(atDocument: lastDoc).limit(to: limit).getDocuments { snapShot, error in
             if let error = error {
-                completion(error)
+                completion(nil, error)
             }
             
             guard let snapShot = snapShot else { return }
             
-            self.fetchQuotesFromSnapShotSaveToCoreData(snapShot.documents)
-            completion(nil)
+            let quotes = self.fetchQuotesFromSnapShotSaveToCoreData(snapShot.documents)
+            completion(quotes, nil)
             print("got netxt\n")
         }
     }
@@ -66,18 +67,25 @@ class FirestoreController {
         
         return quotes
     }
-    
-    private func fetchQuotesFromSnapShotSaveToCoreData( _ documents: [QueryDocumentSnapshot]) {
+    @discardableResult
+    private func fetchQuotesFromSnapShotSaveToCoreData( _ documents: [QueryDocumentSnapshot]) -> [Quote]{
+        var quotes = [Quote]()
+        
         for doc in documents {
             let data = doc.data() as [String: Any]
             let id = data["id"] as! String
             let body = data["body"] as! String
             let author = data["author"] as! String
                 
-            let _ = Quote(body: body, author: author, id: id, like: false)
-
-            let moc = CoreDataStack.shared.mainContext
-            try! moc.save()
+            let quote = Quote(body: body, author: author, id: id, like: false)
+            quotes.append(quote)
+            do {
+                try CoreDataStack.shared.save()
+                print("save")
+            } catch {
+                NSLog("error")
+            }
         }
+        return quotes
     }
 }

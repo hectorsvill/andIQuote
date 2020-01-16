@@ -36,7 +36,10 @@ extension MainQuoteViewController {
             if sender.direction == .left {
                 // get next quote
                 impactGesture(style: .light)
+                
                 quoteController.getNextQuote()
+                
+                
                 quoteTextView.attributedText = quoteController.attributedString
             } else if sender.direction == .right {
                 // get previous quote
@@ -45,7 +48,7 @@ extension MainQuoteViewController {
                 quoteController.getPreviousQuote()
                 quoteTextView.attributedText = quoteController.attributedString
             }
-            
+            quoteController.saveQuoteIndex()
             let quoteID = quoteController.quote.id
             var buttonImageName =  "hand.thumbsup.fill"
             if !quoteController.favorites.contains(quoteID!) {
@@ -70,7 +73,7 @@ extension MainQuoteViewController {
             // up down for font
         }
         
-        quoteController.saveQuoteIndex()
+        
     }
     
     func setBackground(_ backgroundString: String) {
