@@ -22,7 +22,7 @@ class MainQuoteViewController: UIViewController {
         setupLayouts()
         setupGestureRecogniser()
         setBackground(quoteController.background)
-        setup3dTouch()
+        
     }
     
     // MARK: lowerStackView
@@ -51,7 +51,7 @@ extension MainQuoteViewController {
     // MARK: Setup 3d Touch
     private func setup3dTouch() {
         let icon = UIApplicationShortcutIcon(type: .share)
-        let item = UIApplicationShortcutItem(type: "com.hectorstevenvillasano.andIQuote.quote", localizedTitle: "Quote", localizedSubtitle: quoteController.quote.body, icon: icon, userInfo: [:])
+        let item = UIApplicationShortcutItem(type: "com.hectorstevenvillasano.andIQuote.quote", localizedTitle: "Quote", localizedSubtitle: quoteController.quote.body, icon: icon, userInfo: nil)
         UIApplication.shared.shortcutItems = [item]
     }
     
@@ -74,6 +74,7 @@ extension MainQuoteViewController {
             }
 
             self.quoteTextView.attributedText = self.quoteController.attributedString
+            self.setup3dTouch()
         }
 
         view.addSubview(quoteTextView)
@@ -167,4 +168,7 @@ extension MainQuoteViewController {
         
         quoteController.likeButtonpressed()
     }
+    
+    
+    
 }

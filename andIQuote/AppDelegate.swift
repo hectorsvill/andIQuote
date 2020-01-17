@@ -19,6 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        setupNetworkMonitor()
         signAnonnamously()
+        
+        if let shortcutItem = launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
+            print(shortcutItem.type)
+        }
+        
         return true
     }
     
