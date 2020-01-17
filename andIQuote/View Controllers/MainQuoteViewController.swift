@@ -22,6 +22,7 @@ class MainQuoteViewController: UIViewController {
         setupLayouts()
         setupGestureRecogniser()
         setBackground(quoteController.background)
+        setup3dTouch()
     }
     
     // MARK: lowerStackView
@@ -47,6 +48,13 @@ class MainQuoteViewController: UIViewController {
 }
 
 extension MainQuoteViewController {
+    // MARK: Setup 3d Touch
+    private func setup3dTouch() {
+        let icon = UIApplicationShortcutIcon(type: .share)
+        let item = UIApplicationShortcutItem(type: "com.hectorstevenvillasano.andIQuote.quote", localizedTitle: "Quote", localizedSubtitle: quoteController.quote.body, icon: icon, userInfo: [:])
+        UIApplication.shared.shortcutItems = [item]
+    }
+    
     // MARK: setupNavButtons
     private func setupNavButtons() {
         let menuImage = UIImage(systemName: "line.horizontal.3", withConfiguration: UIImage().mainViewSymbolConfig())
