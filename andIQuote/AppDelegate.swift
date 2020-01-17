@@ -16,27 +16,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
-        
-//        setupNetworkMonitor()
         signAnonnamously()
-        
-        if let shortcutItem = launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
-            print(shortcutItem.type)
-        }
-        
+
         return true
     }
     
+}
+
+// MARK: Helpers
+
+extension AppDelegate {
+    
     private func signAnonnamously() {
-        Auth.auth().signInAnonymously { authResult, error in
+        Auth.auth().signInAnonymously { _, error in
             if let error = error {
                 NSLog("Erro with signInAnonymously: \(error)")
             }
-            
-            guard let authResult = authResult else { return }
-            let user = authResult.user
-            
-            print(user.uid)
         }
     }
 
@@ -56,7 +51,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         monitor.start(queue: queue)
     }
     
-    // MARK: UISceneSession Lifecycle
+}
+
+// MARK: UISceneSession Lifecycle
+extension AppDelegate {
+    
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.

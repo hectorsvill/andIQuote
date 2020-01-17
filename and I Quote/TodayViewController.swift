@@ -1,6 +1,6 @@
 //
 //  TodayViewController.swift
-//  TodayExt
+//  and I Quote
 //
 //  Created by s on 1/16/20.
 //  Copyright © 2020 Hector. All rights reserved.
@@ -13,15 +13,17 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        print("Today Viewdidload")
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
+    
         
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
-        // Perform any setup necessary in order to update the view.
         
-        // If an error is encountered, use NCUpdateResult.Failed
-        // If there's no update required, use NCUpdateResult.NoData
-        // If there's an update, use NCUpdateResult.NewData
         
         completionHandler(NCUpdateResult.newData)
     }

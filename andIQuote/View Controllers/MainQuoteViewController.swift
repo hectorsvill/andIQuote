@@ -74,7 +74,7 @@ extension MainQuoteViewController {
             }
 
             self.quoteTextView.attributedText = self.quoteController.attributedString
-            self.setup3dTouch()
+//            self.setup3dTouch()
         }
 
         view.addSubview(quoteTextView)

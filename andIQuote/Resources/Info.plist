@@ -60,5 +60,16 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeShare</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Quote</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>com.hectorstevenvillasano.andIQuote.quoteShare</string>
+		</dict>
+	</array>
 </dict>
 </plist>

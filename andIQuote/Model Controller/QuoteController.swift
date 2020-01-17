@@ -11,22 +11,13 @@ import UIKit
 import Firebase
 
 class QuoteController {
+    let backgrounds = ["green", "blue", "gray", "pink", "red", "teal", "indigo", "orange", "yellow", "purple", "systemBackground"]
     let firestore = FirestoreController()
-    
     var quoteThemeIsActive = false // theme selecting to inactive
     private (set) var quotes = [Quote]() // list of quotes
-    let backgrounds = ["green", "blue", "gray", "pink", "red", "teal", "indigo", "orange", "yellow", "purple", "systemBackground"]
-    var _quoteIndex = UserDefaults().integer(forKey: "QIndex") // current index of quote
-    
-    var _backgroundIndex = UserDefaults().integer(forKey: "BgIndex") // current index of background
-    
+    private (set) var _quoteIndex = UserDefaults().integer(forKey: "QIndex") // current index of quote
+    private (set) var _backgroundIndex = UserDefaults().integer(forKey: "BgIndex") // current index of background
     var favorites = [String]() // should be part of user
-    
-    init() {
-       print(_backgroundIndex)
-        print(Auth.auth().currentUser!.uid)
-        
-    }
 }
 
 extension QuoteController {
