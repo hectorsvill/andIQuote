@@ -48,10 +48,13 @@ extension MainQuoteViewController {
                 quoteController.getPreviousQuote()
                 quoteTextView.attributedText = quoteController.attributedString
             }
+//            setup3dTouch()
             quoteController.saveQuoteIndex()
             let quoteID = quoteController.quote.id
             var buttonImageName =  "hand.thumbsup.fill"
-            if !quoteController.favorites.contains(quoteID!) {
+            
+            
+            if !quoteController.quoteUser!.favorites.contains(quoteID!) {
                 buttonImageName =  "hand.thumbsup"
             }
             let configuration = UIImage().mainViewSymbolConfig()

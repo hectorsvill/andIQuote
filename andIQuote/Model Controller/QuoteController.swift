@@ -11,13 +11,21 @@ import UIKit
 import Firebase
 
 class QuoteController {
+    var quoteUser: QuoteUser?
     let backgrounds = ["green", "blue", "gray", "pink", "red", "teal", "indigo", "orange", "yellow", "purple", "systemBackground"]
     let firestore = FirestoreController()
     var quoteThemeIsActive = false // theme selecting to inactive
     private (set) var quotes = [Quote]() // list of quotes
     private (set) var _quoteIndex = UserDefaults().integer(forKey: "QIndex") // current index of quote
     private (set) var _backgroundIndex = UserDefaults().integer(forKey: "BgIndex") // current index of background
-    var favorites = [String]() // should be part of user
+
+    init() {
+        if let user = Auth.auth().currentUser {
+            self.quoteUser = QuoteUser(id: user.uid)
+            
+        }
+    }
+    
 }
 
 extension QuoteController {
@@ -150,7 +158,8 @@ extension QuoteController {
     }
     
     func likeButtonpressed() {
-        UserDefaults().set(favorites, forKey: "FavoriteList")
+        guard let user = quoteUser else { return }
+        UserDefaults().set(user.favorites, forKey: "FavoriteList")
     }
     
 }

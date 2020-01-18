@@ -9,11 +9,6 @@
 /* Begin PBXBuildFile section */
 		0788B03A23C56820001D00E3 /* FirestoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0788B03923C56820001D00E3 /* FirestoreController.swift */; };
 		0788B03E23C569C2001D00E3 /* OffLineQuotes.json in Resources */ = {isa = PBXBuildFile; fileRef = 0788B03D23C569C2001D00E3 /* OffLineQuotes.json */; };
-		1231708523D17D2C00EBF261 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1231707023D1402700EBF261 /* NotificationCenter.framework */; };
-		1231708823D17D2C00EBF261 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1231708723D17D2C00EBF261 /* TodayViewController.swift */; };
-		1231708B23D17D2C00EBF261 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1231708923D17D2C00EBF261 /* MainInterface.storyboard */; };
-		1231708F23D17D2C00EBF261 /* and I Quote.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1231708423D17D2C00EBF261 /* and I Quote.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		1231709523D17E1200EBF261 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1231708723D17D2C00EBF261 /* TodayViewController.swift */; };
 		12B3DAA623CAE18E00B6358E /* DatabaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B3DAA523CAE18E00B6358E /* DatabaseController.swift */; };
 		12D72AAC23CD41C4000BECDC /* Quote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AAA23CD41C4000BECDC /* Quote.xcdatamodeld */; };
 		12D72AAF23CD42F7000BECDC /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AAE23CD42F7000BECDC /* Quote.swift */; };
@@ -22,7 +17,7 @@
 		A202E35A755FB094217DC89B /* Pods_andIQuote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79D12627DD0C2007F1C7F923 /* Pods_andIQuote.framework */; };
 		C42EE0F423BEC6230045DF02 /* BackgroundCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0F323BEC6230045DF02 /* BackgroundCell.swift */; };
 		C42EE0F723BED18C0045DF02 /* MainQuoteViewController+UISwipeGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0F623BED18C0045DF02 /* MainQuoteViewController+UISwipeGestureRecognizer.swift */; };
-		C42EE0F923C285C50045DF02 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0F823C285C50045DF02 /* User.swift */; };
+		C42EE0F923C285C50045DF02 /* QuoteUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0F823C285C50045DF02 /* QuoteUser.swift */; };
 		C42EE0FB23C2E1D00045DF02 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0FA23C2E1D00045DF02 /* UIView+Extensions.swift */; };
 		C43D445223A47018005B2458 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D445123A47018005B2458 /* AppDelegate.swift */; };
 		C43D445423A47018005B2458 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D445323A47018005B2458 /* SceneDelegate.swift */; };
@@ -40,16 +35,6 @@
 		C4FB3F0523BBC37C0041B1BD /* UIImage+mainViewSymbolConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FB3F0423BBC37C0041B1BD /* UIImage+mainViewSymbolConfig.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		1231708D23D17D2C00EBF261 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C43D444623A47018005B2458 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1231708323D17D2C00EBF261;
-			remoteInfo = "and I Quote";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		1231707F23D1402700EBF261 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -57,7 +42,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				1231708F23D17D2C00EBF261 /* and I Quote.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -68,10 +52,6 @@
 		0788B03923C56820001D00E3 /* FirestoreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreController.swift; sourceTree = "<group>"; };
 		0788B03D23C569C2001D00E3 /* OffLineQuotes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = OffLineQuotes.json; sourceTree = "<group>"; };
 		1231707023D1402700EBF261 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
-		1231708423D17D2C00EBF261 /* and I Quote.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "and I Quote.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1231708723D17D2C00EBF261 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
-		1231708A23D17D2C00EBF261 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
-		1231708C23D17D2C00EBF261 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12B3DAA523CAE18E00B6358E /* DatabaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseController.swift; sourceTree = "<group>"; };
 		12D72AAB23CD41C4000BECDC /* Quote.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Quote.xcdatamodel; sourceTree = "<group>"; };
 		12D72AAE23CD42F7000BECDC /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
@@ -82,7 +62,7 @@
 		79D12627DD0C2007F1C7F923 /* Pods_andIQuote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_andIQuote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C42EE0F323BEC6230045DF02 /* BackgroundCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCell.swift; sourceTree = "<group>"; };
 		C42EE0F623BED18C0045DF02 /* MainQuoteViewController+UISwipeGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainQuoteViewController+UISwipeGestureRecognizer.swift"; sourceTree = "<group>"; };
-		C42EE0F823C285C50045DF02 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C42EE0F823C285C50045DF02 /* QuoteUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteUser.swift; sourceTree = "<group>"; };
 		C42EE0FA23C2E1D00045DF02 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		C43D444E23A47018005B2458 /* andIQuote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = andIQuote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C43D445123A47018005B2458 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -103,14 +83,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		1231708123D17D2C00EBF261 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1231708523D17D2C00EBF261 /* NotificationCenter.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C43D444B23A47018005B2458 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -122,16 +94,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1231708623D17D2C00EBF261 /* and I Quote */ = {
-			isa = PBXGroup;
-			children = (
-				1231708723D17D2C00EBF261 /* TodayViewController.swift */,
-				1231708923D17D2C00EBF261 /* MainInterface.storyboard */,
-				1231708C23D17D2C00EBF261 /* Info.plist */,
-			);
-			path = "and I Quote";
-			sourceTree = "<group>";
-		};
 		12D72AAD23CD42C8000BECDC /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,7 +128,6 @@
 			isa = PBXGroup;
 			children = (
 				C43D445023A47018005B2458 /* andIQuote */,
-				1231708623D17D2C00EBF261 /* and I Quote */,
 				C43D444F23A47018005B2458 /* Products */,
 				FC694681BB32D3EB48BEEEB9 /* Pods */,
 				3D858A6172EAE387DF38FA05 /* Frameworks */,
@@ -177,7 +138,6 @@
 			isa = PBXGroup;
 			children = (
 				C43D444E23A47018005B2458 /* andIQuote.app */,
-				1231708423D17D2C00EBF261 /* and I Quote.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -225,7 +185,7 @@
 			children = (
 				C4F0E90D23AB3297005917A8 /* QuoteLibrary.swift */,
 				12D72AAD23CD42C8000BECDC /* Core Data */,
-				C42EE0F823C285C50045DF02 /* User.swift */,
+				C42EE0F823C285C50045DF02 /* QuoteUser.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -270,23 +230,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1231708323D17D2C00EBF261 /* and I Quote */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1231709023D17D2C00EBF261 /* Build configuration list for PBXNativeTarget "and I Quote" */;
-			buildPhases = (
-				1231708023D17D2C00EBF261 /* Sources */,
-				1231708123D17D2C00EBF261 /* Frameworks */,
-				1231708223D17D2C00EBF261 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "and I Quote";
-			productName = "and I Quote";
-			productReference = 1231708423D17D2C00EBF261 /* and I Quote.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		C43D444D23A47018005B2458 /* andIQuote */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C43D446223A4701C005B2458 /* Build configuration list for PBXNativeTarget "andIQuote" */;
@@ -301,7 +244,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				1231708E23D17D2C00EBF261 /* PBXTargetDependency */,
 			);
 			name = andIQuote;
 			productName = andIQuote;
@@ -318,9 +260,6 @@
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = Hector;
 				TargetAttributes = {
-					1231708323D17D2C00EBF261 = {
-						CreatedOnToolsVersion = 11.3.1;
-					};
 					C43D444D23A47018005B2458 = {
 						CreatedOnToolsVersion = 11.3;
 					};
@@ -340,20 +279,11 @@
 			projectRoot = "";
 			targets = (
 				C43D444D23A47018005B2458 /* andIQuote */,
-				1231708323D17D2C00EBF261 /* and I Quote */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		1231708223D17D2C00EBF261 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1231708B23D17D2C00EBF261 /* MainInterface.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C43D444C23A47018005B2458 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -411,14 +341,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		1231708023D17D2C00EBF261 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1231708823D17D2C00EBF261 /* TodayViewController.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C43D444A23A47018005B2458 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -430,8 +352,7 @@
 				C4E4617823B0683E003A98D1 /* QuoteReviewCollectionViewController.swift in Sources */,
 				C43D446D23A48677005B2458 /* QuoteCell.swift in Sources */,
 				C42EE0F723BED18C0045DF02 /* MainQuoteViewController+UISwipeGestureRecognizer.swift in Sources */,
-				C42EE0F923C285C50045DF02 /* User.swift in Sources */,
-				1231709523D17E1200EBF261 /* TodayViewController.swift in Sources */,
+				C42EE0F923C285C50045DF02 /* QuoteUser.swift in Sources */,
 				C42EE0FB23C2E1D00045DF02 /* UIView+Extensions.swift in Sources */,
 				C4FB3F0123BBA8300041B1BD /* UIButton+SimpleButton.swift in Sources */,
 				C4FB3F0523BBC37C0041B1BD /* UIImage+mainViewSymbolConfig.swift in Sources */,
@@ -449,23 +370,7 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		1231708E23D17D2C00EBF261 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1231708323D17D2C00EBF261 /* and I Quote */;
-			targetProxy = 1231708D23D17D2C00EBF261 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
-		1231708923D17D2C00EBF261 /* MainInterface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1231708A23D17D2C00EBF261 /* Base */,
-			);
-			name = MainInterface.storyboard;
-			sourceTree = "<group>";
-		};
 		C43D445723A47018005B2458 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -485,44 +390,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		1231709123D17D2C00EBF261 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 97AS6JS382;
-				INFOPLIST_FILE = "and I Quote/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hectorstevenvillasano.andIQuote.and-I-Quote";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		1231709223D17D2C00EBF261 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 97AS6JS382;
-				INFOPLIST_FILE = "and I Quote/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hectorstevenvillasano.andIQuote.and-I-Quote";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		C43D446023A4701C005B2458 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -680,15 +547,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1231709023D17D2C00EBF261 /* Build configuration list for PBXNativeTarget "and I Quote" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1231709123D17D2C00EBF261 /* Debug */,
-				1231709223D17D2C00EBF261 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		C43D444923A47018005B2458 /* Build configuration list for PBXProject "andIQuote" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

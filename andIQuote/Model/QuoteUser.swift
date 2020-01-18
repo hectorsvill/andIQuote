@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct User: Codable {
-    let id = UUID().uuidString
-    let name = ""
-    let favorites: [String] = []
+struct QuoteUser: Codable {
+    let id: String
+    var name = ""
+    var favorites: [String] = []
 }

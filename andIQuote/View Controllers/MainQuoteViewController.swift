@@ -25,6 +25,11 @@ class MainQuoteViewController: UIViewController {
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        setup3dTouch()
+    }
+    
     // MARK: lowerStackView
     var lowerStackView: UIStackView = {
         let stackView = UIStackView()
@@ -49,9 +54,9 @@ class MainQuoteViewController: UIViewController {
 
 extension MainQuoteViewController {
     // MARK: Setup 3d Touch
-    private func setup3dTouch() {
+    func setup3dTouch() {
         let icon = UIApplicationShortcutIcon(type: .share)
-        let item = UIApplicationShortcutItem(type: "com.hectorstevenvillasano.andIQuote.quote", localizedTitle: "Quote", localizedSubtitle: quoteController.quote.body, icon: icon, userInfo: nil)
+        let item = UIApplicationShortcutItem(type: "com.hectorstevenvillasano.andIQuote.Quote", localizedTitle: "Share", localizedSubtitle: nil, icon: icon, userInfo: nil)
         UIApplication.shared.shortcutItems = [item]
     }
     
@@ -74,7 +79,7 @@ extension MainQuoteViewController {
             }
 
             self.quoteTextView.attributedText = self.quoteController.attributedString
-//            self.setup3dTouch()
+            self.setup3dTouch()
         }
 
         view.addSubview(quoteTextView)
@@ -153,12 +158,14 @@ extension MainQuoteViewController {
         
         let quoteID = quoteController.quote.id
         var buttonImageName =  "hand.thumbsup"
-        if quoteController.favorites.contains(quoteID!) {
-            if let index = quoteController.favorites.firstIndex(of: quoteID!) {
-                quoteController.favorites.remove(at: index)
+        guard var user = quoteController.quoteUser else { return }
+        
+        if user.favorites.contains(quoteID!) {
+            if let index = user.favorites.firstIndex(of: quoteID!) {
+                user.favorites.remove(at: index)
             }
         } else {
-            quoteController.favorites.append(quoteID!)
+            user.favorites.append(quoteID!)
             buttonImageName =  "hand.thumbsup.fill"
         }
         
