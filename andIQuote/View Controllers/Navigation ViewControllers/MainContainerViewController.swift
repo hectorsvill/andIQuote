@@ -8,12 +8,8 @@
 
 import UIKit
 
-protocol HomeControllerViewDelegate {
-    func handleMenuToggle()
-}
-
 class MainContainerViewController: UIViewController {
-    
+    var quoteController = QuoteController()
     var navigationIsExpanded = false
     var menuViewController: UIViewController!
     var centerNavViewController: UIViewController!
@@ -22,10 +18,10 @@ class MainContainerViewController: UIViewController {
         super.viewDidLoad()
         configureHomeController()
     }
-
     
     func configureHomeController() {
         let homeController = MainQuoteViewController()
+        homeController.quoteController = quoteController
         centerNavViewController = UINavigationController(rootViewController: homeController)
         homeController.delegate = self
         view.addSubview(centerNavViewController.view)
@@ -41,8 +37,6 @@ class MainContainerViewController: UIViewController {
             addChild(menuViewController)
             menuViewController.didMove(toParent: self)
         }
-        
-        
     }
     
     func showMenuController(shouldExpand: Bool) {
@@ -58,6 +52,13 @@ class MainContainerViewController: UIViewController {
         }
     }
     
+}
+
+
+
+// MARK: HomeControllerViewDelegate
+protocol HomeControllerViewDelegate {
+    func handleMenuToggle()
 }
 
 extension MainContainerViewController: HomeControllerViewDelegate {

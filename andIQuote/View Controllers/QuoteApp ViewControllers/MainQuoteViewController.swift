@@ -10,7 +10,7 @@ import UIKit
 
 class MainQuoteViewController: UIViewController {
     var delegate: HomeControllerViewDelegate?
-    var quoteController = QuoteController()
+    var quoteController: QuoteController!
     var menuButton: UIButton!
     var shareButton: UIButton!
     var themeButton: UIButton!
@@ -23,8 +23,6 @@ class MainQuoteViewController: UIViewController {
         setupLayouts()
         setupGestureRecogniser()
         setBackground(quoteController.background)
-        
-        
     }
   
     override func viewWillDisappear(_ animated: Bool) {
@@ -60,6 +58,8 @@ extension MainQuoteViewController {
         let icon = UIApplicationShortcutIcon(type: .share)
         let item = UIApplicationShortcutItem(type: "com.hectorstevenvillasano.andIQuote.Quote", localizedTitle: "Share", localizedSubtitle: nil, icon: icon, userInfo: nil)
         UIApplication.shared.shortcutItems = [item]
+        
+        
     }
     
     // MARK: setupNavButtons
