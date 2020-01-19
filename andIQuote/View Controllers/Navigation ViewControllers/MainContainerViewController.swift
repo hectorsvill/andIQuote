@@ -20,8 +20,7 @@ class MainContainerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
+        configureHomeController()
     }
 
     
@@ -29,15 +28,44 @@ class MainContainerViewController: UIViewController {
         let homeController = MainQuoteViewController()
         centerNavViewController = UINavigationController(rootViewController: homeController)
         homeController.delegate = self
+        view.addSubview(centerNavViewController.view)
+        addChild(centerNavViewController)
+        centerNavViewController.didMove(toParent: self)
+    }
+    
+    func configureMenuViewController() {
+        if menuViewController == nil {
+            menuViewController = SlideMenuViewController()
+            view.insertSubview(menuViewController.view, at: 0)
+            menuViewController.didMove(toParent: self)
+        }
         
         
     }
     
+    func showMenuController(shouldExpand: Bool) {
+        if shouldExpand {
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+                self.centerNavViewController.view.frame.origin.x = self.centerNavViewController.view.frame.width - 80
+            })
+                
+        } else {
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+                self.centerNavViewController.view.frame.origin.x = 0
+            })
+        }
+    }
     
 }
 
 extension MainContainerViewController: HomeControllerViewDelegate {
     func handleMenuToggle() {
+        if !navigationIsExpanded {
+            configureHomeController()
+        }
+        
+        navigationIsExpanded.toggle()
+        showMenuController(shouldExpand: navigationIsExpanded)
         
     }
     
