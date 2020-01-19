@@ -10,7 +10,6 @@ import UIKit
 
 class MainContainerViewController: UIViewController {
     var quoteController = QuoteController()
-    var navigationIsExpanded = false
     var menuViewController: UIViewController!
     var centerNavViewController: UIViewController!
     
@@ -59,11 +58,11 @@ protocol HomeControllerViewDelegate {
 
 extension MainContainerViewController: HomeControllerViewDelegate {
     func handleMenuToggle() {
-        if !navigationIsExpanded {
+        if !quoteController.menuNavigationIsExpanded {
             configureMenuViewController()
         }
         
-        navigationIsExpanded.toggle()
-        showMenuController(shouldExpand: navigationIsExpanded)
+        quoteController.menuNavigationIsExpanded.toggle()
+        showMenuController(shouldExpand: quoteController.menuNavigationIsExpanded)
     }
 }
