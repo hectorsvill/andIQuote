@@ -8,15 +8,38 @@
 
 import UIKit
 
+protocol HomeControllerViewDelegate {
+    func handleMenuToggle()
+}
+
 class MainContainerViewController: UIViewController {
-    var navigationIsExpanded = false
-    var mainContainerViewController: MainContainerViewController!
     
-    var slideMenuViewController: slideMenuViewController!
+    var navigationIsExpanded = false
+    var menuViewController: UIViewController!
+    var centerNavViewController: UIViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
     }
 
+    
+    func configureHomeController() {
+        let homeController = MainQuoteViewController()
+        centerNavViewController = UINavigationController(rootViewController: homeController)
+        homeController.delegate = self
+        
+        
+    }
+    
+    
+}
+
+extension MainContainerViewController: HomeControllerViewDelegate {
+    func handleMenuToggle() {
+        
+    }
+    
+    
 }

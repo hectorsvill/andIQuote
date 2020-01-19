@@ -9,6 +9,7 @@
 import UIKit
 
 class MainQuoteViewController: UIViewController {
+    var delegate: HomeControllerViewDelegate?
     var quoteController = QuoteController()
     var menuButton: UIButton!
     var shareButton: UIButton!
@@ -120,6 +121,7 @@ extension MainQuoteViewController {
     // MARK: menuButtonTapped
     @objc func menuButtonTapped() {
         impactGesture(style: .rigid)
+        delegate?.handleMenuToggle()
     }
     
     // MARK: shareButtonTapped
@@ -175,7 +177,4 @@ extension MainQuoteViewController {
         
         quoteController.likeButtonpressed()
     }
-    
-    
-    
 }
