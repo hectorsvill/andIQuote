@@ -14,28 +14,28 @@ class SlideMenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.setBackground(to: quoteController.background)
         configureTableview()
     }
     
     func configureTableview() {
         tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = view.backgroundColor
+        tableView.setBackground(to: quoteController.background)
         
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "MenuCell")
         tableView.separatorStyle = .none
         tableView.rowHeight = 80
         
-//        view.addSubview(tableView)
-//
-//        NSLayoutConstraint.activate([
-//            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
-//            tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
-//            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-//            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-//        ])
+        view.addSubview(tableView)
+
+        NSLayoutConstraint.activate([
+            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
         
     }
 }
@@ -48,6 +48,8 @@ extension SlideMenuViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MenuCell", for: indexPath)
         cell.textLabel?.text = "\(indexPath.row)"
+        cell.setBackground(to: quoteController.background)
+        cell.textLabel?.textColor = .white
         return cell
     }
     
