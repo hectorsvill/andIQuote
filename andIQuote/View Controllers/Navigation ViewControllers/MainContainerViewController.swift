@@ -10,7 +10,9 @@ import UIKit
 
 class MainContainerViewController: UIViewController {
     var navigationIsExpanded = false
-    var MainContainerViewController: MainContainerViewController!
+    var mainContainerViewController: MainContainerViewController!
+    
+    var slideMenuViewController: slideMenuViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
