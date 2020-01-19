@@ -160,6 +160,7 @@ extension MainQuoteViewController {
     
     // MARK: likeButtonTapped
     @objc func likeButtonTapped() {
+        guard !quoteController.quoteThemeIsActive else { return }
         impactGesture(style: .medium)
         
         let quoteID = quoteController.quote.id

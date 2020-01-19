@@ -74,7 +74,6 @@ extension QuoteController {
         }
     }
     
-    
     func fetchQuotes(completion: @escaping (Error?) -> ())  {
         if UserDefaults().bool(forKey: "Startup") == false {
             firestore.fetchFirstQuotes { quotesDetail, error in
