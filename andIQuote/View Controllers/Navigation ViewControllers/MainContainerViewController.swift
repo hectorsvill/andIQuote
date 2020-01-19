@@ -10,7 +10,7 @@ import UIKit
 
 class MainContainerViewController: UIViewController {
     var quoteController = QuoteController()
-    var menuViewController: UIViewController!
+    var menuViewController: SlideMenuViewController!
     var centerNavViewController: UIViewController!
     
     override func viewDidLoad() {
@@ -30,8 +30,8 @@ class MainContainerViewController: UIViewController {
     
     func configureMenuViewController() {
         if menuViewController == nil {
-            print("here")
             menuViewController = SlideMenuViewController()
+            menuViewController.quoteController = quoteController
             view.insertSubview(menuViewController.view, at: 0)
             addChild(menuViewController)
             menuViewController.didMove(toParent: self)

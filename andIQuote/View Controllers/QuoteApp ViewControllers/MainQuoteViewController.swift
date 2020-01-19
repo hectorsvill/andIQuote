@@ -124,6 +124,7 @@ extension MainQuoteViewController {
     
     // MARK: menuButtonTapped
     @objc func menuButtonTapped() {
+        guard !quoteController.quoteThemeIsActive else { return }
         impactGesture(style: .rigid)
         delegate?.handleMenuToggle()
     }

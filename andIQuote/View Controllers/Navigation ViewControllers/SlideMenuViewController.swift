@@ -9,14 +9,14 @@
 import UIKit
 
 class SlideMenuViewController: UIViewController {
-
+    var quoteController: QuoteController!
     var tableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+        
+        view.setBackground(to: quoteController.background)
         configureTableview()
-        print(view.backgroundColor)
     }
     
     func configureTableview() {
@@ -28,14 +28,14 @@ class SlideMenuViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.rowHeight = 80
         
-        view.addSubview(tableView)
-        
-        NSLayoutConstraint.activate([
-            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        ])
+//        view.addSubview(tableView)
+//
+//        NSLayoutConstraint.activate([
+//            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
+//            tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
+//            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+//            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+//        ])
         
     }
 }
