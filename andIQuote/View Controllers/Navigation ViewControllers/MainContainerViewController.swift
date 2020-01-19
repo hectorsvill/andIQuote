@@ -66,7 +66,7 @@ extension MainContainerViewController: HomeControllerViewDelegate {
         
         navigationIsExpanded.toggle()
         showMenuController(shouldExpand: navigationIsExpanded)
-        
+        print("handleMenuToggle")
     }
     
     

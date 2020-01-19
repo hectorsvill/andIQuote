@@ -24,8 +24,9 @@ class MainQuoteViewController: UIViewController {
         setupGestureRecogniser()
         setBackground(quoteController.background)
         
+        
     }
-    
+  
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         setup3dTouch()
@@ -63,6 +64,9 @@ extension MainQuoteViewController {
     
     // MARK: setupNavButtons
     private func setupNavButtons() {
+        navigationController?.navigationBar.barTintColor = view.backgroundColor
+        navigationController?.navigationBar.barStyle = .default
+        
         let menuImage = UIImage(systemName: "line.horizontal.3", withConfiguration: UIImage().mainViewSymbolConfig())
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: menuImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(menuButtonTapped))
         navigationItem.leftBarButtonItem?.tintColor = .label
