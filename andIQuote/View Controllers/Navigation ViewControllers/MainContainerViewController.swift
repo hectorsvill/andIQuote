@@ -35,8 +35,10 @@ class MainContainerViewController: UIViewController {
     
     func configureMenuViewController() {
         if menuViewController == nil {
+            print("here")
             menuViewController = SlideMenuViewController()
             view.insertSubview(menuViewController.view, at: 0)
+            addChild(menuViewController)
             menuViewController.didMove(toParent: self)
         }
         
@@ -61,12 +63,11 @@ class MainContainerViewController: UIViewController {
 extension MainContainerViewController: HomeControllerViewDelegate {
     func handleMenuToggle() {
         if !navigationIsExpanded {
-            configureHomeController()
+            configureMenuViewController()
         }
         
         navigationIsExpanded.toggle()
         showMenuController(shouldExpand: navigationIsExpanded)
-        print("handleMenuToggle")
     }
     
     
