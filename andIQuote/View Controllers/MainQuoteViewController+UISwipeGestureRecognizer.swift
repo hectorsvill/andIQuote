@@ -38,9 +38,8 @@ extension MainQuoteViewController {
                 impactGesture(style: .light)
                 
                 quoteController.getNextQuote()
-                
-                
                 quoteTextView.attributedText = quoteController.attributedString
+                
             } else if sender.direction == .right {
                 // get previous quote
                 guard quoteController._quoteIndex != 0 else { return }

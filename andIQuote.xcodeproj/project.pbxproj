@@ -14,7 +14,6 @@
 		12D72AAF23CD42F7000BECDC /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AAE23CD42F7000BECDC /* Quote.swift */; };
 		12D72AB123CD4554000BECDC /* Quote+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AB023CD4554000BECDC /* Quote+Convenience.swift */; };
 		12F85FE023CFD34300BC74B0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12F85FDF23CFD34300BC74B0 /* GoogleService-Info.plist */; };
-		A202E35A755FB094217DC89B /* Pods_andIQuote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79D12627DD0C2007F1C7F923 /* Pods_andIQuote.framework */; };
 		C42EE0F423BEC6230045DF02 /* BackgroundCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0F323BEC6230045DF02 /* BackgroundCell.swift */; };
 		C42EE0F723BED18C0045DF02 /* MainQuoteViewController+UISwipeGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0F623BED18C0045DF02 /* MainQuoteViewController+UISwipeGestureRecognizer.swift */; };
 		C42EE0F923C285C50045DF02 /* QuoteUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0F823C285C50045DF02 /* QuoteUser.swift */; };
@@ -59,7 +58,6 @@
 		12F85FDF23CFD34300BC74B0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1BB3DABBB0667D35BF858725 /* Pods-andIQuote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-andIQuote.release.xcconfig"; path = "Target Support Files/Pods-andIQuote/Pods-andIQuote.release.xcconfig"; sourceTree = "<group>"; };
 		410A8ADF26336FBEB51DA16B /* Pods-andIQuote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-andIQuote.debug.xcconfig"; path = "Target Support Files/Pods-andIQuote/Pods-andIQuote.debug.xcconfig"; sourceTree = "<group>"; };
-		79D12627DD0C2007F1C7F923 /* Pods_andIQuote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_andIQuote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C42EE0F323BEC6230045DF02 /* BackgroundCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCell.swift; sourceTree = "<group>"; };
 		C42EE0F623BED18C0045DF02 /* MainQuoteViewController+UISwipeGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainQuoteViewController+UISwipeGestureRecognizer.swift"; sourceTree = "<group>"; };
 		C42EE0F823C285C50045DF02 /* QuoteUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteUser.swift; sourceTree = "<group>"; };
@@ -87,7 +85,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A202E35A755FB094217DC89B /* Pods_andIQuote.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,7 +104,6 @@
 		3D858A6172EAE387DF38FA05 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				79D12627DD0C2007F1C7F923 /* Pods_andIQuote.framework */,
 				1231707023D1402700EBF261 /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
