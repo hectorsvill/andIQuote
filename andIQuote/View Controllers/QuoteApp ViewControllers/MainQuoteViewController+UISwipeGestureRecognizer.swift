@@ -32,6 +32,13 @@ extension MainQuoteViewController {
     }
     
     @objc func handleSwipeAction(_ sender: UISwipeGestureRecognizer) {
+        guard !quoteController.menuNavigationIsExpanded else {
+            if sender.direction == .left {
+                delegate?.handleMenuToggle()
+            }
+            return
+        }
+        
         if !quoteController.quoteThemeIsActive {
             if sender.direction == .left {
                 // get next quote

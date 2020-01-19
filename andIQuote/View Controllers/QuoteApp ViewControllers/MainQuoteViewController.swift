@@ -9,7 +9,8 @@
 import UIKit
 
 class MainQuoteViewController: UIViewController {
-    var quoteController = QuoteController()
+    var delegate: HomeControllerViewDelegate?
+    var quoteController: QuoteController!
     var menuButton: UIButton!
     var shareButton: UIButton!
     var themeButton: UIButton!
@@ -22,9 +23,8 @@ class MainQuoteViewController: UIViewController {
         setupLayouts()
         setupGestureRecogniser()
         setBackground(quoteController.background)
-        
     }
-    
+  
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         setup3dTouch()
@@ -58,10 +58,15 @@ extension MainQuoteViewController {
         let icon = UIApplicationShortcutIcon(type: .share)
         let item = UIApplicationShortcutItem(type: "com.hectorstevenvillasano.andIQuote.Quote", localizedTitle: "Share", localizedSubtitle: nil, icon: icon, userInfo: nil)
         UIApplication.shared.shortcutItems = [item]
+        
+        
     }
     
     // MARK: setupNavButtons
     private func setupNavButtons() {
+        navigationController?.navigationBar.barTintColor = view.backgroundColor
+        navigationController?.navigationBar.barStyle = .default
+        
         let menuImage = UIImage(systemName: "line.horizontal.3", withConfiguration: UIImage().mainViewSymbolConfig())
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: menuImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(menuButtonTapped))
         navigationItem.leftBarButtonItem?.tintColor = .label
@@ -119,7 +124,9 @@ extension MainQuoteViewController {
     
     // MARK: menuButtonTapped
     @objc func menuButtonTapped() {
+        guard !quoteController.quoteThemeIsActive else { return }
         impactGesture(style: .rigid)
+        delegate?.handleMenuToggle()
     }
     
     // MARK: shareButtonTapped
@@ -154,6 +161,7 @@ extension MainQuoteViewController {
     
     // MARK: likeButtonTapped
     @objc func likeButtonTapped() {
+        guard !quoteController.quoteThemeIsActive else { return }
         impactGesture(style: .medium)
         
         let quoteID = quoteController.quote.id
@@ -175,7 +183,4 @@ extension MainQuoteViewController {
         
         quoteController.likeButtonpressed()
     }
-    
-    
-    
 }

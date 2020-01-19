@@ -11,13 +11,14 @@ import UIKit
 import Firebase
 
 class QuoteController {
-    var quoteUser: QuoteUser?
+    var quoteThemeIsActive = false // theme selecting state
+    var menuNavigationIsExpanded = false // menu navigations state
     let backgrounds = ["green", "blue", "gray", "pink", "red", "teal", "indigo", "orange", "yellow", "purple", "systemBackground"]
     let firestore = FirestoreController()
-    var quoteThemeIsActive = false // theme selecting to inactive
     private (set) var quotes = [Quote]() // list of quotes
     private (set) var _quoteIndex = UserDefaults().integer(forKey: "QIndex") // current index of quote
     private (set) var _backgroundIndex = UserDefaults().integer(forKey: "BgIndex") // current index of background
+    private (set) var quoteUser: QuoteUser?
 
     init() {
         if let user = Auth.auth().currentUser {
@@ -73,7 +74,6 @@ extension QuoteController {
             }
         }
     }
-    
     
     func fetchQuotes(completion: @escaping (Error?) -> ())  {
         if UserDefaults().bool(forKey: "Startup") == false {
