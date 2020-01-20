@@ -25,6 +25,7 @@ class SlideMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureHierarchy()
+        configureDataSouce()
     }
     
 }
