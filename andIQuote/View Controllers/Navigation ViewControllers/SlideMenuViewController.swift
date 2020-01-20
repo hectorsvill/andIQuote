@@ -14,6 +14,8 @@ class SlideMenuViewController: UIViewController {
     
     enum Section {
         case main
+        case header
+        case footer
     }
     
     var dataSource: dataSouceDiffable!
@@ -29,3 +31,14 @@ class SlideMenuViewController: UIViewController {
     
 }
 
+extension SlideMenuViewController {
+    private func createLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(80))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
+    }
+}
