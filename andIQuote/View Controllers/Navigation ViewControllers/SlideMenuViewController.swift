@@ -43,11 +43,29 @@ extension SlideMenuViewController {
     private func configureHierarchy() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createMainLayout())
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.backgroundColor = .systemBackground
+        collectionView.setBackground(to: quoteController.background)
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "MenuCell")
         view.addSubview((collectionView))
         collectionView.delegate = self
     }
+    
+    private func configureDataSouce() {
+        dataSource = dataSouceDiffable(collectionView: collectionView, cellProvider: {
+            collectionView, indexPath, i -> UICollectionViewCell? in
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MenuCell", for: indexPath)
+            
+            cell.backgroundColor = .red
+            return cell
+        })
+        
+        var snapShot = NSDiffableDataSourceSnapshot<Section, Int>()
+        snapShot.appendSections([.main])
+        snapShot.appendItems(Array(0...5))
+        dataSource.apply(snapShot, animatingDifferences: false)
+    }
+    
+    
 }
 
 extension SlideMenuViewController: UICollectionViewDelegate {
