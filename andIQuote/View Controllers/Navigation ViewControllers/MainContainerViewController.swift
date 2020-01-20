@@ -19,10 +19,10 @@ class MainContainerViewController: UIViewController {
     }
     
     func configureHomeController() {
-        let homeController = MainQuoteViewController()
+        let homeController = QuoteCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
         homeController.quoteController = quoteController
         centerNavViewController = UINavigationController(rootViewController: homeController)
-        homeController.delegate = self
+//        homeController.delegate = self
         view.addSubview(centerNavViewController.view)
         addChild(centerNavViewController)
         centerNavViewController.didMove(toParent: self)

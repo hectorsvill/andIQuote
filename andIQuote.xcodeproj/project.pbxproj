@@ -100,6 +100,7 @@
 		122F4B7E23D3EDCE004C2F34 /* QuoteApp ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				C43D446623A47138005B2458 /* QuoteCollectionViewController.swift */,
 				C4FB3F0223BBABE40041B1BD /* MainQuoteViewController.swift */,
 				C42EE0F623BED18C0045DF02 /* MainQuoteViewController+UISwipeGestureRecognizer.swift */,
 				C4E4617723B0683E003A98D1 /* QuoteReviewCollectionViewController.swift */,
@@ -112,7 +113,6 @@
 			children = (
 				122F4B7C23D3EDC5004C2F34 /* MainContainerViewController.swift */,
 				122F4B8023D3EF36004C2F34 /* SlideMenuViewController.swift */,
-				122F4B8223D5320C004C2F34 /* MenuCollectionViewCell.swift */,
 			);
 			path = "Navigation ViewControllers";
 			sourceTree = "<group>";
@@ -141,7 +141,6 @@
 				0788B03D23C569C2001D00E3 /* OffLineQuotes.json */,
 				C42EE0F323BEC6230045DF02 /* BackgroundCell.swift */,
 				C4FB3EFE23BAE4A70041B1BD /* ThemeSettingsCollectionViewController.swift */,
-				C43D446623A47138005B2458 /* QuoteCollectionViewController.swift */,
 			);
 			path = Trash;
 			sourceTree = "<group>";
@@ -215,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				C43D446C23A48677005B2458 /* QuoteCell.swift */,
+				122F4B8223D5320C004C2F34 /* MenuCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
