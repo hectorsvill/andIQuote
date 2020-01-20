@@ -44,7 +44,8 @@ extension SlideMenuViewController {
     private func configureHierarchy() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createMainLayout())
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.setBackground(to: quoteController.background)
+        collectionView.backgroundColor = .blue 
+//        collectionView.setBackground(to: quoteController.background)
         collectionView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.reuseIdentifier)
         view.addSubview((collectionView))
         collectionView.delegate = self
