@@ -9,5 +9,5 @@
 import UIKit
 
 class MenuCollectionViewCell: UICollectionViewCell {
-    
+    static let reuseIdentifier = "MenuCell"
 }

@@ -45,7 +45,7 @@ extension SlideMenuViewController {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createMainLayout())
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.setBackground(to: quoteController.background)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "MenuCell")
+        collectionView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.reuseIdentifier)
         view.addSubview((collectionView))
         collectionView.delegate = self
     }
@@ -54,7 +54,7 @@ extension SlideMenuViewController {
         dataSource = dataSouceDiffable(collectionView: collectionView, cellProvider: {
             collectionView, indexPath, i -> UICollectionViewCell? in
             
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MenuCell", for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.reuseIdentifier, for: indexPath)
             
             cell.backgroundColor = .red
             return cell
