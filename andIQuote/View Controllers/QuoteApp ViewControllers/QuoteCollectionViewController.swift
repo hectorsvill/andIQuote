@@ -10,8 +10,8 @@ import UIKit
 import EventKit
 import EventKitUI
 
-typealias QuoteDataSource = UICollectionViewDiffableDataSource<QuoteCollectionViewController.Section, QuoteDetail>
-
+typealias QuoteDataSource = UICollectionViewDiffableDataSource<QuoteCollectionViewController.Section, Quote>
+typealias QuoteSourceSnapShot = NSDiffableDataSourceSnapshot<QuoteCollectionViewController.Section, Quote>
 //linehorizontal - magnifying glass
 
 class QuoteCollectionViewController: UICollectionViewController {
@@ -155,9 +155,9 @@ extension QuoteCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
 
     private func createSnapShot() {
-        var snapShot = NSDiffableDataSourceSnapshot<Section, QuoteDetail>()
+        var snapShot = QuoteSourceSnapShot()
         snapShot.appendSections([.main])
-//        snapShot.appendItems(self.quoteController.quotes)
+        snapShot.appendItems(quoteController.quotes)
         self.dataSource.apply(snapShot, animatingDifferences: true)
     }
 }

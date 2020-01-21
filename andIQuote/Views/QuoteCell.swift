@@ -12,7 +12,7 @@ import UIKit
 class QuoteCell: UICollectionViewCell {
     static let reuseId: String = "QuoteCell"
     
-    var quote: QuoteDetail? { didSet { setupView()} }
+    var quote: Quote? { didSet { setupView()} }
 
     let quoteTextView: UITextView = {
         let textview = UITextView()
@@ -39,9 +39,8 @@ class QuoteCell: UICollectionViewCell {
     private func getAttributedText() -> NSAttributedString {
         backgroundColor = .systemBackground
         guard let quote = quote else { return NSAttributedString(string: "") }
-        let attributedString = NSMutableAttributedString(string: quote.body, attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 24), NSAttributedString.Key.foregroundColor: UIColor.label])
-        let author = quote.author
-        attributedString.append(NSAttributedString(string: "\n\n\(author)", attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.label]))
+        let attributedString = NSMutableAttributedString(string: quote.body!, attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 24), NSAttributedString.Key.foregroundColor: UIColor.label])
+        attributedString.append(NSAttributedString(string: "\n\n\(quote.author!)", attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.label]))
         
         return attributedString
     }
