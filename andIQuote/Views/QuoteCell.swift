@@ -9,8 +9,8 @@
 import UIKit
 
 
-class QuoteCell: UICollectionViewCell {
-    static let reuseId: String = "QuoteCell"
+class QuoteCell: UICollectionViewCell, SelfConfiguringCell {
+    static var reuseIdentifier = "QuoteCell"
     
     var quote: Quote? { didSet { setupView()} }
 

@@ -47,7 +47,7 @@ class QuoteCollectionViewController: UICollectionViewController {
     private func configureDataSource() {
         dataSource = QuoteDataSource(collectionView: collectionView) {
             (collectionView, indexPath, quote) -> UICollectionViewCell? in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuoteCell.reuseId, for: indexPath) as! QuoteCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuoteCell.reuseIdentifier, for: indexPath) as! QuoteCell
             cell.quote = quote
             
             return cell
@@ -91,7 +91,7 @@ extension QuoteCollectionViewController {
     
     private func setupViews() {
         collectionView.setBackground(to: quoteController.background)
-        collectionView.register(QuoteCell.self, forCellWithReuseIdentifier: QuoteCell.reuseId)
+        collectionView.register(QuoteCell.self, forCellWithReuseIdentifier: QuoteCell.reuseIdentifier)
         themeButton = UIButton().sfImageButton(systemName: "paintbrush")
         themeButton.addTarget(self, action: #selector(themeButtonTapped), for: .touchUpInside)
         lowerStackView.addArrangedSubview(themeButton)

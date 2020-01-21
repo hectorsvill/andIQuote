@@ -8,6 +8,6 @@
 
 import UIKit
 
-class MenuCollectionViewCell: UICollectionViewCell {
-    static let reuseIdentifier = "MenuCell"
+class MenuCollectionViewCell: UICollectionViewCell, SelfConfiguringCell {
+    static var reuseIdentifier = "MenuCell"
 }
