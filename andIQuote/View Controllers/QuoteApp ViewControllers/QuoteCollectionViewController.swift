@@ -57,6 +57,7 @@ class QuoteCollectionViewController: UICollectionViewController {
     private func createSnapShot() {
         var snapShot = QuoteSourceSnapShot()
         snapShot.appendSections([.main])
+        quoteController.fetchResultController
         snapShot.appendItems(quoteController.quotes)
         self.dataSource.apply(snapShot, animatingDifferences: false)
     }

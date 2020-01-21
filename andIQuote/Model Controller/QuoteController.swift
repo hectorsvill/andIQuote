@@ -118,6 +118,23 @@ extension QuoteController {
         }
     }
     
+    func fetchQuotesFromFireStore(completion: @escaping ([Quote]?, Error?) -> ()){
+        let moc = CoreDataStack.shared.mainContext
+        moc.performAndWait {
+        let quoteFetch: NSFetchRequest<Quote> = Quote.fetchRequest()
+        quoteFetch.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
+                
+        do {
+            _ = try moc.fetch(quoteFetch)
+            let quotes = try quoteFetch.execute()
+            self.quotes = quotes
+            completion(quotes, nil)
+                    
+        }catch {
+            completion(nil, error)
+        }
+    }
+    
     func getNextQuote() {
         _quoteIndex = _quoteIndex < quotes.count - 1 ? _quoteIndex + 1: _quoteIndex
         
