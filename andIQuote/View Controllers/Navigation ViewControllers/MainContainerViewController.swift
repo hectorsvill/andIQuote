@@ -22,7 +22,7 @@ class MainContainerViewController: UIViewController {
         let homeController = QuoteCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
         homeController.quoteController = quoteController
         centerNavViewController = UINavigationController(rootViewController: homeController)
-//        homeController.delegate = self
+        homeController.delegate = self
         view.addSubview(centerNavViewController.view)
         addChild(centerNavViewController)
         centerNavViewController.didMove(toParent: self)
@@ -52,10 +52,6 @@ class MainContainerViewController: UIViewController {
 }
 
 // MARK: HomeControllerViewDelegate
-protocol HomeControllerViewDelegate {
-    func handleMenuToggle()
-}
-
 extension MainContainerViewController: HomeControllerViewDelegate {
     func handleMenuToggle() {
         if !quoteController.menuNavigationIsExpanded {

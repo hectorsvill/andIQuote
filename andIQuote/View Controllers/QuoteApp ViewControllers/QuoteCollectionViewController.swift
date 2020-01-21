@@ -7,22 +7,20 @@
 //
 
 import UIKit
-import EventKit
-import EventKitUI
 
 typealias QuoteDataSource = UICollectionViewDiffableDataSource<QuoteCollectionViewController.Section, Quote>
 typealias QuoteSourceSnapShot = NSDiffableDataSourceSnapshot<QuoteCollectionViewController.Section, Quote>
-//linehorizontal - magnifying glass
 
-
-class QuoteCollectionViewController: UICollectionViewController {
+extension QuoteCollectionViewController {
     enum Section {
         case main
     }
-    
-    var quoteController: QuoteController!
+}
+
+class QuoteCollectionViewController: UICollectionViewController {
     var delegate: HomeControllerViewDelegate?
-    private var dataSource: QuoteDataSource!
+    var quoteController: QuoteController!
+    var dataSource: QuoteDataSource!
     var shareButton: UIButton!
     var themeButton: UIButton!
     var ReviewButton: UIButton!
