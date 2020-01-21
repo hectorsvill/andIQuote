@@ -55,11 +55,16 @@ class QuoteCollectionViewController: UICollectionViewController {
     }
     
     private func createSnapShot() {
-        var snapShot = QuoteSourceSnapShot()
-        snapShot.appendSections([.main])
-        quoteController.fetchResultController
-        snapShot.appendItems(quoteController.quotes)
-        self.dataSource.apply(snapShot, animatingDifferences: false)
+        quoteController.fetchQuotes { error in
+            if let error = error {
+                NSLog("\(error)")
+            }
+            var snapShot = QuoteSourceSnapShot()
+            snapShot.appendSections([.main])
+            snapShot.appendItems(self.quoteController.quotes)
+            self.dataSource.apply(snapShot, animatingDifferences: false)
+        }
+        
     }
 }
 
