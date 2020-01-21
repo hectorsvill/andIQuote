@@ -15,146 +15,127 @@ typealias QuoteDataSource = UICollectionViewDiffableDataSource<QuoteCollectionVi
 //linehorizontal - magnifying glass
 
 class QuoteCollectionViewController: UICollectionViewController {
-    var quoteController: QuoteController!
-    
     enum Section {
         case main
     }
     
+    var quoteController: QuoteController!
+    var delegate: HomeControllerViewDelegate?
     private var dataSource: QuoteDataSource!
-    
-   
+    var shareButton: UIButton!
+    var themeButton: UIButton!
+    var ReviewButton: UIButton!
+    var likeButton: UIButton!
+       
+    var lowerStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.spacing = 32
+        return stackView
+        
+    }()
+
     override func viewDidLoad() {
-           super.viewDidLoad()
-           setupViews()
-           configureDataSource()
-           createSnapShot()
-    }
-    
-    var squareButton: UIButton = {
-           let button = UIButton()
-           button.translatesAutoresizingMaskIntoConstraints = false
-           button.tintColor = .label
-           button.addTarget(self, action: #selector(squareButtonTapped), for: .touchUpInside)
-           return button
-    }()
-    
-    var lineButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.tintColor = .label
-        button.addTarget(self, action: #selector(lineButtonTapped), for: .touchUpInside)
-        return button
-    }()
-    
-    var heartButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.tintColor = .label
-        button.addTarget(self, action: #selector(heartButtonTapped), for: .touchUpInside)
-        return button
-    }()
-    
-    var bubbleButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.tintColor = .label
-        button.addTarget(self, action: #selector(bubbleButtonTapped), for: .touchUpInside)
-        return button
-    }()
-    
-    var gearButton: UIButton = {
-         let button = UIButton()
-         button.translatesAutoresizingMaskIntoConstraints = false
-         button.tintColor = .label
-         button.addTarget(self, action: #selector(gearButtonTapped), for: .touchUpInside)
-         return button
-     }()
-    
-    @objc func heartButtonTapped() {
-        let config = UIImage.SymbolConfiguration(pointSize: 25, weight: .medium, scale: .large)
-        let heartImage = UIImage(systemName: "hand.thumbsup.fill", withConfiguration: config)
-        heartButton.setImage(heartImage, for: .normal)
-    }
-    
-    
-    @objc func lineButtonTapped() {
-        let vc = QuoteReviewCollectionViewController()
-        present(vc, animated: true, completion: nil)
-    }
+        super.viewDidLoad()
+        setupViews()
+        configureDataSource()
+        createSnapShot()
+        setupNavButtons()
         
-    @objc func bubbleButtonTapped() {
-        let vc = QuoteReviewCollectionViewController()
-        present(vc, animated: true, completion: nil)
     }
-        
-    @objc func squareButtonTapped() {
-//        let index = collectionView.contentOffset.x / collectionView.frame.size.width
-//        let quote = quoteController.quotes[Int(index)]
-//        let vc = UIActivityViewController(activityItems: [quote.body], applicationActivities: [])
-//        present(vc, animated: true, completion: nil)
-    }
+}
+
+extension QuoteCollectionViewController {
     
-    @objc func gearButtonTapped() {
-//
-//        let vc = ThemeSettingsCollectionViewController()
-//        present(vc, animated:  true)
-//
+    private func setupNavButtons() {
+        navigationController?.navigationBar.barTintColor = view.backgroundColor
+        navigationController?.navigationBar.barStyle = .default
         
+        let menuImage = UIImage(systemName: "line.horizontal.3", withConfiguration: UIImage().mainViewSymbolConfig())
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: menuImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(menuButtonTapped))
+        navigationItem.leftBarButtonItem?.tintColor = .label
+        
+        let shareImage = UIImage(systemName: "square.and.arrow.up", withConfiguration: UIImage().mainViewSymbolConfig())
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: shareImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(shareButtonTapped))
+        navigationItem.rightBarButtonItem?.tintColor = .label
     }
     
     private func setupViews() {
-        collectionView.backgroundColor = .systemBackground
-        collectionView.register(QuoteCell.self, forCellWithReuseIdentifier: QuoteCell.reuseId)
-        collectionView.isPagingEnabled = true
         
         
-        // configure button
-        let config = UIImage.SymbolConfiguration(pointSize: 25, weight: .light, scale: .large)
         
-        // square and arrow up
-//        collectionView.addSubview(squareButton)
-//        let squareImage = UIImage(systemName: "square.and.arrow.up", withConfiguration: config)
-//        squareButton.setImage(squareImage, for: .normal)
-//        
-//        // line button
-//        collectionView.addSubview(lineButton)
-//        let lineImage = UIImage(systemName: "line.horizontal.3", withConfiguration: config)
-//        lineButton.setImage(lineImage, for: .normal)
-//        
-        // heart button
-        let thumsupImage = UIImage(systemName: "hand.thumbsup", withConfiguration: config)
-        heartButton.setImage(thumsupImage, for: .normal)
+    }
+    
+    
+    // MARK: menuButtonTapped
+    @objc func menuButtonTapped() {
+        guard !quoteController.quoteThemeIsActive else { return }
+        impactGesture(style: .rigid)
+        delegate?.handleMenuToggle()
+    }
+    
+    // MARK: shareButtonTapped
+    @objc func shareButtonTapped() {
+        guard quoteController.quoteThemeIsActive != true else { return }
+        impactGesture(style: .rigid)
+        lowerStackView.isHidden = true
+        let activityVC = UIActivityViewController(activityItems: [quoteController.attributedString, view.screenShot()], applicationActivities: [])
+        present(activityVC, animated: true)
+        lowerStackView.isHidden = false
+    }
+    
+    // MARK: themeButtonTapped
+    @objc func themeButtonTapped() {
+        impactGesture(style: .medium)
+        quoteController.quoteThemeIsActive.toggle()
+        let buttonImageName = quoteController.quoteThemeIsActive ? "paintbrush.fill" : "paintbrush"
+        let configuration = UIImage().mainViewSymbolConfig()
+        let image = UIImage(systemName: buttonImageName, withConfiguration: configuration)
+        themeButton.setImage(image, for: .normal)
+        quoteController.saveBackgroundIndex()
+    }
+    
+    // MARK: ReviewButtonTapped
+    @objc func ReviewButtonTapped() {
+        impactGesture(style: .medium)
+        let layout = UICollectionViewFlowLayout()
+        let quoteReviewCollectionViewController = QuoteReviewCollectionViewController(collectionViewLayout: layout)
+        quoteReviewCollectionViewController.quoteController = quoteController
+        present(quoteReviewCollectionViewController, animated: true)
+    }
+    
+    // MARK: likeButtonTapped
+    @objc func likeButtonTapped() {
+        guard !quoteController.quoteThemeIsActive else { return }
+        impactGesture(style: .medium)
         
-        // bubble button
-        let bubleImage = UIImage(systemName: "text.bubble", withConfiguration: config)
-        bubbleButton.setImage(bubleImage, for: .normal)
+        let quoteID = quoteController.quote.id
+        var buttonImageName =  "hand.thumbsup"
+        guard var user = quoteController.quoteUser else { return }
         
+        if user.favorites.contains(quoteID!) {
+            if let index = user.favorites.firstIndex(of: quoteID!) {
+                user.favorites.remove(at: index)
+            }
+        } else {
+            user.favorites.append(quoteID!)
+            buttonImageName =  "hand.thumbsup.fill"
+        }
         
-        // gear button
-        let gearImage = UIImage(systemName: "gear", withConfiguration: config)
-        gearButton.setImage(gearImage, for: .normal)
+        let configuration = UIImage().mainViewSymbolConfig()
+        let image = UIImage(systemName: buttonImageName, withConfiguration: configuration)
+        likeButton.setImage(image, for: .normal)
         
-        
-        let lowerStackView = UIStackView(arrangedSubviews: [gearButton, bubbleButton, heartButton])
-        
-        lowerStackView.translatesAutoresizingMaskIntoConstraints = false
-        lowerStackView.axis = .horizontal
-        lowerStackView.spacing = 16
-          
-        collectionView.addSubview(lowerStackView)
-          
-        NSLayoutConstraint.activate([
-//            squareButton.topAnchor.constraint(equalTo: collectionView.safeAreaLayoutGuide.topAnchor, constant: 8),
-//            squareButton.rightAnchor.constraint(equalTo: collectionView.safeAreaLayoutGuide.rightAnchor, constant: -8),
-//
-//            lineButton.topAnchor.constraint(equalTo: collectionView.safeAreaLayoutGuide.topAnchor, constant: 8),
-//            lineButton.leftAnchor.constraint(equalTo: collectionView.safeAreaLayoutGuide.leftAnchor, constant: 8),
-              
-            lowerStackView.rightAnchor.constraint(equalTo: collectionView.safeAreaLayoutGuide.rightAnchor, constant: -8),
-            lowerStackView.bottomAnchor.constraint(equalTo: collectionView.safeAreaLayoutGuide.bottomAnchor, constant: -8),
-        ])
-      }
+        quoteController.likeButtonpressed()
+    }
+    
+    // MARK: Impact Gesture
+    func impactGesture(style: UIImpactFeedbackGenerator.FeedbackStyle = .light) {
+        let impactFeedback = UIImpactFeedbackGenerator(style: style)
+        impactFeedback.impactOccurred()
+    }
+    
 }
 
 extension QuoteCollectionViewController: UICollectionViewDelegateFlowLayout {
