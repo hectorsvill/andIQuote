@@ -14,6 +14,7 @@ typealias QuoteDataSource = UICollectionViewDiffableDataSource<QuoteCollectionVi
 typealias QuoteSourceSnapShot = NSDiffableDataSourceSnapshot<QuoteCollectionViewController.Section, Quote>
 //linehorizontal - magnifying glass
 
+
 class QuoteCollectionViewController: UICollectionViewController {
     enum Section {
         case main
@@ -40,9 +41,32 @@ class QuoteCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         setupViews()
         configureDataSource()
-        createSnapShot()
         setupNavButtons()
-        
+        createSnapShot()
+
+    }
+    
+    private func configureDataSource() {
+        dataSource = QuoteDataSource(collectionView: collectionView) {
+            (collectionView, indexPath, quote) -> UICollectionViewCell? in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuoteCell.reuseId, for: indexPath) as! QuoteCell
+            cell.quote = quote
+            
+            return cell
+        }
+    }
+    
+    private func createSnapShot() {
+        var snapShot = QuoteSourceSnapShot()
+        snapShot.appendSections([.main])
+        snapShot.appendItems(quoteController.quotes)
+        self.dataSource.apply(snapShot, animatingDifferences: false)
+    }
+}
+
+extension QuoteCollectionViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: view.frame.height)
     }
 }
 
@@ -62,7 +86,25 @@ extension QuoteCollectionViewController {
     }
     
     private func setupViews() {
-        
+        collectionView.setBackground(to: quoteController.background)
+        themeButton = UIButton().sfImageButton(systemName: "paintbrush")
+        themeButton.addTarget(self, action: #selector(themeButtonTapped), for: .touchUpInside)
+        lowerStackView.addArrangedSubview(themeButton)
+
+        ReviewButton = UIButton().sfImageButton(systemName: "text.bubble")
+        ReviewButton.addTarget(self, action: #selector(ReviewButtonTapped), for: .touchUpInside)
+        lowerStackView.addArrangedSubview(ReviewButton)
+
+        likeButton = UIButton().sfImageButton(systemName: "hand.thumbsup")
+        likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
+        lowerStackView.addArrangedSubview(likeButton)
+
+        collectionView.addSubview(lowerStackView)
+
+        NSLayoutConstraint.activate([
+           lowerStackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16),
+           lowerStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+        ])
         
         
     }
@@ -138,27 +180,4 @@ extension QuoteCollectionViewController {
     
 }
 
-extension QuoteCollectionViewController: UICollectionViewDelegateFlowLayout {
- 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.height)
-    }
-    
-    private func configureDataSource() {
-        dataSource = QuoteDataSource(collectionView: collectionView) {
-            (collectionView, indexPath, quote) -> UICollectionViewCell? in
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuoteCell.reuseId, for: indexPath) as! QuoteCell
-                cell.quote = quote
-
-                return cell
-        }
-    }
-
-    private func createSnapShot() {
-        var snapShot = QuoteSourceSnapShot()
-        snapShot.appendSections([.main])
-        snapShot.appendItems(quoteController.quotes)
-        self.dataSource.apply(snapShot, animatingDifferences: true)
-    }
-}
 
