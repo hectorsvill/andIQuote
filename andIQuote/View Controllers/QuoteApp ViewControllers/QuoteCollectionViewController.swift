@@ -91,6 +91,7 @@ extension QuoteCollectionViewController {
     
     private func setupViews() {
         collectionView.setBackground(to: quoteController.background)
+        collectionView.register(QuoteCell.self, forCellWithReuseIdentifier: QuoteCell.reuseId)
         themeButton = UIButton().sfImageButton(systemName: "paintbrush")
         themeButton.addTarget(self, action: #selector(themeButtonTapped), for: .touchUpInside)
         lowerStackView.addArrangedSubview(themeButton)
