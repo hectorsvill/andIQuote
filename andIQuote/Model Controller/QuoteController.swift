@@ -153,7 +153,10 @@ extension QuoteController {
             }
         }
     }
-    
+}
+
+// MARK: DEPRICATED
+extension QuoteController {
     func getPreviousQuote() {
         _quoteIndex = _quoteIndex > 0 ? _quoteIndex - 1 : quotes.count - 1
     }

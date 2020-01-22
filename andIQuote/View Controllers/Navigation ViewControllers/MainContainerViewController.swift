@@ -18,8 +18,15 @@ class MainContainerViewController: UIViewController {
         configureHomeController()
     }
     
+    func createFlowLayout() -> UICollectionViewFlowLayout {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.minimumInteritemSpacing = 10
+        return flowLayout
+    }
+    
     func configureHomeController() {
-        let homeController = QuoteCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        let homeController = QuoteCollectionViewController(collectionViewLayout: createFlowLayout())
         homeController.quoteController = quoteController
         centerNavViewController = UINavigationController(rootViewController: homeController)
         homeController.delegate = self

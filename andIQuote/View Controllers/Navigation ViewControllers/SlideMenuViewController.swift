@@ -45,7 +45,7 @@ extension SlideMenuViewController {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createMainLayout())
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = .blue 
-//        collectionView.setBackground(to: quoteController.background)
+        collectionView.setBackground(to: quoteController.background)
         collectionView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.reuseIdentifier)
         view.addSubview((collectionView))
         collectionView.delegate = self

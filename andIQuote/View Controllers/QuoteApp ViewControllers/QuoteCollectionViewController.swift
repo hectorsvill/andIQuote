@@ -25,7 +25,10 @@ class QuoteCollectionViewController: UICollectionViewController {
     var themeButton: UIButton!
     var ReviewButton: UIButton!
     var likeButton: UIButton!
-       
+    
+    var currentIndex = 0
+    
+    // MARK: lowerStackView
     var lowerStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -35,25 +38,30 @@ class QuoteCollectionViewController: UICollectionViewController {
         
     }()
 
+    // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         configureDataSource()
         setupNavButtons()
         createSnapShot()
-
+        
+        collectionView.isPagingEnabled = true
+        collectionView.autoresizingMask = [.flexibleHeight, .flexibleHeight]
+        
     }
-    
+
+    // MARK: configureDataSource
     private func configureDataSource() {
         dataSource = QuoteDataSource(collectionView: collectionView) {
             (collectionView, indexPath, quote) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuoteCell.reuseIdentifier, for: indexPath) as! QuoteCell
             cell.quote = quote
-            
             return cell
         }
     }
     
+    // MARK: createSnapShot
     private func createSnapShot() {
         quoteController.fetchQuotes { error in
             if let error = error {
@@ -64,18 +72,30 @@ class QuoteCollectionViewController: UICollectionViewController {
             snapShot.appendItems(self.quoteController.quotes)
             self.dataSource.apply(snapShot, animatingDifferences: false)
         }
-        
     }
 }
 
+// MARK: UICollectionViewDelegateFlowLayout
 extension QuoteCollectionViewController: UICollectionViewDelegateFlowLayout {
+    // MARK: collectionViewLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: view.frame.height)
+    }
+    
+    // MARK: scrollViewWillEndDragging
+    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        currentIndex = Int(targetContentOffset.pointee.x / view.frame.width)
+        print(currentIndex)
+    }
+    
+    // MARK: minimumLineSpacingForSectionAt
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
 }
 
 extension QuoteCollectionViewController {
-    
+    // MARK: setupNavButtons
     private func setupNavButtons() {
         navigationController?.navigationBar.barTintColor = view.backgroundColor
         navigationController?.navigationBar.barStyle = .default
@@ -89,6 +109,7 @@ extension QuoteCollectionViewController {
         navigationItem.rightBarButtonItem?.tintColor = .label
     }
     
+    // MARK: setupViews
     private func setupViews() {
         collectionView.setBackground(to: quoteController.background)
         collectionView.register(QuoteCell.self, forCellWithReuseIdentifier: QuoteCell.reuseIdentifier)
@@ -110,8 +131,6 @@ extension QuoteCollectionViewController {
            lowerStackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16),
            lowerStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
         ])
-        
-        
     }
     
     
@@ -182,7 +201,4 @@ extension QuoteCollectionViewController {
         let impactFeedback = UIImpactFeedbackGenerator(style: style)
         impactFeedback.impactOccurred()
     }
-    
 }
-
-
