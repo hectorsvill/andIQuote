@@ -22,6 +22,7 @@ class QuoteCollectionViewController: UICollectionViewController {
     var quoteController: QuoteController!
     var dataSource: QuoteDataSource!
     var shareButton: UIButton!
+    var leftSwipe: UISwipeGestureRecognizer!
     var themeButton: UIButton!
     var ReviewButton: UIButton!
     var likeButton: UIButton!
@@ -108,6 +109,11 @@ extension QuoteCollectionViewController {
     
     // MARK: setupViews
     private func setupViews() {
+        leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeAction(_:)))
+        leftSwipe.isEnabled = false
+        leftSwipe.direction = .left
+        collectionView.addGestureRecognizer(leftSwipe)
+        
         collectionView.isPagingEnabled = true
         collectionView.autoresizingMask = [.flexibleHeight, .flexibleHeight]
         collectionView.setBackground(to: quoteController.background)
@@ -133,12 +139,17 @@ extension QuoteCollectionViewController {
         ])
     }
     
+    @objc private func handleSwipeAction(_ sender: UISwipeGestureRecognizer) {
+        delegate?.handleMenuToggle()
+    }
+    
     // MARK: slideMenuButtonTapped
     @objc func slideMenuButtonTapped() {
         guard !quoteController.quoteThemeIsActive else { return }
         impactGesture(style: .rigid)
         delegate?.handleMenuToggle()
         collectionView.isScrollEnabled.toggle()
+        leftSwipe.isEnabled.toggle()
     }
     
     // MARK: shareButtonTapped
