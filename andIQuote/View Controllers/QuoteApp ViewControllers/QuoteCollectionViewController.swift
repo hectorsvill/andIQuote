@@ -54,7 +54,7 @@ class QuoteCollectionViewController: UICollectionViewController {
     private func configureDataSource() {
         dataSource = QuoteDataSource(collectionView: collectionView) {
             (collectionView, indexPath, quote) -> UICollectionViewCell? in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuoteCell.reuseIdentifier, for: indexPath) as! QuoteCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier, for: indexPath) as! QuoteCollectionViewCell
             cell.quote = quote
             cell.setBackground(to: self.quoteController.background)
             return cell
@@ -116,7 +116,7 @@ extension QuoteCollectionViewController {
         collectionView.isPagingEnabled = true
         collectionView.autoresizingMask = [.flexibleHeight, .flexibleHeight]
         collectionView.setBackground(to: quoteController.background)
-        collectionView.register(QuoteCell.self, forCellWithReuseIdentifier: QuoteCell.reuseIdentifier)
+        collectionView.register(QuoteCollectionViewCell.self, forCellWithReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier)
     }
     // MARK: setupSwipeGestureRecognizer
     private func setupSwipeGestureRecognizer() {
@@ -184,17 +184,6 @@ extension QuoteCollectionViewController {
         present(activityVC, animated: true)
         lowerStackView.isHidden = false
     }
-    // MARK: themeButtonTapped
-//    @objc func themeButtonTapped() {
-//        impactGesture(style: .medium)
-//        quoteController.quoteThemeIsActive.toggle()
-//        let buttonImageName = quoteController.quoteThemeIsActive ? "paintbrush.fill" : "paintbrush"
-//        let configuration = UIImage().mainViewSymbolConfig()
-//        let image = UIImage(systemName: buttonImageName, withConfiguration: configuration)
-//        themeButton.setImage(image, for: .normal)
-//        quoteController.saveBackgroundIndex()
-//    }
-//
     // MARK: ReviewButtonTapped
     @objc func reviewButtonTapped() {
         impactGesture(style: .medium)

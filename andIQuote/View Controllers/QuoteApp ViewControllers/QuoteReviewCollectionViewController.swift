@@ -15,7 +15,4 @@ class QuoteReviewCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         collectionView.setBackground(to: quoteController.background)
     }
-    
-
 }
-
