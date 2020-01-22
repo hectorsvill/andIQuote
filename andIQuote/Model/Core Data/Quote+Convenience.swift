@@ -10,7 +10,6 @@ import CoreData
 import Foundation
 
 extension Quote {
-    
     convenience init(body: String, author: String, id: String, like: Bool, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
         self.init(context: context)
         self.body = body
@@ -18,7 +17,4 @@ extension Quote {
         self.id = id
         self.like = like
     }
-    
-    
-    
 }

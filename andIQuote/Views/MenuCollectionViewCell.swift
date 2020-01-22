@@ -10,4 +10,12 @@ import UIKit
 
 class MenuCollectionViewCell: UICollectionViewCell, SelfConfiguringCell {
     static var reuseIdentifier = "MenuCell"
+    var slideMenuItem: SlideMenuItem? { didSet { setupViews() }}
+    
+    private func setupViews() {
+        
+    }
 }
+
+
+
