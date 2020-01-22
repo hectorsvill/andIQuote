@@ -19,6 +19,7 @@ class SlideMenuViewController: UIViewController {
         case footer
     }
     
+    var slideMenuItems: [SlideMenuItem] = []
     var dataSource: SlideMenudataSouce!
     var collectionView: UICollectionView!
     var quoteController: QuoteController!
@@ -62,12 +63,10 @@ extension SlideMenuViewController {
             return cell
         })
         
-        var snapShot = SlideMenu
+        var snapShot = SlideSourceSnapShot()
         snapShot.appendSections([.main])
-        snapShot.appendItems(Array(0...5))
+        snapShot.appendItems(slideMenuItems)
         dataSource.apply(snapShot, animatingDifferences: false)
     }
-    
-    
 }
 
