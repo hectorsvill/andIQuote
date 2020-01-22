@@ -30,9 +30,6 @@ class QuoteController {
 }
 
 extension QuoteController {
-    var quote: Quote {
-        quotes[_quoteIndex]
-    }
     
     var background: String {
         backgrounds[_backgroundIndex]
@@ -42,7 +39,7 @@ extension QuoteController {
         background == "systemBackground" ? UIColor.label : UIColor.white
     }
     
-    var attributedString: NSMutableAttributedString {
+    func attributedString(_ quote: Quote) -> NSMutableAttributedString {
         let attributedString = NSMutableAttributedString(string: quote.body!, attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 24), NSAttributedString.Key.foregroundColor: quoteForegroundColor])
         attributedString.append(NSAttributedString(string: "\n\n\(quote.author!)", attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: quoteForegroundColor]))
         return attributedString

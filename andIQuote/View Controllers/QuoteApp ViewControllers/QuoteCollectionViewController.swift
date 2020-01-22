@@ -22,8 +22,9 @@ class QuoteCollectionViewController: UICollectionViewController {
     var quoteController: QuoteController!
     var dataSource: QuoteDataSource!
     var shareButton: UIButton!
-    var leftSwipe: UISwipeGestureRecognizer!
-    var themeButton: UIButton!
+    var leftSwipeGestureRecognizer: UISwipeGestureRecognizer!
+    var upSwipeGestureRecognizer: UISwipeGestureRecognizer!
+    var downSwipeGestureRecognizer: UISwipeGestureRecognizer!
     var ReviewButton: UIButton!
     var likeButton: UIButton!
     
@@ -93,6 +94,48 @@ extension QuoteCollectionViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension QuoteCollectionViewController {
+    // MARK: setupViews
+    private func setupViews() {
+        setupCollectionView()
+        setupSwipeGestureRecognizer()
+        
+        ReviewButton = UIButton().sfImageButton(systemName: "text.bubble")
+        ReviewButton.addTarget(self, action: #selector(reviewButtonTapped), for: .touchUpInside)
+        lowerStackView.addArrangedSubview(ReviewButton)
+        
+        likeButton = UIButton().sfImageButton(systemName: "hand.thumbsup")
+        likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
+        lowerStackView.addArrangedSubview(likeButton)
+        
+        collectionView.addSubview(lowerStackView)
+        
+        NSLayoutConstraint.activate([
+            lowerStackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16),
+            lowerStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+        ])
+    }
+    // MARK: setupCollectionView
+    private func setupCollectionView() {
+        collectionView.isPagingEnabled = true
+        collectionView.autoresizingMask = [.flexibleHeight, .flexibleHeight]
+        collectionView.setBackground(to: quoteController.background)
+        collectionView.register(QuoteCell.self, forCellWithReuseIdentifier: QuoteCell.reuseIdentifier)
+    }
+    // MARK: setupSwipeGestureRecognizer
+    private func setupSwipeGestureRecognizer() {
+        leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeAction(_:)))
+        leftSwipeGestureRecognizer.isEnabled = false
+        leftSwipeGestureRecognizer.direction = .left
+        collectionView.addGestureRecognizer(leftSwipeGestureRecognizer)
+        
+        upSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(shareButtonTapped))
+        upSwipeGestureRecognizer.direction = .up
+        collectionView.addGestureRecognizer(upSwipeGestureRecognizer)
+        
+        downSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(reviewButtonTapped))
+        downSwipeGestureRecognizer.direction = .down
+        view.addGestureRecognizer(downSwipeGestureRecognizer)
+    }
     // MARK: setupNavButtons
     private func setupNavButtons() {
         navigationController?.navigationBar.barTintColor = view.backgroundColor
@@ -106,54 +149,15 @@ extension QuoteCollectionViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: shareImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(shareButtonTapped))
         navigationItem.rightBarButtonItem?.tintColor = .label
     }
-    
-    // MARK: setupViews
-    private func setupViews() {
-        leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeAction(_:)))
-        leftSwipe.isEnabled = false
-        leftSwipe.direction = .left
-        collectionView.addGestureRecognizer(leftSwipe)
-        
-        let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(shareButtonTapped))
-        upSwipe.direction = .up
-        collectionView.addGestureRecognizer(upSwipe)
-        
-        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(reviewButtonTapped))
-        downSwipe.direction = .down
-        view.addGestureRecognizer(downSwipe)
-        
-        collectionView.isPagingEnabled = true
-        collectionView.autoresizingMask = [.flexibleHeight, .flexibleHeight]
-        collectionView.setBackground(to: quoteController.background)
-        collectionView.register(QuoteCell.self, forCellWithReuseIdentifier: QuoteCell.reuseIdentifier)
-        
-        themeButton = UIButton().sfImageButton(systemName: "paintbrush")
-        themeButton.addTarget(self, action: #selector(themeButtonTapped), for: .touchUpInside)
-        //lowerStackView.addArrangedSubview(themeButton)
-
-        ReviewButton = UIButton().sfImageButton(systemName: "text.bubble")
-        ReviewButton.addTarget(self, action: #selector(reviewButtonTapped), for: .touchUpInside)
-        lowerStackView.addArrangedSubview(ReviewButton)
-
-        likeButton = UIButton().sfImageButton(systemName: "hand.thumbsup")
-        likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
-        lowerStackView.addArrangedSubview(likeButton)
-
-        collectionView.addSubview(lowerStackView)
-
-        NSLayoutConstraint.activate([
-           lowerStackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16),
-           lowerStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
-        ])
-    }
-    
     // MARK: handleSlideMenuToggle
     private func handleSlideMenuToggle() {
         delegate?.handleMenuToggle()
         collectionView.isScrollEnabled.toggle()
-        leftSwipe.isEnabled.toggle()
+        leftSwipeGestureRecognizer.isEnabled.toggle()
+        upSwipeGestureRecognizer.isEnabled.toggle()
+        downSwipeGestureRecognizer.isEnabled.toggle()
+        
     }
-    
     // MARK: handleSwipeAction
     @objc private func handleSwipeAction(_ sender: UISwipeGestureRecognizer) {
         if sender.direction == .up {
@@ -164,14 +168,12 @@ extension QuoteCollectionViewController {
             handleSlideMenuToggle()
         }
     }
-    
     // MARK: slideMenuButtonTapped
     @objc func slideMenuButtonTapped() {
         guard !quoteController.quoteThemeIsActive else { return }
         impactGesture(style: .rigid)
         handleSlideMenuToggle()
     }
-    
     // MARK: shareButtonTapped
     @objc func shareButtonTapped() {
         guard quoteController.quoteThemeIsActive != true else { return }
@@ -181,18 +183,17 @@ extension QuoteCollectionViewController {
         present(activityVC, animated: true)
         lowerStackView.isHidden = false
     }
-    
     // MARK: themeButtonTapped
-    @objc func themeButtonTapped() {
-        impactGesture(style: .medium)
-        quoteController.quoteThemeIsActive.toggle()
-        let buttonImageName = quoteController.quoteThemeIsActive ? "paintbrush.fill" : "paintbrush"
-        let configuration = UIImage().mainViewSymbolConfig()
-        let image = UIImage(systemName: buttonImageName, withConfiguration: configuration)
-        themeButton.setImage(image, for: .normal)
-        quoteController.saveBackgroundIndex()
-    }
-    
+//    @objc func themeButtonTapped() {
+//        impactGesture(style: .medium)
+//        quoteController.quoteThemeIsActive.toggle()
+//        let buttonImageName = quoteController.quoteThemeIsActive ? "paintbrush.fill" : "paintbrush"
+//        let configuration = UIImage().mainViewSymbolConfig()
+//        let image = UIImage(systemName: buttonImageName, withConfiguration: configuration)
+//        themeButton.setImage(image, for: .normal)
+//        quoteController.saveBackgroundIndex()
+//    }
+//
     // MARK: ReviewButtonTapped
     @objc func reviewButtonTapped() {
         impactGesture(style: .medium)
@@ -201,32 +202,30 @@ extension QuoteCollectionViewController {
         quoteReviewCollectionViewController.quoteController = quoteController
         present(quoteReviewCollectionViewController, animated: true)
     }
-    
     // MARK: likeButtonTapped
     @objc func likeButtonTapped() {
-        guard !quoteController.quoteThemeIsActive else { return }
-        impactGesture(style: .medium)
-        
-        let quoteID = quoteController.quote.id
-        var buttonImageName =  "hand.thumbsup"
-        guard var user = quoteController.quoteUser else { return }
-        
-        if user.favorites.contains(quoteID!) {
-            if let index = user.favorites.firstIndex(of: quoteID!) {
-                user.favorites.remove(at: index)
-            }
-        } else {
-            user.favorites.append(quoteID!)
-            buttonImageName =  "hand.thumbsup.fill"
-        }
-        
-        let configuration = UIImage().mainViewSymbolConfig()
-        let image = UIImage(systemName: buttonImageName, withConfiguration: configuration)
-        likeButton.setImage(image, for: .normal)
-        
-        quoteController.likeButtonpressed()
+//        guard !quoteController.quoteThemeIsActive else { return }
+//        impactGesture(style: .medium)
+//
+//        let quoteID = quoteController.quote.id
+//        var buttonImageName =  "hand.thumbsup"
+//        guard var user = quoteController.quoteUser else { return }
+//
+//        if user.favorites.contains(quoteID!) {
+//            if let index = user.favorites.firstIndex(of: quoteID!) {
+//                user.favorites.remove(at: index)
+//            }
+//        } else {
+//            user.favorites.append(quoteID!)
+//            buttonImageName =  "hand.thumbsup.fill"
+//        }
+//
+//        let configuration = UIImage().mainViewSymbolConfig()
+//        let image = UIImage(systemName: buttonImageName, withConfiguration: configuration)
+//        likeButton.setImage(image, for: .normal)
+//
+//        quoteController.likeButtonpressed()
     }
-    
     // MARK: Impact Gesture
     func impactGesture(style: UIImpactFeedbackGenerator.FeedbackStyle = .light) {
         let impactFeedback = UIImpactFeedbackGenerator(style: style)
