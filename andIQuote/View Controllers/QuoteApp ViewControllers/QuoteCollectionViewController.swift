@@ -139,17 +139,23 @@ extension QuoteCollectionViewController {
         ])
     }
     
-    @objc private func handleSwipeAction(_ sender: UISwipeGestureRecognizer) {
+    // MARK: handleSlideMenuToggle
+    private func handleSlideMenuToggle() {
         delegate?.handleMenuToggle()
+        collectionView.isScrollEnabled.toggle()
+        leftSwipe.isEnabled.toggle()
+    }
+    
+    // MARK: handleSwipeAction
+    @objc private func handleSwipeAction(_ sender: UISwipeGestureRecognizer) {
+        handleSlideMenuToggle()
     }
     
     // MARK: slideMenuButtonTapped
     @objc func slideMenuButtonTapped() {
         guard !quoteController.quoteThemeIsActive else { return }
         impactGesture(style: .rigid)
-        delegate?.handleMenuToggle()
-        collectionView.isScrollEnabled.toggle()
-        leftSwipe.isEnabled.toggle()
+        handleSlideMenuToggle()
     }
     
     // MARK: shareButtonTapped
