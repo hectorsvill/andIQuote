@@ -68,7 +68,7 @@ extension MainQuoteViewController {
         navigationController?.navigationBar.barStyle = .default
         
         let menuImage = UIImage(systemName: "line.horizontal.3", withConfiguration: UIImage().mainViewSymbolConfig())
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: menuImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(menuButtonTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: menuImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(slideMenuButtonTapped))
         navigationItem.leftBarButtonItem?.tintColor = .label
         
         let shareImage = UIImage(systemName: "square.and.arrow.up", withConfiguration: UIImage().mainViewSymbolConfig())
@@ -123,7 +123,7 @@ extension MainQuoteViewController {
     }
     
     // MARK: menuButtonTapped
-    @objc func menuButtonTapped() {
+    @objc func slideMenuButtonTapped() {
         guard !quoteController.quoteThemeIsActive else { return }
         impactGesture(style: .rigid)
         delegate?.handleMenuToggle()
