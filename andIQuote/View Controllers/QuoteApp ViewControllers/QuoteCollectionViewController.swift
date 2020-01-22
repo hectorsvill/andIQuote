@@ -118,7 +118,7 @@ extension QuoteCollectionViewController {
         upSwipe.direction = .up
         collectionView.addGestureRecognizer(upSwipe)
         
-        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(ReviewButtonTapped))
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(reviewButtonTapped))
         downSwipe.direction = .down
         view.addGestureRecognizer(downSwipe)
         
@@ -132,7 +132,7 @@ extension QuoteCollectionViewController {
         //lowerStackView.addArrangedSubview(themeButton)
 
         ReviewButton = UIButton().sfImageButton(systemName: "text.bubble")
-        ReviewButton.addTarget(self, action: #selector(ReviewButtonTapped), for: .touchUpInside)
+        ReviewButton.addTarget(self, action: #selector(reviewButtonTapped), for: .touchUpInside)
         lowerStackView.addArrangedSubview(ReviewButton)
 
         likeButton = UIButton().sfImageButton(systemName: "hand.thumbsup")
@@ -159,7 +159,7 @@ extension QuoteCollectionViewController {
         if sender.direction == .up {
             shareButtonTapped()
         }else if sender.direction == .down {
-            ReviewButtonTapped()
+            reviewButtonTapped()
         }else {
             handleSlideMenuToggle()
         }
@@ -194,7 +194,7 @@ extension QuoteCollectionViewController {
     }
     
     // MARK: ReviewButtonTapped
-    @objc func ReviewButtonTapped() {
+    @objc func reviewButtonTapped() {
         impactGesture(style: .medium)
         let layout = UICollectionViewFlowLayout()
         let quoteReviewCollectionViewController = QuoteReviewCollectionViewController(collectionViewLayout: layout)

@@ -93,9 +93,9 @@ extension MainQuoteViewController {
         themeButton.addTarget(self, action: #selector(themeButtonTapped), for: .touchUpInside)
         lowerStackView.addArrangedSubview(themeButton)
         
-        ReviewButton = UIButton().sfImageButton(systemName: "text.bubble")
-        ReviewButton.addTarget(self, action: #selector(ReviewButtonTapped), for: .touchUpInside)
-        lowerStackView.addArrangedSubview(ReviewButton)
+//        ReviewButton = UIButton().sfImageButton(systemName: "text.bubble")
+//        ReviewButton.addTarget(self, action: #selector(reviewButtonTapped), for: .touchUpInside)
+//        lowerStackView.addArrangedSubview(ReviewButton)
         
         likeButton = UIButton().sfImageButton(systemName: "hand.thumbsup")
         likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
