@@ -25,6 +25,7 @@ class QuoteCollectionViewController: UICollectionViewController {
     var leftSwipeGestureRecognizer: UISwipeGestureRecognizer!
     var upSwipeGestureRecognizer: UISwipeGestureRecognizer!
     var downSwipeGestureRecognizer: UISwipeGestureRecognizer!
+    var doubleTapSwipeGestureRecognizer: UITapGestureRecognizer!
     var ReviewButton: UIButton!
     var likeButton: UIButton!
     
@@ -130,7 +131,11 @@ extension QuoteCollectionViewController {
         
         downSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(reviewButtonTapped))
         downSwipeGestureRecognizer.direction = .down
-        view.addGestureRecognizer(downSwipeGestureRecognizer)
+        collectionView.addGestureRecognizer(downSwipeGestureRecognizer)
+        
+        doubleTapSwipeGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(likeButtonTapped(_:)))
+        doubleTapSwipeGestureRecognizer.numberOfTapsRequired = 2
+        collectionView.addGestureRecognizer(doubleTapSwipeGestureRecognizer)
     }
     // MARK: setupNavButtons
     private func setupNavButtons() {
@@ -152,7 +157,7 @@ extension QuoteCollectionViewController {
         leftSwipeGestureRecognizer.isEnabled.toggle()
         upSwipeGestureRecognizer.isEnabled.toggle()
         downSwipeGestureRecognizer.isEnabled.toggle()
-        
+        doubleTapSwipeGestureRecognizer.isEnabled.toggle()
     }
     // MARK: handleSwipeAction
     @objc private func handleSwipeAction(_ sender: UISwipeGestureRecognizer) {
@@ -199,8 +204,8 @@ extension QuoteCollectionViewController {
         present(quoteReviewCollectionViewController, animated: true)
     }
     // MARK: likeButtonTapped
-    @objc func likeButtonTapped() {
-
+    @objc func likeButtonTapped(_ sender: UIButton) {
+        print("like")
     }
     // MARK: Impact Gesture
     func impactGesture(style: UIImpactFeedbackGenerator.FeedbackStyle = .light) {
