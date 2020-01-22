@@ -13,17 +13,20 @@ class MainContainerViewController: UIViewController {
     var menuViewController: SlideMenuViewController!
     var centerNavViewController: UIViewController!
     
+    // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         configureHomeController()
     }
     
+    // MARK: createFlowLayout
     func createFlowLayout() -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
         return flowLayout
     }
     
+    // MARK: configureHomeController
     func configureHomeController() {
         let homeController = QuoteCollectionViewController(collectionViewLayout: createFlowLayout())
         homeController.quoteController = quoteController
@@ -34,7 +37,8 @@ class MainContainerViewController: UIViewController {
         centerNavViewController.didMove(toParent: self)
     }
     
-    func configureMenuViewController() {
+    // MARK:configureSlideMenuViewController
+    func configureSlideMenuViewController() {
         if menuViewController == nil {
             menuViewController = SlideMenuViewController()
             menuViewController.quoteController = quoteController
@@ -44,10 +48,11 @@ class MainContainerViewController: UIViewController {
         }
     }
     
+    // MARK: showMenuController
     func showMenuController(shouldExpand: Bool) {
         if shouldExpand {
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
-                self.centerNavViewController.view.frame.origin.x = self.centerNavViewController.view.frame.width - 80
+                self.centerNavViewController.view.frame.origin.x = 80 //self.centerNavViewController.view.frame.width - 80
             })
         } else {
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
@@ -61,7 +66,7 @@ class MainContainerViewController: UIViewController {
 extension MainContainerViewController: HomeControllerViewDelegate {
     func handleMenuToggle() {
         if !quoteController.menuNavigationIsExpanded {
-            configureMenuViewController()
+            configureSlideMenuViewController()
         }
         
         quoteController.menuNavigationIsExpanded.toggle()

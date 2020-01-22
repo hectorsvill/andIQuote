@@ -45,10 +45,6 @@ class QuoteCollectionViewController: UICollectionViewController {
         configureDataSource()
         setupNavButtons()
         createSnapShot()
-        
-        collectionView.isPagingEnabled = true
-        collectionView.autoresizingMask = [.flexibleHeight, .flexibleHeight]
-        
     }
 
     // MARK: configureDataSource
@@ -112,11 +108,14 @@ extension QuoteCollectionViewController {
     
     // MARK: setupViews
     private func setupViews() {
+        collectionView.isPagingEnabled = true
+        collectionView.autoresizingMask = [.flexibleHeight, .flexibleHeight]
         collectionView.setBackground(to: quoteController.background)
         collectionView.register(QuoteCell.self, forCellWithReuseIdentifier: QuoteCell.reuseIdentifier)
+        
         themeButton = UIButton().sfImageButton(systemName: "paintbrush")
         themeButton.addTarget(self, action: #selector(themeButtonTapped), for: .touchUpInside)
-        lowerStackView.addArrangedSubview(themeButton)
+        //lowerStackView.addArrangedSubview(themeButton)
 
         ReviewButton = UIButton().sfImageButton(systemName: "text.bubble")
         ReviewButton.addTarget(self, action: #selector(ReviewButtonTapped), for: .touchUpInside)

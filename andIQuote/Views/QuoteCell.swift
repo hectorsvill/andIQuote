@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class QuoteCell: UICollectionViewCell, SelfConfiguringCell {
     static var reuseIdentifier = "QuoteCell"
     
@@ -24,18 +23,15 @@ class QuoteCell: UICollectionViewCell, SelfConfiguringCell {
         textview.isScrollEnabled = false
         return textview
     }()
-    
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        setupView()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    
     private func getAttributedText() -> NSAttributedString {
         guard let quote = quote else { return NSAttributedString(string: "") }
         let attributedString = NSMutableAttributedString(string: quote.body!, attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 24), NSAttributedString.Key.foregroundColor: UIColor.label])
@@ -54,5 +50,4 @@ class QuoteCell: UICollectionViewCell, SelfConfiguringCell {
             quoteTextView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -8),
         ])
     }
-    
 }

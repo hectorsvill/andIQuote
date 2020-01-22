@@ -57,7 +57,7 @@ extension SlideMenuViewController {
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.reuseIdentifier, for: indexPath)
             
-            cell.backgroundColor = .red
+            cell.setBackground(to: self.quoteController.background)
             return cell
         })
         
