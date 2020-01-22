@@ -30,21 +30,25 @@ class QuoteController {
 }
 
 extension QuoteController {
-    
+    // MARK: setIndex
+    func setIndex(_ index: Int) {
+        _quoteIndex = index
+    }
+    // MARK: background
     var background: String {
         backgrounds[_backgroundIndex]
     }
-    
+    // MARK: quoteForegroundColor
     var quoteForegroundColor: UIColor {
         background == "systemBackground" ? UIColor.label : UIColor.white
     }
-    
+    // MARK: attributedString
     func attributedString(_ quote: Quote) -> NSMutableAttributedString {
         let attributedString = NSMutableAttributedString(string: quote.body!, attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 24), NSAttributedString.Key.foregroundColor: quoteForegroundColor])
         attributedString.append(NSAttributedString(string: "\n\n\(quote.author!)", attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: quoteForegroundColor]))
         return attributedString
     }
-    
+    // MARK: fetchResultController
     var fetchResultController: NSFetchedResultsController<Quote> {
         let fetchRequest: NSFetchRequest<Quote> = Quote.fetchRequest()
         fetchRequest.sortDescriptors = []
@@ -54,7 +58,7 @@ extension QuoteController {
         
         return fetchResultController
     }
-    
+    // MARK: fetchFireQuotes
     private func fetchFireQuotes() {
         firestore.fetchFirstQuotes { quotesDetail, error in
             if let error = error {
@@ -71,7 +75,7 @@ extension QuoteController {
             }
         }
     }
-    
+    // MARK: fetchQuotes
     func fetchQuotes(completion: @escaping (Error?) -> ())  {
         if UserDefaults().bool(forKey: "Startup") == false {
             firestore.fetchFirstQuotes { quotesDetail, error in
@@ -95,26 +99,17 @@ extension QuoteController {
                 completion(nil)
                 UserDefaults().set(true, forKey: "Startup")
             }
-                   
         } else {
-            let moc = CoreDataStack.shared.mainContext
-            moc.performAndWait {
-                let quoteFetch: NSFetchRequest<Quote> = Quote.fetchRequest()
-                quoteFetch.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
-                
-                do {
-                    _ = try moc.fetch(quoteFetch)
-                    let quotes = try quoteFetch.execute()
-                    self.quotes = quotes
-                    completion(nil)
-                    
-                }catch {
+            fetchQuotesFromCoreData { _ , error in
+                if let error = error {
                     completion(error)
                 }
+                
+                completion(nil)
             }
         }
     }
-    
+    // MARK: fetchQuotesFromCoreData
     func fetchQuotesFromCoreData(completion: @escaping ([Quote]?, Error?) -> ()){
         let moc = CoreDataStack.shared.mainContext
         moc.performAndWait {
@@ -132,7 +127,7 @@ extension QuoteController {
             }
         }
     }
-    
+    // MARK: getNextQuote
     func getNextQuote() {
         _quoteIndex = _quoteIndex < quotes.count - 1 ? _quoteIndex + 1: _quoteIndex
         
@@ -150,35 +145,5 @@ extension QuoteController {
             }
         }
     }
-}
-
-// MARK: DEPRICATED
-extension QuoteController {
-    func getPreviousQuote() {
-        _quoteIndex = _quoteIndex > 0 ? _quoteIndex - 1 : quotes.count - 1
-    }
-    
-    func getNextBackground() {
-        _backgroundIndex = _backgroundIndex >= backgrounds.count - 1 ? 0 : _backgroundIndex + 1
-    }
-    
-    func getPreviousBackground() {
-        _backgroundIndex = _backgroundIndex > 0 ? _backgroundIndex - 1 : backgrounds.count - 1
-    }
-    
-    func saveQuoteIndex() {
-        print("SaveQuoteINdex: \(_quoteIndex)")
-        UserDefaults().set(_quoteIndex, forKey: "QIndex")
-    }
-    
-    func saveBackgroundIndex() {
-        UserDefaults().set(_backgroundIndex, forKey: "BgIndex")
-    }
-    
-    func likeButtonpressed() {
-        guard let user = quoteUser else { return }
-        UserDefaults().set(user.favorites, forKey: "FavoriteList")
-    }
-    
 }
 

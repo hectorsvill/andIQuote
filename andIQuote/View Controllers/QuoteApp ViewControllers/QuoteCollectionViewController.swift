@@ -59,7 +59,6 @@ class QuoteCollectionViewController: UICollectionViewController {
             return cell
         }
     }
-    
     // MARK: createSnapShot
     private func createSnapShot() {
         quoteController.fetchQuotes { error in
@@ -73,20 +72,17 @@ class QuoteCollectionViewController: UICollectionViewController {
         }
     }
 }
-
 // MARK: UICollectionViewDelegateFlowLayout
 extension QuoteCollectionViewController: UICollectionViewDelegateFlowLayout {
     // MARK: collectionViewLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: view.frame.height)
     }
-    
     // MARK: scrollViewWillEndDragging
     override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        currentIndex = Int(targetContentOffset.pointee.x / view.frame.width)
-        print(currentIndex)
+        let currentIndex = Int(targetContentOffset.pointee.x / view.frame.width)
+        quoteController.setIndex(currentIndex)
     }
-    
     // MARK: minimumLineSpacingForSectionAt
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
@@ -204,27 +200,7 @@ extension QuoteCollectionViewController {
     }
     // MARK: likeButtonTapped
     @objc func likeButtonTapped() {
-//        guard !quoteController.quoteThemeIsActive else { return }
-//        impactGesture(style: .medium)
-//
-//        let quoteID = quoteController.quote.id
-//        var buttonImageName =  "hand.thumbsup"
-//        guard var user = quoteController.quoteUser else { return }
-//
-//        if user.favorites.contains(quoteID!) {
-//            if let index = user.favorites.firstIndex(of: quoteID!) {
-//                user.favorites.remove(at: index)
-//            }
-//        } else {
-//            user.favorites.append(quoteID!)
-//            buttonImageName =  "hand.thumbsup.fill"
-//        }
-//
-//        let configuration = UIImage().mainViewSymbolConfig()
-//        let image = UIImage(systemName: buttonImageName, withConfiguration: configuration)
-//        likeButton.setImage(image, for: .normal)
-//
-//        quoteController.likeButtonpressed()
+
     }
     // MARK: Impact Gesture
     func impactGesture(style: UIImpactFeedbackGenerator.FeedbackStyle = .light) {
