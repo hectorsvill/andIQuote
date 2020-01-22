@@ -57,6 +57,7 @@ class QuoteCollectionViewController: UICollectionViewController {
             (collectionView, indexPath, quote) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuoteCell.reuseIdentifier, for: indexPath) as! QuoteCell
             cell.quote = quote
+            cell.setBackground(to: self.quoteController.background)
             return cell
         }
     }

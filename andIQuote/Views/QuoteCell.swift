@@ -13,12 +13,12 @@ class QuoteCell: UICollectionViewCell, SelfConfiguringCell {
     static var reuseIdentifier = "QuoteCell"
     
     var quote: Quote? { didSet { setupView()} }
-
+    
     let quoteTextView: UITextView = {
         let textview = UITextView()
         textview.translatesAutoresizingMaskIntoConstraints = false
         textview.textAlignment = .justified
-        
+        textview.backgroundColor = .clear
         textview.isEditable = false
         textview.isSelectable = false
         textview.isScrollEnabled = false
@@ -37,7 +37,6 @@ class QuoteCell: UICollectionViewCell, SelfConfiguringCell {
 
     
     private func getAttributedText() -> NSAttributedString {
-        backgroundColor = .systemBackground
         guard let quote = quote else { return NSAttributedString(string: "") }
         let attributedString = NSMutableAttributedString(string: quote.body!, attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 24), NSAttributedString.Key.foregroundColor: UIColor.label])
         attributedString.append(NSAttributedString(string: "\n\n\(quote.author!)", attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.label]))
@@ -54,11 +53,6 @@ class QuoteCell: UICollectionViewCell, SelfConfiguringCell {
             quoteTextView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 8),
             quoteTextView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -8),
         ])
-        
-
-    
-
-        
     }
     
 }

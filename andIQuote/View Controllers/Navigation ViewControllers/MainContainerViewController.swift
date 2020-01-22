@@ -21,7 +21,6 @@ class MainContainerViewController: UIViewController {
     func createFlowLayout() -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
-        flowLayout.minimumInteritemSpacing = 10
         return flowLayout
     }
     
