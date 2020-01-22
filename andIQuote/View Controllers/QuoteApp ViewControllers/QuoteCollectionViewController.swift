@@ -114,6 +114,10 @@ extension QuoteCollectionViewController {
         leftSwipe.direction = .left
         collectionView.addGestureRecognizer(leftSwipe)
         
+        let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(shareButtonTapped))
+        upSwipe.direction = .up
+        collectionView.addGestureRecognizer(upSwipe)
+        
         collectionView.isPagingEnabled = true
         collectionView.autoresizingMask = [.flexibleHeight, .flexibleHeight]
         collectionView.setBackground(to: quoteController.background)
@@ -148,7 +152,11 @@ extension QuoteCollectionViewController {
     
     // MARK: handleSwipeAction
     @objc private func handleSwipeAction(_ sender: UISwipeGestureRecognizer) {
-        handleSlideMenuToggle()
+        if sender.direction == .up {
+            shareButtonTapped()
+        }else {
+            handleSlideMenuToggle()
+        }
     }
     
     // MARK: slideMenuButtonTapped
