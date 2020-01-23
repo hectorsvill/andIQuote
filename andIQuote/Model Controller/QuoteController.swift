@@ -13,7 +13,7 @@ import Firebase
 class QuoteController {
     var quoteThemeIsActive = false // theme selecting state
     var menuNavigationIsExpanded = false // menu navigations state
-    let backgrounds = ["green", "blue", "gray", "pink", "red", "teal", "indigo", "orange", "yellow", "purple", "systemBackground"]
+    let backgrounds = ["systemBackground", "green", "blue", "gray", "pink", "red", "teal", "indigo", "orange", "yellow", "purple",]
     let firestore = FirestoreController()
     private (set) var quotes = [Quote]() // list of quotes
     private (set) var _quoteIndex = UserDefaults().integer(forKey: "QIndex") // current index of quote
@@ -23,10 +23,8 @@ class QuoteController {
     init() {
         if let user = Auth.auth().currentUser {
             self.quoteUser = QuoteUser(id: user.uid)
-            
         }
     }
-    
 }
 
 extension QuoteController {

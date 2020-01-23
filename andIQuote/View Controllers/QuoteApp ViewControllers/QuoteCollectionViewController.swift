@@ -26,7 +26,7 @@ class QuoteCollectionViewController: UICollectionViewController {
     var upSwipeGestureRecognizer: UISwipeGestureRecognizer!
     var downSwipeGestureRecognizer: UISwipeGestureRecognizer!
     var doubleTapSwipeGestureRecognizer: UITapGestureRecognizer!
-    var ReviewButton: UIButton!
+    var reviewButton: UIButton!
     var likeButton: UIButton!
     
     var currentIndex = 0
@@ -102,16 +102,14 @@ extension QuoteCollectionViewController {
         setupCollectionView()
         setupSwipeGestureRecognizer()
         
-        ReviewButton = UIButton().sfImageButton(systemName: "text.bubble")
-        ReviewButton.addTarget(self, action: #selector(reviewButtonTapped), for: .touchUpInside)
-        lowerStackView.addArrangedSubview(ReviewButton)
+        reviewButton = UIButton().sfImageButton(systemName: "text.bubble")
+        reviewButton.addTarget(self, action: #selector(reviewButtonTapped), for: .touchUpInside)
+        lowerStackView.addArrangedSubview(reviewButton)
         
         likeButton = UIButton().sfImageButton(systemName: "hand.thumbsup")
         likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         lowerStackView.addArrangedSubview(likeButton)
         collectionView.addSubview(lowerStackView)
-        
-//        collectionView.addSubview(<#T##view: UIView##UIView#>)
         
         NSLayoutConstraint.activate([
             lowerStackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16),

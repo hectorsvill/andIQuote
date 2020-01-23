@@ -28,11 +28,9 @@ class MenuCollectionViewCell: UICollectionViewCell, SelfConfiguringCell {
     }()
     
     private func setupViews() {
-//        layer.cornerRadius = 2
-//        layer.borderWidth = 1
-        
         labelText.text = slideMenuItem?.displayText
         imageView.image = UIImage(systemName: slideMenuItem!.sfSymbol, withConfiguration: UIImage().mainViewSymbolConfig())
+        imageView.tintColor = .black
         addSubview(imageView)
         addSubview(labelText)
         
