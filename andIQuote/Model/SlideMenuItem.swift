@@ -22,7 +22,7 @@ extension SlideMenuViewController {
         SlideMenuItem(sfSymbol: "paintbrush.fill", displayText: "Theme"),
         SlideMenuItem(sfSymbol: "bell.fill", displayText: "Reminder"),
         SlideMenuItem(sfSymbol: "plus", displayText: "Create"),
-        SlideMenuItem(sfSymbol: "bookmark.fill", displayText: "I Quote"),
+        SlideMenuItem(sfSymbol: "book.fill", displayText: "I Quote"),
         SlideMenuItem(sfSymbol: "magnifyingglass", displayText: "Serach")
             ].map {slideMenuItems.append($0)}
     }

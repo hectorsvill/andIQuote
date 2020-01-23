@@ -34,7 +34,7 @@ class SlideMenuViewController: UIViewController {
 
 extension SlideMenuViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath)
+        
     }
 }
 

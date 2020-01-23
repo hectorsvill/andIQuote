@@ -38,7 +38,13 @@ class QuoteCollectionViewController: UICollectionViewController {
         stackView.axis = .horizontal
         stackView.spacing = 32
         return stackView
-        
+    }()
+    
+    var slideMenuButton: UIButton = {
+        let button = UIButton()
+        let image = UIImage(systemName: "", withConfiguration: UIImage().mainViewSymbolConfig())
+        button.setImage(image, for: .normal)
+        return button
     }()
 
     // MARK: viewDidLoad
@@ -103,8 +109,9 @@ extension QuoteCollectionViewController {
         likeButton = UIButton().sfImageButton(systemName: "hand.thumbsup")
         likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         lowerStackView.addArrangedSubview(likeButton)
-        
         collectionView.addSubview(lowerStackView)
+        
+//        collectionView.addSubview(<#T##view: UIView##UIView#>)
         
         NSLayoutConstraint.activate([
             lowerStackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16),
@@ -139,7 +146,7 @@ extension QuoteCollectionViewController {
     }
     // MARK: setupNavButtons
     private func setupNavButtons() {
-        navigationController?.navigationBar.barTintColor = view.backgroundColor
+        navigationController?.navigationBar.barTintColor = collectionView.backgroundColor
         navigationController?.navigationBar.barStyle = .default
         
         let menuImage = UIImage(systemName: "line.horizontal.3", withConfiguration: UIImage().mainViewSymbolConfig())

@@ -30,7 +30,9 @@ class MainContainerViewController: UIViewController {
     func configureHomeController() {
         let homeController = QuoteCollectionViewController(collectionViewLayout: createFlowLayout())
         homeController.quoteController = quoteController
-        centerNavViewController = UINavigationController(rootViewController: homeController)
+        let navigationController = UINavigationController(rootViewController: homeController)
+//        navigationController.isNavigationBarHidden = true
+        centerNavViewController = navigationController
         homeController.delegate = self
         view.addSubview(centerNavViewController.view)
         addChild(centerNavViewController)
