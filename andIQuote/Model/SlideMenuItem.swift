@@ -15,11 +15,11 @@ struct SlideMenuItem: Hashable {
 
 extension SlideMenuViewController {
     func createSlideMenuData() {
-        let favoriteItem = SlideMenuItem(sfSymbol: "text.bubble", displayText: "Favorites")
-        slideMenuItems.append(favoriteItem)
-        let themeItem = SlideMenuItem(sfSymbol: "hand.thumpsup.fill", displayText: "Theme Select")
-        slideMenuItems.append(themeItem)
-        let reminderItem = SlideMenuItem(sfSymbol: "bell.fill", displayText: "Reminder")
-        slideMenuItems.append(reminderItem)
+        _ = [
+        SlideMenuItem(sfSymbol: "", displayText: ""),
+        SlideMenuItem(sfSymbol: "text.bubble.fill", displayText: "Favorites"),
+        SlideMenuItem(sfSymbol: "hand.thumbsup.fill", displayText: "Theme Select"),
+        SlideMenuItem(sfSymbol: "bell.fill", displayText: "Reminder"),
+            ].map {slideMenuItems.append($0)}
     }
 }

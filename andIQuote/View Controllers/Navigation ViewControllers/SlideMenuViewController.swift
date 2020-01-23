@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias SlideMenudataSouce = UICollectionViewDiffableDataSource<SlideMenuViewController.Section, SlideMenuItem>
+typealias SlideMenuDataSouce = UICollectionViewDiffableDataSource<SlideMenuViewController.Section, SlideMenuItem>
 typealias SlideSourceSnapShot = NSDiffableDataSourceSnapshot<SlideMenuViewController.Section, SlideMenuItem>
 
 class SlideMenuViewController: UIViewController {
@@ -20,16 +20,16 @@ class SlideMenuViewController: UIViewController {
     }
     
     var slideMenuItems: [SlideMenuItem] = []
-    var dataSource: SlideMenudataSouce!
+    var dataSource: SlideMenuDataSouce!
     var collectionView: UICollectionView!
     var quoteController: QuoteController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        createSlideMenuData()
         configureHierarchy()
         configureDataSouce()
     }
-    
 }
 
 extension SlideMenuViewController: UICollectionViewDelegate {}
@@ -48,7 +48,6 @@ extension SlideMenuViewController {
     private func configureHierarchy() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createMainLayout())
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.backgroundColor = .blue
         collectionView.setBackground(to: quoteController.background)
         collectionView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.reuseIdentifier)
         view.addSubview((collectionView))
@@ -56,10 +55,9 @@ extension SlideMenuViewController {
     }
     
     private func configureDataSouce() {
-        dataSource = SlideMenudataSouce(collectionView: collectionView, cellProvider: {
-            collectionView, indexPath, i -> UICollectionViewCell? in
+        dataSource = SlideMenuDataSouce(collectionView: collectionView, cellProvider: { collectionView, indexPath, slideMenuItem -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.reuseIdentifier, for: indexPath) as! MenuCollectionViewCell
-//            cell.setBackground(to: self.quoteController.background)
+            cell.slideMenuItem = slideMenuItem
             return cell
         })
         
@@ -69,4 +67,3 @@ extension SlideMenuViewController {
         dataSource.apply(snapShot, animatingDifferences: false)
     }
 }
-
