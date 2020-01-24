@@ -43,26 +43,7 @@ extension SlideMenuViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let row = indexPath.row
-        
-        switch row {
-        case 1:
-            print("Home: ", row)
-        case 2:
-            print("favorites")
-        case 3:
-            print("Theme")
-        case 4:
-            print("Reminder")
-        case 5:
-            print("create")
-        case 6:
-            print("I Quote")
-        case 7:
-            print("search")
-        default:
-            print(row)
-        }
-        
+        delegateSlideMenuEvents?.handleSlideMenuEvents(row)
         delegateHomeControllerView?.handleMenuToggle()
     }
 }

@@ -81,3 +81,10 @@ extension MainContainerViewController: HomeControllerViewDelegate {
         showMenuController(shouldExpand: quoteController.menuNavigationIsExpanded)
     }
 }
+
+// MARK: SlideMenuEventsDelegate
+extension MainContainerViewController: SlideMenuEventsDelegate {
+    func handleSlideMenuEvents(_ index: Int) {
+        
+    }
+}

@@ -28,9 +28,6 @@ class QuoteCollectionViewController: UICollectionViewController {
     var doubleTapSwipeGestureRecognizer: UITapGestureRecognizer!
     var reviewButton: UIButton!
     var likeButton: UIButton!
-    
-    var currentIndex = 0
-    
     // MARK: lowerStackView
     var lowerStackView: UIStackView = {
         let stackView = UIStackView()
@@ -39,14 +36,6 @@ class QuoteCollectionViewController: UICollectionViewController {
         stackView.spacing = 32
         return stackView
     }()
-    
-    var slideMenuButton: UIButton = {
-        let button = UIButton()
-        let image = UIImage(systemName: "", withConfiguration: UIImage().mainViewSymbolConfig())
-        button.setImage(image, for: .normal)
-        return button
-    }()
-
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,8 +43,13 @@ class QuoteCollectionViewController: UICollectionViewController {
         configureDataSource()
         setupNavButtons()
         createSnapShot()
+        loadLastIndex()
     }
-
+    // MARK: loadLastIndex
+    private func loadLastIndex() {
+        let index = IndexPath(item: quoteController._quoteIndex, section: 0)
+        collectionView.scrollToItem(at: index, at: .left, animated: false)
+    }
     // MARK: configureDataSource
     private func configureDataSource() {
         dataSource = QuoteDataSource(collectionView: collectionView) {
@@ -79,13 +73,6 @@ class QuoteCollectionViewController: UICollectionViewController {
         }
     }
 }
-// MARK: SlideMenuEventsDelegate
-extension QuoteCollectionViewController: SlideMenuEventsDelegate {
-    func handleSlideMenuEvents(_ index: Int) {
-        print(index)
-    }
-}
-
 // MARK: UICollectionViewDelegateFlowLayout
 extension QuoteCollectionViewController: UICollectionViewDelegateFlowLayout {
     // MARK: collectionViewLayout
@@ -102,7 +89,6 @@ extension QuoteCollectionViewController: UICollectionViewDelegateFlowLayout {
         return 0
     }
 }
-
 extension QuoteCollectionViewController {
     // MARK: setupViews
     private func setupViews() {

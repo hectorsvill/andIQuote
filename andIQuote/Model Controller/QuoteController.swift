@@ -23,13 +23,14 @@ class QuoteController {
     init() {
         if let user = Auth.auth().currentUser {
             self.quoteUser = QuoteUser(id: user.uid)
+            print(_quoteIndex)
         }
     }
 }
 
 extension QuoteController {
     // MARK: setIndex
-    func setIndex(_ index: Int) {
+    func quoteIndex(_ index: Int) {
         _quoteIndex = index
     }
     // MARK: background
@@ -40,6 +41,12 @@ extension QuoteController {
     var quoteForegroundColor: UIColor {
         background == "systemBackground" ? UIColor.label : UIColor.white
     }
+    
+    func setIndex(_ index: Int) {
+        _quoteIndex = index
+        UserDefaults().set(index, forKey: "QIndex")
+    }
+    
     // MARK: attributedString
     func attributedString(_ quote: Quote) -> NSMutableAttributedString {
         let attributedString = NSMutableAttributedString(string: quote.body!, attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 24), NSAttributedString.Key.foregroundColor: quoteForegroundColor])
