@@ -44,7 +44,7 @@ class MainContainerViewController: UIViewController {
     func configureSlideMenuViewController() {
         if menuViewController == nil {
             menuViewController = SlideMenuViewController()
-            menuViewController.delegate = self
+            menuViewController.delegateHomeControllerView = self
             menuViewController.quoteController = quoteController
             view.insertSubview(menuViewController.view, at: 0)
             addChild(menuViewController)
@@ -61,7 +61,11 @@ class MainContainerViewController: UIViewController {
         } else {
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
                 self.centerNavViewController.view.frame.origin.x = 0
-            })
+            }){ _ in
+                print("slide menu did end")
+                
+                
+            }
         }
     }
 }

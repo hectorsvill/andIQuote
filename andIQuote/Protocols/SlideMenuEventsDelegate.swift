@@ -9,5 +9,5 @@
 import Foundation
 
 protocol SlideMenuEventsDelegate {
-    func handleSlideMenuEvents()
+    func handleSlideMenuEvents(_ index: Int)
 }

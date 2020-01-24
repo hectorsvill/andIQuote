@@ -79,6 +79,13 @@ class QuoteCollectionViewController: UICollectionViewController {
         }
     }
 }
+// MARK: SlideMenuEventsDelegate
+extension QuoteCollectionViewController: SlideMenuEventsDelegate {
+    func handleSlideMenuEvents(_ index: Int) {
+        print(index)
+    }
+}
+
 // MARK: UICollectionViewDelegateFlowLayout
 extension QuoteCollectionViewController: UICollectionViewDelegateFlowLayout {
     // MARK: collectionViewLayout

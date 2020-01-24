@@ -20,7 +20,8 @@ extension SlideMenuViewController {
 }
 
 class SlideMenuViewController: UIViewController {
-    var delegate: HomeControllerViewDelegate?
+    var delegateSlideMenuEvents: SlideMenuEventsDelegate?
+    var delegateHomeControllerView: HomeControllerViewDelegate?
     var slideMenuItems: [SlideMenuItem] = []
     var dataSource: SlideMenuDataSouce!
     var collectionView: UICollectionView!
@@ -36,7 +37,7 @@ class SlideMenuViewController: UIViewController {
 
 
 extension SlideMenuViewController: UICollectionViewDelegate {
-    enum MenuItems {
+    enum MenuItems: Int {
         case home, Favorites, Theme, Reminder, Create, IQuote, Search
     }
     
@@ -46,15 +47,23 @@ extension SlideMenuViewController: UICollectionViewDelegate {
         switch row {
         case 1:
             print("Home: ", row)
-            delegate?.handleMenuToggle()
-//        case 1:
-//        case 2:
-//        case 3:
-//        case 4:
-            
+        case 2:
+            print("favorites")
+        case 3:
+            print("Theme")
+        case 4:
+            print("Reminder")
+        case 5:
+            print("create")
+        case 6:
+            print("I Quote")
+        case 7:
+            print("search")
         default:
             print(row)
         }
+        
+        delegateHomeControllerView?.handleMenuToggle()
     }
 }
 
