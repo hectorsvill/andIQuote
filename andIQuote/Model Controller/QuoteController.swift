@@ -15,7 +15,6 @@ class QuoteController {
     var menuNavigationIsExpanded = false // menu navigations state
     let backgrounds = ["systemBackground", "green", "blue", "gray", "pink", "red", "teal", "indigo", "orange", "yellow", "purple",]
     let firestore = FirestoreController()
-    private (set) var quotes = [Quote]() // list of quotes
     private (set) var _quoteIndex = UserDefaults().integer(forKey: "QIndex") // current index of quote
     private (set) var _backgroundIndex = UserDefaults().integer(forKey: "BgIndex") // current index of background
     private (set) var quoteUser: QuoteUser?
@@ -23,11 +22,9 @@ class QuoteController {
     init() {
         if let user = Auth.auth().currentUser {
             self.quoteUser = QuoteUser(id: user.uid)
-            print(_quoteIndex)
         }
     }
 }
-
 extension QuoteController {
     // MARK: setIndex
     func quoteIndex(_ index: Int) {
@@ -41,12 +38,10 @@ extension QuoteController {
     var quoteForegroundColor: UIColor {
         background == "systemBackground" ? UIColor.label : UIColor.white
     }
-    
     func setIndex(_ index: Int) {
         _quoteIndex = index
         UserDefaults().set(index, forKey: "QIndex")
     }
-    
     // MARK: attributedString
     func attributedString(_ quote: Quote) -> NSMutableAttributedString {
         let attributedString = NSMutableAttributedString(string: quote.body!, attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 24), NSAttributedString.Key.foregroundColor: quoteForegroundColor])
@@ -56,61 +51,51 @@ extension QuoteController {
     // MARK: fetchResultController
     var fetchResultController: NSFetchedResultsController<Quote> {
         let fetchRequest: NSFetchRequest<Quote> = Quote.fetchRequest()
-        fetchRequest.sortDescriptors = []
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true),]
         
         let moc = CoreDataStack.shared.mainContext
         let fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: "id", cacheName: nil)
         
         return fetchResultController
     }
-    // MARK: fetchFireQuotes
-    private func fetchFireQuotes() {
-        firestore.fetchFirstQuotes { quotesDetail, error in
-            if let error = error {
-                NSLog("error: \(error)")
-            }
-            
-            guard let qd = quotesDetail else { return }
-            for q in qd {
-                let q = Quote(body: q.body, author: q.author, id: q.id, like: false)
-                self.quotes.append(q)
-                            
-                let moc = CoreDataStack.shared.mainContext
-                try! moc.save()
-            }
-        }
-    }
+    
+}
+// MARK: Networking
+extension QuoteController {
     // MARK: fetchQuotes
-    func fetchQuotes(completion: @escaping (Error?) -> ())  {
+    func fetchQuotes(completion: @escaping ([Quote]?, Error?) -> ())  {
         if UserDefaults().bool(forKey: "Startup") == false {
             firestore.fetchFirstQuotes { quotesDetail, error in
                 if let error = error {
-                    completion(error)
+                    completion(nil, error)
                 }
                 
                 guard let quotesDetail = quotesDetail else { return }
                 
+                var quotes = [Quote]()
+                
                 for quote in quotesDetail {
                     let quote = Quote(body: quote.body, author: quote.author, id: quote.id, like: false, context: CoreDataStack.shared.mainContext)
-                    self.quotes.append(quote)
+                    quotes.append(quote)
                 }
                 
                 do {
                     try CoreDataStack.shared.save()
-                    print("save")
+                    completion(quotes, nil)
                 } catch {
-                    NSLog("error")
+                    completion(nil, error)
                 }
-                completion(nil)
+                
                 UserDefaults().set(true, forKey: "Startup")
             }
         } else {
-            fetchQuotesFromCoreData { _ , error in
+            fetchQuotesFromCoreData { quotes , error in
                 if let error = error {
-                    completion(error)
+                    completion(nil, error)
                 }
+                guard let quotes = quotes else { return }
                 
-                completion(nil)
+                completion(quotes, nil)
             }
         }
     }
@@ -124,7 +109,6 @@ extension QuoteController {
             do {
                 _ = try moc.fetch(quoteFetch)
                 let quotes = try quoteFetch.execute()
-                self.quotes = quotes
                 completion(quotes, nil)
                         
             }catch {
@@ -133,22 +117,22 @@ extension QuoteController {
         }
     }
     // MARK: getNextQuote
-    func getNextQuote() {
+    func getNextQuote(completion: @escaping ([Quote]?, Error?) -> ()) {
+        let quotes = fetchResultController.fetchedObjects ?? []
         _quoteIndex = _quoteIndex < quotes.count - 1 ? _quoteIndex + 1: _quoteIndex
         
         if _quoteIndex % 7 == 0 && _quoteIndex + 10 > quotes.count {
-            firestore.getNext { quotes, error in
-                if let error = error {
-                    NSLog("\(error)")
-                }
-                
-                guard let quotes = quotes else { return }
-
-                for q in quotes {
-                    self.quotes.append(q)
+            let moc = CoreDataStack.shared.mainContext
+            moc.performAndWait {
+                firestore.getNext { quotes, error in
+                    if let error = error {
+                        completion(nil, error)
+                    }
+                    
+                    guard let quotes = quotes else { return }
+                    completion(quotes,  nil)
                 }
             }
         }
     }
 }
-

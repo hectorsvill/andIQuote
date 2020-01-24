@@ -62,13 +62,13 @@ class QuoteCollectionViewController: UICollectionViewController {
     }
     // MARK: createSnapShot
     private func createSnapShot() {
-        quoteController.fetchQuotes { error in
+        quoteController.fetchQuotes { quotes, error in
             if let error = error {
                 NSLog("\(error)")
             }
             var snapShot = QuoteSourceSnapShot()
             snapShot.appendSections([.main])
-            snapShot.appendItems(self.quoteController.quotes)
+            snapShot.appendItems(quotes ?? [])
             self.dataSource.apply(snapShot, animatingDifferences: false)
         }
     }
@@ -83,6 +83,7 @@ extension QuoteCollectionViewController: UICollectionViewDelegateFlowLayout {
     override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let currentIndex = Int(targetContentOffset.pointee.x / view.frame.width)
         quoteController.setIndex(currentIndex)
+//        quoteController.getNextQuote()
     }
     // MARK: minimumLineSpacingForSectionAt
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
