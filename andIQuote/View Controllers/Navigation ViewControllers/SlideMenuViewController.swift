@@ -11,14 +11,16 @@ import UIKit
 typealias SlideMenuDataSouce = UICollectionViewDiffableDataSource<SlideMenuViewController.Section, SlideMenuItem>
 typealias SlideSourceSnapShot = NSDiffableDataSourceSnapshot<SlideMenuViewController.Section, SlideMenuItem>
 
-class SlideMenuViewController: UIViewController {
-    
+extension SlideMenuViewController {
     enum Section {
         case main
         case header
         case footer
     }
-    
+}
+
+class SlideMenuViewController: UIViewController {
+    var delegate: HomeControllerViewDelegate?
     var slideMenuItems: [SlideMenuItem] = []
     var dataSource: SlideMenuDataSouce!
     var collectionView: UICollectionView!
@@ -32,9 +34,27 @@ class SlideMenuViewController: UIViewController {
     }
 }
 
+
 extension SlideMenuViewController: UICollectionViewDelegate {
+    enum MenuItems {
+        case home, Favorites, Theme, Reminder, Create, IQuote, Search
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let row = indexPath.row
         
+        switch row {
+        case 1:
+            print("Home: ", row)
+            delegate?.handleMenuToggle()
+//        case 1:
+//        case 2:
+//        case 3:
+//        case 4:
+            
+        default:
+            print(row)
+        }
     }
 }
 

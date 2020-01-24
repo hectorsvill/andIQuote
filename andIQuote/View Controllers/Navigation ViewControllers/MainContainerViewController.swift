@@ -31,7 +31,6 @@ class MainContainerViewController: UIViewController {
         let homeController = QuoteCollectionViewController(collectionViewLayout: createFlowLayout())
         homeController.quoteController = quoteController
         let navigationController = UINavigationController(rootViewController: homeController)
-//        navigationController.isNavigationBarHidden = true
         centerNavViewController = navigationController
         homeController.delegate = self
         view.addSubview(centerNavViewController.view)
@@ -43,6 +42,7 @@ class MainContainerViewController: UIViewController {
     func configureSlideMenuViewController() {
         if menuViewController == nil {
             menuViewController = SlideMenuViewController()
+            menuViewController.delegate = self
             menuViewController.quoteController = quoteController
             view.insertSubview(menuViewController.view, at: 0)
             addChild(menuViewController)
