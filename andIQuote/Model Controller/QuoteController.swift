@@ -61,26 +61,13 @@ extension QuoteController {
     // MARK: fetchQuotes
     func fetchQuotes(completion: @escaping ([Quote]?, Error?) -> ())  {
         if UserDefaults().bool(forKey: "Startup") == false {
-            firestore.fetchFirstQuotes { quotesDetail, error in
+            firestore.fetchFirstQuotes { quotes, error in
                 if let error = error {
                     completion(nil, error)
                 }
                 
-                guard let quotesDetail = quotesDetail else { return }
-                
-                var quotes = [Quote]()
-                
-                for quote in quotesDetail {
-                    let quote = Quote(body: quote.body, author: quote.author, id: quote.id, like: false, context: CoreDataStack.shared.mainContext)
-                    quotes.append(quote)
-                }
-                
-                do {
-                    try CoreDataStack.shared.save()
-                    completion(quotes, nil)
-                } catch {
-                    completion(nil, error)
-                }
+                guard let quotes = quotes else { return }
+                completion(quotes, nil)
                 
                 UserDefaults().set(true, forKey: "Startup")
             }

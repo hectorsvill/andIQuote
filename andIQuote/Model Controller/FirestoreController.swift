@@ -23,17 +23,21 @@ class FirestoreController {
     }
     
     // MARK: fetchQuotesFromFireStore
-    func fetchFirstQuotes(limit: Int = 10, completion: @escaping ([QuoteDetail]?, Error?) -> ()) {
+    func fetchFirstQuotes(limit: Int = 10, completion: @escaping ([Quote]?, Error?) -> ()) {
         quoteQuery.limit(to: limit).getDocuments { snapShot, error in
             if let error = error {
                 completion(nil, error)
             }
 
             guard let snapShot = snapShot else { return }
-            let quotes = self.fetchQuotesFromSnapShot(snapShot.documents)
+            
+            let quotes = self.fetchQuotesFromSnapShotSaveToCoreData(snapShot.documents)
+
+            
             if let last = snapShot.documents.last {
                 self.lastQueryDocumentSnapshot = last
             }
+            
             completion(quotes, nil)
         }
     }
@@ -55,20 +59,20 @@ class FirestoreController {
     }
     
     // MARK: fetchQuotesFromSnapShot
-    func fetchQuotesFromSnapShot( _ documents: [QueryDocumentSnapshot]) -> [QuoteDetail] {
-        var quotes = [QuoteDetail]()
-        
-        for doc in documents {
-            let data = doc.data() as [String: Any]
-            let id = data["id"] as! String
-            let body = data["body"] as! String
-            let author = data["author"] as! String
-            let q = QuoteDetail(id: id, body: body, author: author)
-            quotes.append(q)
-        }
-        
-        return quotes
-    }
+//    func fetchQuotesFromSnapShot( _ documents: [QueryDocumentSnapshot]) -> [QuoteDetail] {
+//        var quotes = [QuoteDetail]()
+//
+//        for doc in documents {
+//            let data = doc.data() as [String: Any]
+//            let id = data["id"] as! String
+//            let body = data["body"] as! String
+//            let author = data["author"] as! String
+//            let q = QuoteDetail(id: id, body: body, author: author)
+//            quotes.append(q)
+//        }
+//
+//        return quotes
+//    }
     
     @discardableResult
     private func fetchQuotesFromSnapShotSaveToCoreData( _ documents: [QueryDocumentSnapshot]) -> [Quote]{
@@ -76,20 +80,17 @@ class FirestoreController {
         
         for doc in documents {
             let data = doc.data() as [String: Any]
-            let id = data["id"] as! String
-            let body = data["body"] as! String
-            let author = data["author"] as! String
-                
-            let quote = Quote(body: body, author: author, id: id, like: false)
+            let quote = Quote(data: data)
             quotes.append(quote)
-            do {
-                try CoreDataStack.shared.save()
-                return quotes
-            } catch {
-                NSLog("error")
-            }
         }
-        return []
+        
+        do {
+            try CoreDataStack.shared.save()
+        } catch {
+            NSLog("error")
+        }
+        
+        return quotes
     }
     
     // MARK: getLastDocumentSnapShot
