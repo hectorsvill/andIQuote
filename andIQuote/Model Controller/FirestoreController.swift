@@ -17,7 +17,7 @@ class FirestoreController {
     var quoteQuery: Query {
         db.collectionGroup("quotes")
     }
-    
+
     // MARK: fetchQuotesFromFireStore
     func fetchFirstQuotes(limit: Int = 10, completion: @escaping ([QuoteDetail]?, Error?) -> ()) {
         quoteQuery.limit(to: limit).getDocuments { snapShot, error in
@@ -82,11 +82,11 @@ class FirestoreController {
             quotes.append(quote)
             do {
                 try CoreDataStack.shared.save()
-                print("save")
+                return quotes
             } catch {
                 NSLog("error")
             }
         }
-        return quotes
+        return []
     }
 }

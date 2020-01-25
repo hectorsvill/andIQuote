@@ -26,10 +26,6 @@ class QuoteController {
     }
 }
 extension QuoteController {
-    // MARK: setIndex
-    func quoteIndex(_ index: Int) {
-        _quoteIndex = index
-    }
     // MARK: background
     var background: String {
         backgrounds[_backgroundIndex]
@@ -117,21 +113,20 @@ extension QuoteController {
         }
     }
     // MARK: getNextQuote
-    func getNextQuote(completion: @escaping ([Quote]?, Error?) -> ()) {
+    func getNextQuote(completion: @escaping ([Quote]?) -> ()) {
         let quotes = fetchResultController.fetchedObjects ?? []
         _quoteIndex = _quoteIndex < quotes.count - 1 ? _quoteIndex + 1: _quoteIndex
         
-        if _quoteIndex % 7 == 0 && _quoteIndex + 10 > quotes.count {
-            let moc = CoreDataStack.shared.mainContext
-            moc.performAndWait {
-                firestore.getNext { quotes, error in
-                    if let error = error {
-                        completion(nil, error)
-                    }
-                    
-                    guard let quotes = quotes else { return }
-                    completion(quotes,  nil)
+        let moc = CoreDataStack.shared.mainContext
+        moc.performAndWait {
+            firestore.getNext { quotes, error in
+                if let error = error {
+                    print(error)
+                    completion(nil)
                 }
+                
+                guard let quotes = quotes else { return }
+                completion(quotes)
             }
         }
     }

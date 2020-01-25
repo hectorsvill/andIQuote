@@ -83,7 +83,9 @@ extension QuoteCollectionViewController: UICollectionViewDelegateFlowLayout {
     override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let currentIndex = Int(targetContentOffset.pointee.x / view.frame.width)
         quoteController.setIndex(currentIndex)
-//        quoteController.getNextQuote()
+        
+        let numberOfItems = dataSource.snapshot().numberOfItems
+        print("\(currentIndex): dataSource.snapshot().numberOfItems", numberOfItems)
     }
     // MARK: minimumLineSpacingForSectionAt
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
