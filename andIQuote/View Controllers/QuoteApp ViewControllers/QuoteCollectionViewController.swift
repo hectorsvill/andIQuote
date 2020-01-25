@@ -86,18 +86,16 @@ extension QuoteCollectionViewController: UICollectionViewDelegateFlowLayout {
         quoteController.setIndex(currentIndex)
         
         let numberOfItems = dataSource.snapshot().numberOfItems
-        
+
         if currentIndex == numberOfItems - 1 {
             print("\(currentIndex): dataSource.snapshot().numberOfItems", numberOfItems)
-            quoteController.getNextQuote { quotes, error in
+            quoteController.getNextQuote { _ , error in
                 if let error = error {
                     NSLog("\(error)")
                 }
                 
-                guard let quotes = quotes else { return }
-                print(quotes.count)
+                self.createSnapShot()
             }
-            
         }
     }
     // MARK: minimumLineSpacingForSectionAt

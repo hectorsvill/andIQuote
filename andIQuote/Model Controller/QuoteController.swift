@@ -77,7 +77,6 @@ extension QuoteController {
                     completion(nil, error)
                 }
                 guard let quotes = quotes else { return }
-                
                 completion(quotes, nil)
             }
         }
