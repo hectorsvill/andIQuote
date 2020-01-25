@@ -113,21 +113,16 @@ extension QuoteController {
         }
     }
     // MARK: getNextQuote
-    func getNextQuote(completion: @escaping ([Quote]?) -> ()) {
-        let quotes = fetchResultController.fetchedObjects ?? []
-        _quoteIndex = _quoteIndex < quotes.count - 1 ? _quoteIndex + 1: _quoteIndex
-        
-        let moc = CoreDataStack.shared.mainContext
-        moc.performAndWait {
-            firestore.getNext { quotes, error in
-                if let error = error {
-                    print(error)
-                    completion(nil)
-                }
-                
+    func getNextQuote(completion: @escaping ([Quote]?, Error?) -> ()) {
+        firestore.getNext { quotes, error in
+            if let error = error {
+                completion(nil, error)
+            }else {
                 guard let quotes = quotes else { return }
-                completion(quotes)
+                completion(quotes, nil)
+                
             }
         }
+        
     }
 }

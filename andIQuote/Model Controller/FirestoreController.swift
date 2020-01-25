@@ -17,7 +17,11 @@ class FirestoreController {
     var quoteQuery: Query {
         db.collectionGroup("quotes")
     }
-
+    
+    init() {
+        getLastDocumentSnapShot()
+    }
+    
     // MARK: fetchQuotesFromFireStore
     func fetchFirstQuotes(limit: Int = 10, completion: @escaping ([QuoteDetail]?, Error?) -> ()) {
         quoteQuery.limit(to: limit).getDocuments { snapShot, error in
@@ -45,7 +49,7 @@ class FirestoreController {
             }
             
             guard let snapShot = snapShot else { return }
-            
+            self.lastQueryDocumentSnapshot = snapShot.documents.last!
             let quotes = self.fetchQuotesFromSnapShotSaveToCoreData(snapShot.documents)
             completion(quotes, nil)
             print("got netxt\n")
@@ -88,5 +92,21 @@ class FirestoreController {
             }
         }
         return []
+    }
+    
+    // MARK: getLastDocumentSnapShot
+    private func getLastDocumentSnapShot() {
+        Firestore.firestore().disableNetwork { error in
+            self.quoteQuery.limit(to: 10).getDocuments { snapShot, error in
+                if let error = error {
+                    print(error)
+                }
+                
+                guard let documents = snapShot?.documents else { return }
+                self.lastQueryDocumentSnapshot = documents.last!
+            }
+        }
+                
+        Firestore.firestore().enableNetwork()
     }
 }

@@ -6,6 +6,7 @@
 //  Copyright © 2019 Hector. All rights reserved.
 //
 
+import Firebase
 import UIKit
 
 typealias QuoteDataSource = UICollectionViewDiffableDataSource<QuoteCollectionViewController.Section, Quote>
@@ -85,7 +86,19 @@ extension QuoteCollectionViewController: UICollectionViewDelegateFlowLayout {
         quoteController.setIndex(currentIndex)
         
         let numberOfItems = dataSource.snapshot().numberOfItems
-        print("\(currentIndex): dataSource.snapshot().numberOfItems", numberOfItems)
+        
+        if currentIndex == numberOfItems - 1 {
+            print("\(currentIndex): dataSource.snapshot().numberOfItems", numberOfItems)
+            quoteController.getNextQuote { quotes, error in
+                if let error = error {
+                    NSLog("\(error)")
+                }
+                
+                guard let quotes = quotes else { return }
+                print(quotes.count)
+            }
+            
+        }
     }
     // MARK: minimumLineSpacingForSectionAt
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
