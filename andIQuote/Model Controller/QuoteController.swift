@@ -114,15 +114,38 @@ extension QuoteController {
     }
     // MARK: getNextQuote
     func getNextQuote(completion: @escaping ([Quote]?, Error?) -> ()) {
-        firestore.getNext { quotes, error in
+        
+        firestore.quoteQuery.start(afterDocument: firestore.lastQueryDocumentSnapshot!).limit(to: 10).getDocuments { snapShot, error in
             if let error = error {
                 completion(nil, error)
-            }else {
-                guard let quotes = quotes else { return }
-                completion(quotes, nil)
-                
             }
+            
+            guard let snapShot = snapShot else { return }
+            
+            var quotes = [Quote]()
+            for doc in snapShot.documents {
+                let doc  = doc.data() as [String: Any]
+                let quote = Quote(data: doc)
+                quotes.append(quote)
+            }
+            
+            do {
+                try CoreDataStack.shared.save()
+            } catch  {
+                NSLog("\(error)")
+            }
+            
+            completion(quotes, nil)
         }
         
+//        firestore.getNext { quotes, error in
+//            if let error = error {
+//                completion(nil, error)
+//            }else {
+//                guard let quotes = quotes else { return }
+//                completion(quotes, nil)
+//
+//            }
+//        }
     }
 }

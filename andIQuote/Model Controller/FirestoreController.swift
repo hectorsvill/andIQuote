@@ -40,9 +40,7 @@ class FirestoreController {
     
     // MARK: getNext(limit:,
     func getNext(limit: Int = 10, completion: @escaping ([Quote]?, Error?) -> ()) {
-        
         guard let lastDoc = lastQueryDocumentSnapshot else { return }
-        
         quoteQuery.start(atDocument: lastDoc).limit(to: limit).getDocuments { snapShot, error in
             if let error = error {
                 completion(nil, error)
@@ -57,7 +55,7 @@ class FirestoreController {
     }
     
     // MARK: fetchQuotesFromSnapShot
-    private func fetchQuotesFromSnapShot( _ documents: [QueryDocumentSnapshot]) -> [QuoteDetail] {
+    func fetchQuotesFromSnapShot( _ documents: [QueryDocumentSnapshot]) -> [QuoteDetail] {
         var quotes = [QuoteDetail]()
         
         for doc in documents {
@@ -103,7 +101,9 @@ class FirestoreController {
                 }
                 
                 guard let documents = snapShot?.documents else { return }
-                self.lastQueryDocumentSnapshot = documents.last!
+                if let last = documents.last {
+                    self.lastQueryDocumentSnapshot = last
+                }
             }
         }
                 

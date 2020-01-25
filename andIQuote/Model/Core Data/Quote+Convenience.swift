@@ -17,4 +17,11 @@ extension Quote {
         self.id = id
         self.like = like
     }
+    
+    convenience init(data: [String: Any], context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+        let id = data["id"] as! String
+        let body = data["body"] as! String
+        let author = data["author"] as! String
+        self.init(body: body, author: author, id: id, like: false)
+    }
 }
