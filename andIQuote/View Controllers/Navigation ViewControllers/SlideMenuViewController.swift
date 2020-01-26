@@ -26,7 +26,7 @@ class SlideMenuViewController: UIViewController {
     var dataSource: SlideMenuDataSouce!
     var collectionView: UICollectionView!
     var quoteController: QuoteController!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         createSlideMenuData()
@@ -34,21 +34,8 @@ class SlideMenuViewController: UIViewController {
         configureDataSouce()
     }
 }
-
-
-extension SlideMenuViewController: UICollectionViewDelegate {
-    enum MenuItems: Int {
-        case home, Favorites, Theme, Reminder, Create, IQuote, Search
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let row = indexPath.row
-        delegateSlideMenuEvents?.handleSlideMenuEvents(row)
-        delegateHomeControllerView?.handleMenuToggle()
-    }
-}
-
 extension SlideMenuViewController {
+    //MARK: createMainLayout
     private func createMainLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -58,17 +45,16 @@ extension SlideMenuViewController {
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
-    
+    // MARK: configureHierarchy
     private func configureHierarchy() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createMainLayout())
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//        collectionView.setBackground(to: quoteController.background)
         collectionView.backgroundColor = .systemGray6
         collectionView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.reuseIdentifier)
         view.addSubview((collectionView))
         collectionView.delegate = self
     }
-    
+    // MARK: configureDataSouce
     private func configureDataSouce() {
         dataSource = SlideMenuDataSouce(collectionView: collectionView, cellProvider: { collectionView, indexPath, slideMenuItem -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.reuseIdentifier, for: indexPath) as! MenuCollectionViewCell
@@ -80,5 +66,13 @@ extension SlideMenuViewController {
         snapShot.appendSections([.main])
         snapShot.appendItems(slideMenuItems)
         dataSource.apply(snapShot, animatingDifferences: false)
+    }
+}
+extension SlideMenuViewController: UICollectionViewDelegate {
+    // MARK: didSelectItemAt
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let row = indexPath.row
+        delegateSlideMenuEvents?.handleSlideMenuEvents(row)
+        delegateHomeControllerView?.handleMenuToggle()
     }
 }

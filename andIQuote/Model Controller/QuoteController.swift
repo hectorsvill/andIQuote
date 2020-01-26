@@ -34,6 +34,7 @@ extension QuoteController {
     var quoteForegroundColor: UIColor {
         background == "systemBackground" ? UIColor.label : UIColor.white
     }
+    // MARK: setIndex
     func setIndex(_ index: Int) {
         _quoteIndex = index
         UserDefaults().set(index, forKey: "QIndex")
@@ -54,7 +55,6 @@ extension QuoteController {
         
         return fetchResultController
     }
-    
 }
 // MARK: Networking
 extension QuoteController {
@@ -100,7 +100,6 @@ extension QuoteController {
     }
     // MARK: getNextQuote
     func getNextQuote(completion: @escaping ([Quote]?, Error?) -> ()) {
-        
         firestore.quoteQuery.start(afterDocument: firestore.lastQueryDocumentSnapshot!).limit(to: 10).getDocuments { snapShot, error in
             if let error = error {
                 completion(nil, error)
@@ -118,20 +117,10 @@ extension QuoteController {
             do {
                 try CoreDataStack.shared.save()
             } catch  {
-                NSLog("\(error)")
+                completion(nil, error)
             }
             
             completion(quotes, nil)
         }
-        
-//        firestore.getNext { quotes, error in
-//            if let error = error {
-//                completion(nil, error)
-//            }else {
-//                guard let quotes = quotes else { return }
-//                completion(quotes, nil)
-//
-//            }
-//        }
     }
 }

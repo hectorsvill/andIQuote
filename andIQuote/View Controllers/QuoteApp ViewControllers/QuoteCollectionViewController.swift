@@ -109,7 +109,7 @@ extension QuoteCollectionViewController {
         setupCollectionView()
         setupSwipeGestureRecognizer()
         
-        reviewButton = UIButton().sfImageButton(systemName: "text.bubble")
+        reviewButton = UIButton().sfImageButton(systemName: "bell")
         reviewButton.addTarget(self, action: #selector(reviewButtonTapped), for: .touchUpInside)
         lowerStackView.addArrangedSubview(reviewButton)
         
@@ -128,6 +128,7 @@ extension QuoteCollectionViewController {
         collectionView.isPagingEnabled = true
         collectionView.autoresizingMask = [.flexibleHeight, .flexibleHeight]
         collectionView.setBackground(to: quoteController.background)
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(QuoteCollectionViewCell.self, forCellWithReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier)
     }
     // MARK: setupSwipeGestureRecognizer

@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 class MainContainerViewController: UIViewController {
     var quoteController = QuoteController()
     var menuViewController: SlideMenuViewController!
@@ -20,14 +18,12 @@ class MainContainerViewController: UIViewController {
         super.viewDidLoad()
         configureHomeController()
     }
-    
     // MARK: createFlowLayout
     func createFlowLayout() -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
         return flowLayout
     }
-    
     // MARK: configureHomeController
     func configureHomeController() {
         let homeController = QuoteCollectionViewController(collectionViewLayout: createFlowLayout())
@@ -39,7 +35,6 @@ class MainContainerViewController: UIViewController {
         addChild(centerNavViewController)
         centerNavViewController.didMove(toParent: self)
     }
-    
     // MARK:configureSlideMenuViewController
     func configureSlideMenuViewController() {
         if menuViewController == nil {
@@ -51,7 +46,6 @@ class MainContainerViewController: UIViewController {
             menuViewController.didMove(toParent: self)
         }
     }
-    
     // MARK: showMenuController
     func showMenuController(shouldExpand: Bool) {
         if shouldExpand {
@@ -63,13 +57,10 @@ class MainContainerViewController: UIViewController {
                 self.centerNavViewController.view.frame.origin.x = 0
             }){ _ in
                 print("slide menu did end")
-                
-                
             }
         }
     }
 }
-
 // MARK: HomeControllerViewDelegate
 extension MainContainerViewController: HomeControllerViewDelegate {
     func handleMenuToggle() {
@@ -81,7 +72,6 @@ extension MainContainerViewController: HomeControllerViewDelegate {
         showMenuController(shouldExpand: quoteController.menuNavigationIsExpanded)
     }
 }
-
 // MARK: SlideMenuEventsDelegate
 extension MainContainerViewController: SlideMenuEventsDelegate {
     func handleSlideMenuEvents(_ index: Int) {

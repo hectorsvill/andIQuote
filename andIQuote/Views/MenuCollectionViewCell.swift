@@ -30,7 +30,7 @@ class MenuCollectionViewCell: UICollectionViewCell, SelfConfiguringCell {
     private func setupViews() {
         labelText.text = slideMenuItem?.displayText
         imageView.image = UIImage(systemName: slideMenuItem!.sfSymbol, withConfiguration: UIImage().mainViewSymbolConfig())
-        imageView.tintColor = .black
+        imageView.tintColor = .label
         addSubview(imageView)
         addSubview(labelText)
         
@@ -46,6 +46,3 @@ class MenuCollectionViewCell: UICollectionViewCell, SelfConfiguringCell {
         ])
     }
 }
-
-
-
