@@ -16,6 +16,7 @@
 		122F4B7D23D3EDC5004C2F34 /* MainContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122F4B7C23D3EDC5004C2F34 /* MainContainerViewController.swift */; };
 		122F4B8123D3EF36004C2F34 /* SlideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122F4B8023D3EF36004C2F34 /* SlideMenuViewController.swift */; };
 		122F4B8323D5320D004C2F34 /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122F4B8223D5320C004C2F34 /* MenuCollectionViewCell.swift */; };
+		12A76B5E23DD40B800026C28 /* DailyReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A76B5D23DD40B800026C28 /* DailyReminderViewController.swift */; };
 		12B3DAA623CAE18E00B6358E /* DatabaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B3DAA523CAE18E00B6358E /* DatabaseController.swift */; };
 		12D72AAC23CD41C4000BECDC /* Quote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AAA23CD41C4000BECDC /* Quote.xcdatamodeld */; };
 		12D72AAF23CD42F7000BECDC /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AAE23CD42F7000BECDC /* Quote.swift */; };
@@ -30,7 +31,6 @@
 		C43D445E23A4701C005B2458 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C43D445C23A4701C005B2458 /* LaunchScreen.storyboard */; };
 		C43D446723A47138005B2458 /* QuoteCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D446623A47138005B2458 /* QuoteCollectionViewController.swift */; };
 		C43D446D23A48677005B2458 /* QuoteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D446C23A48677005B2458 /* QuoteCollectionViewCell.swift */; };
-		C4E4617823B0683E003A98D1 /* QuoteReviewCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E4617723B0683E003A98D1 /* QuoteReviewCollectionViewController.swift */; };
 		C4F0E90E23AB3297005917A8 /* QuoteLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F0E90D23AB3297005917A8 /* QuoteLibrary.swift */; };
 		C4F0E91023AB330D005917A8 /* QuoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F0E90F23AB330D005917A8 /* QuoteController.swift */; };
 		C4FB3EFF23BAE4A70041B1BD /* ThemeSettingsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FB3EFE23BAE4A70041B1BD /* ThemeSettingsCollectionViewController.swift */; };
@@ -62,6 +62,7 @@
 		122F4B8023D3EF36004C2F34 /* SlideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideMenuViewController.swift; sourceTree = "<group>"; };
 		122F4B8223D5320C004C2F34 /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		1231707023D1402700EBF261 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		12A76B5D23DD40B800026C28 /* DailyReminderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyReminderViewController.swift; sourceTree = "<group>"; };
 		12B3DAA523CAE18E00B6358E /* DatabaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseController.swift; sourceTree = "<group>"; };
 		12D72AAB23CD41C4000BECDC /* Quote.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Quote.xcdatamodel; sourceTree = "<group>"; };
 		12D72AAE23CD42F7000BECDC /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
@@ -80,7 +81,6 @@
 		C43D445F23A4701C005B2458 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C43D446623A47138005B2458 /* QuoteCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteCollectionViewController.swift; sourceTree = "<group>"; };
 		C43D446C23A48677005B2458 /* QuoteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteCollectionViewCell.swift; sourceTree = "<group>"; };
-		C4E4617723B0683E003A98D1 /* QuoteReviewCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteReviewCollectionViewController.swift; sourceTree = "<group>"; };
 		C4F0E90D23AB3297005917A8 /* QuoteLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteLibrary.swift; sourceTree = "<group>"; };
 		C4F0E90F23AB330D005917A8 /* QuoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteController.swift; sourceTree = "<group>"; };
 		C4FB3EFE23BAE4A70041B1BD /* ThemeSettingsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSettingsCollectionViewController.swift; sourceTree = "<group>"; };
@@ -113,7 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				C43D446623A47138005B2458 /* QuoteCollectionViewController.swift */,
-				C4E4617723B0683E003A98D1 /* QuoteReviewCollectionViewController.swift */,
+				12A76B5D23DD40B800026C28 /* DailyReminderViewController.swift */,
 			);
 			path = "QuoteApp ViewControllers";
 			sourceTree = "<group>";
@@ -382,7 +382,6 @@
 				122C918623D775E7002045CE /* SelfConfiguringCell.swift in Sources */,
 				122C919B23D90FFD002045CE /* SlideMenuItem.swift in Sources */,
 				12D72AAC23CD41C4000BECDC /* Quote.xcdatamodeld in Sources */,
-				C4E4617823B0683E003A98D1 /* QuoteReviewCollectionViewController.swift in Sources */,
 				C43D446D23A48677005B2458 /* QuoteCollectionViewCell.swift in Sources */,
 				122F4B8323D5320D004C2F34 /* MenuCollectionViewCell.swift in Sources */,
 				C42EE0F923C285C50045DF02 /* QuoteUser.swift in Sources */,
@@ -396,6 +395,7 @@
 				122F4B7D23D3EDC5004C2F34 /* MainContainerViewController.swift in Sources */,
 				C43D445223A47018005B2458 /* AppDelegate.swift in Sources */,
 				0788B03A23C56820001D00E3 /* FirestoreController.swift in Sources */,
+				12A76B5E23DD40B800026C28 /* DailyReminderViewController.swift in Sources */,
 				C4F0E90E23AB3297005917A8 /* QuoteLibrary.swift in Sources */,
 				C42EE0F423BEC6230045DF02 /* BackgroundCell.swift in Sources */,
 				12B3DAA623CAE18E00B6358E /* DatabaseController.swift in Sources */,

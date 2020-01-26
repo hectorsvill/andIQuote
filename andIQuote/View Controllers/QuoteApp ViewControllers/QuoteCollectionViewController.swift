@@ -46,6 +46,11 @@ class QuoteCollectionViewController: UICollectionViewController {
         createSnapShot()
         loadLastIndex()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        print("viewWillAppear")
+    }
     // MARK: loadLastIndex
     private func loadLastIndex() {
         let index = IndexPath(item: quoteController._quoteIndex, section: 0)
@@ -110,7 +115,7 @@ extension QuoteCollectionViewController {
         setupSwipeGestureRecognizer()
         
         reviewButton = UIButton().sfImageButton(systemName: "bell")
-        reviewButton.addTarget(self, action: #selector(reviewButtonTapped), for: .touchUpInside)
+        reviewButton.addTarget(self, action: #selector(reminderButtonTapped), for: .touchUpInside)
         lowerStackView.addArrangedSubview(reviewButton)
         
         likeButton = UIButton().sfImageButton(systemName: "hand.thumbsup")
@@ -142,7 +147,7 @@ extension QuoteCollectionViewController {
         upSwipeGestureRecognizer.direction = .up
         collectionView.addGestureRecognizer(upSwipeGestureRecognizer)
         
-        downSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(reviewButtonTapped))
+        downSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(reminderButtonTapped))
         downSwipeGestureRecognizer.direction = .down
         collectionView.addGestureRecognizer(downSwipeGestureRecognizer)
         
@@ -177,8 +182,8 @@ extension QuoteCollectionViewController {
         if sender.direction == .up {
             shareButtonTapped()
         }else if sender.direction == .down {
-            reviewButtonTapped()
-        }else {
+            reminderButtonTapped()
+        }else if sender.direction == .left {
             handleSlideMenuToggle()
         }
     }
@@ -197,13 +202,13 @@ extension QuoteCollectionViewController {
         present(activityVC, animated: true)
         lowerStackView.isHidden = false
     }
-    // MARK: ReviewButtonTapped
-    @objc func reviewButtonTapped() {
+    // MARK: reminderButtonTapped
+    @objc func reminderButtonTapped() {
         impactGesture(style: .medium)
-        let layout = UICollectionViewFlowLayout()
-        let quoteReviewCollectionViewController = QuoteReviewCollectionViewController(collectionViewLayout: layout)
-        quoteReviewCollectionViewController.quoteController = quoteController
-        present(quoteReviewCollectionViewController, animated: true)
+        let dailyReminderVC = DailyReminderViewController()
+        dailyReminderVC.quoteController = quoteController
+        present(dailyReminderVC, animated: true)
+        
     }
     // MARK: likeButtonTapped
     @objc func likeButtonTapped(_ sender: UIButton) {

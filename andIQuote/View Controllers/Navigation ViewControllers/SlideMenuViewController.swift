@@ -73,6 +73,6 @@ extension SlideMenuViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let row = indexPath.row
         delegateSlideMenuEvents?.handleSlideMenuEvents(row)
-        delegateHomeControllerView?.handleMenuToggle()
+//        delegateHomeControllerView?.handleMenuToggle()
     }
 }
