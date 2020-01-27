@@ -18,6 +18,7 @@ class DailyReminderTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .label
+        label.font = UIFont.boldSystemFont(ofSize: 22)
         return label
     }()
     
@@ -26,6 +27,7 @@ class DailyReminderTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .label
         label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 22)
         return label
     }()
     
@@ -58,7 +60,7 @@ class DailyReminderTableViewCell: UITableViewCell {
         guard let reminderCell = reminderCell else { return }
         descriptionLabel.text = reminderCell.title
         steperDescriptionLabel.text = reminderCell.steperDescription
-        let stackViiew = UIStackView(arrangedSubviews: [descriptionLabel, plussButton,steperDescriptionLabel, minusButton])
+        let stackViiew = UIStackView(arrangedSubviews: [descriptionLabel, minusButton,steperDescriptionLabel, plussButton])
         stackViiew.translatesAutoresizingMaskIntoConstraints = false
         stackViiew.axis = .horizontal
         stackViiew.spacing = 8
@@ -78,7 +80,8 @@ extension DailyReminderViewController {
     func createReminderCellData() {
         _ = [ ReminderCell(title: "Reminders",  steperDescription: "1X"),
               ReminderCell(title: "Start Time", steperDescription: "06:00"),
-              ReminderCell(title: "End Time",   steperDescription: "10:00"),
+              ReminderCell(title: "End Time",   steperDescription: "22:00"),
+              ReminderCell(title: "Sound",   steperDescription: "1"),
             ].map { reminderCellData.append($0) }
     }
 }

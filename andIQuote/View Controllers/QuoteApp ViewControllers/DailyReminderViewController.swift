@@ -98,7 +98,15 @@ extension DailyReminderViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReminderCell", for: indexPath) as! DailyReminderTableViewCell
-        cell.reminderCell = reminderCellData[indexPath.row]
+        
+        if indexPath.section == 1 {
+            cell.reminderCell = reminderCellData[indexPath.row + 1]
+        } else if indexPath.section == 0{
+            cell.reminderCell = reminderCellData[indexPath.row]
+        } else if indexPath.section == 2 {
+            cell.reminderCell = reminderCellData[indexPath.row + 3]
+        }
+        
         return cell
     }
     
