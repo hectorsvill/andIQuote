@@ -51,35 +51,37 @@ class DailyReminderViewController: UIViewController {
     
     func setupLayouts() {
         titleLabel.text = "Daily Reminders"
-        let mainStackView = UIStackView(arrangedSubviews: [finishButton, titleLabel, descriptionLabel])
-        mainStackView.translatesAutoresizingMaskIntoConstraints = false
-        mainStackView.axis = .vertical
-        mainStackView.alignment = .top
-        mainStackView.spacing = 8
-
-        view.addSubview(mainStackView)
         
+        let splitView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 10))
+        splitView.backgroundColor = .systemGray
+        splitView.heightAnchor.constraint(equalToConstant: 10).isActive = true
+        splitView.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
         
         let remindersView = DailyReminderView()
         remindersView.deleagate = self
         remindersView.reminderCell = reminderCellData[0]
-        remindersView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        remindersView.heightAnchor.constraint(equalToConstant: 75).isActive = true
         remindersView.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
-        mainStackView.addArrangedSubview(remindersView)
-        
+
         let startView = DailyReminderView()
         startView.deleagate = self
         startView.reminderCell = reminderCellData[1]
-        startView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        startView.heightAnchor.constraint(equalToConstant: 75).isActive = true
         startView.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
-        mainStackView.addArrangedSubview(startView)
-    
+        
         let stopView = DailyReminderView()
         stopView.deleagate = self
         stopView.reminderCell = reminderCellData[2]
-        stopView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        stopView.heightAnchor.constraint(equalToConstant: 75).isActive = true
         stopView.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
-        mainStackView.addArrangedSubview(stopView)
+        
+        let mainStackView = UIStackView(arrangedSubviews: [finishButton, titleLabel, descriptionLabel, remindersView, splitView, startView, stopView])
+        mainStackView.translatesAutoresizingMaskIntoConstraints = false
+        mainStackView.axis = .vertical
+        mainStackView.alignment = .top
+        mainStackView.spacing = 8
+        
+        view.addSubview(mainStackView)
         
         NSLayoutConstraint.activate([
             finishButton.widthAnchor.constraint(equalToConstant: 60),
