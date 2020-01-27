@@ -55,6 +55,7 @@ class DailyReminderView: UIView {
         
         descriptionLabel.text = reminderCell.title
         steperDescriptionLabel.text = reminderCell.steperDescription
+        steperDescriptionLabel.widthAnchor.constraint(equalToConstant: 80).isActive = true
         
         stackView = UIStackView(arrangedSubviews: [descriptionLabel, minusButton,steperDescriptionLabel, plussButton])
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -85,7 +86,11 @@ class DailyReminderView: UIView {
                     reminderCell.value -= 1
                     steperDescriptionLabel.text = "\(reminderCell.value)X"
                 }
-            } else if descriptionLabel.text == "Start Time" {
+            } else if descriptionLabel.text == "Start Time" || descriptionLabel.text == "End Time" {
+                if reminderCell.value >= 1 {
+                    reminderCell.value -= 1
+                    steperDescriptionLabel.text = "\(reminderCell.value):00"
+                }
 
             } else if descriptionLabel.text ==  "End Time" {
 
@@ -95,6 +100,11 @@ class DailyReminderView: UIView {
                 if reminderCell.value <= 4 {
                     reminderCell.value += 1
                     steperDescriptionLabel.text = "\(reminderCell.value)X"
+                }
+            } else if descriptionLabel.text == "Start Time" || descriptionLabel.text == "End Time" {
+                if reminderCell.value <= 23 {
+                    reminderCell.value += 1
+                    steperDescriptionLabel.text = "\(reminderCell.value):00"
                 }
             }
         }
@@ -111,7 +121,7 @@ protocol ReminderCellButtonPressedDelegate {
 extension DailyReminderViewController {
     func createReminderCellData() {
         _ = [ ReminderCell(title: "Reminders",  steperDescription: "0X", value: 0),
-              ReminderCell(title: "Start Time", steperDescription: "06:00", value: 6),
+              ReminderCell(title: "Start Time", steperDescription: "6:00", value: 6),
               ReminderCell(title: "End Time",   steperDescription: "22:00", value: 22),
               ReminderCell(title: "Sound",   steperDescription: "1", value: 1),
             ].map { reminderCellData.append($0) }
