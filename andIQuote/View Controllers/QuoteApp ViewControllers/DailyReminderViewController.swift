@@ -50,16 +50,6 @@ class DailyReminderViewController: UIViewController {
     
     
     func setupLayouts() {
-        tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.dataSource = self
-        tableView.backgroundColor = .systemGray6
-        tableView.register(DailyReminderTableViewCell.self, forCellReuseIdentifier: "ReminderCell")
-        tableView.rowHeight = view.bounds.height / 9
-        tableView.isScrollEnabled = false
-        tableView.isUserInteractionEnabled = false
-        view.addSubview(tableView)
-        
         titleLabel.text = "Daily Reminders"
         let mainStackView = UIStackView(arrangedSubviews: [finishButton, titleLabel, descriptionLabel])
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -68,16 +58,19 @@ class DailyReminderViewController: UIViewController {
         mainStackView.spacing = 8
 
         view.addSubview(mainStackView)
+        
+        
+        let r1 = DailyReminderView()
+        r1.reminderCell = reminderCellData[0]
+        r1.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        r1.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
+        mainStackView.addArrangedSubview(r1)
     
         NSLayoutConstraint.activate([
             finishButton.widthAnchor.constraint(equalToConstant: 60),
             mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
             mainStackView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 8),
             mainStackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -8),
-            tableView.topAnchor.constraint(equalTo: mainStackView.bottomAnchor, constant: 8),
-            tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 8),
-            tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -8),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: (view.frame.height / 5) * -1),
         ])
     }
     
@@ -86,40 +79,10 @@ class DailyReminderViewController: UIViewController {
     }
 }
 
-extension DailyReminderViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        } else if section == 1 {
-            return 2
-        }
-        return 1
+extension DailyReminderViewController: ReminderCellButtonPressedDelegate {
+    func plusminusbuttonPressed(reminderCell: ReminderCell, tag: Int) {
+        print(tag)
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ReminderCell", for: indexPath) as! DailyReminderTableViewCell
-        
-        if indexPath.section == 1 {
-            cell.reminderCell = reminderCellData[indexPath.row + 1]
-        } else if indexPath.section == 0{
-            cell.reminderCell = reminderCellData[indexPath.row]
-        } else if indexPath.section == 2 {
-            cell.reminderCell = reminderCellData[indexPath.row + 3]
-        }
-        
-        return cell
-    }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return ""
-        }
-        return " "
-    }
 }
-
-

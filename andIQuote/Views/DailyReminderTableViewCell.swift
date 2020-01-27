@@ -8,7 +8,10 @@
 
 import UIKit
 
-class DailyReminderTableViewCell: UITableViewCell {
+
+class DailyReminderView: UIView {
+    var stackView: UIStackView!
+    var deleagate: ReminderCellButtonPressedDelegate?
     
     var reminderCell: ReminderCell? {
         didSet { setupViews() }
@@ -36,7 +39,6 @@ class DailyReminderTableViewCell: UITableViewCell {
         button.tintColor = .label
         button.tag = 1
         return button
-        
     }()
     
     var plussButton: UIButton = {
@@ -50,15 +52,19 @@ class DailyReminderTableViewCell: UITableViewCell {
     private func setupViews() {
         backgroundColor = .systemGray6
         guard let reminderCell = reminderCell else { return }
+        
         descriptionLabel.text = reminderCell.title
         steperDescriptionLabel.text = reminderCell.steperDescription
-        let stackView = UIStackView(arrangedSubviews: [descriptionLabel, minusButton,steperDescriptionLabel, plussButton])
+        
+        stackView = UIStackView(arrangedSubviews: [descriptionLabel, minusButton,steperDescriptionLabel, plussButton])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
         stackView.spacing = 8
-        addSubview(stackView)
-        minusButton.addTarget(self, action: #selector(plusminusbuttonPressed(_:)), for: .allEvents)
+        
+        minusButton.addTarget(self, action: #selector(plusminusbuttonPressed(_:)), for: .touchUpInside)
         plussButton.addTarget(self, action: #selector(plusminusbuttonPressed(_:)), for: .touchUpInside)
+        
+        addSubview(stackView)
         
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -70,8 +76,8 @@ class DailyReminderTableViewCell: UITableViewCell {
     }
     
     @objc func plusminusbuttonPressed(_ sender: UIButton) {
-        
         guard let reminderCell = reminderCell else { return }
+        deleagate?.plusminusbuttonPressed(reminderCell: reminderCell, tag: sender.tag)
         
         if sender.tag == 1 {
             if descriptionLabel.text == "Reminders" {
@@ -80,9 +86,9 @@ class DailyReminderTableViewCell: UITableViewCell {
                     steperDescriptionLabel.text = "\(reminderCell.value)X"
                 }
             } else if descriptionLabel.text == "Start Time" {
-                
+
             } else if descriptionLabel.text ==  "End Time" {
-                
+
             }
         } else {
             if descriptionLabel.text == "Reminders" {
@@ -93,6 +99,13 @@ class DailyReminderTableViewCell: UITableViewCell {
             }
         }
     }
+}
+
+
+// MARK: CLEAN THIS !!!!!!!!!!!!
+
+protocol ReminderCellButtonPressedDelegate {
+    func plusminusbuttonPressed(reminderCell: ReminderCell, tag: Int)
 }
 
 extension DailyReminderViewController {
