@@ -14,8 +14,6 @@ typealias SlideSourceSnapShot = NSDiffableDataSourceSnapshot<SlideMenuViewContro
 extension SlideMenuViewController {
     enum Section {
         case main
-        case header
-        case footer
     }
 }
 

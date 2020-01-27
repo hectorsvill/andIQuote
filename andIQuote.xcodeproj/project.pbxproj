@@ -17,6 +17,7 @@
 		122F4B8123D3EF36004C2F34 /* SlideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122F4B8023D3EF36004C2F34 /* SlideMenuViewController.swift */; };
 		122F4B8323D5320D004C2F34 /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122F4B8223D5320C004C2F34 /* MenuCollectionViewCell.swift */; };
 		12A76B5E23DD40B800026C28 /* DailyReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A76B5D23DD40B800026C28 /* DailyReminderViewController.swift */; };
+		12A76B6023DD4A9500026C28 /* NSAttributeString+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A76B5F23DD4A9500026C28 /* NSAttributeString+Strings.swift */; };
 		12B3DAA623CAE18E00B6358E /* DatabaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B3DAA523CAE18E00B6358E /* DatabaseController.swift */; };
 		12D72AAC23CD41C4000BECDC /* Quote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AAA23CD41C4000BECDC /* Quote.xcdatamodeld */; };
 		12D72AAF23CD42F7000BECDC /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AAE23CD42F7000BECDC /* Quote.swift */; };
@@ -63,6 +64,7 @@
 		122F4B8223D5320C004C2F34 /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		1231707023D1402700EBF261 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		12A76B5D23DD40B800026C28 /* DailyReminderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyReminderViewController.swift; sourceTree = "<group>"; };
+		12A76B5F23DD4A9500026C28 /* NSAttributeString+Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributeString+Strings.swift"; sourceTree = "<group>"; };
 		12B3DAA523CAE18E00B6358E /* DatabaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseController.swift; sourceTree = "<group>"; };
 		12D72AAB23CD41C4000BECDC /* Quote.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Quote.xcdatamodel; sourceTree = "<group>"; };
 		12D72AAE23CD42F7000BECDC /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				C4FB3F0023BBA8300041B1BD /* UIButton+SimpleButton.swift */,
 				C4FB3F0423BBC37C0041B1BD /* UIImage+mainViewSymbolConfig.swift */,
 				C42EE0FA23C2E1D00045DF02 /* UIView+Extensions.swift */,
+				12A76B5F23DD4A9500026C28 /* NSAttributeString+Strings.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 				0788B03A23C56820001D00E3 /* FirestoreController.swift in Sources */,
 				12A76B5E23DD40B800026C28 /* DailyReminderViewController.swift in Sources */,
 				C4F0E90E23AB3297005917A8 /* QuoteLibrary.swift in Sources */,
+				12A76B6023DD4A9500026C28 /* NSAttributeString+Strings.swift in Sources */,
 				C42EE0F423BEC6230045DF02 /* BackgroundCell.swift in Sources */,
 				12B3DAA623CAE18E00B6358E /* DatabaseController.swift in Sources */,
 				C43D445423A47018005B2458 /* SceneDelegate.swift in Sources */,
