@@ -10,10 +10,6 @@ import UIKit
 
 extension NSAttributedString {
     func andiquoteString() -> NSAttributedString {
-        let attributes = [
-            NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 16),
-            NSAttributedString.Key.foregroundColor: UIColor.label,
-        ]
         
         let attributes2 = [
             NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20),

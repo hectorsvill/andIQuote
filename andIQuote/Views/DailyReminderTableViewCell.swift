@@ -54,22 +54,29 @@ class DailyReminderTableViewCell: UITableViewCell {
         descriptionLabel.text = reminderCell.title
         steperDescriptionLabel.text = reminderCell.steperDescription
         let stackViiew = UIStackView(arrangedSubviews: [descriptionLabel, plussButton,steperDescriptionLabel, minusButton])
+        stackViiew.translatesAutoresizingMaskIntoConstraints = false
         stackViiew.axis = .horizontal
         stackViiew.spacing = 8
         addSubview(stackViiew)
-        
         
         NSLayoutConstraint.activate([
             stackViiew.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             stackViiew.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             stackViiew.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor),
             stackViiew.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor),
-        
         ])
         
     }
 }
 
+extension DailyReminderViewController {
+    func createReminderCellData() {
+        _ = [ ReminderCell(title: "Reminders", steperDescription: "1X"),
+              ReminderCell(title: "Start Time", steperDescription: " 1:00"),
+              ReminderCell(title: "End Time", steperDescription: " 1:00"),
+            ].map { reminderCellData.append($0) }
+    }
+}
 
 
 struct ReminderCell {

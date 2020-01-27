@@ -10,7 +10,7 @@ import EventKit
 import UIKit
 
 class DailyReminderViewController: UIViewController {
-    
+    var reminderCellData = [ReminderCell]()
     var quoteController: QuoteController!
     var tableView: UITableView!
     
@@ -44,6 +44,7 @@ class DailyReminderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGray6
+        createReminderCellData()
         setupLayouts()
     }
     
@@ -53,7 +54,7 @@ class DailyReminderViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
         tableView.backgroundColor = .systemGray6
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ReminderCell")
+        tableView.register(DailyReminderTableViewCell.self, forCellReuseIdentifier: "ReminderCell")
         tableView.rowHeight = view.bounds.height / 9
         tableView.isScrollEnabled = false
         tableView.isUserInteractionEnabled = false
@@ -88,14 +89,14 @@ class DailyReminderViewController: UIViewController {
 extension DailyReminderViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 3
+            return reminderCellData.count
         }
         return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReminderCell", for: indexPath) as? DailyReminderTableViewCell else { return UITableViewCell() }
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ReminderCell", for: indexPath) as! DailyReminderTableViewCell
+        cell.reminderCell = reminderCellData[indexPath.row]
         return cell
     }
     
@@ -104,9 +105,6 @@ extension DailyReminderViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return " "
-        }
         return " "
     }
 }
