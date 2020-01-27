@@ -12,6 +12,7 @@ import UIKit
 class DailyReminderViewController: UIViewController {
     
     var quoteController: QuoteController!
+    var tableView: UITableView!
     
     var finishButton: UIButton = {
         let button = UIButton()
@@ -44,6 +45,9 @@ class DailyReminderViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemGray6
         setupLayouts()
+        
+        
+        
     }
     
     func creatreSteper(title: String, steperDescription: String) -> UIStackView {
@@ -71,19 +75,25 @@ class DailyReminderViewController: UIViewController {
         minusButton.tintColor = .label
         minusButton.addTarget(self, action: #selector(minusButtonPressed), for: .touchUpInside)
         
-        
         let stackViiew = UIStackView(arrangedSubviews: [descriptionLabel, plussButton,steperDescriptionLabel, minusButton])
         stackViiew.axis = .horizontal
-        
+        stackViiew.heightAnchor.constraint(equalToConstant: 100).isActive = false
         return stackViiew
     }
     
     func setupLayouts() {
+        tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.dataSource = self
+        tableView.backgroundColor = .systemGray6
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ReminderCell")
+        tableView.rowHeight = view.bounds.height / 9
+        tableView.isScrollEnabled = false
+        tableView.isUserInteractionEnabled = false
+        view.addSubview(tableView)
+        
         titleLabel.text = "Daily Reminders"
-        
-        let numberOfReminder = creatreSteper(title: "Reminders", steperDescription: "0")
-        
-        let mainStackView = UIStackView(arrangedSubviews: [finishButton, titleLabel, descriptionLabel, numberOfReminder])
+        let mainStackView = UIStackView(arrangedSubviews: [finishButton, titleLabel, descriptionLabel])
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         mainStackView.axis = .vertical
         mainStackView.alignment = .top
@@ -96,6 +106,10 @@ class DailyReminderViewController: UIViewController {
             mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
             mainStackView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 8),
             mainStackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -8),
+            tableView.topAnchor.constraint(equalTo: mainStackView.bottomAnchor, constant: 8),
+            tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 8),
+            tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -8),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: (view.frame.height / 5) * -1),
         ])
     }
     
@@ -110,4 +124,24 @@ class DailyReminderViewController: UIViewController {
     @objc func minusButtonPressed() {
         
     }
+}
+
+extension DailyReminderViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ReminderCell", for: indexPath)
+        
+        if indexPath.row % 2 == 0 {
+            cell.textLabel?.text = "\(indexPath)"
+        }
+        
+        
+        cell.backgroundColor = .systemGray6
+        
+        return cell
+    }
+    
 }
