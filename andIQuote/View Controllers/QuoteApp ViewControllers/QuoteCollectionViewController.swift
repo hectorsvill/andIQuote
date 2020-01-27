@@ -93,7 +93,6 @@ extension QuoteCollectionViewController: UICollectionViewDelegateFlowLayout {
         let numberOfItems = dataSource.snapshot().numberOfItems
 
         if currentIndex == numberOfItems - 1 {
-            print("\(currentIndex): dataSource.snapshot().numberOfItems", numberOfItems)
             quoteController.getNextQuote { _ , error in
                 if let error = error {
                     NSLog("\(error)")
