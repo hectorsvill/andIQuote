@@ -25,24 +25,29 @@ class DailyReminderTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .label
+        label.textAlignment = .center
         return label
     }()
     
     var plussButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        let plussIMage = UIImage(systemName: "plus.square")
+        let plussIMage = UIImage(systemName: "plus.square", withConfiguration: UIImage().mainViewSymbolConfig())
         button.setImage(plussIMage, for: .normal)
         button.tintColor = .label
+//        button.widthAnchor.constraint(equalToConstant: 20).isActive = true
+//        button.heightAnchor.constraint(equalToConstant: 20).isActive = true
         return button
     }()
     
     var minusButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        let plussIMage = UIImage(systemName: "minus.square")
+        let plussIMage = UIImage(systemName: "minus.square", withConfiguration: UIImage().mainViewSymbolConfig())
         button.setImage(plussIMage, for: .normal)
         button.tintColor = .label
+//        button.widthAnchor.constraint(equalToConstant: 20).isActive = true
+//        button.heightAnchor.constraint(equalToConstant: 20).isActive = true
         return button
     
     }()
@@ -71,13 +76,12 @@ class DailyReminderTableViewCell: UITableViewCell {
 
 extension DailyReminderViewController {
     func createReminderCellData() {
-        _ = [ ReminderCell(title: "Reminders", steperDescription: "1X"),
-              ReminderCell(title: "Start Time", steperDescription: " 1:00"),
-              ReminderCell(title: "End Time", steperDescription: " 1:00"),
+        _ = [ ReminderCell(title: "Reminders",  steperDescription: "1X"),
+              ReminderCell(title: "Start Time", steperDescription: "06:00"),
+              ReminderCell(title: "End Time",   steperDescription: "10:00"),
             ].map { reminderCellData.append($0) }
     }
 }
-
 
 struct ReminderCell {
     let title: String

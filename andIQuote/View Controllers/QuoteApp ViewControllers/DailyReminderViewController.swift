@@ -89,7 +89,9 @@ class DailyReminderViewController: UIViewController {
 extension DailyReminderViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return reminderCellData.count
+            return 1
+        } else if section == 1 {
+            return 2
         }
         return 1
     }
@@ -101,10 +103,13 @@ extension DailyReminderViewController: UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return ""
+        }
         return " "
     }
 }
