@@ -48,47 +48,37 @@ class DailyReminderViewController: UIViewController {
         setupLayouts()
     }
     
+    private func createSplitView() -> UIView{
+        let splitView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 10))
+        splitView.backgroundColor = .systemGray4
+        splitView.heightAnchor.constraint(equalToConstant: 10).isActive = true
+        splitView.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
+        splitView.layer.cornerRadius = 5
+        return splitView
+    }
+    
+    private func createReminderView(_ reminderCellData: ReminderCell) -> UIView {
+        let dailyReminderView = DailyReminderView()
+        dailyReminderView.deleagate = self
+        dailyReminderView.reminderCell = reminderCellData
+        dailyReminderView.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        dailyReminderView.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
+        return dailyReminderView
+    }
     
     func setupLayouts() {
         titleLabel.text = "Daily Reminders"
         
-        let splitView1 = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 10))
-        splitView1.backgroundColor = .systemGray4
-        splitView1.heightAnchor.constraint(equalToConstant: 10).isActive = true
-        splitView1.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
-        splitView1.layer.cornerRadius = 5
+        let splitView1 = createSplitView()
+        let splitView2 = createSplitView()
         
-        let splitView2 = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 10))
-        splitView2.backgroundColor = .systemGray4
-        splitView2.heightAnchor.constraint(equalToConstant: 10).isActive = true
-        splitView2.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
-        splitView2.layer.cornerRadius = 5
+        let remindersView = createReminderView(reminderCellData[0])
+        let startView = createReminderView(reminderCellData[1])
+        let stopView = createReminderView(reminderCellData[2])
+        let typeView = createReminderView(reminderCellData[3])
+        let views = [finishButton, titleLabel, descriptionLabel, remindersView, splitView1, startView, stopView, splitView2, typeView]
         
-        let remindersView = DailyReminderView()
-        remindersView.deleagate = self
-        remindersView.reminderCell = reminderCellData[0]
-        remindersView.heightAnchor.constraint(equalToConstant: 75).isActive = true
-        remindersView.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
-
-        let startView = DailyReminderView()
-        startView.deleagate = self
-        startView.reminderCell = reminderCellData[1]
-        startView.heightAnchor.constraint(equalToConstant: 75).isActive = true
-        startView.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
-        
-        let stopView = DailyReminderView()
-        stopView.deleagate = self
-        stopView.reminderCell = reminderCellData[2]
-        stopView.heightAnchor.constraint(equalToConstant: 75).isActive = true
-        stopView.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
-        
-        let typeView = DailyReminderView()
-        typeView.deleagate = self
-        typeView.reminderCell = reminderCellData[3]
-        typeView.heightAnchor.constraint(equalToConstant: 75).isActive = true
-        typeView.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
-        
-        let mainStackView = UIStackView(arrangedSubviews: [finishButton, titleLabel, descriptionLabel, remindersView, splitView1, startView, stopView, splitView2, typeView])
+        let mainStackView = UIStackView(arrangedSubviews: views)
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         mainStackView.axis = .vertical
         mainStackView.alignment = .top
