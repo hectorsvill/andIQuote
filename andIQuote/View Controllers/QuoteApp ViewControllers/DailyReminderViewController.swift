@@ -45,41 +45,8 @@ class DailyReminderViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemGray6
         setupLayouts()
-        
-        
-        
     }
     
-    func creatreSteper(title: String, steperDescription: String) -> UIStackView {
-        let descriptionLabel = UILabel()
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        descriptionLabel.textColor = .label
-        descriptionLabel.text = title
-        
-        let steperDescriptionLabel = UILabel()
-        steperDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        steperDescriptionLabel.textColor = .label
-        steperDescriptionLabel.text = steperDescription
-        
-        let plussButton = UIButton()
-        plussButton.translatesAutoresizingMaskIntoConstraints = false
-        let plussIMage = UIImage(systemName: "plus.square")
-        plussButton.setImage(plussIMage, for: .normal)
-        plussButton.tintColor = .label
-        plussButton.addTarget(self, action: #selector(plusButtonPressed), for: .touchUpInside)
-        
-        let minusButton = UIButton()
-        minusButton.translatesAutoresizingMaskIntoConstraints = false
-        let minusImage = UIImage(systemName: "minus.square")
-        minusButton.setImage(minusImage, for: .normal)
-        minusButton.tintColor = .label
-        minusButton.addTarget(self, action: #selector(minusButtonPressed), for: .touchUpInside)
-        
-        let stackViiew = UIStackView(arrangedSubviews: [descriptionLabel, plussButton,steperDescriptionLabel, minusButton])
-        stackViiew.axis = .horizontal
-        stackViiew.heightAnchor.constraint(equalToConstant: 100).isActive = false
-        return stackViiew
-    }
     
     func setupLayouts() {
         tableView = UITableView()
@@ -116,32 +83,32 @@ class DailyReminderViewController: UIViewController {
     @objc func finishButtonPressed() {
         dismiss(animated: true)
     }
-    
-    @objc func plusButtonPressed() {
-        
-    }
-    
-    @objc func minusButtonPressed() {
-        
-    }
 }
 
 extension DailyReminderViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        if section == 0 {
+            return 3
+        }
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ReminderCell", for: indexPath)
-        
-        if indexPath.row % 2 == 0 {
-            cell.textLabel?.text = "\(indexPath)"
-        }
-        
-        
-        cell.backgroundColor = .systemGray6
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReminderCell", for: indexPath) as? DailyReminderTableViewCell else { return UITableViewCell() }
         
         return cell
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return " "
+        }
+        return " "
+    }
 }
+
+
