@@ -112,19 +112,3 @@ class DailyReminderView: UIView {
 }
 
 
-// MARK: CLEAN THIS !!!!!!!!!!!!
-
-protocol ReminderCellButtonPressedDelegate {
-    func plusminusbuttonPressed(reminderCell: ReminderViewData, tag: Int)
-}
-
-extension DailyReminderViewController {
-    func createReminderCellData() {
-        _ = [ ReminderViewData(title: "Reminders",  steperDescription: "0X", value: 0),
-              ReminderViewData(title: "Start Time", steperDescription: "6:00", value: 6),
-              ReminderViewData(title: "End Time",   steperDescription: "22:00", value: 22),
-              ReminderViewData(title: "Sound",   steperDescription: "1", value: 1),
-            ].map { reminderViewData.append($0) }
-    }
-}
-
