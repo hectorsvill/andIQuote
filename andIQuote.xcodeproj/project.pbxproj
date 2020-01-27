@@ -17,6 +17,7 @@
 		122F4B7D23D3EDC5004C2F34 /* MainContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122F4B7C23D3EDC5004C2F34 /* MainContainerViewController.swift */; };
 		122F4B8123D3EF36004C2F34 /* SlideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122F4B8023D3EF36004C2F34 /* SlideMenuViewController.swift */; };
 		122F4B8323D5320D004C2F34 /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122F4B8223D5320C004C2F34 /* MenuCollectionViewCell.swift */; };
+		124EAFBC23DF956700047558 /* ReminderViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124EAFBB23DF956700047558 /* ReminderViewData.swift */; };
 		12A76B5E23DD40B800026C28 /* DailyReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A76B5D23DD40B800026C28 /* DailyReminderViewController.swift */; };
 		12A76B6023DD4A9500026C28 /* NSAttributeString+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A76B5F23DD4A9500026C28 /* NSAttributeString+Strings.swift */; };
 		12B3DAA623CAE18E00B6358E /* DatabaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B3DAA523CAE18E00B6358E /* DatabaseController.swift */; };
@@ -65,6 +66,7 @@
 		122F4B8023D3EF36004C2F34 /* SlideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideMenuViewController.swift; sourceTree = "<group>"; };
 		122F4B8223D5320C004C2F34 /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		1231707023D1402700EBF261 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		124EAFBB23DF956700047558 /* ReminderViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderViewData.swift; sourceTree = "<group>"; };
 		12A76B5D23DD40B800026C28 /* DailyReminderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyReminderViewController.swift; sourceTree = "<group>"; };
 		12A76B5F23DD4A9500026C28 /* NSAttributeString+Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributeString+Strings.swift"; sourceTree = "<group>"; };
 		12B3DAA523CAE18E00B6358E /* DatabaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseController.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				C4F0E90D23AB3297005917A8 /* QuoteLibrary.swift */,
 				12D72AAD23CD42C8000BECDC /* Core Data */,
 				C42EE0F823C285C50045DF02 /* QuoteUser.swift */,
+				124EAFBB23DF956700047558 /* ReminderViewData.swift */,
 				122C919A23D90FFD002045CE /* SlideMenuItem.swift */,
 			);
 			path = Model;
@@ -390,6 +393,7 @@
 				12D72AAC23CD41C4000BECDC /* Quote.xcdatamodeld in Sources */,
 				C43D446D23A48677005B2458 /* QuoteCollectionViewCell.swift in Sources */,
 				122F4B8323D5320D004C2F34 /* MenuCollectionViewCell.swift in Sources */,
+				124EAFBC23DF956700047558 /* ReminderViewData.swift in Sources */,
 				C42EE0F923C285C50045DF02 /* QuoteUser.swift in Sources */,
 				C42EE0FB23C2E1D00045DF02 /* UIView+Extensions.swift in Sources */,
 				C4FB3F0123BBA8300041B1BD /* UIButton+SimpleButton.swift in Sources */,

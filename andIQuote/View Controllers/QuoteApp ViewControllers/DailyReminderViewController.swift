@@ -10,7 +10,7 @@ import EventKit
 import UIKit
 
 class DailyReminderViewController: UIViewController {
-    var reminderCellData = [ReminderCell]()
+    var reminderViewData = [ReminderViewData]()
     var quoteController: QuoteController!
     var tableView: UITableView!
     
@@ -57,7 +57,7 @@ class DailyReminderViewController: UIViewController {
         return splitView
     }
     
-    private func createReminderView(_ reminderCellData: ReminderCell) -> UIView {
+    private func createReminderView(_ reminderCellData: ReminderViewData) -> UIView {
         let dailyReminderView = DailyReminderView()
         dailyReminderView.deleagate = self
         dailyReminderView.reminderCell = reminderCellData
@@ -72,10 +72,10 @@ class DailyReminderViewController: UIViewController {
         let splitView1 = createSplitView()
         let splitView2 = createSplitView()
         
-        let remindersView = createReminderView(reminderCellData[0])
-        let startView = createReminderView(reminderCellData[1])
-        let stopView = createReminderView(reminderCellData[2])
-        let typeView = createReminderView(reminderCellData[3])
+        let remindersView = createReminderView(reminderViewData[0])
+        let startView = createReminderView(reminderViewData[1])
+        let stopView = createReminderView(reminderViewData[2])
+        let typeView = createReminderView(reminderViewData[3])
         let views = [finishButton, titleLabel, descriptionLabel, remindersView, splitView1, startView, stopView, splitView2, typeView]
         
         let mainStackView = UIStackView(arrangedSubviews: views)
@@ -101,7 +101,7 @@ class DailyReminderViewController: UIViewController {
 }
 
 extension DailyReminderViewController: ReminderCellButtonPressedDelegate {
-    func plusminusbuttonPressed(reminderCell: ReminderCell, tag: Int) {
+    func plusminusbuttonPressed(reminderCell: ReminderViewData, tag: Int) {
         print(tag)
     }
     
