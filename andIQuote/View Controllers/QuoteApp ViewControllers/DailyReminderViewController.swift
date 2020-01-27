@@ -60,17 +60,33 @@ class DailyReminderViewController: UIViewController {
         view.addSubview(mainStackView)
         
         
-        let r1 = DailyReminderView()
-        r1.reminderCell = reminderCellData[0]
-        r1.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        r1.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
-        mainStackView.addArrangedSubview(r1)
+        let remindersView = DailyReminderView()
+        remindersView.deleagate = self
+        remindersView.reminderCell = reminderCellData[0]
+        remindersView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        remindersView.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
+        mainStackView.addArrangedSubview(remindersView)
+        
+        let startView = DailyReminderView()
+        startView.deleagate = self
+        startView.reminderCell = reminderCellData[1]
+        startView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        startView.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
+        mainStackView.addArrangedSubview(startView)
     
+        let stopView = DailyReminderView()
+        stopView.deleagate = self
+        stopView.reminderCell = reminderCellData[2]
+        stopView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        stopView.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
+        mainStackView.addArrangedSubview(stopView)
+        
         NSLayoutConstraint.activate([
             finishButton.widthAnchor.constraint(equalToConstant: 60),
             mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
             mainStackView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 8),
             mainStackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -8),
+
         ])
     }
     
