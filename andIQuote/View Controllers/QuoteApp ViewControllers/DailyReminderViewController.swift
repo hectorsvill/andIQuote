@@ -52,10 +52,17 @@ class DailyReminderViewController: UIViewController {
     func setupLayouts() {
         titleLabel.text = "Daily Reminders"
         
-        let splitView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 10))
-        splitView.backgroundColor = .systemGray
-        splitView.heightAnchor.constraint(equalToConstant: 10).isActive = true
-        splitView.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
+        let splitView1 = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 10))
+        splitView1.backgroundColor = .systemGray4
+        splitView1.heightAnchor.constraint(equalToConstant: 10).isActive = true
+        splitView1.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
+        splitView1.layer.cornerRadius = 5
+        
+        let splitView2 = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 10))
+        splitView2.backgroundColor = .systemGray4
+        splitView2.heightAnchor.constraint(equalToConstant: 10).isActive = true
+        splitView2.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
+        splitView2.layer.cornerRadius = 5
         
         let remindersView = DailyReminderView()
         remindersView.deleagate = self
@@ -75,7 +82,13 @@ class DailyReminderViewController: UIViewController {
         stopView.heightAnchor.constraint(equalToConstant: 75).isActive = true
         stopView.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
         
-        let mainStackView = UIStackView(arrangedSubviews: [finishButton, titleLabel, descriptionLabel, remindersView, splitView, startView, stopView])
+        let typeView = DailyReminderView()
+        typeView.deleagate = self
+        typeView.reminderCell = reminderCellData[3]
+        typeView.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        typeView.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
+        
+        let mainStackView = UIStackView(arrangedSubviews: [finishButton, titleLabel, descriptionLabel, remindersView, splitView1, startView, stopView, splitView2, typeView])
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         mainStackView.axis = .vertical
         mainStackView.alignment = .top
@@ -88,7 +101,7 @@ class DailyReminderViewController: UIViewController {
             mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
             mainStackView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 8),
             mainStackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -8),
-
+            
         ])
     }
     
