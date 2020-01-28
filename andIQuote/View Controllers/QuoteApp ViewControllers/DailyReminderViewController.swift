@@ -14,6 +14,7 @@ class DailyReminderViewController: UIViewController {
     var quoteController: QuoteController!
     var reminderNotificationData: [String: Int] = [:]
     let userNotificationCenter = UNUserNotificationCenter.current()
+    let _dailyReminderKey = "DailyReminderViewController.reminderNotificationData"
     // MARK : finishButton
     var finishButton: UIButton = {
         let button = UIButton()
@@ -73,6 +74,7 @@ class DailyReminderViewController: UIViewController {
         let notificationContent = UNMutableNotificationContent()
         notificationContent.title = "test"
         notificationContent.body = "Test body"
+        notificationContent.sound = .default
         notificationContent.badge = NSNumber(value: 1)
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
