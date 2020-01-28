@@ -13,6 +13,7 @@ class DailyReminderViewController: UIViewController {
     var reminderViewData = [ReminderViewData]()
     var quoteController: QuoteController!
     var reminderNotificationData: [String: Int] = [:]
+    let userNotificationCenter = UNUserNotificationCenter.current()
     // MARK : finishButton
     var finishButton: UIButton = {
         let button = UIButton()
@@ -46,18 +47,42 @@ class DailyReminderViewController: UIViewController {
         view.backgroundColor = .systemGray6
         createReminderViewlData()
         setupLayouts()
+        requestNotificationAuthorization()
     }
     // MARK:viewWillDisappear
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        print("viewWillDisappear - DailyReminderViewController")
         if reminderNotificationData[reminderViewData[0].title]! > 0 {
-            
+            sendNotification()
         } else {
             print("reminders set to 0")
         }
     }
+    // MARK: requestNotificationAuthorization
+    private func requestNotificationAuthorization() {
+        let options = UNAuthorizationOptions.init(arrayLiteral: .alert, .badge, .sound)
+        userNotificationCenter.requestAuthorization(options: options) { bool, error in
+            if let error = error {
+                NSLog("\(error)")
+            }
+        }
+    }
+    // MARK: sendNotification
+    private func sendNotification() {
+        let notificationContent = UNMutableNotificationContent()
+        notificationContent.title = "test"
+        notificationContent.body = "Test body"
+        notificationContent.badge = NSNumber(value: 1)
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+        let request = UNNotificationRequest(identifier: "testthisnotification", content: notificationContent, trigger: trigger)
+        userNotificationCenter.add(request) { error in
+            if let error = error {
+                NSLog("\(error)")
+            }
+        }
+     }
     // MARK: createSplitView
     private func createSplitView() -> UIView{
         let splitView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 10))
@@ -71,7 +96,7 @@ class DailyReminderViewController: UIViewController {
     private func createReminderView(_ reminderCellData: ReminderViewData) -> UIView {
         let dailyReminderView = DailyReminderView()
         dailyReminderView.deleagate = self
-        dailyReminderView.reminderCell = reminderCellData
+        dailyReminderView.reminderViewData = reminderCellData
         dailyReminderView.heightAnchor.constraint(equalToConstant: 75).isActive = true
         dailyReminderView.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
         return dailyReminderView
@@ -111,7 +136,8 @@ class DailyReminderViewController: UIViewController {
 }
 // MARK: ReminderCellButtonPressedDelegate
 extension DailyReminderViewController: ReminderCellButtonPressedDelegate {
-    func plusminusbuttonPressed(reminderCell: ReminderViewData, tag: Int) {
-        print(tag)
+    func plusminusbuttonPressed(reminderViewData: ReminderViewData, tag: Int) {
+        reminderNotificationData[reminderViewData.title] = reminderViewData.value
+        print("\(reminderViewData.title) - \(reminderViewData.value) - \(tag)")
     }
 }

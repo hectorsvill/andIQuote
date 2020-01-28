@@ -9,5 +9,5 @@
 import Foundation
 
 protocol ReminderCellButtonPressedDelegate {
-    func plusminusbuttonPressed(reminderCell: ReminderViewData, tag: Int)
+    func plusminusbuttonPressed(reminderViewData: ReminderViewData, tag: Int)
 }

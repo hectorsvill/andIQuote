@@ -7,13 +7,12 @@
 //
 
 import UIKit
-import UserNotifications
 
 class DailyReminderView: UIView {
     var stackView: UIStackView!
     var deleagate: ReminderCellButtonPressedDelegate?
     
-    var reminderCell: ReminderViewData? {
+    var reminderViewData: ReminderViewData? {
         didSet { setupViews() }
     }
 
@@ -37,7 +36,7 @@ class DailyReminderView: UIView {
     var minusButton: UIButton = {
         let button = UIButton().sfImageButton(systemName: "minus.square")
         button.tintColor = .label
-        button.tag = 1
+        button.tag = 0
         return button
     }()
     
@@ -45,13 +44,13 @@ class DailyReminderView: UIView {
         let button = UIButton().sfImageButton(systemName: "plus.square")
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .label
-        button.tag = 2
+        button.tag = 1
         return button
     }()
     
     private func setupViews() {
         backgroundColor = .systemGray6
-        guard let reminderCell = reminderCell else { return }
+        guard let reminderCell = reminderViewData else { return }
         
         descriptionLabel.text = reminderCell.title
         steperDescriptionLabel.text = reminderCell.steperDescription
@@ -77,10 +76,9 @@ class DailyReminderView: UIView {
     }
     
     @objc func plusminusbuttonPressed(_ sender: UIButton) {
-        guard let reminderCell = reminderCell else { return }
-        deleagate?.plusminusbuttonPressed(reminderCell: reminderCell, tag: sender.tag)
+        guard let reminderCell = reminderViewData else { return }
         
-        if sender.tag == 1 {
+        if sender.tag == 0 {
             if descriptionLabel.text == "Reminders" {
                 if reminderCell.value >= 1 {
                     reminderCell.value -= 1
@@ -108,6 +106,8 @@ class DailyReminderView: UIView {
                 }
             }
         }
+        
+        deleagate?.plusminusbuttonPressed(reminderViewData: reminderCell, tag: sender.tag)
     }
 }
 
