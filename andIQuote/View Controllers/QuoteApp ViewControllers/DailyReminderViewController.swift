@@ -52,7 +52,11 @@ class DailyReminderViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         print("viewWillDisappear - DailyReminderViewController")
-        
+        if reminderNotificationData[reminderViewData[0].title]! > 0 {
+            
+        } else {
+            print("reminders set to 0")
+        }
     }
     // MARK: createSplitView
     private func createSplitView() -> UIView{

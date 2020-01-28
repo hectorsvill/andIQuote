@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import UserNotifications
 
 class DailyReminderView: UIView {
     var stackView: UIStackView!
