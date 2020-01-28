@@ -12,8 +12,8 @@ import UIKit
 class DailyReminderViewController: UIViewController {
     var reminderViewData = [ReminderViewData]()
     var quoteController: QuoteController!
-    var tableView: UITableView!
-    
+    var reminderNotificationData: [String: Int] = [:]
+    // MARK : finishButton
     var finishButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -22,7 +22,7 @@ class DailyReminderViewController: UIViewController {
         button.addTarget(self, action: #selector(finishButtonPressed), for: .touchUpInside)
         return button
     }()
-    
+    // MARK: titleLabel
     var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -30,7 +30,7 @@ class DailyReminderViewController: UIViewController {
         label.font = UIFont.boldSystemFont(ofSize: 28)
         return label
     }()
-    
+    // MARK: descriptionLabel
     var descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -40,14 +40,21 @@ class DailyReminderViewController: UIViewController {
         label.text = "SETTING DAILY REMINDERS WILL HElP YOU STAY MINDFUL SO YOU MAY REMAIN CONSCIOUS AND AWARE."
         return label
     }()
-    
+    // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGray6
-        createReminderCellData()
+        createReminderViewlData()
         setupLayouts()
     }
-    
+    // MARK:viewWillDisappear
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        print("viewWillDisappear - DailyReminderViewController")
+        
+    }
+    // MARK: createSplitView
     private func createSplitView() -> UIView{
         let splitView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 10))
         splitView.backgroundColor = .systemGray4
@@ -56,7 +63,7 @@ class DailyReminderViewController: UIViewController {
         splitView.layer.cornerRadius = 5
         return splitView
     }
-    
+    // MARK: createReminderView
     private func createReminderView(_ reminderCellData: ReminderViewData) -> UIView {
         let dailyReminderView = DailyReminderView()
         dailyReminderView.deleagate = self
@@ -65,7 +72,7 @@ class DailyReminderViewController: UIViewController {
         dailyReminderView.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
         return dailyReminderView
     }
-    
+    // MARK: setupLayouts
     func setupLayouts() {
         titleLabel.text = "Daily Reminders"
         
@@ -91,19 +98,16 @@ class DailyReminderViewController: UIViewController {
             mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
             mainStackView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 8),
             mainStackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -8),
-            
         ])
     }
-    
+    // MARK: finishButtonPressed
     @objc func finishButtonPressed() {
         dismiss(animated: true)
     }
 }
-
+// MARK: ReminderCellButtonPressedDelegate
 extension DailyReminderViewController: ReminderCellButtonPressedDelegate {
     func plusminusbuttonPressed(reminderCell: ReminderViewData, tag: Int) {
         print(tag)
     }
-    
-    
 }
