@@ -53,16 +53,18 @@ class DailyReminderViewController: UIViewController {
     // MARK:viewWillDisappear
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+
         if reminderNotificationData[reminderViewData[0].title]! > 0 {
             sendNotification()
         } else {
-            print("reminders set to 0")
+            // remove notifications
+            userNotificationCenter.removeAllDeliveredNotifications()
+            userNotificationCenter.removeAllPendingNotificationRequests()
         }
     }
     // MARK: requestNotificationAuthorization
     private func requestNotificationAuthorization() {
-        let options = UNAuthorizationOptions.init(arrayLiteral: .alert, .badge, .sound)
+        let options = UNAuthorizationOptions.init(arrayLiteral: .alert, .sound)
         userNotificationCenter.requestAuthorization(options: options) { bool, error in
             if let error = error {
                 NSLog("\(error)")
@@ -75,9 +77,8 @@ class DailyReminderViewController: UIViewController {
         notificationContent.title = "test"
         notificationContent.body = "Test body"
         notificationContent.sound = .default
-        notificationContent.badge = NSNumber(value: 1)
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 100, repeats: false)
         let request = UNNotificationRequest(identifier: "testthisnotification", content: notificationContent, trigger: trigger)
         userNotificationCenter.add(request) { error in
             if let error = error {
@@ -140,6 +141,6 @@ class DailyReminderViewController: UIViewController {
 extension DailyReminderViewController: ReminderCellButtonPressedDelegate {
     func plusminusbuttonPressed(reminderViewData: ReminderViewData, tag: Int) {
         reminderNotificationData[reminderViewData.title] = reminderViewData.value
-        print("\(reminderViewData.title) - \(reminderViewData.value) - \(tag)")
+        UserDefaults.standard.set(reminderNotificationData[reminderViewData.title], forKey: _dailyReminderKey + reminderViewData.title)
     }
 }

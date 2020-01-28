@@ -15,6 +15,7 @@ class DailyReminderView: UIView {
     var reminderViewData: ReminderViewData? {
         didSet { setupViews() }
     }
+    
     // MARK: descriptionLabel
     var descriptionLabel: UILabel = {
         let label = UILabel()
@@ -47,7 +48,7 @@ class DailyReminderView: UIView {
         button.tag = 1
         return button
     }()
-    // MAKR: setupViews
+    // MARK: setupViews
     private func setupViews() {
         backgroundColor = .systemGray6
         guard let reminderCell = reminderViewData else { return }
@@ -73,28 +74,26 @@ class DailyReminderView: UIView {
             stackView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor),
         ])
     }
-    
+    // MARK: setupSteperDescriptionText
     private func setupSteperDescriptionText() {
         guard let reminderViewData = reminderViewData else { return }
-        if reminderViewData.title == "Reminders" {
+        if reminderViewData.title == "Reminders" || reminderViewData.title == "Sound" {
              steperDescriptionLabel.text = "\(reminderViewData.value)X"
         } else if descriptionLabel.text == "Start Time" || descriptionLabel.text == "End Time"  {
              steperDescriptionLabel.text = "\(reminderViewData.value):00"
         }
         
     }
-    
     // MARK: plusminusbuttonPressed
     @objc func plusminusbuttonPressed(_ sender: UIButton) {
         guard let reminderViewData = reminderViewData else { return }
         
-        if descriptionLabel.text == "Reminders" {
-            if reminderViewData.value >= 1 && reminderViewData.value <= 4 || reminderViewData.value == 0 && sender.tag == 1 || reminderViewData.value == 5 && sender.tag == 0{
+        if reminderViewData.title == "Reminders" || reminderViewData.title == "Sound" {
+            if reminderViewData.value >= 1 && reminderViewData.value <= 4 || reminderViewData.value == 0 && sender.tag == 1 || reminderViewData.value == 5 && sender.tag == 0 {
                 reminderViewData.value = sender.tag == 0 ?  reminderViewData.value - 1 : reminderViewData.value + 1
                 setupSteperDescriptionText()
-                
             }
-        } else if descriptionLabel.text == "Start Time" || descriptionLabel.text == "End Time" {
+        } else if reminderViewData.title == "Start Time" || reminderViewData.title == "End Time" {
             if reminderViewData.value >= 1 && reminderViewData.value <= 23 ||  reminderViewData.value == 0 && sender.tag == 1 || reminderViewData.value == 24 && sender.tag == 0 {
                 reminderViewData.value = sender.tag == 0 ?  reminderViewData.value - 1 : reminderViewData.value + 1
                 setupSteperDescriptionText()

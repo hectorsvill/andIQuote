@@ -20,19 +20,19 @@ class ReminderViewData {
 
 extension DailyReminderViewController {
     func createReminderViewlData() {
+        let defaults = UserDefaults.standard
         
-        _ = [ ReminderViewData(title: "Reminders", value: 0),
-              ReminderViewData(title: "Start Time", value: 6),
-              ReminderViewData(title: "End Time", value: 22),
-              ReminderViewData(title: "Sound", value: 1),
+        let reminderValue = defaults.integer(forKey: _dailyReminderKey + "Reminders")
+        let startTimeValue = defaults.integer(forKey: _dailyReminderKey + "Start Time")
+        let endTimeValue = defaults.integer(forKey: _dailyReminderKey + "End Time")
+        let soundValue = defaults.integer(forKey: _dailyReminderKey + "Sound")
+        
+        _ = [ ReminderViewData(title: "Reminders", value: reminderValue),
+              ReminderViewData(title: "Start Time", value: startTimeValue == 0 ? 6 : startTimeValue),
+              ReminderViewData(title: "End Time", value: endTimeValue == 0 ? 22 : endTimeValue),
+              ReminderViewData(title: "Sound", value: soundValue),
             ].map { reminderViewData.append($0) }
         
-        if let dict = UserDefaults().dictionary(forKey: _dailyReminderKey) {
-            reminderNotificationData = dict as! [String: Int]
-        } else {
-            _ = reminderViewData.map {
-                reminderNotificationData[$0.title] = $0.value
-            }
-        }
+        _ = reminderViewData.map { reminderNotificationData[$0.title] = $0.value }
     }
 }
