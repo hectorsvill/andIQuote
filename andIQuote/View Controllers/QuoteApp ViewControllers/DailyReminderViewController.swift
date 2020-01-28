@@ -73,16 +73,47 @@ class DailyReminderViewController: UIViewController {
     }
     // MARK: sendNotification
     private func sendNotification() {
-        let notificationContent = UNMutableNotificationContent()
-        notificationContent.title = "test"
-        notificationContent.body = "Test body"
-        notificationContent.sound = .default
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 100, repeats: false)
-        let request = UNNotificationRequest(identifier: "testthisnotification", content: notificationContent, trigger: trigger)
-        userNotificationCenter.add(request) { error in
+        
+        quoteController.fetchQuotesFromCoreData { quotes, error in
             if let error = error {
                 NSLog("\(error)")
+            }
+            
+            guard let quotes = quotes, let randomQuote = quotes.randomElement() else { return }
+            
+            let notificationContent = UNMutableNotificationContent()
+            notificationContent.title = randomQuote.author!
+            notificationContent.body = randomQuote.body!
+            
+            if self.reminderNotificationData["Sound"]! == 1 {
+                notificationContent.sound = .default
+            }
+            
+            switch self.reminderNotificationData["Sound"]! {
+            case 1:
+                notificationContent.sound = .defaultCriticalSound(withAudioVolume: 0.2)
+            case 2:
+                notificationContent.sound = .defaultCriticalSound(withAudioVolume: 0.4)
+            case 3:
+                notificationContent.sound = .defaultCriticalSound(withAudioVolume: 0.6)
+            case 4:
+                notificationContent.sound = .defaultCriticalSound(withAudioVolume: 0.8)
+            case 5:
+                notificationContent.sound = .defaultCriticalSound(withAudioVolume: 1.0)
+            default:
+                notificationContent.sound = .none
+            }
+            
+            notificationContent.title = randomQuote.author!
+            notificationContent.body = randomQuote.body!
+            
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+            let request = UNNotificationRequest(identifier: randomQuote.id!, content: notificationContent, trigger: trigger)
+            self.userNotificationCenter.add(request) { error in
+                if let error = error {
+                    NSLog("\(error)")
+                }
             }
         }
      }
