@@ -19,6 +19,7 @@
 		122F4B8323D5320D004C2F34 /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122F4B8223D5320C004C2F34 /* MenuCollectionViewCell.swift */; };
 		124EAFBC23DF956700047558 /* ReminderViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124EAFBB23DF956700047558 /* ReminderViewData.swift */; };
 		124EAFBE23DF95CF00047558 /* ReminderCellButtonPressedDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124EAFBD23DF95CF00047558 /* ReminderCellButtonPressedDelegate.swift */; };
+		12525E3923E2488B0010A663 /* QuoteCollectionViewController+Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12525E3823E2488B0010A663 /* QuoteCollectionViewController+Gestures.swift */; };
 		12A76B5E23DD40B800026C28 /* DailyReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A76B5D23DD40B800026C28 /* DailyReminderViewController.swift */; };
 		12A76B6023DD4A9500026C28 /* NSAttributeString+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A76B5F23DD4A9500026C28 /* NSAttributeString+Strings.swift */; };
 		12D72AAC23CD41C4000BECDC /* Quote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AAA23CD41C4000BECDC /* Quote.xcdatamodeld */; };
@@ -68,6 +69,7 @@
 		1231707023D1402700EBF261 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		124EAFBB23DF956700047558 /* ReminderViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderViewData.swift; sourceTree = "<group>"; };
 		124EAFBD23DF95CF00047558 /* ReminderCellButtonPressedDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderCellButtonPressedDelegate.swift; sourceTree = "<group>"; };
+		12525E3823E2488B0010A663 /* QuoteCollectionViewController+Gestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuoteCollectionViewController+Gestures.swift"; sourceTree = "<group>"; };
 		12A76B5D23DD40B800026C28 /* DailyReminderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyReminderViewController.swift; sourceTree = "<group>"; };
 		12A76B5F23DD4A9500026C28 /* NSAttributeString+Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributeString+Strings.swift"; sourceTree = "<group>"; };
 		12D72AAB23CD41C4000BECDC /* Quote.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Quote.xcdatamodel; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				C43D446623A47138005B2458 /* QuoteCollectionViewController.swift */,
+				12525E3823E2488B0010A663 /* QuoteCollectionViewController+Gestures.swift */,
 				12A76B5D23DD40B800026C28 /* DailyReminderViewController.swift */,
 			);
 			path = "QuoteApp ViewControllers";
@@ -391,6 +394,7 @@
 				C43D446723A47138005B2458 /* QuoteCollectionViewController.swift in Sources */,
 				122C918623D775E7002045CE /* SelfConfiguringCell.swift in Sources */,
 				122C919B23D90FFD002045CE /* SlideMenuItem.swift in Sources */,
+				12525E3923E2488B0010A663 /* QuoteCollectionViewController+Gestures.swift in Sources */,
 				12D72AAC23CD41C4000BECDC /* Quote.xcdatamodeld in Sources */,
 				C43D446D23A48677005B2458 /* QuoteCollectionViewCell.swift in Sources */,
 				122F4B8323D5320D004C2F34 /* MenuCollectionViewCell.swift in Sources */,
@@ -557,6 +561,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hectorstevenvillasano.andIQuote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -577,6 +582,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hectorstevenvillasano.andIQuote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

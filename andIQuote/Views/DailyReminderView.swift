@@ -92,16 +92,15 @@ class DailyReminderView: UIView {
             if reminderViewData.value >= 1 && reminderViewData.value <= 4 || reminderViewData.value == 0 && sender.tag == 1 || reminderViewData.value == 5 && sender.tag == 0 {
                 reminderViewData.value = sender.tag == 0 ?  reminderViewData.value - 1 : reminderViewData.value + 1
                 setupSteperDescriptionText()
+                deleagate?.plusminusbuttonPressed(reminderViewData: reminderViewData, tag: sender.tag)
             }
         } else if reminderViewData.title == "Start Time" || reminderViewData.title == "End Time" {
             if reminderViewData.value >= 1 && reminderViewData.value <= 23 ||  reminderViewData.value == 0 && sender.tag == 1 || reminderViewData.value == 24 && sender.tag == 0 {
                 reminderViewData.value = sender.tag == 0 ?  reminderViewData.value - 1 : reminderViewData.value + 1
                 setupSteperDescriptionText()
+                deleagate?.plusminusbuttonPressed(reminderViewData: reminderViewData, tag: sender.tag)
             }
-            
         }
-
-        deleagate?.plusminusbuttonPressed(reminderViewData: reminderViewData, tag: sender.tag)
     }
 }
 

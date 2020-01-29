@@ -19,17 +19,19 @@ extension QuoteCollectionViewController {
 }
 
 class QuoteCollectionViewController: UICollectionViewController {
-    lazy var activityIndicator = UIActivityIndicatorView()
+    var activityIndicator = UIActivityIndicatorView()
     var delegate: HomeControllerViewDelegate?
     var quoteController: QuoteController!
     var dataSource: QuoteDataSource!
     var shareButton: UIButton!
     var leftSwipeGestureRecognizer: UISwipeGestureRecognizer!
+    var rightSwipeGestureRecognizer: UISwipeGestureRecognizer!
     var upSwipeGestureRecognizer: UISwipeGestureRecognizer!
     var downSwipeGestureRecognizer: UISwipeGestureRecognizer!
     var doubleTapSwipeGestureRecognizer: UITapGestureRecognizer!
     var reviewButton: UIButton!
     var likeButton: UIButton!
+    var themeButton: UIButton!
     // MARK: lowerStackView
     var lowerStackView: UIStackView = {
         let stackView = UIStackView()
@@ -66,7 +68,7 @@ class QuoteCollectionViewController: UICollectionViewController {
             (collectionView, indexPath, quote) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier, for: indexPath) as! QuoteCollectionViewCell
             cell.quote = quote
-            cell.setBackground(to: self.quoteController.background)
+            cell.backgroundColor = .clear
             return cell
         }
     }
@@ -77,10 +79,12 @@ class QuoteCollectionViewController: UICollectionViewController {
                 NSLog("\(error)")
             }
             var snapShot = QuoteSourceSnapShot()
-            snapShot.appendSections([.main])
-            snapShot.appendItems(quotes ?? [])
-            self.dataSource.apply(snapShot, animatingDifferences: false)
-            self.activityIndicator.stopAnimating()
+            DispatchQueue.main.async {
+                snapShot.appendSections([.main])
+                snapShot.appendItems(quotes ?? [])
+                self.dataSource.apply(snapShot, animatingDifferences: false)
+                self.activityIndicator.stopAnimating()
+            }
         }
     }
 }
@@ -122,9 +126,16 @@ extension QuoteCollectionViewController {
         reviewButton.addTarget(self, action: #selector(reminderButtonTapped), for: .touchUpInside)
         lowerStackView.addArrangedSubview(reviewButton)
         
-        likeButton = UIButton().sfImageButton(systemName: "hand.thumbsup")
-        likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
+//        likeButton = UIButton().sfImageButton(systemName: "hand.thumbsup")
+//        likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
 //        lowerStackView.addArrangedSubview(likeButton)
+//        collectionView.addSubview(lowerStackView)
+        
+                
+
+        themeButton = UIButton().sfImageButton(systemName: "paintbrush")
+        themeButton.addTarget(self, action: #selector(themeButtonTapped), for: .touchUpInside)
+        lowerStackView.addArrangedSubview(themeButton)
         collectionView.addSubview(lowerStackView)
         
         NSLayoutConstraint.activate([
@@ -140,25 +151,7 @@ extension QuoteCollectionViewController {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(QuoteCollectionViewCell.self, forCellWithReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier)
     }
-    // MARK: setupSwipeGestureRecognizer
-    private func setupSwipeGestureRecognizer() {
-        leftSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeAction(_:)))
-        leftSwipeGestureRecognizer.isEnabled = false
-        leftSwipeGestureRecognizer.direction = .left
-        collectionView.addGestureRecognizer(leftSwipeGestureRecognizer)
-        
-        upSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(shareButtonTapped))
-        upSwipeGestureRecognizer.direction = .up
-        collectionView.addGestureRecognizer(upSwipeGestureRecognizer)
-        
-        downSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(reminderButtonTapped))
-        downSwipeGestureRecognizer.direction = .down
-        collectionView.addGestureRecognizer(downSwipeGestureRecognizer)
-        
-        doubleTapSwipeGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(likeButtonTapped(_:)))
-        doubleTapSwipeGestureRecognizer.numberOfTapsRequired = 2
-        collectionView.addGestureRecognizer(doubleTapSwipeGestureRecognizer)
-    }
+
     // MARK: setupNavButtons
     private func setupNavButtons() {
         navigationController?.navigationBar.barTintColor = collectionView.backgroundColor
@@ -173,7 +166,7 @@ extension QuoteCollectionViewController {
         navigationItem.rightBarButtonItem?.tintColor = .label
     }
     // MARK: handleSlideMenuToggle
-    private func handleSlideMenuToggle() {
+    func handleSlideMenuToggle() {
         delegate?.handleMenuToggle()
         collectionView.isScrollEnabled.toggle()
         leftSwipeGestureRecognizer.isEnabled.toggle()
@@ -181,21 +174,22 @@ extension QuoteCollectionViewController {
         downSwipeGestureRecognizer.isEnabled.toggle()
         doubleTapSwipeGestureRecognizer.isEnabled.toggle()
     }
-    // MARK: handleSwipeAction
-    @objc private func handleSwipeAction(_ sender: UISwipeGestureRecognizer) {
-        if sender.direction == .up {
-            shareButtonTapped()
-        }else if sender.direction == .down {
-            reminderButtonTapped()
-        }else if sender.direction == .left {
-            handleSlideMenuToggle()
-        }
-    }
     // MARK: slideMenuButtonTapped
     @objc func slideMenuButtonTapped() {
         guard !quoteController.quoteThemeIsActive else { return }
         impactGesture(style: .rigid)
         handleSlideMenuToggle()
+    }
+    // MARK: themebutton tapped
+    @objc func themeButtonTapped(_ sender: UIButton) {
+        impactGesture(style: .medium)
+        quoteController.quoteThemeIsActive.toggle()
+        collectionView.isScrollEnabled.toggle()
+        leftSwipeGestureRecognizer.isEnabled.toggle()
+        rightSwipeGestureRecognizer.isEnabled.toggle()
+        let brush = quoteController.quoteThemeIsActive ? "paintbrush.fill" : "paintbrush"
+        let image = UIImage(systemName: brush, withConfiguration: UIImage().mainViewSymbolConfig())
+        themeButton.setImage(image, for: .normal)
     }
     // MARK: shareButtonTapped
     @objc func shareButtonTapped() {
@@ -214,13 +208,17 @@ extension QuoteCollectionViewController {
         present(dailyReminderVC, animated: true)
         
     }
-    // MARK: likeButtonTapped
-    @objc func likeButtonTapped(_ sender: UIButton) {
-        print("like")
-    }
+//    // MARK: likeButtonTapped
+//    @objc func likeButtonTapped(_ sender: UIButton) {
+//        print("like")
+//    }
+
     // MARK: Impact Gesture
     func impactGesture(style: UIImpactFeedbackGenerator.FeedbackStyle = .light) {
         let impactFeedback = UIImpactFeedbackGenerator(style: style)
         impactFeedback.impactOccurred()
     }
 }
+
+// MARK: Theme
+

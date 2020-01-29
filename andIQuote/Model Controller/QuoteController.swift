@@ -15,8 +15,8 @@ class QuoteController {
     var menuNavigationIsExpanded = false // menu navigations state
     let backgrounds = ["systemBackground", "green", "blue", "gray", "pink", "red", "teal", "indigo", "orange", "yellow", "purple",]
     let firestore = FirestoreController()
-    private (set) var _quoteIndex = UserDefaults().integer(forKey: "QIndex") // current index of quote
-    private (set) var _backgroundIndex = UserDefaults().integer(forKey: "BgIndex") // current index of background
+    private (set) var _quoteIndex = UserDefaults.standard.integer(forKey: "QIndex") // current index of quote
+    var _backgroundIndex = UserDefaults.standard.integer(forKey: "BgIndex") // current index of background
     private (set) var quoteUser: QuoteUser?
 
     init() {
@@ -30,6 +30,12 @@ extension QuoteController {
     var background: String {
         backgrounds[_backgroundIndex]
     }
+    // MARK: setBackgroundIndex
+    func setBackgroundIndex(_ add: Int) {
+        let newValue = _backgroundIndex + add
+        _backgroundIndex =  newValue > -1 && newValue < backgrounds.count ? newValue : _backgroundIndex
+        UserDefaults.standard.set(_backgroundIndex, forKey: "BgIndex")
+    }
     // MARK: quoteForegroundColor
     var quoteForegroundColor: UIColor {
         background == "systemBackground" ? UIColor.label : UIColor.white
@@ -37,7 +43,7 @@ extension QuoteController {
     // MARK: setIndex
     func setIndex(_ index: Int) {
         _quoteIndex = index
-        UserDefaults().set(index, forKey: "QIndex")
+        UserDefaults.standard.set(index, forKey: "QIndex")
     }
     // MARK: attributedString
     func attributedString(_ quote: Quote) -> NSMutableAttributedString {

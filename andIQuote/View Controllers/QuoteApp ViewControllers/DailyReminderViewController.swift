@@ -191,8 +191,14 @@ class DailyReminderViewController: UIViewController {
 }
 // MARK: ReminderCellButtonPressedDelegate
 extension DailyReminderViewController: ReminderCellButtonPressedDelegate {
+    private func impactGesture(style: UIImpactFeedbackGenerator.FeedbackStyle = .light) {
+        let impactFeedback = UIImpactFeedbackGenerator(style: style)
+        impactFeedback.impactOccurred()
+    }
+    
     func plusminusbuttonPressed(reminderViewData: ReminderViewData, tag: Int) {
         reminderNotificationData[reminderViewData.title] = reminderViewData.value
         UserDefaults.standard.set(reminderNotificationData[reminderViewData.title], forKey: _dailyReminderKey + reminderViewData.title)
+        impactGesture(style: .rigid)
     }
 }
