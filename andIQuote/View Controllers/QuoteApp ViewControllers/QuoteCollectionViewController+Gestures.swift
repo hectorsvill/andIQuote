@@ -48,14 +48,15 @@ extension QuoteCollectionViewController {
                 quoteController.setBackgroundIndex(1)
                 collectionView.setBackground(to: quoteController.background)
                 navigationController?.navigationBar.barTintColor = collectionView.backgroundColor
-
+                impactGesture(style: .rigid)
             } else {
                 handleSlideMenuToggle()
             }
         }else if sender.direction == .right {
             quoteController.setBackgroundIndex(-1)
             collectionView.setBackground(to: quoteController.background)
-
+            navigationController?.navigationBar.barTintColor = collectionView.backgroundColor
+            impactGesture(style: .rigid)
         }
     }
 
