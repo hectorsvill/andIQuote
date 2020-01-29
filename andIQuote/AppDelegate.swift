@@ -51,6 +51,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {}
+    
+    private func application(_ application: UIApplication, didReceive notification: UNUserNotificationCenter) {
+        UIApplication.shared.applicationIconBadgeNumber = 0
+    }
 }
 
 // MARK: Helpers
