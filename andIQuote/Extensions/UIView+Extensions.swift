@@ -9,8 +9,10 @@
 import UIKit
 
 extension UIView {
-    func screenShot() -> UIImage{
+    
+    func screenShot() -> UIImage {
         let render = UIGraphicsImageRenderer(size: bounds.size)
+        
         return render.image { _ in
             drawHierarchy(in: bounds, afterScreenUpdates: true)
         }

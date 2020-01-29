@@ -45,11 +45,8 @@ class QuoteCollectionViewController: UICollectionViewController {
         setupNavButtons()
         createSnapShot()
         loadLastIndex()
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
-        print("viewWillAppear")
+        title = "andIQuote"
     }
     // MARK: loadLastIndex
     private func loadLastIndex() {
@@ -119,7 +116,7 @@ extension QuoteCollectionViewController {
         
         likeButton = UIButton().sfImageButton(systemName: "hand.thumbsup")
         likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
-        lowerStackView.addArrangedSubview(likeButton)
+//        lowerStackView.addArrangedSubview(likeButton)
         collectionView.addSubview(lowerStackView)
         
         NSLayoutConstraint.activate([
@@ -159,9 +156,9 @@ extension QuoteCollectionViewController {
         navigationController?.navigationBar.barTintColor = collectionView.backgroundColor
         navigationController?.navigationBar.barStyle = .default
         
-        let menuImage = UIImage(systemName: "line.horizontal.3", withConfiguration: UIImage().mainViewSymbolConfig())
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: menuImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(slideMenuButtonTapped))
-        navigationItem.leftBarButtonItem?.tintColor = .label
+//        let menuImage = UIImage(systemName: "line.horizontal.3", withConfiguration: UIImage().mainViewSymbolConfig())
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(image: menuImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(slideMenuButtonTapped))
+//        navigationItem.leftBarButtonItem?.tintColor = .label
         
         let shareImage = UIImage(systemName: "square.and.arrow.up", withConfiguration: UIImage().mainViewSymbolConfig())
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: shareImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(shareButtonTapped))
