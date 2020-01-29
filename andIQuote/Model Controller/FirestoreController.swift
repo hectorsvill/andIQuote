@@ -23,7 +23,7 @@ class FirestoreController {
 }
 extension FirestoreController {
     // MARK: fetchQuotesFromFireStore
-    func fetchFirstQuotes(limit: Int = 100, completion: @escaping ([Quote]?, Error?) -> ()) {
+    func fetchFirstQuotes(limit: Int = 10, completion: @escaping ([Quote]?, Error?) -> ()) {
         quoteQuery.limit(to: limit).getDocuments { snapShot, error in
             if let error = error {
                 completion(nil, error)
@@ -42,7 +42,7 @@ extension FirestoreController {
         }
     }
     // MARK: getNext(limit:,
-    func getNext(limit: Int = 100, completion: @escaping ([Quote]?, Error?) -> ()) {
+    func getNext(limit: Int = 10, completion: @escaping ([Quote]?, Error?) -> ()) {
         guard let lastDoc = lastQueryDocumentSnapshot else { return }
         quoteQuery.start(atDocument: lastDoc).limit(to: limit).getDocuments { snapShot, error in
             if let error = error {

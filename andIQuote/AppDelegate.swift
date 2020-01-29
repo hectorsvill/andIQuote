@@ -36,7 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let shortcutItem = shortcutItemToProcess {
             
             let localizedSubtitle = shortcutItem.localizedSubtitle!
-//            let name = shortcutItem.userInfo!["Name"]
             
             let activityVC = UIActivityViewController(activityItems: [localizedSubtitle], applicationActivities: [])
             window?.rootViewController?.present(activityVC, animated: true, completion: nil)

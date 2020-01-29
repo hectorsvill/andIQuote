@@ -19,6 +19,7 @@ extension QuoteCollectionViewController {
 }
 
 class QuoteCollectionViewController: UICollectionViewController {
+    lazy var activityIndicator = UIActivityIndicatorView()
     var delegate: HomeControllerViewDelegate?
     var quoteController: QuoteController!
     var dataSource: QuoteDataSource!
@@ -47,6 +48,12 @@ class QuoteCollectionViewController: UICollectionViewController {
         loadLastIndex()
         
         title = "andIQuote"
+        
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = UIActivityIndicatorView.Style.medium
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
     }
     // MARK: loadLastIndex
     private func loadLastIndex() {
@@ -73,6 +80,7 @@ class QuoteCollectionViewController: UICollectionViewController {
             snapShot.appendSections([.main])
             snapShot.appendItems(quotes ?? [])
             self.dataSource.apply(snapShot, animatingDifferences: false)
+            self.activityIndicator.stopAnimating()
         }
     }
 }

@@ -21,7 +21,6 @@
 		124EAFBE23DF95CF00047558 /* ReminderCellButtonPressedDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124EAFBD23DF95CF00047558 /* ReminderCellButtonPressedDelegate.swift */; };
 		12A76B5E23DD40B800026C28 /* DailyReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A76B5D23DD40B800026C28 /* DailyReminderViewController.swift */; };
 		12A76B6023DD4A9500026C28 /* NSAttributeString+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A76B5F23DD4A9500026C28 /* NSAttributeString+Strings.swift */; };
-		12B3DAA623CAE18E00B6358E /* DatabaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B3DAA523CAE18E00B6358E /* DatabaseController.swift */; };
 		12D72AAC23CD41C4000BECDC /* Quote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AAA23CD41C4000BECDC /* Quote.xcdatamodeld */; };
 		12D72AAF23CD42F7000BECDC /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AAE23CD42F7000BECDC /* Quote.swift */; };
 		12D72AB123CD4554000BECDC /* Quote+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AB023CD4554000BECDC /* Quote+Convenience.swift */; };
@@ -71,7 +70,6 @@
 		124EAFBD23DF95CF00047558 /* ReminderCellButtonPressedDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderCellButtonPressedDelegate.swift; sourceTree = "<group>"; };
 		12A76B5D23DD40B800026C28 /* DailyReminderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyReminderViewController.swift; sourceTree = "<group>"; };
 		12A76B5F23DD4A9500026C28 /* NSAttributeString+Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributeString+Strings.swift"; sourceTree = "<group>"; };
-		12B3DAA523CAE18E00B6358E /* DatabaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseController.swift; sourceTree = "<group>"; };
 		12D72AAB23CD41C4000BECDC /* Quote.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Quote.xcdatamodel; sourceTree = "<group>"; };
 		12D72AAE23CD42F7000BECDC /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		12D72AB023CD4554000BECDC /* Quote+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Quote+Convenience.swift"; sourceTree = "<group>"; };
@@ -246,7 +244,6 @@
 			children = (
 				C4F0E90F23AB330D005917A8 /* QuoteController.swift */,
 				0788B03923C56820001D00E3 /* FirestoreController.swift */,
-				12B3DAA523CAE18E00B6358E /* DatabaseController.swift */,
 			);
 			path = "Model Controller";
 			sourceTree = "<group>";
@@ -413,7 +410,6 @@
 				C4F0E90E23AB3297005917A8 /* QuoteLibrary.swift in Sources */,
 				12A76B6023DD4A9500026C28 /* NSAttributeString+Strings.swift in Sources */,
 				C42EE0F423BEC6230045DF02 /* BackgroundCell.swift in Sources */,
-				12B3DAA623CAE18E00B6358E /* DatabaseController.swift in Sources */,
 				C43D445423A47018005B2458 /* SceneDelegate.swift in Sources */,
 				C4FB3EFF23BAE4A70041B1BD /* ThemeSettingsCollectionViewController.swift in Sources */,
 				121B5F2823DE977E00569569 /* DailyReminderView.swift in Sources */,
