@@ -19,7 +19,7 @@ extension QuoteCollectionViewController {
 
         rightSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeAction(_:)))
         rightSwipeGestureRecognizer.isEnabled = false
-        rightSwipeGestureRecognizer.direction = .left
+        rightSwipeGestureRecognizer.direction = .right
         collectionView.addGestureRecognizer(rightSwipeGestureRecognizer)
 
         upSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(shareButtonTapped))
@@ -47,6 +47,7 @@ extension QuoteCollectionViewController {
 
                 quoteController.setBackgroundIndex(1)
                 collectionView.setBackground(to: quoteController.background)
+                navigationController?.navigationBar.barTintColor = collectionView.backgroundColor
 
             } else {
                 handleSlideMenuToggle()
