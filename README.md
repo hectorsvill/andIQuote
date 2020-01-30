@@ -2,7 +2,7 @@
 Discover mindful quotes and share them with your friends
 
 #
-V1(3)
+V1(4)
 #
 - I wrote a web scraper to scrape thousands of quotes.  Check out my [quote dictionary creator](https://github.com/hectorsvill/QuotesDictionaryCreator)
 #  
