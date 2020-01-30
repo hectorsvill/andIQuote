@@ -159,7 +159,6 @@ extension QuoteCollectionViewController {
             lowerStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
             trademarkLabel.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16),
             trademarkLabel.bottomAnchor.constraint(equalTo: lowerStackView.topAnchor),
-            trademarkLabel.heightAnchor.constraint(equalToConstant: 30),
         ])
     }
     // MARK: setupNavButtons

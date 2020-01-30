@@ -49,6 +49,7 @@ class DailyReminderViewController: UIViewController {
         createReminderViewlData()
         setupLayouts()
         requestNotificationAuthorization()
+        view.setBackground(to: quoteController.background)
     }
     // MARK:viewWillDisappear
     override func viewWillDisappear(_ animated: Bool) {
@@ -140,9 +141,9 @@ class DailyReminderViewController: UIViewController {
     
     // MARK: createSplitView
     private func createSplitView() -> UIView{
-        let splitView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 10))
-        splitView.backgroundColor = .systemGray4
-        splitView.heightAnchor.constraint(equalToConstant: 10).isActive = true
+        let splitView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 2))
+        splitView.backgroundColor = .label
+        splitView.heightAnchor.constraint(equalToConstant: 2).isActive = true
         splitView.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
         splitView.layer.cornerRadius = 5
         return splitView
@@ -165,9 +166,9 @@ class DailyReminderViewController: UIViewController {
         
         let remindersView = createReminderView(reminderViewData[0])
         let startView = createReminderView(reminderViewData[1])
-        let stopView = createReminderView(reminderViewData[2])
+//        let stopView = createReminderView(reminderViewData[2])
         let typeView = createReminderView(reminderViewData[3])
-        let views = [finishButton, titleLabel, descriptionLabel, remindersView, splitView1, startView, stopView, splitView2, typeView]
+        let views = [finishButton, titleLabel, descriptionLabel, remindersView, splitView1, startView, splitView2, typeView]
         
         let mainStackView = UIStackView(arrangedSubviews: views)
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
