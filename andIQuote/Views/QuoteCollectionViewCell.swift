@@ -36,7 +36,6 @@ class QuoteCollectionViewCell: UICollectionViewCell, SelfConfiguringCell {
         guard let quote = quote else { return NSAttributedString(string: "") }
         let attributedString = NSMutableAttributedString(string: quote.body!, attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 24), NSAttributedString.Key.foregroundColor: UIColor.label])
         attributedString.append(NSAttributedString(string: "\n\n\(quote.author!)", attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.label]))
-        
         return attributedString
     }
     

@@ -30,6 +30,13 @@ extension QuoteController {
     var background: String {
         backgrounds[_backgroundIndex]
     }
+    // MARK: trademarkAttributedString
+    var trademarkAttributedString: NSAttributedString {
+        let attributedString = NSMutableAttributedString(string: "and", attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 13), NSAttributedString.Key.foregroundColor: UIColor.label])
+        attributedString.append(NSAttributedString(string: "I", attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: UIColor.label]))
+        attributedString.append(NSAttributedString(string: "Quote", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.label]))
+        return attributedString
+    }
     // MARK: setBackgroundIndex
     func setBackgroundIndex(_ add: Int) {
         let newValue = _backgroundIndex + add

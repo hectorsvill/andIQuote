@@ -40,6 +40,16 @@ class QuoteCollectionViewController: UICollectionViewController {
         stackView.spacing = 32
         return stackView
     }()
+
+    let trademarkLabel: UILabel = {
+        let textview = UILabel()
+        textview.translatesAutoresizingMaskIntoConstraints = false
+        textview.textAlignment = .justified
+        textview.textColor = .label
+        textview.isHidden = true
+        textview.attributedText = QuoteController().trademarkAttributedString
+        return textview
+    }()
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,9 +58,9 @@ class QuoteCollectionViewController: UICollectionViewController {
         setupNavButtons()
         createSnapShot()
         loadLastIndex()
-        
-        title = "andIQuote"
-        
+
+
+        title = quoteController.trademarkAttributedString.string
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
         activityIndicator.style = UIActivityIndicatorView.Style.medium
@@ -61,6 +71,14 @@ class QuoteCollectionViewController: UICollectionViewController {
     private func loadLastIndex() {
         let index = IndexPath(item: quoteController._quoteIndex, section: 0)
         collectionView.scrollToItem(at: index, at: .left, animated: false)
+    }
+    // MARK: setupCollectionView
+    private func setupCollectionView() {
+        collectionView.isPagingEnabled = true
+        collectionView.autoresizingMask = [.flexibleHeight, .flexibleHeight]
+        collectionView.setBackground(to: quoteController.background)
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.register(QuoteCollectionViewCell.self, forCellWithReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier)
     }
     // MARK: configureDataSource
     private func configureDataSource() {
@@ -130,28 +148,20 @@ extension QuoteCollectionViewController {
 //        likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
 //        lowerStackView.addArrangedSubview(likeButton)
 //        collectionView.addSubview(lowerStackView)
-        
-                
 
         themeButton = UIButton().sfImageButton(systemName: "paintbrush")
         themeButton.addTarget(self, action: #selector(themeButtonTapped), for: .touchUpInside)
         lowerStackView.addArrangedSubview(themeButton)
         collectionView.addSubview(lowerStackView)
-        
+        collectionView.addSubview(trademarkLabel)
         NSLayoutConstraint.activate([
             lowerStackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16),
             lowerStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            trademarkLabel.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16),
+            trademarkLabel.bottomAnchor.constraint(equalTo: lowerStackView.topAnchor),
+            trademarkLabel.heightAnchor.constraint(equalToConstant: 30),
         ])
     }
-    // MARK: setupCollectionView
-    private func setupCollectionView() {
-        collectionView.isPagingEnabled = true
-        collectionView.autoresizingMask = [.flexibleHeight, .flexibleHeight]
-        collectionView.setBackground(to: quoteController.background)
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.register(QuoteCollectionViewCell.self, forCellWithReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier)
-    }
-
     // MARK: setupNavButtons
     private func setupNavButtons() {
         navigationController?.navigationBar.barTintColor = collectionView.backgroundColor
@@ -165,21 +175,21 @@ extension QuoteCollectionViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: shareImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(shareButtonTapped))
         navigationItem.rightBarButtonItem?.tintColor = .label
     }
-    // MARK: handleSlideMenuToggle
-    func handleSlideMenuToggle() {
-        delegate?.handleMenuToggle()
-        collectionView.isScrollEnabled.toggle()
-        leftSwipeGestureRecognizer.isEnabled.toggle()
-        upSwipeGestureRecognizer.isEnabled.toggle()
-        downSwipeGestureRecognizer.isEnabled.toggle()
-        doubleTapSwipeGestureRecognizer.isEnabled.toggle()
-    }
+//    // MARK: handleSlideMenuToggle
+//    func handleSlideMenuToggle() {
+//        delegate?.handleMenuToggle()
+//        collectionView.isScrollEnabled.toggle()
+//        leftSwipeGestureRecognizer.isEnabled.toggle()
+//        upSwipeGestureRecognizer.isEnabled.toggle()
+//        downSwipeGestureRecognizer.isEnabled.toggle()
+//        doubleTapSwipeGestureRecognizer.isEnabled.toggle()
+//    }
     // MARK: slideMenuButtonTapped
-    @objc func slideMenuButtonTapped() {
-        guard !quoteController.quoteThemeIsActive else { return }
-        impactGesture(style: .rigid)
-        handleSlideMenuToggle()
-    }
+//    @objc func slideMenuButtonTapped() {
+//        guard !quoteController.quoteThemeIsActive else { return }
+//        impactGesture(style: .rigid)
+//        handleSlideMenuToggle()
+//    }
     // MARK: themebutton tapped
     @objc func themeButtonTapped(_ sender: UIButton) {
         impactGesture(style: .medium)
@@ -195,10 +205,12 @@ extension QuoteCollectionViewController {
     @objc func shareButtonTapped() {
         guard quoteController.quoteThemeIsActive != true else { return }
         impactGesture(style: .rigid)
-        lowerStackView.isHidden = true
+        lowerStackView.isHidden.toggle()
+        trademarkLabel.isHidden.toggle()
         let activityVC = UIActivityViewController(activityItems: [quoteController.attributedString, view.screenShot()], applicationActivities: [])
         present(activityVC, animated: true)
-        lowerStackView.isHidden = false
+        lowerStackView.isHidden.toggle()
+        trademarkLabel.isHidden.toggle()
     }
     // MARK: reminderButtonTapped
     @objc func reminderButtonTapped() {

@@ -50,7 +50,7 @@ extension QuoteCollectionViewController {
                 navigationController?.navigationBar.barTintColor = collectionView.backgroundColor
                 impactGesture(style: .rigid)
             } else {
-                handleSlideMenuToggle()
+//                handleSlideMenuToggle()
             }
         }else if sender.direction == .right {
             quoteController.setBackgroundIndex(-1)
