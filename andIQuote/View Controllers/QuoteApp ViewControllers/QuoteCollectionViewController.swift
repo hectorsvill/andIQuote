@@ -213,6 +213,7 @@ extension QuoteCollectionViewController {
     }
     // MARK: reminderButtonTapped
     @objc func reminderButtonTapped() {
+        guard quoteController.quoteThemeIsActive != true else { return }
         impactGesture(style: .medium)
         let dailyReminderVC = DailyReminderViewController()
         dailyReminderVC.quoteController = quoteController

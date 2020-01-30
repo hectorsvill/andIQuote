@@ -95,7 +95,7 @@ class DailyReminderView: UIView {
                 deleagate?.plusminusbuttonPressed(reminderViewData: reminderViewData, tag: sender.tag)
             }
         } else if reminderViewData.title == "Start Time" || reminderViewData.title == "End Time" {
-            if reminderViewData.value >= 1 && reminderViewData.value <= 18 ||  reminderViewData.value == 0 && sender.tag == 1 || reminderViewData.value == 18 && sender.tag == 0 {
+            if reminderViewData.value >= 1 && reminderViewData.value <= 18 ||  reminderViewData.value == 0 && sender.tag == 1 || reminderViewData.value == 19 && sender.tag == 0 {
                 reminderViewData.value = sender.tag == 0 ?  reminderViewData.value - 1 : reminderViewData.value + 1
                 setupSteperDescriptionText()
                 deleagate?.plusminusbuttonPressed(reminderViewData: reminderViewData, tag: sender.tag)
