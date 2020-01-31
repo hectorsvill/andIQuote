@@ -47,7 +47,6 @@ class QuoteCollectionViewController: UICollectionViewController {
         textview.textAlignment = .justified
         textview.textColor = .label
         textview.isHidden = true
-        textview.attributedText = QuoteController().trademarkAttributedString
         return textview
     }()
     // MARK: viewDidLoad
@@ -139,6 +138,8 @@ extension QuoteCollectionViewController {
     private func setupViews() {
         setupCollectionView()
         setupSwipeGestureRecognizer()
+
+        trademarkLabel.attributedText = quoteController.trademarkAttributedString
         
         reviewButton = UIButton().sfImageButton(systemName: "bell")
         reviewButton.addTarget(self, action: #selector(reminderButtonTapped), for: .touchUpInside)

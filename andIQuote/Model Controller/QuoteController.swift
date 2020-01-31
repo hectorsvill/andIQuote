@@ -22,6 +22,8 @@ class QuoteController {
     init() {
         if let user = Auth.auth().currentUser {
             self.quoteUser = QuoteUser(id: user.uid)
+//            NSLog("\(_quoteIndex)")
+            print("index set -> \(_quoteIndex)")
         }
     }
 }

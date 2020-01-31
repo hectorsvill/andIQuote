@@ -44,7 +44,6 @@ extension QuoteCollectionViewController {
             reminderButtonTapped()
         }else if sender.direction == .left {
             if quoteController.quoteThemeIsActive {
-
                 quoteController.setBackgroundIndex(1)
                 collectionView.setBackground(to: quoteController.background)
                 navigationController?.navigationBar.barTintColor = collectionView.backgroundColor
@@ -59,9 +58,4 @@ extension QuoteCollectionViewController {
             impactGesture(style: .rigid)
         }
     }
-
-
-
-
-
 }
