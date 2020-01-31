@@ -56,8 +56,10 @@ class QuoteCollectionViewController: UICollectionViewController {
         configureDataSource()
         setupNavButtons()
         createSnapShot()
-        loadLastIndex()
 
+        DispatchQueue.main.async {
+            self.loadLastIndex()
+        }
 
         title = quoteController.trademarkAttributedString.string
         activityIndicator.center = self.view.center
@@ -66,10 +68,12 @@ class QuoteCollectionViewController: UICollectionViewController {
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
     }
+
     // MARK: loadLastIndex
     private func loadLastIndex() {
         let index = IndexPath(item: quoteController._quoteIndex, section: 0)
         collectionView.scrollToItem(at: index, at: .left, animated: false)
+
     }
     // MARK: setupCollectionView
     private func setupCollectionView() {
