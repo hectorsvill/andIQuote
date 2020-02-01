@@ -15,4 +15,6 @@ V1(4) - Feel free to download from the [App Store](https://itunes.apple.com/WebO
 - Share either the text or the image of the current quote.
 - The brush button will allow you to change the background color.
 #
+
+![img](https://github.com/hectorsvill/hectorsvill.github.io/blob/master/images/andIQuote_app_store_preview_1.png)
 #
