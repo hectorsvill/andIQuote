@@ -127,7 +127,7 @@ class DailyReminderViewController: UIViewController {
         
         var dateComponent = DateComponents()
         dateComponent.hour = hour
-        dateComponent.minute = 46
+        dateComponent.minute = 0
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: true)
         let request = UNNotificationRequest(identifier: quote.id!, content: notificationContent, trigger: trigger)

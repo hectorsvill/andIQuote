@@ -32,6 +32,7 @@ class QuoteCollectionViewController: UICollectionViewController {
     var reviewButton: UIButton!
     var likeButton: UIButton!
     var themeButton: UIButton!
+
     // MARK: lowerStackView
     var lowerStackView: UIStackView = {
         let stackView = UIStackView()
@@ -40,7 +41,7 @@ class QuoteCollectionViewController: UICollectionViewController {
         stackView.spacing = 32
         return stackView
     }()
-
+    // MARK: trademarkLabel
     let trademarkLabel: UILabel = {
         let textview = UILabel()
         textview.translatesAutoresizingMaskIntoConstraints = false
@@ -52,16 +53,13 @@ class QuoteCollectionViewController: UICollectionViewController {
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = quoteController.trademarkAttributedString.string
         setupViews()
         configureDataSource()
         setupNavButtons()
         createSnapShot()
+        self.loadLastIndex()
 
-        DispatchQueue.main.async {
-            self.loadLastIndex()
-        }
-
-        title = quoteController.trademarkAttributedString.string
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
         activityIndicator.style = UIActivityIndicatorView.Style.medium
@@ -71,8 +69,12 @@ class QuoteCollectionViewController: UICollectionViewController {
 
     // MARK: loadLastIndex
     private func loadLastIndex() {
-        let index = IndexPath(item: quoteController._quoteIndex, section: 0)
-        collectionView.scrollToItem(at: index, at: .left, animated: false)
+
+        DispatchQueue.main.async {
+            let item = self.quoteController._quoteIndex
+            let index = IndexPath(item: item, section: 0)
+            self.collectionView.scrollToItem(at: index, at: .left, animated: false)
+        }
 
     }
     // MARK: setupCollectionView

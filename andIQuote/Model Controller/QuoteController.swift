@@ -22,8 +22,6 @@ class QuoteController {
     init() {
         if let user = Auth.auth().currentUser {
             self.quoteUser = QuoteUser(id: user.uid)
-//            NSLog("\(_quoteIndex)")
-            print("index set -> \(_quoteIndex)")
         }
     }
 }
@@ -42,7 +40,14 @@ extension QuoteController {
     // MARK: setBackgroundIndex
     func setBackgroundIndex(_ add: Int) {
         let newValue = _backgroundIndex + add
-        _backgroundIndex =  newValue > -1 && newValue < backgrounds.count ? newValue : _backgroundIndex
+        if newValue > -1 && newValue < backgrounds.count {
+            _backgroundIndex = newValue
+        } else if newValue >= backgrounds.count {
+            _backgroundIndex = 0
+        } else if newValue <= -1 {
+            _backgroundIndex = backgrounds.count - 1
+        }
+//        _backgroundIndex =  newValue > -1 && newValue < backgrounds.count ? newValue : _backgroundIndex
         UserDefaults.standard.set(_backgroundIndex, forKey: "BgIndex")
     }
     // MARK: quoteForegroundColor
