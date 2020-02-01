@@ -1,6 +1,6 @@
 # andIQuote
-Discover mindful quotes and share them with your friends
-
+Discover mindful quotes and share them with your friends.
+Feel free to download from the [App Store](https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1493892128)
 #
 V1(4)
 #
