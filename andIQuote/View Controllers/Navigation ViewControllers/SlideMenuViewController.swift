@@ -17,7 +17,7 @@ extension SlideMenuViewController {
     }
 }
 
-class SlideMenuViewController: UIViewController {
+final class SlideMenuViewController: UIViewController {
     var delegateSlideMenuEvents: SlideMenuEventsDelegate?
     var delegateHomeControllerView: HomeControllerViewDelegate?
     var slideMenuItems: [SlideMenuItem] = []

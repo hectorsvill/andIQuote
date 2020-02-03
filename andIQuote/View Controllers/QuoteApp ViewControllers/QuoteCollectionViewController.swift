@@ -18,7 +18,7 @@ extension QuoteCollectionViewController {
     }
 }
 
-class QuoteCollectionViewController: UICollectionViewController {
+final class QuoteCollectionViewController: UICollectionViewController {
     var activityIndicator = UIActivityIndicatorView()
     var delegate: HomeControllerViewDelegate?
     var quoteController: QuoteController!
@@ -69,13 +69,11 @@ class QuoteCollectionViewController: UICollectionViewController {
 
     // MARK: loadLastIndex
     private func loadLastIndex() {
-
         DispatchQueue.main.async {
             let item = self.quoteController._quoteIndex
             let index = IndexPath(item: item, section: 0)
             self.collectionView.scrollToItem(at: index, at: .left, animated: false)
         }
-
     }
     // MARK: setupCollectionView
     private func setupCollectionView() {
@@ -173,29 +171,29 @@ extension QuoteCollectionViewController {
         navigationController?.navigationBar.barTintColor = collectionView.backgroundColor
         navigationController?.navigationBar.barStyle = .default
         
-//        let menuImage = UIImage(systemName: "line.horizontal.3", withConfiguration: UIImage().mainViewSymbolConfig())
-//        navigationItem.leftBarButtonItem = UIBarButtonItem(image: menuImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(slideMenuButtonTapped))
-//        navigationItem.leftBarButtonItem?.tintColor = .label
+        let menuImage = UIImage(systemName: "line.horizontal.3", withConfiguration: UIImage().mainViewSymbolConfig())
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: menuImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(slideMenuButtonTapped))
+        navigationItem.leftBarButtonItem?.tintColor = .label
         
         let shareImage = UIImage(systemName: "square.and.arrow.up", withConfiguration: UIImage().mainViewSymbolConfig())
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: shareImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(shareButtonTapped))
         navigationItem.rightBarButtonItem?.tintColor = .label
     }
 //    // MARK: handleSlideMenuToggle
-//    func handleSlideMenuToggle() {
-//        delegate?.handleMenuToggle()
-//        collectionView.isScrollEnabled.toggle()
-//        leftSwipeGestureRecognizer.isEnabled.toggle()
-//        upSwipeGestureRecognizer.isEnabled.toggle()
-//        downSwipeGestureRecognizer.isEnabled.toggle()
+    func handleSlideMenuToggle() {
+        delegate?.handleMenuToggle()
+        collectionView.isScrollEnabled.toggle()
+        leftSwipeGestureRecognizer.isEnabled.toggle()
+        upSwipeGestureRecognizer.isEnabled.toggle()
+        downSwipeGestureRecognizer.isEnabled.toggle()
 //        doubleTapSwipeGestureRecognizer.isEnabled.toggle()
-//    }
+    }
     // MARK: slideMenuButtonTapped
-//    @objc func slideMenuButtonTapped() {
-//        guard !quoteController.quoteThemeIsActive else { return }
-//        impactGesture(style: .rigid)
-//        handleSlideMenuToggle()
-//    }
+    @objc func slideMenuButtonTapped() {
+        guard !quoteController.quoteThemeIsActive else { return }
+        impactGesture(style: .rigid)
+        handleSlideMenuToggle()
+    }
     // MARK: themebutton tapped
     @objc func themeButtonTapped(_ sender: UIButton) {
         impactGesture(style: .medium)

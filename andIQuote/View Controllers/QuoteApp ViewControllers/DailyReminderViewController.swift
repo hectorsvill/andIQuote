@@ -9,7 +9,7 @@
 import EventKit
 import UIKit
 
-class DailyReminderViewController: UIViewController {
+final class DailyReminderViewController: UIViewController {
     var reminderViewData = [ReminderViewData]()
     var quoteController: QuoteController!
     var reminderNotificationData: [String: Int] = [:]

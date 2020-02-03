@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainContainerViewController: UIViewController {
+final class MainContainerViewController: UIViewController {
     var quoteController = QuoteController()
     var menuViewController: SlideMenuViewController!
     var centerNavViewController: UIViewController!
