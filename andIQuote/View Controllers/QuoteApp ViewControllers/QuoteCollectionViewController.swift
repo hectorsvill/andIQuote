@@ -171,9 +171,9 @@ extension QuoteCollectionViewController {
         navigationController?.navigationBar.barTintColor = collectionView.backgroundColor
         navigationController?.navigationBar.barStyle = .default
         
-        let menuImage = UIImage(systemName: "line.horizontal.3", withConfiguration: UIImage().mainViewSymbolConfig())
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: menuImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(slideMenuButtonTapped))
-        navigationItem.leftBarButtonItem?.tintColor = .label
+//        let menuImage = UIImage(systemName: "line.horizontal.3", withConfiguration: UIImage().mainViewSymbolConfig())
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(image: menuImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(slideMenuButtonTapped))
+//        navigationItem.leftBarButtonItem?.tintColor = .label
         
         let shareImage = UIImage(systemName: "square.and.arrow.up", withConfiguration: UIImage().mainViewSymbolConfig())
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: shareImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(shareButtonTapped))
@@ -252,11 +252,13 @@ extension QuoteCollectionViewController: UNUserNotificationCenterDelegate {
 
     func findIndex(_ id: String) -> Int {
         let items = dataSource.snapshot().itemIdentifiers
+
         for (i, item) in items.enumerated() {
             if item.id == id {
                 return i
             }
         }
+
         return 0
     }
 }
