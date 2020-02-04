@@ -20,6 +20,7 @@ extension QuoteCollectionViewController {
 
 final class QuoteCollectionViewController: UICollectionViewController {
     var activityIndicator = UIActivityIndicatorView()
+    let userNotificationCenter = UNUserNotificationCenter.current()
     var delegate: HomeControllerViewDelegate?
     var quoteController: QuoteController!
     var dataSource: QuoteDataSource!
@@ -32,7 +33,6 @@ final class QuoteCollectionViewController: UICollectionViewController {
     var reviewButton: UIButton!
     var likeButton: UIButton!
     var themeButton: UIButton!
-
     // MARK: lowerStackView
     var lowerStackView: UIStackView = {
         let stackView = UIStackView()
@@ -65,8 +65,8 @@ final class QuoteCollectionViewController: UICollectionViewController {
         activityIndicator.style = UIActivityIndicatorView.Style.medium
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
+        userNotificationCenter.delegate = self
     }
-
     // MARK: loadLastIndex
     private func loadLastIndex() {
         DispatchQueue.main.async {
@@ -221,6 +221,7 @@ extension QuoteCollectionViewController {
         guard quoteController.quoteThemeIsActive != true else { return }
         impactGesture(style: .medium)
         let dailyReminderVC = DailyReminderViewController()
+        dailyReminderVC.userNotificationCenter = userNotificationCenter
         dailyReminderVC.quoteController = quoteController
         present(dailyReminderVC, animated: true)
         
@@ -237,3 +238,25 @@ extension QuoteCollectionViewController {
     }
 }
 
+
+extension QuoteCollectionViewController: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let id = response.notification.request.identifier
+        let index = findIndex(id)
+        DispatchQueue.main.async {
+            let index = IndexPath(item: index, section: 0)
+            self.collectionView.scrollToItem(at: index, at: .left, animated: false)
+        }
+        completionHandler()
+    }
+
+    func findIndex(_ id: String) -> Int {
+        let items = dataSource.snapshot().itemIdentifiers
+        for (i, item) in items.enumerated() {
+            if item.id == id {
+                return i
+            }
+        }
+        return 0
+    }
+}

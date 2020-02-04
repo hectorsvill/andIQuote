@@ -13,7 +13,7 @@ final class DailyReminderViewController: UIViewController {
     var reminderViewData = [ReminderViewData]()
     var quoteController: QuoteController!
     var reminderNotificationData: [String: Int] = [:]
-    let userNotificationCenter = UNUserNotificationCenter.current()
+    var userNotificationCenter: UNUserNotificationCenter! //= UNUserNotificationCenter.current()
     let _dailyReminderKey = "DailyReminderViewController.reminderNotificationData"
     // MARK : finishButton
     var finishButton: UIButton = {
@@ -85,7 +85,7 @@ final class DailyReminderViewController: UIViewController {
             if let error = error {
                 NSLog("\(error)")
             }
-            
+
             guard let quotes = quotes else { return }
             let count = self.reminderNotificationData["Reminders"]!
             let startTime = self.reminderNotificationData["Start Time"]!
@@ -128,10 +128,10 @@ final class DailyReminderViewController: UIViewController {
         var dateComponent = DateComponents()
         dateComponent.hour = hour
         dateComponent.minute = 0
-        
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: true)
-        let request = UNNotificationRequest(identifier: quote.id!, content: notificationContent, trigger: trigger)
-        
+        let t = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+//        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: true)
+        let request = UNNotificationRequest(identifier: quote.id!, content: notificationContent, trigger: t)
+
         self.userNotificationCenter.add(request) { error in
             if let error = error {
                 NSLog("\(error)")

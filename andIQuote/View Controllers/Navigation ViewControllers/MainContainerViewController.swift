@@ -12,7 +12,7 @@ final class MainContainerViewController: UIViewController {
     var quoteController = QuoteController()
     var menuViewController: SlideMenuViewController!
     var centerNavViewController: UIViewController!
-    
+
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
