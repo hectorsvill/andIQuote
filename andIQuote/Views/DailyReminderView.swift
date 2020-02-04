@@ -12,6 +12,7 @@ class DailyReminderView: UIView {
     var deleagate: ReminderCellButtonPressedDelegate?
     var config: Int! { didSet { setupViews() } }
     var value = 0
+    let _dailyReminderKey = "DailyReminderViewController.reminderNotificationData"
     
     // MARK: descriptionLabel
     var descriptionLabel: UILabel = {
@@ -45,7 +46,7 @@ class DailyReminderView: UIView {
         button.tag = 1
         return button
     }()
-
+    // MARK: timePicker
     var timePicker: UIDatePicker = {
         let timepicker = UIDatePicker()
         timepicker.translatesAutoresizingMaskIntoConstraints = false
@@ -53,7 +54,6 @@ class DailyReminderView: UIView {
         timepicker.layer.cornerRadius = 4
         return timepicker
     }()
-
     // MARK: setupViews
     private func setupViews() {
         backgroundColor = .clear
@@ -110,14 +110,15 @@ class DailyReminderView: UIView {
     }
     // MARK: setupSteperDescriptionText
     private func setupSteperDescriptionText() {
-
+        let key = _dailyReminderKey + descriptionLabel.text!
+        value = UserDefaults.standard.integer(forKey: key)
 
         switch config {
         case 0:
-//            let remindersCount = UserDefaults.standard.integer(forKey: key!)
             steperDescriptionLabel.text = "\(value)X"
         case 1:
-            print("time picker")
+            let date = value == 0 ? Date() : Date(timeIntervalSince1970: Double(value))
+            timePicker.date = date
         case 2:
             print("time picker")
         case 3:
@@ -129,15 +130,12 @@ class DailyReminderView: UIView {
     }
     // MARK: plusminusbuttonPressed
     @objc func plusminusbuttonPressed(_ sender: UIButton) {
-        print("sender with tag: \(sender.tag)")
+        let newValue = sender.tag == 0 ? (value - 1) : (value + 1)
 
-        if sender.tag == 0 {
-            value -= 1
-        } else {
-            value += 1
+        if newValue >= 0 && newValue <= 5 {
+            value = newValue
+            steperDescriptionLabel.text = "\(value)X"
         }
-
-        steperDescriptionLabel.text = "\(value)X"
     }
 }
 

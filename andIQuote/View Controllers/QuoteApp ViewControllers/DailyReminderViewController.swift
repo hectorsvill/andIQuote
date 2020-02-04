@@ -52,15 +52,6 @@ final class DailyReminderViewController: UIViewController {
         setupLayouts()
         requestNotificationAuthorization()
         view.setBackground(to: quoteController.background)
-
-        let userDefaults = UserDefaults.standard
-
-        let reminmdersCount = userDefaults.integer(forKey: _dailyReminderKey + "Reminders:")
-        let startTime = userDefaults.integer(forKey: _dailyReminderKey + "Time:") //Double
-        let soundValue = userDefaults.integer(forKey: _dailyReminderKey + "Sound:")
-
-        print("viewdidload: ", reminmdersCount, startTime, soundValue)
-
     }
     // MARK:viewWillDisappear
     override func viewWillDisappear(_ animated: Bool) {
@@ -194,12 +185,17 @@ final class DailyReminderViewController: UIViewController {
         
         let splitView1 = createSplitView()
         let splitView2 = createSplitView()
+
+
+        let userDefaults = UserDefaults.standard
         
         remindersView = createReminderView(0)
-
+        remindersView.value = userDefaults.integer(forKey: _dailyReminderKey + "Reminders:")
         startView = createReminderView(1)
+        startView.value = userDefaults.integer(forKey: _dailyReminderKey + "Time:") //Double
 //        let stopView = createReminderView(1)
         soundSelectView = createReminderView(3)
+        soundSelectView.value = userDefaults.integer(forKey: _dailyReminderKey + "Sound:")
         let views = [finishButton, titleLabel, descriptionLabel, remindersView, splitView1,startView, splitView2, soundSelectView]
         
         let mainStackView = UIStackView(arrangedSubviews: views as! [UIView])
