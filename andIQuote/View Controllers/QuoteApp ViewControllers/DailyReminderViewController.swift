@@ -13,11 +13,11 @@ final class DailyReminderViewController: UIViewController {
     var quoteController: QuoteController!
     var reminderNotificationData: [String: Int] = [:]
     var userNotificationCenter: UNUserNotificationCenter! //= UNUserNotificationCenter.current()
-    var remindersView: UIView!
-    var startView: UIView!
-    var soundSelectView: UIView!
+    var remindersView: DailyReminderView!
+    var startView: DailyReminderView!
+    var soundSelectView: DailyReminderView!
 
-    static let _dailyReminderKey = "DailyReminderViewController.reminderNotificationData"
+    let _dailyReminderKey = "DailyReminderViewController.reminderNotificationData"
     // MARK : finishButton
     var finishButton: UIButton = {
         let button = UIButton()
@@ -52,17 +52,36 @@ final class DailyReminderViewController: UIViewController {
         setupLayouts()
         requestNotificationAuthorization()
         view.setBackground(to: quoteController.background)
+
+        let userDefaults = UserDefaults.standard
+
+        let reminmdersCount = userDefaults.integer(forKey: _dailyReminderKey + "Reminders:")
+        let startTime = userDefaults.integer(forKey: _dailyReminderKey + "Time:") //Double
+        let soundValue = userDefaults.integer(forKey: _dailyReminderKey + "Sound:")
+
+        print("viewdidload: ", reminmdersCount, startTime, soundValue)
+
     }
     // MARK:viewWillDisappear
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        let view0 = remindersView as! DailyReminderView
-        let view1 = startView as! DailyReminderView
-        let view3 = soundSelectView as! DailyReminderView
-        print(view0.value)
-        let startTime = view1.timePicker.date.timeIntervalSince1970 //Double
-        print(startTime)
-        print(view3.value)
+        
+        let reminmdersCount = remindersView.value
+        let startTime = startView.timePicker.date.timeIntervalSince1970 //Double
+        let soundValue = soundSelectView.value
+
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(reminmdersCount, forKey: _dailyReminderKey + "Reminders:")
+        userDefaults.set(startTime, forKey: _dailyReminderKey + "Time:")
+        userDefaults.set(soundValue, forKey: _dailyReminderKey + "Sound:")
+
+//        if reminmdersCount > 0 {
+//            // setup reaquring notifications
+//
+//
+//        } else {
+//            removeAllNotifications()
+//        }
 
 
 //        if reminderNotificationData[reminderViewData[0].title]! > 0 {
@@ -161,7 +180,7 @@ final class DailyReminderViewController: UIViewController {
         return splitView
     }
     // MARK: createReminderView
-    private func createReminderView(_ config: Int) -> UIView {
+    private func createReminderView(_ config: Int) -> DailyReminderView {
         let dailyReminderView = DailyReminderView()
         dailyReminderView.deleagate = self
         dailyReminderView.config = config
@@ -177,6 +196,7 @@ final class DailyReminderViewController: UIViewController {
         let splitView2 = createSplitView()
         
         remindersView = createReminderView(0)
+
         startView = createReminderView(1)
 //        let stopView = createReminderView(1)
         soundSelectView = createReminderView(3)
@@ -192,9 +212,9 @@ final class DailyReminderViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             finishButton.widthAnchor.constraint(equalToConstant: 60),
-            mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
-            mainStackView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 8),
-            mainStackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -8),
+            mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            mainStackView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            mainStackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
         ])
     }
     // MARK: finishButtonPressed

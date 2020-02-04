@@ -54,13 +54,6 @@ class DailyReminderView: UIView {
         return timepicker
     }()
 
-    var key: String? {
-        if let str = descriptionLabel.text {
-            return DailyReminderViewController._dailyReminderKey + str
-        }
-        return nil
-    }
-
     // MARK: setupViews
     private func setupViews() {
         backgroundColor = .clear
@@ -91,8 +84,8 @@ class DailyReminderView: UIView {
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             stackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            stackView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor),
-            stackView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor),
+            stackView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 8),
+            stackView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -8),
         ])
     }
     // MARK: setupDescriptionLabel
@@ -102,13 +95,13 @@ class DailyReminderView: UIView {
 
         switch config {
         case 0:
-            descriptionText = "Reminders"
+            descriptionText = "Reminders:"
         case 1:
-            descriptionText = "Start Time:"
+            descriptionText = "Time:"
         case 2:
             descriptionText = "End Time:"
         case 3:
-            descriptionText = "Sound"
+            descriptionText = "Sound:"
         default:
             fatalError("setupDescriptionLabel - out of range")
         }
