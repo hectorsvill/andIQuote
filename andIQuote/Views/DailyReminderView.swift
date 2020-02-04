@@ -11,6 +11,7 @@ import UIKit
 class DailyReminderView: UIView {
     var deleagate: ReminderCellButtonPressedDelegate?
     var config: Int! { didSet { setupViews() } }
+    var value = 0
     
     // MARK: descriptionLabel
     var descriptionLabel: UILabel = {
@@ -53,12 +54,19 @@ class DailyReminderView: UIView {
         return timepicker
     }()
 
+    var key: String? {
+        if let str = descriptionLabel.text {
+            return DailyReminderViewController._dailyReminderKey + str
+        }
+        return nil
+    }
+
     // MARK: setupViews
     private func setupViews() {
         backgroundColor = .clear
 
-        setupSteperDescriptionText()
         setupDescriptionLabel()
+        setupSteperDescriptionText()
         steperDescriptionLabel.widthAnchor.constraint(equalToConstant: 80).isActive = true
         timePicker.widthAnchor.constraint(equalToConstant: 175).isActive = true
         let stackView = UIStackView(arrangedSubviews: [descriptionLabel])
@@ -98,7 +106,7 @@ class DailyReminderView: UIView {
         case 1:
             descriptionText = "Start Time:"
         case 2:
-            descriptionText = "End Time"
+            descriptionText = "End Time:"
         case 3:
             descriptionText = "Sound"
         default:
@@ -109,15 +117,18 @@ class DailyReminderView: UIView {
     }
     // MARK: setupSteperDescriptionText
     private func setupSteperDescriptionText() {
+
+
         switch config {
         case 0:
-            steperDescriptionLabel.text = "0X"
+//            let remindersCount = UserDefaults.standard.integer(forKey: key!)
+            steperDescriptionLabel.text = "\(value)X"
         case 1:
             print("time picker")
         case 2:
             print("time picker")
         case 3:
-            steperDescriptionLabel.text = "0X"
+            steperDescriptionLabel.text = "\(value)X"
         default:
             fatalError("setupSteperDescriptionText - out of range")
         }
@@ -128,12 +139,12 @@ class DailyReminderView: UIView {
         print("sender with tag: \(sender.tag)")
 
         if sender.tag == 0 {
-
-
+            value -= 1
         } else {
+            value += 1
         }
 
-        steperDescriptionLabel.text = "\(0)X"
+        steperDescriptionLabel.text = "\(value)X"
     }
 }
 

@@ -13,7 +13,11 @@ final class DailyReminderViewController: UIViewController {
     var quoteController: QuoteController!
     var reminderNotificationData: [String: Int] = [:]
     var userNotificationCenter: UNUserNotificationCenter! //= UNUserNotificationCenter.current()
-    let _dailyReminderKey = "DailyReminderViewController.reminderNotificationData"
+    var remindersView: UIView!
+    var startView: UIView!
+    var soundSelectView: UIView!
+
+    static let _dailyReminderKey = "DailyReminderViewController.reminderNotificationData"
     // MARK : finishButton
     var finishButton: UIButton = {
         let button = UIButton()
@@ -52,6 +56,15 @@ final class DailyReminderViewController: UIViewController {
     // MARK:viewWillDisappear
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        let view0 = remindersView as! DailyReminderView
+        let view1 = startView as! DailyReminderView
+        let view3 = soundSelectView as! DailyReminderView
+        print(view0.value)
+        let startTime = view1.timePicker.date.timeIntervalSince1970 //Double
+        print(startTime)
+        print(view3.value)
+
+
 //        if reminderNotificationData[reminderViewData[0].title]! > 0 {
 //            userNotificationCenter.getPendingNotificationRequests { n in
 //                print(n.count)
@@ -79,6 +92,7 @@ final class DailyReminderViewController: UIViewController {
     }
     // MARK: sendNotification
     private func setupsendNotification() {
+        print("setupsendNotification")
 //        quoteController.fetchQuotesFromCoreData { quotes, error in
 //            if let error = error {
 //                NSLog("\(error)")
@@ -162,13 +176,13 @@ final class DailyReminderViewController: UIViewController {
         let splitView1 = createSplitView()
         let splitView2 = createSplitView()
         
-        let remindersView = createReminderView(0)
-        let startView = createReminderView(1)
+        remindersView = createReminderView(0)
+        startView = createReminderView(1)
 //        let stopView = createReminderView(1)
-        let typeView = createReminderView(3)
-        let views = [finishButton, titleLabel, descriptionLabel, remindersView, splitView1,startView, splitView2, typeView]
+        soundSelectView = createReminderView(3)
+        let views = [finishButton, titleLabel, descriptionLabel, remindersView, splitView1,startView, splitView2, soundSelectView]
         
-        let mainStackView = UIStackView(arrangedSubviews: views)
+        let mainStackView = UIStackView(arrangedSubviews: views as! [UIView])
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         mainStackView.axis = .vertical
         mainStackView.alignment = .top
