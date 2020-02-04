@@ -143,9 +143,6 @@ extension QuoteController {
 
                 completion(quotes, nil)
             }
-        } else {
-            fatalError("firestore.lastQueryDocumentSnapshot")
         }
     }
-
 }
