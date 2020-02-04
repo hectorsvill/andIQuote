@@ -246,6 +246,7 @@ extension QuoteCollectionViewController: UNUserNotificationCenterDelegate {
         DispatchQueue.main.async {
             let index = IndexPath(item: index, section: 0)
             self.collectionView.scrollToItem(at: index, at: .left, animated: false)
+            self.collectionView.reloadData()
         }
         completionHandler()
     }

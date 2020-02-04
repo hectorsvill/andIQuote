@@ -9,12 +9,8 @@
 import UIKit
 
 class DailyReminderView: UIView {
-    var stackView: UIStackView!
     var deleagate: ReminderCellButtonPressedDelegate?
-    
-    var reminderViewData: ReminderViewData? {
-        didSet { setupViews() }
-    }
+    var config: Int! { didSet { setupViews() } }
     
     // MARK: descriptionLabel
     var descriptionLabel: UILabel = {
@@ -48,18 +44,35 @@ class DailyReminderView: UIView {
         button.tag = 1
         return button
     }()
+
+    var timePicker: UIDatePicker = {
+        let timepicker = UIDatePicker()
+        timepicker.translatesAutoresizingMaskIntoConstraints = false
+        timepicker.datePickerMode = .time
+        timepicker.layer.cornerRadius = 4
+        return timepicker
+    }()
+
     // MARK: setupViews
     private func setupViews() {
         backgroundColor = .clear
-        guard let reminderCell = reminderViewData else { return }
-        
-        descriptionLabel.text = reminderCell.title
+
         setupSteperDescriptionText()
+        setupDescriptionLabel()
         steperDescriptionLabel.widthAnchor.constraint(equalToConstant: 80).isActive = true
-        
-        stackView = UIStackView(arrangedSubviews: [descriptionLabel, minusButton,steperDescriptionLabel, plussButton])
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        timePicker.widthAnchor.constraint(equalToConstant: 175).isActive = true
+        let stackView = UIStackView(arrangedSubviews: [descriptionLabel])
+
+        if config == 1 {
+            stackView.addArrangedSubview(timePicker)
+        } else {
+            stackView.addArrangedSubview(minusButton)
+            stackView.addArrangedSubview(steperDescriptionLabel)
+            stackView.addArrangedSubview(plussButton)
+        }
+
         stackView.axis = .horizontal
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = 8
         
         minusButton.addTarget(self, action: #selector(plusminusbuttonPressed(_:)), for: .touchUpInside)
@@ -74,33 +87,53 @@ class DailyReminderView: UIView {
             stackView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor),
         ])
     }
+    // MARK: setupDescriptionLabel
+    private func setupDescriptionLabel() {
+        guard let config = config else { return }
+        var descriptionText = ""
+
+        switch config {
+        case 0:
+            descriptionText = "Reminders"
+        case 1:
+            descriptionText = "Start Time:"
+        case 2:
+            descriptionText = "End Time"
+        case 3:
+            descriptionText = "Sound"
+        default:
+            fatalError("setupDescriptionLabel - out of range")
+        }
+
+        descriptionLabel.text = descriptionText
+    }
     // MARK: setupSteperDescriptionText
     private func setupSteperDescriptionText() {
-        guard let reminderViewData = reminderViewData else { return }
-        if reminderViewData.title == "Reminders" || reminderViewData.title == "Sound" {
-             steperDescriptionLabel.text = "\(reminderViewData.value)X"
-        } else if descriptionLabel.text == "Start Time" || descriptionLabel.text == "End Time"  {
-             steperDescriptionLabel.text = "\(reminderViewData.value):00"
+        switch config {
+        case 0:
+            steperDescriptionLabel.text = "0X"
+        case 1:
+            print("time picker")
+        case 2:
+            print("time picker")
+        case 3:
+            steperDescriptionLabel.text = "0X"
+        default:
+            fatalError("setupSteperDescriptionText - out of range")
         }
         
     }
     // MARK: plusminusbuttonPressed
     @objc func plusminusbuttonPressed(_ sender: UIButton) {
-        guard let reminderViewData = reminderViewData else { return }
-        
-        if reminderViewData.title == "Reminders" || reminderViewData.title == "Sound" {
-            if reminderViewData.value >= 1 && reminderViewData.value <= 4 || reminderViewData.value == 0 && sender.tag == 1 || reminderViewData.value == 5 && sender.tag == 0 {
-                reminderViewData.value = sender.tag == 0 ?  reminderViewData.value - 1 : reminderViewData.value + 1
-                setupSteperDescriptionText()
-                deleagate?.plusminusbuttonPressed(reminderViewData: reminderViewData, tag: sender.tag)
-            }
-        } else if reminderViewData.title == "Start Time" || reminderViewData.title == "End Time" {
-            if reminderViewData.value >= 1 && reminderViewData.value <= 18 ||  reminderViewData.value == 0 && sender.tag == 1 || reminderViewData.value == 19 && sender.tag == 0 {
-                reminderViewData.value = sender.tag == 0 ?  reminderViewData.value - 1 : reminderViewData.value + 1
-                setupSteperDescriptionText()
-                deleagate?.plusminusbuttonPressed(reminderViewData: reminderViewData, tag: sender.tag)
-            }
+        print("sender with tag: \(sender.tag)")
+
+        if sender.tag == 0 {
+
+
+        } else {
         }
+
+        steperDescriptionLabel.text = "\(0)X"
     }
 }
 

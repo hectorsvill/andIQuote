@@ -10,7 +10,6 @@ import EventKit
 import UIKit
 
 final class DailyReminderViewController: UIViewController {
-    var reminderViewData = [ReminderViewData]()
     var quoteController: QuoteController!
     var reminderNotificationData: [String: Int] = [:]
     var userNotificationCenter: UNUserNotificationCenter! //= UNUserNotificationCenter.current()
@@ -46,7 +45,6 @@ final class DailyReminderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGray6
-        createReminderViewlData()
         setupLayouts()
         requestNotificationAuthorization()
         view.setBackground(to: quoteController.background)
@@ -54,16 +52,16 @@ final class DailyReminderViewController: UIViewController {
     // MARK:viewWillDisappear
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        if reminderNotificationData[reminderViewData[0].title]! > 0 {
-            userNotificationCenter.getPendingNotificationRequests { n in
-                print(n.count)
-                if n.count == 0 {
-                    self.setupsendNotification()
-                }
-            }
-        } else {
-            removeAllNotifications()
-        }
+//        if reminderNotificationData[reminderViewData[0].title]! > 0 {
+//            userNotificationCenter.getPendingNotificationRequests { n in
+//                print(n.count)
+//                if n.count == 0 {
+//                    self.setupsendNotification()
+//                }
+//            }
+//        } else {
+//            removeAllNotifications()
+//        }
     }
     // MARK: removeAllNotifications
     private func removeAllNotifications() {
@@ -81,21 +79,21 @@ final class DailyReminderViewController: UIViewController {
     }
     // MARK: sendNotification
     private func setupsendNotification() {
-        quoteController.fetchQuotesFromCoreData { quotes, error in
-            if let error = error {
-                NSLog("\(error)")
-            }
-
-            guard let quotes = quotes else { return }
-            let count = self.reminderNotificationData["Reminders"]!
-            let startTime = self.reminderNotificationData["Start Time"]!
-            //let endTime = self.reminderNotificationData["End Time"]!
-            for i in 0..<count {
-                if let randomQuote = quotes.randomElement() {
-                    self.createNotification(startTime + i, quote: randomQuote)
-                }
-            }
-        }
+//        quoteController.fetchQuotesFromCoreData { quotes, error in
+//            if let error = error {
+//                NSLog("\(error)")
+//            }
+//
+//            guard let quotes = quotes else { return }
+//            let count = self.reminderNotificationData["Reminders"]!
+//            let startTime = self.reminderNotificationData["Start Time"]!
+//            //let endTime = self.reminderNotificationData["End Time"]!
+//            for i in 0..<count {
+//                if let randomQuote = quotes.randomElement() {
+//                    self.createNotification(startTime + i, quote: randomQuote)
+//                }
+//            }
+//        }
      }
     // MARK: createNotification
     private func createNotification(_ hour: Int, quote: Quote) {
@@ -149,10 +147,10 @@ final class DailyReminderViewController: UIViewController {
         return splitView
     }
     // MARK: createReminderView
-    private func createReminderView(_ reminderCellData: ReminderViewData) -> UIView {
+    private func createReminderView(_ config: Int) -> UIView {
         let dailyReminderView = DailyReminderView()
         dailyReminderView.deleagate = self
-        dailyReminderView.reminderViewData = reminderCellData
+        dailyReminderView.config = config
         dailyReminderView.heightAnchor.constraint(equalToConstant: 75).isActive = true
         dailyReminderView.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
         return dailyReminderView
@@ -164,11 +162,11 @@ final class DailyReminderViewController: UIViewController {
         let splitView1 = createSplitView()
         let splitView2 = createSplitView()
         
-        let remindersView = createReminderView(reminderViewData[0])
-        let startView = createReminderView(reminderViewData[1])
-//        let stopView = createReminderView(reminderViewData[2])
-        let typeView = createReminderView(reminderViewData[3])
-        let views = [finishButton, titleLabel, descriptionLabel, remindersView, splitView1, startView, splitView2, typeView]
+        let remindersView = createReminderView(0)
+        let startView = createReminderView(1)
+//        let stopView = createReminderView(1)
+        let typeView = createReminderView(3)
+        let views = [finishButton, titleLabel, descriptionLabel, remindersView, splitView1,startView, splitView2, typeView]
         
         let mainStackView = UIStackView(arrangedSubviews: views)
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -197,9 +195,9 @@ extension DailyReminderViewController: ReminderCellButtonPressedDelegate {
         impactFeedback.impactOccurred()
     }
     
-    func plusminusbuttonPressed(reminderViewData: ReminderViewData, tag: Int) {
-        reminderNotificationData[reminderViewData.title] = reminderViewData.value
-        UserDefaults.standard.set(reminderNotificationData[reminderViewData.title], forKey: _dailyReminderKey + reminderViewData.title)
+    func plusminusbuttonPressed(tag: Int) {
+//        reminderNotificationData[reminderViewData.title] = reminderViewData.value
+//        UserDefaults.standard.set(reminderNotificationData[reminderViewData.title], forKey: _dailyReminderKey + reminderViewData.title)
         impactGesture(style: .rigid)
     }
 }
