@@ -11,12 +11,10 @@ import UIKit
 
 final class DailyReminderViewController: UIViewController {
     var quoteController: QuoteController!
-    var reminderNotificationData: [String: Int] = [:]
-    var userNotificationCenter: UNUserNotificationCenter! //= UNUserNotificationCenter.current()
+    var userNotificationCenter: UNUserNotificationCenter!
     var remindersView: DailyReminderView!
     var startView: DailyReminderView!
     var soundSelectView: DailyReminderView!
-
     let _dailyReminderKey = "DailyReminderViewController.reminderNotificationData"
     // MARK : finishButton
     var finishButton: UIButton = {
@@ -56,111 +54,8 @@ final class DailyReminderViewController: UIViewController {
     // MARK:viewWillDisappear
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        let reminmdersCount = remindersView.value
-        let startTime = startView.timePicker.date.timeIntervalSince1970 //Double
-        let soundValue = soundSelectView.value
-
-        let userDefaults = UserDefaults.standard
-        userDefaults.set(reminmdersCount, forKey: _dailyReminderKey + "Reminders:")
-        userDefaults.set(startTime, forKey: _dailyReminderKey + "Time:")
-        userDefaults.set(soundValue, forKey: _dailyReminderKey + "Sound:")
-
-//        if reminmdersCount > 0 {
-//            // setup reaquring notifications
-//
-//
-//        } else {
-//            removeAllNotifications()
-//        }
-
-
-//        if reminderNotificationData[reminderViewData[0].title]! > 0 {
-//            userNotificationCenter.getPendingNotificationRequests { n in
-//                print(n.count)
-//                if n.count == 0 {
-//                    self.setupsendNotification()
-//                }
-//            }
-//        } else {
-//            removeAllNotifications()
-//        }
+        configureNotifications()
     }
-    // MARK: removeAllNotifications
-    private func removeAllNotifications() {
-        userNotificationCenter.removeAllDeliveredNotifications()
-        userNotificationCenter.removeAllPendingNotificationRequests()
-    }
-    // MARK: requestNotificationAuthorization
-    private func requestNotificationAuthorization() {
-        let options = UNAuthorizationOptions.init(arrayLiteral: .alert, .sound)
-        userNotificationCenter.requestAuthorization(options: options) { bool, error in
-            if let error = error {
-                NSLog("\(error)")
-            }
-        }
-    }
-    // MARK: sendNotification
-    private func setupsendNotification() {
-        print("setupsendNotification")
-//        quoteController.fetchQuotesFromCoreData { quotes, error in
-//            if let error = error {
-//                NSLog("\(error)")
-//            }
-//
-//            guard let quotes = quotes else { return }
-//            let count = self.reminderNotificationData["Reminders"]!
-//            let startTime = self.reminderNotificationData["Start Time"]!
-//            //let endTime = self.reminderNotificationData["End Time"]!
-//            for i in 0..<count {
-//                if let randomQuote = quotes.randomElement() {
-//                    self.createNotification(startTime + i, quote: randomQuote)
-//                }
-//            }
-//        }
-     }
-    // MARK: createNotification
-    private func createNotification(_ hour: Int, quote: Quote) {
-        let notificationContent = UNMutableNotificationContent()
-        notificationContent.title = quote.author!
-        notificationContent.body = quote.body!
-        
-        if self.reminderNotificationData["Sound"]! == 1 {
-            notificationContent.sound = .default
-        }
-        
-        switch self.reminderNotificationData["Sound"]! {
-        case 1:
-            notificationContent.sound = .defaultCriticalSound(withAudioVolume: 0.2)
-        case 2:
-            notificationContent.sound = .defaultCriticalSound(withAudioVolume: 0.4)
-        case 3:
-            notificationContent.sound = .defaultCriticalSound(withAudioVolume: 0.6)
-        case 4:
-            notificationContent.sound = .defaultCriticalSound(withAudioVolume: 0.8)
-        case 5:
-            notificationContent.sound = .defaultCriticalSound(withAudioVolume: 1.0)
-        default:
-            notificationContent.sound = .none
-        }
-        
-        notificationContent.title = quote.author!
-        notificationContent.body = quote.body!
-        
-        var dateComponent = DateComponents()
-        dateComponent.hour = hour
-        dateComponent.minute = 0
-        let t = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
-//        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: true)
-        let request = UNNotificationRequest(identifier: quote.id!, content: notificationContent, trigger: t)
-
-        self.userNotificationCenter.add(request) { error in
-            if let error = error {
-                NSLog("\(error)")
-            }
-        }
-    }
-    
     // MARK: createSplitView
     private func createSplitView() -> UIView{
         let splitView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 2))
@@ -185,17 +80,10 @@ final class DailyReminderViewController: UIViewController {
         
         let splitView1 = createSplitView()
         let splitView2 = createSplitView()
-
-
-        let userDefaults = UserDefaults.standard
-        
         remindersView = createReminderView(0)
-        remindersView.value = userDefaults.integer(forKey: _dailyReminderKey + "Reminders:")
         startView = createReminderView(1)
-        startView.value = userDefaults.integer(forKey: _dailyReminderKey + "Time:") //Double
-//        let stopView = createReminderView(1)
+        //let stopView = createReminderView(1)
         soundSelectView = createReminderView(3)
-        soundSelectView.value = userDefaults.integer(forKey: _dailyReminderKey + "Sound:")
         let views = [finishButton, titleLabel, descriptionLabel, remindersView, splitView1,startView, splitView2, soundSelectView]
         
         let mainStackView = UIStackView(arrangedSubviews: views as! [UIView])
@@ -220,14 +108,84 @@ final class DailyReminderViewController: UIViewController {
 }
 // MARK: ReminderCellButtonPressedDelegate
 extension DailyReminderViewController: ReminderCellButtonPressedDelegate {
+    func plusminusbuttonPressed(config: Int, value: Int) {
+        let userDefaults = UserDefaults.standard
+        if config == 0{
+            userDefaults.set(value, forKey: _dailyReminderKey + "Reminders:")
+        }else if config == 1{
+            userDefaults.set(value, forKey: _dailyReminderKey + "Time:")
+        } else if config == 3{
+            userDefaults.set(value, forKey: _dailyReminderKey + "Sound:")
+        }
+        impactGesture(style: .rigid)
+    }
+
     private func impactGesture(style: UIImpactFeedbackGenerator.FeedbackStyle = .light) {
         let impactFeedback = UIImpactFeedbackGenerator(style: style)
         impactFeedback.impactOccurred()
     }
-    
-    func plusminusbuttonPressed(tag: Int) {
-//        reminderNotificationData[reminderViewData.title] = reminderViewData.value
-//        UserDefaults.standard.set(reminderNotificationData[reminderViewData.title], forKey: _dailyReminderKey + reminderViewData.title)
-        impactGesture(style: .rigid)
+}
+
+// MARK: Notifications
+extension DailyReminderViewController {
+    // MARK: requestNotificationAuthorization
+    private func requestNotificationAuthorization() {
+        let options = UNAuthorizationOptions.init(arrayLiteral: .alert, .sound)
+        userNotificationCenter.requestAuthorization(options: options) { bool, error in
+            if let error = error {
+                NSLog("\(error)")
+            }
+        }
     }
+    // MARK: configureNotifications
+    private func configureNotifications() {
+        let remindersCount = remindersView.value
+        let startTime = startView.timePicker.date.timeIntervalSince1970
+        let soundTime = soundSelectView.value
+
+        if remindersCount == 0 {
+            userNotificationCenter.removeAllDeliveredNotifications()
+            userNotificationCenter.removeAllPendingNotificationRequests()
+        } else {
+            //setup notifications
+            print(startTime, soundTime)
+        }
+    }
+    // MARK: createNotification
+//    private func createNotification(_ hour: Int, quote: Quote) {
+//        let notificationContent = UNMutableNotificationContent()
+//        notificationContent.title = quote.author!
+//        notificationContent.body = quote.body!
+//
+//        //        switch self.reminderNotificationData["Sound"]! {
+//        //        case 1:
+//        //            notificationContent.sound = .defaultCriticalSound(withAudioVolume: 0.2)
+//        //        case 2:
+//        //            notificationContent.sound = .defaultCriticalSound(withAudioVolume: 0.4)
+//        //        case 3:
+//        //            notificationContent.sound = .defaultCriticalSound(withAudioVolume: 0.6)
+//        //        case 4:
+//        //            notificationContent.sound = .defaultCriticalSound(withAudioVolume: 0.8)
+//        //        case 5:
+//        //            notificationContent.sound = .defaultCriticalSound(withAudioVolume: 1.0)
+//        //        default:
+//        //            notificationContent.sound = .none
+//        //        }
+//
+//        otificationContent.title = quote.author!
+//        notificationContent.body = quote.body!
+//
+//        var dateComponent = DateComponents()
+//        dateComponent.hour = hour
+//        dateComponent.minute = 0
+//        let t = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+//        //        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: true)
+//        let request = UNNotificationRequest(identifier: quote.id!, content: notificationContent, trigger: t)
+//
+//        self.userNotificationCenter.add(request) { error in
+//            if let error = error {
+//                NSLog("\(error)")
+//            }
+//        }
+//    }
 }

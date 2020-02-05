@@ -52,16 +52,14 @@ class DailyReminderView: UIView {
         timepicker.translatesAutoresizingMaskIntoConstraints = false
         timepicker.datePickerMode = .time
         timepicker.layer.cornerRadius = 4
+        timepicker.addTarget(self, action: #selector(timePickerValueChanged), for: .valueChanged)
         return timepicker
     }()
     // MARK: setupViews
     private func setupViews() {
-        backgroundColor = .clear
-
         setupDescriptionLabel()
         setupSteperDescriptionText()
-        steperDescriptionLabel.widthAnchor.constraint(equalToConstant: 80).isActive = true
-        timePicker.widthAnchor.constraint(equalToConstant: 175).isActive = true
+
         let stackView = UIStackView(arrangedSubviews: [descriptionLabel])
 
         if config == 1 {
@@ -82,6 +80,8 @@ class DailyReminderView: UIView {
         addSubview(stackView)
         
         NSLayoutConstraint.activate([
+            timePicker.widthAnchor.constraint(equalToConstant: 175),
+            steperDescriptionLabel.widthAnchor.constraint(equalToConstant: 80),
             stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             stackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             stackView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 8),
@@ -113,18 +113,11 @@ class DailyReminderView: UIView {
         let key = _dailyReminderKey + descriptionLabel.text!
         value = UserDefaults.standard.integer(forKey: key)
 
-        switch config {
-        case 0:
-            steperDescriptionLabel.text = "\(value)X"
-        case 1:
+        if config == 1 {
             let date = value == 0 ? Date() : Date(timeIntervalSince1970: Double(value))
             timePicker.date = date
-        case 2:
-            print("time picker")
-        case 3:
+        } else {
             steperDescriptionLabel.text = "\(value)X"
-        default:
-            fatalError("setupSteperDescriptionText - out of range")
         }
         
     }
@@ -135,8 +128,13 @@ class DailyReminderView: UIView {
         if newValue >= 0 && newValue <= 5 {
             value = newValue
             steperDescriptionLabel.text = "\(value)X"
+            deleagate?.plusminusbuttonPressed(config: config!, value: value)
         }
     }
+   // MARK: timePickerValueChanged
+    @objc func timePickerValueChanged() {
+        value = Int(timePicker.date.timeIntervalSince1970)
+        deleagate?.plusminusbuttonPressed(config: config, value: value)
+    }
+
 }
-
-

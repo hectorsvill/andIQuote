@@ -127,7 +127,6 @@ extension QuoteCollectionViewController: UICollectionViewDelegateFlowLayout {
                 if let error = error {
                     NSLog("\(error)")
                 }
-                
                 self.createSnapShot()
             }
         }
@@ -223,6 +222,7 @@ extension QuoteCollectionViewController {
         let dailyReminderVC = DailyReminderViewController()
         dailyReminderVC.userNotificationCenter = userNotificationCenter
         dailyReminderVC.quoteController = quoteController
+        dailyReminderVC.view.setBackground(to: quoteController.background)
         present(dailyReminderVC, animated: true)
         
     }
@@ -253,7 +253,6 @@ extension QuoteCollectionViewController: UNUserNotificationCenterDelegate {
 
     func findIndex(_ id: String) -> Int {
         let items = dataSource.snapshot().itemIdentifiers
-
         for (i, item) in items.enumerated() {
             if item.id == id {
                 return i
