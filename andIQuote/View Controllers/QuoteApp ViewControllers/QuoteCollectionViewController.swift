@@ -241,8 +241,9 @@ extension QuoteCollectionViewController {
 // MARK: UNUserNotificationCenterDelegate
 extension QuoteCollectionViewController: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        let id = response.notification.request.identifier
-        let index = findIndex(id)
+        let notification = response.notification
+        let id = notification.request.identifier
+        let index = fetchQuoteIndex(id)
 
         DispatchQueue.main.async {
             let index = IndexPath(item: index, section: 0)
@@ -250,16 +251,16 @@ extension QuoteCollectionViewController: UNUserNotificationCenterDelegate {
             self.collectionView.reloadData()
         }
 
+        let badge = notification.request.content.badge as! Int
+        print(badge)
         completionHandler()
     }
 
-    private func findIndex(_ id: String) -> Int {
+    private func fetchQuoteIndex(_ id: String) -> Int {
         let items = dataSource.snapshot().itemIdentifiers
-
+        
         for (i, item) in items.enumerated() {
-            if item.id == id {
-                return i
-            }
+            if item.id == id { return i }
         }
 
         return 0
