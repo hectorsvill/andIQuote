@@ -222,6 +222,7 @@ extension QuoteCollectionViewController {
         let dailyReminderVC = DailyReminderViewController()
         dailyReminderVC.userNotificationCenter = userNotificationCenter
         dailyReminderVC.quoteController = quoteController
+        dailyReminderVC.currentQuotes = dataSource.snapshot().itemIdentifiers
         dailyReminderVC.view.setBackground(to: quoteController.background)
         present(dailyReminderVC, animated: true)
         
@@ -237,22 +238,24 @@ extension QuoteCollectionViewController {
         impactFeedback.impactOccurred()
     }
 }
-
-
+// MARK: UNUserNotificationCenterDelegate
 extension QuoteCollectionViewController: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let id = response.notification.request.identifier
         let index = findIndex(id)
+
         DispatchQueue.main.async {
             let index = IndexPath(item: index, section: 0)
             self.collectionView.scrollToItem(at: index, at: .left, animated: false)
             self.collectionView.reloadData()
         }
+
         completionHandler()
     }
 
-    func findIndex(_ id: String) -> Int {
+    private func findIndex(_ id: String) -> Int {
         let items = dataSource.snapshot().itemIdentifiers
+
         for (i, item) in items.enumerated() {
             if item.id == id {
                 return i

@@ -18,11 +18,13 @@ class QuoteController {
     private (set) var _quoteIndex = UserDefaults.standard.integer(forKey: "QIndex") // current index of quote
     var _backgroundIndex = UserDefaults.standard.integer(forKey: "BgIndex") // current index of background
     private (set) var quoteUser: QuoteUser?
-
+    var remindersCount = UserDefaults.standard.integer(forKey: "DailyReminderViewController.reminderNotificationData" + "Reminders:")
+    var remindersStartTime = UserDefaults.standard.integer(forKey: "DailyReminderViewController.reminderNotificationData" + "Time:")
     init() {
         if let user = Auth.auth().currentUser {
             self.quoteUser = QuoteUser(id: user.uid)
         }
+        print(remindersCount)
     }
 }
 extension QuoteController {
@@ -47,7 +49,6 @@ extension QuoteController {
         } else if newValue <= -1 {
             _backgroundIndex = backgrounds.count - 1
         }
-//        _backgroundIndex =  newValue > -1 && newValue < backgrounds.count ? newValue : _backgroundIndex
         UserDefaults.standard.set(_backgroundIndex, forKey: "BgIndex")
     }
     // MARK: quoteForegroundColor
@@ -112,7 +113,6 @@ extension QuoteController {
                 _ = try moc.fetch(quoteFetch)
                 let quotes = try quoteFetch.execute()
                 completion(quotes, nil)
-                        
             }catch {
                 completion(nil, error)
             }

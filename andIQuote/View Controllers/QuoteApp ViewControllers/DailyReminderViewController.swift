@@ -11,6 +11,7 @@ import UIKit
 
 final class DailyReminderViewController: UIViewController {
     var quoteController: QuoteController!
+    var currentQuotes: [Quote]!
     var userNotificationCenter: UNUserNotificationCenter!
     var remindersView: DailyReminderView!
     var startView: DailyReminderView!
@@ -139,53 +140,55 @@ extension DailyReminderViewController {
     }
     // MARK: configureNotifications
     private func configureNotifications() {
-        let remindersCount = remindersView.value
-        let startTime = startView.timePicker.date.timeIntervalSince1970
-        let soundTime = soundSelectView.value
-
-        if remindersCount == 0 {
+        if remindersView.value == 0 {
             userNotificationCenter.removeAllDeliveredNotifications()
             userNotificationCenter.removeAllPendingNotificationRequests()
-        } else {
-            //setup notifications
-            print(startTime, soundTime)
+        } else if quoteController.remindersCount != remindersView.value || quoteController.remindersStartTime != startView.value {
+            userNotificationCenter.removeAllDeliveredNotifications()
+            userNotificationCenter.removeAllPendingNotificationRequests()
+
+            guard let random_Quote = currentQuotes.randomElement() else {
+                // TODO: create uialerts for error
+                return
+            }
+
+            createNotification(with: random_Quote, badge: NSNumber(integerLiteral: 1))
         }
     }
     // MARK: createNotification
-//    private func createNotification(_ hour: Int, quote: Quote) {
-//        let notificationContent = UNMutableNotificationContent()
-//        notificationContent.title = quote.author!
-//        notificationContent.body = quote.body!
-//
-//        //        switch self.reminderNotificationData["Sound"]! {
-//        //        case 1:
-//        //            notificationContent.sound = .defaultCriticalSound(withAudioVolume: 0.2)
-//        //        case 2:
-//        //            notificationContent.sound = .defaultCriticalSound(withAudioVolume: 0.4)
-//        //        case 3:
-//        //            notificationContent.sound = .defaultCriticalSound(withAudioVolume: 0.6)
-//        //        case 4:
-//        //            notificationContent.sound = .defaultCriticalSound(withAudioVolume: 0.8)
-//        //        case 5:
-//        //            notificationContent.sound = .defaultCriticalSound(withAudioVolume: 1.0)
-//        //        default:
-//        //            notificationContent.sound = .none
-//        //        }
-//
-//        otificationContent.title = quote.author!
-//        notificationContent.body = quote.body!
-//
-//        var dateComponent = DateComponents()
-//        dateComponent.hour = hour
-//        dateComponent.minute = 0
+    private func createNotification(with quote: Quote, badge: NSNumber) {
+        let startTime = startView.timePicker.date
+        let soundValue = soundSelectView.value
+
+        let notificationContent = UNMutableNotificationContent()
+        notificationContent.title = quote.author!
+        notificationContent.body = quote.body!
+        notificationContent.badge = badge
+
+        switch soundValue{
+            case 1:
+                notificationContent.sound = .defaultCriticalSound(withAudioVolume: 0.2)
+            case 2:
+                notificationContent.sound = .defaultCriticalSound(withAudioVolume: 0.4)
+            case 3:
+                notificationContent.sound = .defaultCriticalSound(withAudioVolume: 0.6)
+            case 4:
+                notificationContent.sound = .defaultCriticalSound(withAudioVolume: 0.8)
+            case 5:
+                notificationContent.sound = .defaultCriticalSound(withAudioVolume: 1.0)
+            default:
+                notificationContent.sound = .none
+        }
+
+        let calendarComponents = Calendar.current.dateComponents([.minute, .hour, .day], from: startTime)
 //        let t = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
-//        //        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: true)
-//        let request = UNNotificationRequest(identifier: quote.id!, content: notificationContent, trigger: t)
-//
-//        self.userNotificationCenter.add(request) { error in
-//            if let error = error {
-//                NSLog("\(error)")
-//            }
-//        }
-//    }
+        let dateTrigger = UNCalendarNotificationTrigger(dateMatching: calendarComponents, repeats: true)
+        let request = UNNotificationRequest(identifier: quote.id!, content: notificationContent, trigger: dateTrigger)
+
+        userNotificationCenter.add(request) { error in
+            if let error = error {
+                NSLog("Error: \(error)")
+            }
+        }
+    }
 }
