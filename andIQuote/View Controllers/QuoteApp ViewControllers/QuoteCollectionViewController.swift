@@ -55,9 +55,8 @@ final class QuoteCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         title = quoteController.trademarkAttributedString.string
         setupViews()
-        configureDataSource()
+
         setupNavButtons()
-        createSnapShot()
         self.loadLastIndex()
 
         activityIndicator.center = self.view.center
@@ -66,7 +65,14 @@ final class QuoteCollectionViewController: UICollectionViewController {
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
         userNotificationCenter.delegate = self
+
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("viewWillAppear")
+    }
+
     // MARK: loadLastIndex
     private func loadLastIndex() {
         DispatchQueue.main.async {
@@ -82,6 +88,8 @@ final class QuoteCollectionViewController: UICollectionViewController {
         collectionView.setBackground(to: quoteController.background)
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(QuoteCollectionViewCell.self, forCellWithReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier)
+        configureDataSource()
+        createSnapShot()
     }
     // MARK: configureDataSource
     private func configureDataSource() {
@@ -253,6 +261,7 @@ extension QuoteCollectionViewController: UNUserNotificationCenterDelegate {
             let index = IndexPath(item: index, section: 0)
             self.collectionView.scrollToItem(at: index, at: .left, animated: false)
             self.collectionView.reloadData()
+//            self.shareButtonTapped()
             self.addNextNotification(with: notification.request.content)
         }
 
@@ -269,7 +278,7 @@ extension QuoteCollectionViewController: UNUserNotificationCenterDelegate {
             notificationContent.body = quote.body!
             notificationContent.badge = NSNumber(integerLiteral: badge + 1)
             notificationContent.sound = content.sound
-            let timeIntervalTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 360, repeats: false)
+            let timeIntervalTrigger = UNTimeIntervalNotificationTrigger(timeInterval: quoteController.reminderTimeIntervalSeconds, repeats: false)
             let request = UNNotificationRequest(identifier: quote.id!, content: notificationContent, trigger: timeIntervalTrigger)
             userNotificationCenter.add(request) { error in
                 if let error = error {

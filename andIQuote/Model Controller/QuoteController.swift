@@ -20,6 +20,8 @@ class QuoteController {
     private (set) var quoteUser: QuoteUser?
     var remindersCount = UserDefaults.standard.integer(forKey: "DailyReminderViewController.reminderNotificationData" + "Reminders:")
     var remindersStartTime = UserDefaults.standard.integer(forKey: "DailyReminderViewController.reminderNotificationData" + "Time:")
+    var reminderTimeIntervalSeconds: Double = 60
+
     init() {
         if let user = Auth.auth().currentUser {
             self.quoteUser = QuoteUser(id: user.uid)
