@@ -249,13 +249,33 @@ extension QuoteCollectionViewController: UNUserNotificationCenterDelegate {
             let index = IndexPath(item: index, section: 0)
             self.collectionView.scrollToItem(at: index, at: .left, animated: false)
             self.collectionView.reloadData()
+            self.addNextNotification(with: notification.request.content)
         }
 
-        let badge = notification.request.content.badge as! Int
-        print(badge)
         completionHandler()
     }
-
+    // MARK: addNextNotification
+    private func addNextNotification(with content: UNNotificationContent) {
+        let badge = content.badge as! Int
+        
+        if badge <= quoteController.remindersCount {
+            let quote = dataSource.snapshot().itemIdentifiers.randomElement()!
+            let notificationContent = UNMutableNotificationContent()
+            notificationContent.title = quote.author!
+            notificationContent.body = quote.body!
+            notificationContent.badge = NSNumber(integerLiteral: badge + 1)
+            notificationContent.sound = content.sound
+            let timeIntervalTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+            let request = UNNotificationRequest(identifier: quote.id!, content: notificationContent, trigger: timeIntervalTrigger)
+            userNotificationCenter.add(request) { error in
+                if let error = error {
+                    // TODO: create uialert with error
+                    NSLog("Error: \(error)")
+                }
+            }
+        }
+    }
+    // MARK: fetchQuoteIndex
     private func fetchQuoteIndex(_ id: String) -> Int {
         let items = dataSource.snapshot().itemIdentifiers
         
@@ -265,4 +285,6 @@ extension QuoteCollectionViewController: UNUserNotificationCenterDelegate {
 
         return 0
     }
+
+
 }
