@@ -265,7 +265,7 @@ extension QuoteCollectionViewController: UNUserNotificationCenterDelegate {
             notificationContent.body = quote.body!
             notificationContent.badge = NSNumber(integerLiteral: badge + 1)
             notificationContent.sound = content.sound
-            let timeIntervalTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+            let timeIntervalTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 360, repeats: false)
             let request = UNNotificationRequest(identifier: quote.id!, content: notificationContent, trigger: timeIntervalTrigger)
             userNotificationCenter.add(request) { error in
                 if let error = error {
