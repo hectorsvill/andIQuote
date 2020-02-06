@@ -18,33 +18,16 @@ final class MainContainerViewController: UIViewController {
         super.viewDidLoad()
         configureHomeController()
     }
-    // MARK: createFlowLayout
-    func createFlowLayout() -> UICollectionViewFlowLayout {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .horizontal
-        return flowLayout
-    }
-    // MARK: configureHomeController
-    func configureHomeController() {
-        let homeController = QuoteCollectionViewController(collectionViewLayout: createFlowLayout())
-        homeController.quoteController = quoteController
-        let navigationController = UINavigationController(rootViewController: homeController)
-        centerNavViewController = navigationController
-        homeController.delegate = self
-        view.addSubview(centerNavViewController.view)
-        addChild(centerNavViewController)
-        centerNavViewController.didMove(toParent: self)
-    }
-    // MARK:configureSlideMenuViewController
-    func configureSlideMenuViewController() {
-        if menuViewController == nil {
-            menuViewController = SlideMenuViewController()
-            menuViewController.delegateHomeControllerView = self
-            menuViewController.quoteController = quoteController
-            view.insertSubview(menuViewController.view, at: 0)
-            addChild(menuViewController)
-            menuViewController.didMove(toParent: self)
+}
+// MARK: HomeControllerViewDelegate
+extension MainContainerViewController: HomeControllerViewDelegate {
+    func handleMenuToggle() {
+        if !quoteController.menuNavigationIsExpanded {
+            configureSlideMenuViewController()
         }
+
+        quoteController.menuNavigationIsExpanded.toggle()
+        showMenuController(shouldExpand: quoteController.menuNavigationIsExpanded)
     }
     // MARK: showMenuController
     func showMenuController(shouldExpand: Bool) {
@@ -61,20 +44,41 @@ final class MainContainerViewController: UIViewController {
         }
     }
 }
-// MARK: HomeControllerViewDelegate
-extension MainContainerViewController: HomeControllerViewDelegate {
-    func handleMenuToggle() {
-        if !quoteController.menuNavigationIsExpanded {
-            configureSlideMenuViewController()
-        }
-        
-        quoteController.menuNavigationIsExpanded.toggle()
-        showMenuController(shouldExpand: quoteController.menuNavigationIsExpanded)
+extension MainContainerViewController {
+    // MARK: createFlowLayout
+    func createFlowLayout() -> UICollectionViewFlowLayout {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        return flowLayout
     }
+    // MARK: configureHomeController
+    func configureHomeController() {
+        let homeController = QuoteCollectionViewController(collectionViewLayout: createFlowLayout())
+        homeController.quoteController = quoteController
+        homeController.delegate = self
+        let navigationController = UINavigationController(rootViewController: homeController)
+        centerNavViewController = navigationController
+        view.addSubview(centerNavViewController.view)
+        addChild(centerNavViewController)
+        centerNavViewController.didMove(toParent: self)
+    }
+    // MARK:configureSlideMenuViewController
+    func configureSlideMenuViewController() {
+        if menuViewController == nil {
+            menuViewController = SlideMenuViewController()
+            menuViewController.delegateHomeControllerView = self
+            menuViewController.quoteController = quoteController
+            view.insertSubview(menuViewController.view, at: 0)
+            addChild(menuViewController)
+            menuViewController.didMove(toParent: self)
+        }
+    }
+
 }
+
 // MARK: SlideMenuEventsDelegate
 extension MainContainerViewController: SlideMenuEventsDelegate {
     func handleSlideMenuEvents(_ index: Int) {
-        
+        // send user to a view depending on index
     }
 }

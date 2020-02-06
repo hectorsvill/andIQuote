@@ -20,7 +20,7 @@ class QuoteController {
     private (set) var quoteUser: QuoteUser?
     var remindersCount = UserDefaults.standard.integer(forKey: "DailyReminderViewController.reminderNotificationData" + "Reminders:")
     var remindersStartTime = UserDefaults.standard.integer(forKey: "DailyReminderViewController.reminderNotificationData" + "Time:")
-    var reminderTimeIntervalSeconds: Double = 60
+    var reminderTimeIntervalSeconds: Double = 3600 // 1 hour 
 
     init() {
         if let user = Auth.auth().currentUser {
@@ -135,12 +135,6 @@ extension QuoteController {
                     let doc  = doc.data() as [String: Any]
                     let quote = Quote(data: doc)
                     quotes.append(quote)
-                }
-
-                do {
-                    try CoreDataStack.shared.save()
-                } catch  {
-                    completion(nil, error)
                 }
 
                 completion(quotes, nil)

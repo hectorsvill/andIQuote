@@ -59,7 +59,7 @@ extension FirestoreController {
     @discardableResult
     private func fetchQuotesFromSnapShotSaveToCoreData( _ documents: [QueryDocumentSnapshot]) -> [Quote]{
         var quotes = [Quote]()
-        
+
         for doc in documents {
             let data = doc.data() as [String: Any]
             let quote = Quote(data: data)
@@ -71,7 +71,7 @@ extension FirestoreController {
         } catch {
             NSLog("error")
         }
-        
+
         return quotes
     }
     
