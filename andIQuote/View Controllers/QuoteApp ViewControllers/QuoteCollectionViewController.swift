@@ -240,6 +240,10 @@ extension QuoteCollectionViewController {
 }
 // MARK: UNUserNotificationCenterDelegate
 extension QuoteCollectionViewController: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound])
+    }
+
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let notification = response.notification
         let id = notification.request.identifier
@@ -285,6 +289,4 @@ extension QuoteCollectionViewController: UNUserNotificationCenterDelegate {
 
         return 0
     }
-
-
 }
