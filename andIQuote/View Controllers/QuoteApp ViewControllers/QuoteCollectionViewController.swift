@@ -128,17 +128,25 @@ extension QuoteCollectionViewController: UICollectionViewDelegateFlowLayout {
         let currentIndex = Int(targetContentOffset.pointee.x / view.frame.width)
         quoteController.setIndex(currentIndex)
         
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let numberOfItems = dataSource.snapshot().numberOfItems
 
-        if currentIndex == numberOfItems - 1 {
-            quoteController.getNextQuote { _ , error in
-                if let error = error {
-                    NSLog("\(error)")
-                }
-                self.createSnapShot()
-            }
+        if indexPath.item == numberOfItems - 1 {
+            perform(#selector(fetchNextQuotes), with: nil)
         }
     }
+
+    @objc func fetchNextQuotes() {
+        quoteController.getNextQuote { _ , error in
+            if let error = error {
+                NSLog("\(error)")
+            }
+            self.createSnapShot()
+        }
+    }
+
     // MARK: minimumLineSpacingForSectionAt
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0

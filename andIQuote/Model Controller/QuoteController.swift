@@ -27,6 +27,10 @@ class QuoteController {
             self.quoteUser = QuoteUser(id: user.uid)
         }
         print(remindersCount)
+
+
+
+        
     }
 }
 extension QuoteController {
