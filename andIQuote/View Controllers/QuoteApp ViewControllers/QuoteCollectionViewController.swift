@@ -107,8 +107,8 @@ final class QuoteCollectionViewController: UICollectionViewController {
             if let error = error {
                 NSLog("\(error)")
             }
-            var snapShot = QuoteSourceSnapShot()
             DispatchQueue.main.async {
+                var snapShot = QuoteSourceSnapShot()
                 snapShot.appendSections([.main])
                 snapShot.appendItems(quotes ?? [])
                 self.dataSource.apply(snapShot, animatingDifferences: false)
@@ -127,24 +127,6 @@ extension QuoteCollectionViewController: UICollectionViewDelegateFlowLayout {
     override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let currentIndex = Int(targetContentOffset.pointee.x / view.frame.width)
         quoteController.setIndex(currentIndex)
-        
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        let numberOfItems = dataSource.snapshot().numberOfItems
-
-        if indexPath.item == numberOfItems - 1 {
-            perform(#selector(fetchNextQuotes), with: nil)
-        }
-    }
-
-    @objc func fetchNextQuotes() {
-        quoteController.getNextQuote { _ , error in
-            if let error = error {
-                NSLog("\(error)")
-            }
-            self.createSnapShot()
-        }
     }
 
     // MARK: minimumLineSpacingForSectionAt
@@ -186,9 +168,9 @@ extension QuoteCollectionViewController {
         navigationController?.navigationBar.barTintColor = collectionView.backgroundColor
         navigationController?.navigationBar.barStyle = .default
         
-//        let menuImage = UIImage(systemName: "line.horizontal.3", withConfiguration: UIImage().mainViewSymbolConfig())
-//        navigationItem.leftBarButtonItem = UIBarButtonItem(image: menuImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(slideMenuButtonTapped))
-//        navigationItem.leftBarButtonItem?.tintColor = .label
+        let menuImage = UIImage(systemName: "line.horizontal.3", withConfiguration: UIImage().mainViewSymbolConfig())
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: menuImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(slideMenuButtonTapped))
+        navigationItem.leftBarButtonItem?.tintColor = .label
         
         let shareImage = UIImage(systemName: "square.and.arrow.up", withConfiguration: UIImage().mainViewSymbolConfig())
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: shareImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(shareButtonTapped))

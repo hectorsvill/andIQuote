@@ -108,6 +108,7 @@ extension QuoteController {
             }
         }
     }
+    
     // MARK: fetchQuotesFromCoreData
     func fetchQuotesFromCoreData(completion: @escaping ([Quote]?, Error?) -> ()){
         let moc = CoreDataStack.shared.mainContext
@@ -121,27 +122,6 @@ extension QuoteController {
                 completion(quotes, nil)
             }catch {
                 completion(nil, error)
-            }
-        }
-    }
-    // MARK: getNextQuote
-    func getNextQuote(completion: @escaping ([Quote]?, Error?) -> ()) {
-        if let last = firestore.lastQueryDocumentSnapshot {
-            firestore.quoteQuery.start(afterDocument: last).limit(to: 10).getDocuments { snapShot, error in
-                if let error = error {
-                    completion(nil, error)
-                }
-
-                guard let snapShot = snapShot else { return }
-
-                var quotes = [Quote]()
-                for doc in snapShot.documents {
-                    let doc  = doc.data() as [String: Any]
-                    let quote = Quote(data: doc)
-                    quotes.append(quote)
-                }
-
-                completion(quotes, nil)
             }
         }
     }
