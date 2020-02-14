@@ -11,7 +11,8 @@ import UIKit
 final class MainContainerViewController: UIViewController {
     var quoteController = QuoteController()
     var menuViewController: SlideMenuViewController!
-    var centerNavViewController: UIViewController!
+    var centerNavViewController: UINavigationController!
+    var homeController: UIViewController?
 
     // MARK: viewDidLoad
     override func viewDidLoad() {
@@ -82,5 +83,6 @@ extension MainContainerViewController: SlideMenuEventsDelegate {
     func handleSlideMenuEvents(_ index: Int) {
         // send user to a view depending on index
         print("index selected: ", index)
+
     }
 }
