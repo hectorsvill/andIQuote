@@ -67,6 +67,7 @@ extension MainContainerViewController {
         if menuViewController == nil {
             menuViewController = SlideMenuViewController()
             menuViewController.delegateHomeControllerView = self
+            menuViewController.delegateSlideMenuEvents = self
             menuViewController.quoteController = quoteController
             view.insertSubview(menuViewController.view, at: 0)
             addChild(menuViewController)
@@ -80,5 +81,6 @@ extension MainContainerViewController {
 extension MainContainerViewController: SlideMenuEventsDelegate {
     func handleSlideMenuEvents(_ index: Int) {
         // send user to a view depending on index
+        print("index selected: ", index)
     }
 }
