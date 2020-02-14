@@ -1,11 +1,10 @@
 # andIQuote App
 Discover mindful quotes and share them with your friends.
 #
-V1(4) - Free download from the [App Store](https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1493892128)
+V2(1.1) - Free download from the [App Store](https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1493892128)
 #
 - I wrote a web scraper to scrape thousands of quotes.  Check out my [quote dictionary creator](https://github.com/hectorsvill/QuotesDictionaryCreator)
-#  
-- Utilizes Firestore pagination to control the flow of data.
+- Utilizes Firestore for storing data.
 - Persisting data with Core Data 
 - UICollectionView Compositional Layouts and Diffable Data Sources.
 - All users are automatically signed in anonymously.
