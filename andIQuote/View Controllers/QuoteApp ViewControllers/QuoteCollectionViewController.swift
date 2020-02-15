@@ -178,7 +178,7 @@ extension QuoteCollectionViewController {
     }
 //    // MARK: handleSlideMenuToggle
     func handleSlideMenuToggle() {
-        delegate?.handleMenuToggle()
+        delegate?.handleMenuToggle(index: 0)
         collectionView.isScrollEnabled.toggle()
         leftSwipeGestureRecognizer.isEnabled.toggle()
         upSwipeGestureRecognizer.isEnabled.toggle()

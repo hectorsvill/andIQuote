@@ -12,7 +12,7 @@ final class MainContainerViewController: UIViewController {
     var quoteController = QuoteController()
     var menuViewController: SlideMenuViewController!
     var centerNavViewController: UINavigationController!
-    var homeController: UIViewController?
+    var homeController: QuoteCollectionViewController?
 
     // MARK: viewDidLoad
     override func viewDidLoad() {
@@ -22,16 +22,16 @@ final class MainContainerViewController: UIViewController {
 }
 // MARK: HomeControllerViewDelegate
 extension MainContainerViewController: HomeControllerViewDelegate {
-    func handleMenuToggle() {
+    func handleMenuToggle(index: Int = 0) {
         if !quoteController.menuNavigationIsExpanded {
             configureSlideMenuViewController()
         }
 
         quoteController.menuNavigationIsExpanded.toggle()
-        showMenuController(shouldExpand: quoteController.menuNavigationIsExpanded)
+        showMenuController(shouldExpand: quoteController.menuNavigationIsExpanded, index: index)
     }
     // MARK: showMenuController
-    func showMenuController(shouldExpand: Bool) {
+    func showMenuController(shouldExpand: Bool, index: Int) {
         if shouldExpand {
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
                 self.centerNavViewController.view.frame.origin.x = self.centerNavViewController.view.frame.width / 3
@@ -40,7 +40,7 @@ extension MainContainerViewController: HomeControllerViewDelegate {
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
                 self.centerNavViewController.view.frame.origin.x = 0
             }){ _ in
-                print("slide menu did end")
+                print("index: \(index)")
             }
         }
     }
@@ -68,7 +68,6 @@ extension MainContainerViewController {
         if menuViewController == nil {
             menuViewController = SlideMenuViewController()
             menuViewController.delegateHomeControllerView = self
-            menuViewController.delegateSlideMenuEvents = self
             menuViewController.quoteController = quoteController
             view.insertSubview(menuViewController.view, at: 0)
             addChild(menuViewController)
@@ -76,13 +75,4 @@ extension MainContainerViewController {
         }
     }
 
-}
-
-// MARK: SlideMenuEventsDelegate
-extension MainContainerViewController: SlideMenuEventsDelegate {
-    func handleSlideMenuEvents(_ index: Int) {
-        // send user to a view depending on index
-        print("index selected: ", index)
-
-    }
 }

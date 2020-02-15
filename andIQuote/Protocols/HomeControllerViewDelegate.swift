@@ -9,6 +9,6 @@
 import Foundation
 
 protocol HomeControllerViewDelegate {
-    func handleMenuToggle()
+    func handleMenuToggle(index: Int)
 }
 

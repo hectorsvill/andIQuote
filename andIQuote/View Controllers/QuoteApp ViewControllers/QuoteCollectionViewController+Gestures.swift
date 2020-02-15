@@ -50,6 +50,7 @@ extension QuoteCollectionViewController {
                 impactGesture(style: .rigid)
             } else {
                 handleSlideMenuToggle()
+                leftSwipeGestureRecognizer.isEnabled = false
             }
         }else if sender.direction == .right {
             quoteController.setBackgroundIndex(-1)

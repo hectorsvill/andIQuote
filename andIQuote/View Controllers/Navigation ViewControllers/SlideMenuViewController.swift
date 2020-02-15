@@ -18,7 +18,6 @@ extension SlideMenuViewController {
 }
 
 final class SlideMenuViewController: UIViewController {
-    var delegateSlideMenuEvents: SlideMenuEventsDelegate?
     var delegateHomeControllerView: HomeControllerViewDelegate?
     var slideMenuItems: [SlideMenuItem] = []
     var dataSource: SlideMenuDataSouce!
@@ -78,8 +77,7 @@ extension SlideMenuViewController {
 extension SlideMenuViewController: UICollectionViewDelegate {
     // MARK: didSelectItemAt
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let row = indexPath.row
-        delegateSlideMenuEvents?.handleSlideMenuEvents(row)
-        delegateHomeControllerView?.handleMenuToggle()
+        guard indexPath.item != 0 else { return }
+        delegateHomeControllerView?.handleMenuToggle(index: indexPath.item)
     }
 }
