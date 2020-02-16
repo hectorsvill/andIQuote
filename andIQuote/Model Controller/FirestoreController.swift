@@ -26,7 +26,7 @@ extension FirestoreController {
 
             guard let snapShot = snapShot else { return }
             
-            let quotes = self.fetchQuotesFromSnapShotSaveToCoreData(snapShot.documents)
+            let quotes = self.fetchQuotesFromSnapShot(snapShot.documents)
 
             
             if let last = snapShot.documents.last {
@@ -38,7 +38,7 @@ extension FirestoreController {
     }
     // MARK: fetchQuotesFromSnapShotSaveToCoreData
     @discardableResult
-    private func fetchQuotesFromSnapShotSaveToCoreData( _ documents: [QueryDocumentSnapshot]) -> [Quote]{
+    private func fetchQuotesFromSnapShot( _ documents: [QueryDocumentSnapshot]) -> [Quote]{
         var quotes = [Quote]()
 
         for doc in documents {
@@ -46,7 +46,7 @@ extension FirestoreController {
             let quote = Quote(data: data)
             quotes.append(quote)
         }
-        
+
         do {
             try CoreDataStack.shared.save()
         } catch {
@@ -55,5 +55,4 @@ extension FirestoreController {
 
         return quotes
     }
-
 }

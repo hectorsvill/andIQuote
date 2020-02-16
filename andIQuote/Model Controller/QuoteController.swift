@@ -11,13 +11,19 @@ import UIKit
 import Firebase
 
 class QuoteController {
+    let firestore = FirestoreController()
+    var quotes = [Quote]()
+
     var quoteThemeIsActive = false // theme selecting state
     var menuNavigationIsExpanded = false // menu navigations state
-    let backgrounds = ["systemBackground", "green", "blue", "gray", "pink", "red", "teal", "indigo", "orange", "yellow", "purple",]
-    let firestore = FirestoreController()
+
     private (set) var _quoteIndex = UserDefaults.standard.integer(forKey: "QIndex") // current index of quote
+
+    let backgrounds = ["systemBackground", "green", "blue", "gray", "pink", "red", "teal", "indigo", "orange", "yellow", "purple",]
     var _backgroundIndex = UserDefaults.standard.integer(forKey: "BgIndex") // current index of background
+
     private (set) var quoteUser: QuoteUser?
+
     var remindersCount = UserDefaults.standard.integer(forKey: "DailyReminderViewController.reminderNotificationData" + "Reminders:")
     var remindersStartTime = UserDefaults.standard.integer(forKey: "DailyReminderViewController.reminderNotificationData" + "Time:")
     var reminderTimeIntervalSeconds: Double = 3600 // 1 hour 
@@ -26,11 +32,6 @@ class QuoteController {
         if let user = Auth.auth().currentUser {
             self.quoteUser = QuoteUser(id: user.uid)
         }
-        print(remindersCount)
-
-
-
-        
     }
 }
 extension QuoteController {
@@ -104,6 +105,7 @@ extension QuoteController {
                     completion(nil, error)
                 }
                 guard let quotes = quotes else { return }
+                self.quotes = quotes
                 completion(quotes, nil)
             }
         }

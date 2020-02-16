@@ -10,9 +10,10 @@ import UIKit
 
 final class MainContainerViewController: UIViewController {
     var quoteController = QuoteController()
+    let userNotificationCenter = UNUserNotificationCenter.current()
     var menuViewController: SlideMenuViewController!
     var centerNavViewController: UINavigationController!
-    var homeController: QuoteCollectionViewController?
+    var quoteCollectionViewController: QuoteCollectionViewController?
 
     // MARK: viewDidLoad
     override func viewDidLoad() {
@@ -40,9 +41,40 @@ extension MainContainerViewController: HomeControllerViewDelegate {
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
                 self.centerNavViewController.view.frame.origin.x = 0
             }){ _ in
-                print("index: \(index)")
+                self.createView(with: index)
             }
         }
+    }
+
+    private func createView(with index: Int) {
+//        impactGesture(style: .medium)
+        switch index {
+        case 2:
+            print("favorites")
+        case 3:
+            print("theme")
+        case 4:
+            print("reminder")
+
+            quoteCollectionViewController?.shareButtonTapped()
+            let dailyReminderVC = DailyReminderViewController()
+            dailyReminderVC.userNotificationCenter = userNotificationCenter
+            dailyReminderVC.quoteController = quoteController
+            dailyReminderVC.view.setBackground(to: quoteController.background)
+            present(dailyReminderVC, animated: true)
+        case 5:
+            print("create")
+//            let vc = UIViewController()
+//            vc.view.backgroundColor = .red
+//            present(vc, animated: true, completion: nil)
+        case 6:
+            print("my quotes")
+        case 7:
+            print("search")
+        default:
+            print("default")
+        }
+
     }
 }
 extension MainContainerViewController {
@@ -56,6 +88,7 @@ extension MainContainerViewController {
     func configureHomeController() {
         let homeController = QuoteCollectionViewController(collectionViewLayout: createFlowLayout())
         homeController.quoteController = quoteController
+        homeController.userNotificationCenter = userNotificationCenter
         homeController.delegate = self
         let navigationController = UINavigationController(rootViewController: homeController)
         centerNavViewController = navigationController
@@ -76,3 +109,4 @@ extension MainContainerViewController {
     }
 
 }
+

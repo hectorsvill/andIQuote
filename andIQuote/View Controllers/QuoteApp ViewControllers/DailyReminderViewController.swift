@@ -11,7 +11,6 @@ import UIKit
 
 final class DailyReminderViewController: UIViewController {
     var quoteController: QuoteController!
-    var currentQuotes: [Quote]!
     var userNotificationCenter: UNUserNotificationCenter!
     var remindersView: DailyReminderView!
     var startView: DailyReminderView!
@@ -147,7 +146,7 @@ extension DailyReminderViewController {
             userNotificationCenter.removeAllDeliveredNotifications()
             userNotificationCenter.removeAllPendingNotificationRequests()
 
-            guard let random_Quote = currentQuotes.randomElement() else {
+            guard let random_Quote = quoteController.quotes.randomElement() else {
                 // TODO: create uialerts for error
                 return
             }

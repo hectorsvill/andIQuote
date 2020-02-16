@@ -20,7 +20,7 @@ extension QuoteCollectionViewController {
 
 final class QuoteCollectionViewController: UICollectionViewController {
     var activityIndicator = UIActivityIndicatorView()
-    let userNotificationCenter = UNUserNotificationCenter.current()
+    var userNotificationCenter: UNUserNotificationCenter!
     var delegate: HomeControllerViewDelegate?
     var quoteController: QuoteController!
     var dataSource: QuoteDataSource!
@@ -220,7 +220,6 @@ extension QuoteCollectionViewController {
         let dailyReminderVC = DailyReminderViewController()
         dailyReminderVC.userNotificationCenter = userNotificationCenter
         dailyReminderVC.quoteController = quoteController
-        dailyReminderVC.currentQuotes = dataSource.snapshot().itemIdentifiers
         dailyReminderVC.view.setBackground(to: quoteController.background)
         present(dailyReminderVC, animated: true)
         
