@@ -17,7 +17,7 @@ class QuoteController {
     var quoteThemeIsActive = false // theme selecting state
     var menuNavigationIsExpanded = false // menu navigations state
 
-    private (set) var _quoteIndex = UserDefaults.standard.integer(forKey: "QIndex") // current index of quote
+    private (set) var _quoteIndex = 0 //UserDefaults.standard.integer(forKey: "QIndex") // current index of quote
 
     let backgrounds = ["systemBackground", "green", "blue", "gray", "pink", "red", "teal", "indigo", "orange", "yellow", "purple",]
     var _backgroundIndex = UserDefaults.standard.integer(forKey: "BgIndex") // current index of background

@@ -190,7 +190,6 @@
 				C43D445323A47018005B2458 /* SceneDelegate.swift */,
 				122C918423D775B9002045CE /* Protocols */,
 				C4FB3F0623BBCC120041B1BD /* Extensions */,
-				C43D446E23A4867F005B2458 /* Views */,
 				C43D446823A4713F005B2458 /* View Controllers */,
 				C43D446B23A47ED7005B2458 /* Model */,
 				C4F0E91123AB3AFC005917A8 /* Model Controller */,
@@ -214,6 +213,7 @@
 		C43D446823A4713F005B2458 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C43D446E23A4867F005B2458 /* Views */,
 				122F4B7E23D3EDCE004C2F34 /* QuoteApp ViewControllers */,
 				122F4B7F23D3EDF8004C2F34 /* Navigation ViewControllers */,
 			);

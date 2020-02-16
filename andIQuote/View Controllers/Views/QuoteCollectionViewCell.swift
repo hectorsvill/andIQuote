@@ -10,7 +10,8 @@ import UIKit
 
 class QuoteCollectionViewCell: UICollectionViewCell, SelfConfiguringCell {
     static var reuseIdentifier = "QuoteCell"
-    
+
+    var quoteController: QuoteController?
     var quote: Quote? { didSet { setupView()} }
     
     let quoteTextView: UITextView = {
@@ -24,23 +25,9 @@ class QuoteCollectionViewCell: UICollectionViewCell, SelfConfiguringCell {
         return textview
     }()
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    private func getAttributedText() -> NSAttributedString {
-        guard let quote = quote else { return NSAttributedString(string: "") }
-        let attributedString = NSMutableAttributedString(string: quote.body!, attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 24), NSAttributedString.Key.foregroundColor: UIColor.label])
-        attributedString.append(NSAttributedString(string: "\n\n\(quote.author!)", attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.label]))
-        return attributedString
-    }
-    
     private func setupView() {
-        quoteTextView.attributedText = getAttributedText()
+        guard let quote = quote, let quoteController = quoteController else { return }
+        quoteTextView.attributedText = quoteController.attributedString(quote)
         addSubview(quoteTextView)
         NSLayoutConstraint.activate([
             quoteTextView.centerYAnchor.constraint(equalTo: centerYAnchor),

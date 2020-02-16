@@ -45,18 +45,22 @@ extension QuoteCollectionViewController {
         }else if sender.direction == .left {
             if quoteController.quoteThemeIsActive {
                 quoteController.setBackgroundIndex(1)
-                collectionView.setBackground(to: quoteController.background)
-                navigationController?.navigationBar.barTintColor = collectionView.backgroundColor
-                impactGesture(style: .rigid)
+                handleThemeSelect()
             } else {
                 handleSlideMenuToggle()
                 leftSwipeGestureRecognizer.isEnabled = false
             }
         }else if sender.direction == .right {
             quoteController.setBackgroundIndex(-1)
-            collectionView.setBackground(to: quoteController.background)
-            navigationController?.navigationBar.barTintColor = collectionView.backgroundColor
-            impactGesture(style: .rigid)
+            handleThemeSelect()
         }
+    }
+
+    private func handleThemeSelect() {
+        collectionView.setBackground(to: quoteController.background)
+        collectionView.reloadData()
+        navigationController?.navigationBar.barTintColor = collectionView.backgroundColor
+        impactGesture(style: .rigid)
+
     }
 }

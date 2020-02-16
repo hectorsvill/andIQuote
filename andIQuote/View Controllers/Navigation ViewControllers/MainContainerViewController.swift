@@ -54,8 +54,6 @@ extension MainContainerViewController: HomeControllerViewDelegate {
         case 3:
             print("theme")
         case 4:
-            print("reminder")
-
             quoteCollectionViewController?.shareButtonTapped()
             let dailyReminderVC = DailyReminderViewController()
             dailyReminderVC.userNotificationCenter = userNotificationCenter

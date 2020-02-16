@@ -97,6 +97,7 @@ final class QuoteCollectionViewController: UICollectionViewController {
             (collectionView, indexPath, quote) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier, for: indexPath) as! QuoteCollectionViewCell
             cell.quote = quote
+            cell.quoteController = self.quoteController
             cell.backgroundColor = .clear
             return cell
         }
@@ -112,6 +113,7 @@ final class QuoteCollectionViewController: UICollectionViewController {
                 snapShot.appendSections([.main])
                 snapShot.appendItems(quotes ?? [])
                 self.dataSource.apply(snapShot, animatingDifferences: false)
+                self.collectionView.reloadData()
                 self.activityIndicator.stopAnimating()
             }
         }
@@ -141,19 +143,20 @@ extension QuoteCollectionViewController {
         setupSwipeGestureRecognizer()
 
         trademarkLabel.attributedText = quoteController.trademarkAttributedString
-        
-        reviewButton = UIButton().sfImageButton(systemName: "bell")
-        reviewButton.addTarget(self, action: #selector(reminderButtonTapped), for: .touchUpInside)
-        lowerStackView.addArrangedSubview(reviewButton)
-        
-//        likeButton = UIButton().sfImageButton(systemName: "hand.thumbsup")
-//        likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
-//        lowerStackView.addArrangedSubview(likeButton)
-//        collectionView.addSubview(lowerStackView)
 
         themeButton = UIButton().sfImageButton(systemName: "paintbrush")
         themeButton.addTarget(self, action: #selector(themeButtonTapped), for: .touchUpInside)
         lowerStackView.addArrangedSubview(themeButton)
+
+        reviewButton = UIButton().sfImageButton(systemName: "bell")
+        reviewButton.addTarget(self, action: #selector(reminderButtonTapped), for: .touchUpInside)
+        lowerStackView.addArrangedSubview(reviewButton)
+        
+        likeButton = UIButton().sfImageButton(systemName: "hand.thumbsup")
+        likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
+        lowerStackView.addArrangedSubview(likeButton)
+
+
         collectionView.addSubview(lowerStackView)
         collectionView.addSubview(trademarkLabel)
         NSLayoutConstraint.activate([
@@ -225,9 +228,9 @@ extension QuoteCollectionViewController {
         
     }
 //    // MARK: likeButtonTapped
-//    @objc func likeButtonTapped(_ sender: UIButton) {
-//        print("like")
-//    }
+    @objc func likeButtonTapped(_ sender: UIButton) {
+        print("like")
+    }
 
     // MARK: Impact Gesture
     func impactGesture(style: UIImpactFeedbackGenerator.FeedbackStyle = .light) {
