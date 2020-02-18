@@ -82,9 +82,27 @@ extension MainContainerViewController {
         flowLayout.scrollDirection = .horizontal
         return flowLayout
     }
+
+    private func createLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.8))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .paging
+
+        let flowLayout = UICollectionViewCompositionalLayoutConfiguration()
+        flowLayout.interSectionSpacing = 0
+
+        return UICollectionViewCompositionalLayout(section: section, configuration: flowLayout)
+    }
+
+
     // MARK: configureHomeController
     func configureHomeController() {
-        let homeController = QuoteCollectionViewController(collectionViewLayout: createFlowLayout())
+        let homeController = QuoteCollectionViewController(collectionViewLayout: createLayout())
         homeController.quoteController = quoteController
         homeController.userNotificationCenter = userNotificationCenter
         homeController.delegate = self

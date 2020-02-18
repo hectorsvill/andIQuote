@@ -81,8 +81,12 @@ final class QuoteCollectionViewController: UICollectionViewController {
             self.collectionView.scrollToItem(at: index, at: .left, animated: false)
         }
     }
+
+
+
     // MARK: setupCollectionView
     private func setupCollectionView() {
+//        collectionView.collectionViewLayout = createLayout()
         collectionView.isPagingEnabled = true
         collectionView.autoresizingMask = [.flexibleHeight, .flexibleHeight]
         collectionView.setBackground(to: quoteController.background)
@@ -123,7 +127,7 @@ final class QuoteCollectionViewController: UICollectionViewController {
 extension QuoteCollectionViewController: UICollectionViewDelegateFlowLayout {
     // MARK: collectionViewLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.height)
+        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
     }
     // MARK: scrollViewWillEndDragging
     override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
