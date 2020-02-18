@@ -57,14 +57,13 @@ final class QuoteCollectionViewController: UICollectionViewController {
         setupViews()
 
         setupNavButtons()
-        self.loadLastIndex()
+        loadLastIndex()
 
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
         activityIndicator.style = UIActivityIndicatorView.Style.medium
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
-        userNotificationCenter.delegate = self
 
     }
 
@@ -81,9 +80,6 @@ final class QuoteCollectionViewController: UICollectionViewController {
             self.collectionView.scrollToItem(at: index, at: .left, animated: false)
         }
     }
-
-
-
     // MARK: setupCollectionView
     private func setupCollectionView() {
 //        collectionView.collectionViewLayout = createLayout()
@@ -91,6 +87,7 @@ final class QuoteCollectionViewController: UICollectionViewController {
         collectionView.autoresizingMask = [.flexibleHeight, .flexibleHeight]
         collectionView.setBackground(to: quoteController.background)
         collectionView.showsHorizontalScrollIndicator = false
+        collectionView.delegate = self
         collectionView.register(QuoteCollectionViewCell.self, forCellWithReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier)
         configureDataSource()
         createSnapShot()
@@ -122,24 +119,12 @@ final class QuoteCollectionViewController: UICollectionViewController {
             }
         }
     }
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        print(indexPath.row)
+        quoteController.setIndex(indexPath.item)
+    }
 }
-// MARK: UICollectionViewDelegateFlowLayout
-extension QuoteCollectionViewController: UICollectionViewDelegateFlowLayout {
-    // MARK: collectionViewLayout
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
-    }
-    // MARK: scrollViewWillEndDragging
-    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let currentIndex = Int(targetContentOffset.pointee.x / view.frame.width)
-        quoteController.setIndex(currentIndex)
-    }
 
-    // MARK: minimumLineSpacingForSectionAt
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-}
 extension QuoteCollectionViewController {
     // MARK: setupViews
     private func setupViews() {
@@ -201,13 +186,16 @@ extension QuoteCollectionViewController {
     // MARK: themebutton tapped
     @objc func themeButtonTapped(_ sender: UIButton) {
         impactGesture(style: .medium)
-        quoteController.quoteThemeIsActive.toggle()
-        collectionView.isScrollEnabled.toggle()
-        leftSwipeGestureRecognizer.isEnabled.toggle()
-        rightSwipeGestureRecognizer.isEnabled.toggle()
-        let brush = quoteController.quoteThemeIsActive ? "paintbrush.fill" : "paintbrush"
-        let image = UIImage(systemName: brush, withConfiguration: UIImage().mainViewSymbolConfig())
-        themeButton.setImage(image, for: .normal)
+
+        
+
+//        quoteController.quoteThemeIsActive.toggle()
+//        collectionView.isScrollEnabled.toggle()
+//        leftSwipeGestureRecognizer.isEnabled.toggle()
+//        rightSwipeGestureRecognizer.isEnabled.toggle()
+//        let brush = quoteController.quoteThemeIsActive ? "paintbrush.fill" : "paintbrush"
+//        let image = UIImage(systemName: brush, withConfiguration: UIImage().mainViewSymbolConfig())
+//        themeButton.setImage(image, for: .normal)
     }
     // MARK: shareButtonTapped
     @objc func shareButtonTapped() {

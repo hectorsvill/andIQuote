@@ -19,6 +19,7 @@
 		122F4B8323D5320D004C2F34 /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122F4B8223D5320C004C2F34 /* MenuCollectionViewCell.swift */; };
 		124EAFBE23DF95CF00047558 /* ReminderCellButtonPressedDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124EAFBD23DF95CF00047558 /* ReminderCellButtonPressedDelegate.swift */; };
 		12525E3923E2488B0010A663 /* QuoteCollectionViewController+Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12525E3823E2488B0010A663 /* QuoteCollectionViewController+Gestures.swift */; };
+		12A2B64723FBA0310086F585 /* ThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A2B64623FBA0310086F585 /* ThemeViewController.swift */; };
 		12A76B5E23DD40B800026C28 /* DailyReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A76B5D23DD40B800026C28 /* DailyReminderViewController.swift */; };
 		12A76B6023DD4A9500026C28 /* NSAttributeString+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A76B5F23DD4A9500026C28 /* NSAttributeString+Strings.swift */; };
 		12D72AAC23CD41C4000BECDC /* Quote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AAA23CD41C4000BECDC /* Quote.xcdatamodeld */; };
@@ -69,6 +70,7 @@
 		124EAFBD23DF95CF00047558 /* ReminderCellButtonPressedDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderCellButtonPressedDelegate.swift; sourceTree = "<group>"; };
 		12525E3823E2488B0010A663 /* QuoteCollectionViewController+Gestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuoteCollectionViewController+Gestures.swift"; sourceTree = "<group>"; };
 		12525E3A23E275B00010A663 /* andIQuote.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = andIQuote.entitlements; sourceTree = "<group>"; };
+		12A2B64623FBA0310086F585 /* ThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewController.swift; sourceTree = "<group>"; };
 		12A76B5D23DD40B800026C28 /* DailyReminderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyReminderViewController.swift; sourceTree = "<group>"; };
 		12A76B5F23DD4A9500026C28 /* NSAttributeString+Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributeString+Strings.swift"; sourceTree = "<group>"; };
 		12D72AAB23CD41C4000BECDC /* Quote.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Quote.xcdatamodel; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				C43D446623A47138005B2458 /* QuoteCollectionViewController.swift */,
 				12525E3823E2488B0010A663 /* QuoteCollectionViewController+Gestures.swift */,
 				12A76B5D23DD40B800026C28 /* DailyReminderViewController.swift */,
+				12A2B64623FBA0310086F585 /* ThemeViewController.swift */,
 			);
 			path = "QuoteApp ViewControllers";
 			sourceTree = "<group>";
@@ -410,6 +413,7 @@
 				0788B03A23C56820001D00E3 /* FirestoreController.swift in Sources */,
 				12A76B5E23DD40B800026C28 /* DailyReminderViewController.swift in Sources */,
 				C4F0E90E23AB3297005917A8 /* QuoteLibrary.swift in Sources */,
+				12A2B64723FBA0310086F585 /* ThemeViewController.swift in Sources */,
 				12A76B6023DD4A9500026C28 /* NSAttributeString+Strings.swift in Sources */,
 				C42EE0F423BEC6230045DF02 /* BackgroundCell.swift in Sources */,
 				C43D445423A47018005B2458 /* SceneDelegate.swift in Sources */,
