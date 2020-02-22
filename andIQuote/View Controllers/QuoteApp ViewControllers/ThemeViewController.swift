@@ -50,15 +50,14 @@ class ThemeViewController: UIViewController {
 
         dataSource = UICollectionViewDiffableDataSource<Section, Int>(collectionView: collectionView, cellProvider: { collectionView, indexPath, i -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
-            cell.backgroundColor = .blue
+            cell.setBackground(to:self.quoteController.backgrounds[indexPath.item + 1])
             return cell
         })
 
         var snapShot = NSDiffableDataSourceSnapshot<Section, Int>()
         snapShot.appendSections([.background])
-        snapShot.appendItems(Array(0...11), toSection: .background)
+        snapShot.appendItems(Array(0..<quoteController.backgrounds.count - 1), toSection: .background)
         dataSource.apply(snapShot)
-
     }
 
 

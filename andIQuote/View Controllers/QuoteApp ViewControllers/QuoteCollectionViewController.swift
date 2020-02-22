@@ -204,6 +204,7 @@ extension QuoteCollectionViewController {
         impactGesture(style: .medium)
         quoteController.quoteThemeIsActive.toggle()
         let vc = ThemeViewController()
+        vc.quoteController = quoteController
         present(vc, animated: true)
 
 //        collectionView.isScrollEnabled.toggle()
