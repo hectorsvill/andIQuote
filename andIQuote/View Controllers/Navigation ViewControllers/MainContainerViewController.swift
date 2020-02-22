@@ -21,6 +21,57 @@ final class MainContainerViewController: UIViewController {
         configureHomeController()
     }
 }
+
+extension MainContainerViewController {
+    // MARK: createFlowLayout
+    func createFlowLayout() -> UICollectionViewFlowLayout {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        return flowLayout
+    }
+
+    private func createLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.8))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .paging
+
+        let flowLayout = UICollectionViewCompositionalLayoutConfiguration()
+        flowLayout.interSectionSpacing = 0
+        
+        return UICollectionViewCompositionalLayout(section: section, configuration: flowLayout)
+    }
+    // MARK: configureHomeController
+    func configureHomeController() {
+        let homeController = QuoteCollectionViewController(collectionViewLayout: createLayout())
+        homeController.quoteController = quoteController
+        homeController.userNotificationCenter = userNotificationCenter
+        homeController.delegate = self
+        let navigationController = UINavigationController(rootViewController: homeController)
+        centerNavViewController = navigationController
+        view.addSubview(centerNavViewController.view)
+        addChild(centerNavViewController)
+        centerNavViewController.didMove(toParent: self)
+    }
+    // MARK:configureSlideMenuViewController
+    func configureSlideMenuViewController() {
+        if menuViewController == nil {
+            menuViewController = SlideMenuViewController()
+            menuViewController.delegateHomeControllerView = self
+            menuViewController.quoteController = quoteController
+            view.insertSubview(menuViewController.view, at: 0)
+            addChild(menuViewController)
+            menuViewController.didMove(toParent: self)
+        }
+    }
+
+}
+
+
 // MARK: HomeControllerViewDelegate
 extension MainContainerViewController: HomeControllerViewDelegate {
     func handleMenuToggle(index: Int = 0) {
@@ -74,55 +125,5 @@ extension MainContainerViewController: HomeControllerViewDelegate {
         }
 
     }
-}
-extension MainContainerViewController {
-    // MARK: createFlowLayout
-    func createFlowLayout() -> UICollectionViewFlowLayout {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .horizontal
-        return flowLayout
-    }
-
-    private func createLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.8))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
-
-        let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .paging
-
-        let flowLayout = UICollectionViewCompositionalLayoutConfiguration()
-        flowLayout.interSectionSpacing = 0
-
-        return UICollectionViewCompositionalLayout(section: section, configuration: flowLayout)
-    }
-
-
-    // MARK: configureHomeController
-    func configureHomeController() {
-        let homeController = QuoteCollectionViewController(collectionViewLayout: createLayout())
-        homeController.quoteController = quoteController
-        homeController.userNotificationCenter = userNotificationCenter
-        homeController.delegate = self
-        let navigationController = UINavigationController(rootViewController: homeController)
-        centerNavViewController = navigationController
-        view.addSubview(centerNavViewController.view)
-        addChild(centerNavViewController)
-        centerNavViewController.didMove(toParent: self)
-    }
-    // MARK:configureSlideMenuViewController
-    func configureSlideMenuViewController() {
-        if menuViewController == nil {
-            menuViewController = SlideMenuViewController()
-            menuViewController.delegateHomeControllerView = self
-            menuViewController.quoteController = quoteController
-            view.insertSubview(menuViewController.view, at: 0)
-            addChild(menuViewController)
-            menuViewController.didMove(toParent: self)
-        }
-    }
-
 }
 

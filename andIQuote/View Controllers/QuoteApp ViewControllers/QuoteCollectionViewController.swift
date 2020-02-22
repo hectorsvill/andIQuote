@@ -54,24 +54,73 @@ final class QuoteCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = quoteController.trademarkAttributedString.string
+        setupSwipeGestureRecognizer()
         setupViews()
-
+        setupCollectionView()
         setupNavButtons()
         loadLastIndex()
-
-        activityIndicator.center = self.view.center
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.style = UIActivityIndicatorView.Style.medium
-        view.addSubview(activityIndicator)
-        activityIndicator.startAnimating()
-
+        createActivityIndicator()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("viewWillAppear")
+    // MARK: setupViews
+    private func setupViews() {
+        trademarkLabel.attributedText = quoteController.trademarkAttributedString
+
+        themeButton = UIButton().sfImageButton(systemName: "paintbrush")
+        themeButton.addTarget(self, action: #selector(themeButtonTapped), for: .touchUpInside)
+        lowerStackView.addArrangedSubview(themeButton)
+
+        reviewButton = UIButton().sfImageButton(systemName: "bell")
+        reviewButton.addTarget(self, action: #selector(reminderButtonTapped), for: .touchUpInside)
+        lowerStackView.addArrangedSubview(reviewButton)
+
+//        likeButton = UIButton().sfImageButton(systemName: "hand.thumbsup")
+//        likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
+//        lowerStackView.addArrangedSubview(likeButton)
+
+
+        collectionView.addSubview(lowerStackView)
+        collectionView.addSubview(trademarkLabel)
+        NSLayoutConstraint.activate([
+            lowerStackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16),
+            lowerStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            trademarkLabel.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16),
+            trademarkLabel.bottomAnchor.constraint(equalTo: lowerStackView.topAnchor),
+        ])
+    }
+    // MARK: setupNavButtons
+    private func setupNavButtons() {
+        navigationController?.navigationBar.barTintColor = collectionView.backgroundColor
+        navigationController?.navigationBar.barStyle = .default
+//
+//        let menuImage = UIImage(systemName: "line.horizontal.3", withConfiguration: UIImage().mainViewSymbolConfig())
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(image: menuImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(slideMenuButtonTapped))
+//        navigationItem.leftBarButtonItem?.tintColor = .label
+
+        let shareImage = UIImage(systemName: "square.and.arrow.up", withConfiguration: UIImage().mainViewSymbolConfig())
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: shareImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(shareButtonTapped))
+        navigationItem.rightBarButtonItem?.tintColor = .label
+    }
+}
+// MARK: UICollectionViewDelegateFlowLayout
+extension QuoteCollectionViewController: UICollectionViewDelegateFlowLayout {
+    // MARK: collectionViewLayout
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        return CGSize(width: view.frame.width, height: view.frame.height)
+//    }
+
+    // MARK: scrollViewWillEndDragging
+    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let currentIndex = Int(targetContentOffset.pointee.x / view.frame.width)
+        quoteController.setIndex(currentIndex)
     }
 
+    // MARK: minimumLineSpacingForSectionAt
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+}
+extension QuoteCollectionViewController {
     // MARK: loadLastIndex
     private func loadLastIndex() {
         DispatchQueue.main.async {
@@ -80,9 +129,16 @@ final class QuoteCollectionViewController: UICollectionViewController {
             self.collectionView.scrollToItem(at: index, at: .left, animated: false)
         }
     }
+    // MARK: createActivityIndicator
+    private func createActivityIndicator() {
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = UIActivityIndicatorView.Style.medium
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+    }
     // MARK: setupCollectionView
     private func setupCollectionView() {
-//        collectionView.collectionViewLayout = createLayout()
         collectionView.isPagingEnabled = true
         collectionView.autoresizingMask = [.flexibleHeight, .flexibleHeight]
         collectionView.setBackground(to: quoteController.background)
@@ -110,64 +166,24 @@ final class QuoteCollectionViewController: UICollectionViewController {
                 NSLog("\(error)")
             }
             DispatchQueue.main.async {
+                guard let quotes = quotes else { return }
+                print("createSnapShot: \(quotes.count)")
                 var snapShot = QuoteSourceSnapShot()
                 snapShot.appendSections([.main])
-                snapShot.appendItems(quotes ?? [])
-                self.dataSource.apply(snapShot, animatingDifferences: false)
-                self.collectionView.reloadData()
+                snapShot.appendItems(quotes)
+                self.dataSource.apply(snapShot, animatingDifferences: true)
                 self.activityIndicator.stopAnimating()
             }
         }
     }
-    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        print(indexPath.row)
-        quoteController.setIndex(indexPath.item)
-    }
-}
 
-extension QuoteCollectionViewController {
-    // MARK: setupViews
-    private func setupViews() {
-        setupCollectionView()
-        setupSwipeGestureRecognizer()
-
-        trademarkLabel.attributedText = quoteController.trademarkAttributedString
-
-        themeButton = UIButton().sfImageButton(systemName: "paintbrush")
-        themeButton.addTarget(self, action: #selector(themeButtonTapped), for: .touchUpInside)
-        lowerStackView.addArrangedSubview(themeButton)
-
-        reviewButton = UIButton().sfImageButton(systemName: "bell")
-        reviewButton.addTarget(self, action: #selector(reminderButtonTapped), for: .touchUpInside)
-        lowerStackView.addArrangedSubview(reviewButton)
-        
-        likeButton = UIButton().sfImageButton(systemName: "hand.thumbsup")
-        likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
-        lowerStackView.addArrangedSubview(likeButton)
+//    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        print(indexPath.row)
+//        quoteController.setIndex(indexPath.item)
+//    }
 
 
-        collectionView.addSubview(lowerStackView)
-        collectionView.addSubview(trademarkLabel)
-        NSLayoutConstraint.activate([
-            lowerStackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16),
-            lowerStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
-            trademarkLabel.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16),
-            trademarkLabel.bottomAnchor.constraint(equalTo: lowerStackView.topAnchor),
-        ])
-    }
-    // MARK: setupNavButtons
-    private func setupNavButtons() {
-        navigationController?.navigationBar.barTintColor = collectionView.backgroundColor
-        navigationController?.navigationBar.barStyle = .default
-        
-        let menuImage = UIImage(systemName: "line.horizontal.3", withConfiguration: UIImage().mainViewSymbolConfig())
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: menuImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(slideMenuButtonTapped))
-        navigationItem.leftBarButtonItem?.tintColor = .label
-        
-        let shareImage = UIImage(systemName: "square.and.arrow.up", withConfiguration: UIImage().mainViewSymbolConfig())
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: shareImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(shareButtonTapped))
-        navigationItem.rightBarButtonItem?.tintColor = .label
-    }
+
 //    // MARK: handleSlideMenuToggle
     func handleSlideMenuToggle() {
         delegate?.handleMenuToggle(index: 0)
@@ -186,16 +202,13 @@ extension QuoteCollectionViewController {
     // MARK: themebutton tapped
     @objc func themeButtonTapped(_ sender: UIButton) {
         impactGesture(style: .medium)
-
-        
-
-//        quoteController.quoteThemeIsActive.toggle()
-//        collectionView.isScrollEnabled.toggle()
-//        leftSwipeGestureRecognizer.isEnabled.toggle()
-//        rightSwipeGestureRecognizer.isEnabled.toggle()
-//        let brush = quoteController.quoteThemeIsActive ? "paintbrush.fill" : "paintbrush"
-//        let image = UIImage(systemName: brush, withConfiguration: UIImage().mainViewSymbolConfig())
-//        themeButton.setImage(image, for: .normal)
+        quoteController.quoteThemeIsActive.toggle()
+        collectionView.isScrollEnabled.toggle()
+        leftSwipeGestureRecognizer.isEnabled.toggle()
+        rightSwipeGestureRecognizer.isEnabled.toggle()
+        let brush = quoteController.quoteThemeIsActive ? "paintbrush.fill" : "paintbrush"
+        let image = UIImage(systemName: brush, withConfiguration: UIImage().mainViewSymbolConfig())
+        themeButton.setImage(image, for: .normal)
     }
     // MARK: shareButtonTapped
     @objc func shareButtonTapped() {
