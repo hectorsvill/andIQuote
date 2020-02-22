@@ -203,12 +203,15 @@ extension QuoteCollectionViewController {
     @objc func themeButtonTapped(_ sender: UIButton) {
         impactGesture(style: .medium)
         quoteController.quoteThemeIsActive.toggle()
-        collectionView.isScrollEnabled.toggle()
-        leftSwipeGestureRecognizer.isEnabled.toggle()
-        rightSwipeGestureRecognizer.isEnabled.toggle()
-        let brush = quoteController.quoteThemeIsActive ? "paintbrush.fill" : "paintbrush"
-        let image = UIImage(systemName: brush, withConfiguration: UIImage().mainViewSymbolConfig())
-        themeButton.setImage(image, for: .normal)
+        let vc = ThemeViewController()
+        present(vc, animated: true)
+
+//        collectionView.isScrollEnabled.toggle()
+//        leftSwipeGestureRecognizer.isEnabled.toggle()
+//        rightSwipeGestureRecognizer.isEnabled.toggle()
+//        let brush = quoteController.quoteThemeIsActive ? "paintbrush.fill" : "paintbrush"
+//        let image = UIImage(systemName: brush, withConfiguration: UIImage().mainViewSymbolConfig())
+//        themeButton.setImage(image, for: .normal)
     }
     // MARK: shareButtonTapped
     @objc func shareButtonTapped() {
