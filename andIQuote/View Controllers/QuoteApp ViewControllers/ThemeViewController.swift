@@ -17,7 +17,7 @@ extension ThemeViewController {
 
 class ThemeViewController: UIViewController {
     var quoteController: QuoteController!
-
+    var delegate: ThemeViewControllerDelegate?
     var collectionView: UICollectionView! = nil
     var dataSource: UICollectionViewDiffableDataSource<Section, Int>! = nil
 
@@ -29,12 +29,6 @@ class ThemeViewController: UIViewController {
         super.viewDidLoad()
         createCollectionView()
         setSelectedCell()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-
-        UserDefaults.standard.set(selectedIndex, forKey: "ThemeViewController.selectedIndex")
     }
 
     private func setSelectedCell() {
@@ -102,5 +96,9 @@ extension ThemeViewController: UICollectionViewDelegate {
         cell.layer.borderColor = UIColor.black.cgColor
         selectedCell = cell
         selectedIndex = indexPath.item
+        UserDefaults.standard.set(selectedIndex, forKey: "ThemeViewController.selectedIndex")
+        delegate?.makeBackgroundChange(selectedIndex)
     }
 }
+
+

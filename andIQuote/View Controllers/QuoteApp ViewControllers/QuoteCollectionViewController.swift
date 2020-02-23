@@ -203,16 +203,11 @@ extension QuoteCollectionViewController {
     @objc func themeButtonTapped(_ sender: UIButton) {
         impactGesture(style: .medium)
         quoteController.quoteThemeIsActive.toggle()
-        let vc = ThemeViewController()
-        vc.quoteController = quoteController
-        present(vc, animated: true)
+        let themeViewController = ThemeViewController()
+        themeViewController.quoteController = quoteController
+        themeViewController.delegate = self
+        present(themeViewController, animated: true)
 
-//        collectionView.isScrollEnabled.toggle()
-//        leftSwipeGestureRecognizer.isEnabled.toggle()
-//        rightSwipeGestureRecognizer.isEnabled.toggle()
-//        let brush = quoteController.quoteThemeIsActive ? "paintbrush.fill" : "paintbrush"
-//        let image = UIImage(systemName: brush, withConfiguration: UIImage().mainViewSymbolConfig())
-//        themeButton.setImage(image, for: .normal)
     }
     // MARK: shareButtonTapped
     @objc func shareButtonTapped() {
@@ -247,6 +242,17 @@ extension QuoteCollectionViewController {
         impactFeedback.impactOccurred()
     }
 }
+extension QuoteCollectionViewController: ThemeViewControllerDelegate {
+    func makeBackgroundChange(_ selectedItem: Int) {
+        collectionView.setBackground(to: quoteController.backgrounds[selectedItem])
+        collectionView.reloadData()
+        quoteController.setIndex(selectedItem)
+        navigationController?.navigationBar.barTintColor = collectionView.backgroundColor
+    }
+
+
+}
+
 // MARK: UNUserNotificationCenterDelegate
 extension QuoteCollectionViewController: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
