@@ -177,13 +177,6 @@ extension QuoteCollectionViewController {
         }
     }
 
-//    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        print(indexPath.row)
-//        quoteController.setIndex(indexPath.item)
-//    }
-
-
-
 //    // MARK: handleSlideMenuToggle
     func handleSlideMenuToggle() {
         delegate?.handleMenuToggle(index: 0)
@@ -244,13 +237,11 @@ extension QuoteCollectionViewController {
 }
 extension QuoteCollectionViewController: ThemeViewControllerDelegate {
     func makeBackgroundChange(_ selectedItem: Int) {
+        quoteController.setBackgroundIndex(selectedItem)
         collectionView.setBackground(to: quoteController.backgrounds[selectedItem])
         collectionView.reloadData()
-        quoteController.setIndex(selectedItem)
         navigationController?.navigationBar.barTintColor = collectionView.backgroundColor
     }
-
-
 }
 
 // MARK: UNUserNotificationCenterDelegate

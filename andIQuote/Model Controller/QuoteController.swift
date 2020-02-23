@@ -20,7 +20,7 @@ class QuoteController {
     private (set) var _quoteIndex = UserDefaults.standard.integer(forKey: "QIndex") // current index of quote
 
     let backgrounds = ["systemBackground", "green", "blue", "gray", "pink", "red", "teal", "indigo", "orange", "yellow", "purple",]
-    var _backgroundIndex = UserDefaults.standard.integer(forKey: "BgIndex") // current index of background
+    private (set) var _backgroundIndex = UserDefaults.standard.integer(forKey: "QuoteController.setBackgroundIndex") // current index of background
 
     private (set) var quoteUser: QuoteUser?
 
@@ -47,16 +47,9 @@ extension QuoteController {
         return attributedString
     }
     // MARK: setBackgroundIndex
-    func setBackgroundIndex(_ add: Int) {
-        let newValue = _backgroundIndex + add
-        if newValue > -1 && newValue < backgrounds.count {
-            _backgroundIndex = newValue
-        } else if newValue >= backgrounds.count {
-            _backgroundIndex = 0
-        } else if newValue <= -1 {
-            _backgroundIndex = backgrounds.count - 1
-        }
-        UserDefaults.standard.set(_backgroundIndex, forKey: "BgIndex")
+    func setBackgroundIndex(_ index: Int) {
+        _backgroundIndex = index
+        UserDefaults.standard.set(_backgroundIndex, forKey: "QuoteController.setBackgroundIndex")
     }
     // MARK: quoteForegroundColor
     var quoteForegroundColor: UIColor {
