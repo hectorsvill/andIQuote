@@ -33,7 +33,7 @@ extension ThemeViewController {
     private func createCollectionView() {
         collectionView = UICollectionView(frame: view.frame, collectionViewLayout: createLayout())
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.backgroundColor = .systemBackground
+        collectionView.backgroundColor = .systemGray4
         collectionView.delegate = self
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         view.addSubview(collectionView)
@@ -41,6 +41,8 @@ extension ThemeViewController {
         dataSource = UICollectionViewDiffableDataSource<Section, Int>(collectionView: collectionView, cellProvider: { collectionView, indexPath, i -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
             cell.setBackground(to:self.quoteController.backgrounds[indexPath.item + 1])
+            cell.layer.borderColor = UIColor.white.cgColor
+            cell.layer.borderWidth = 3
             cell.layer.cornerRadius = 3
             cell.contentView.layer.cornerRadius = 3
             return cell
