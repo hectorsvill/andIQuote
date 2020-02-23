@@ -21,9 +21,35 @@ class ThemeViewController: UIViewController {
     var collectionView: UICollectionView! = nil
     var dataSource: UICollectionViewDiffableDataSource<Section, Int>! = nil
 
+    var selectedCell: UICollectionViewCell?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         createCollectionView()
+    }
+}
+
+extension ThemeViewController {
+    private func createCollectionView() {
+        collectionView = UICollectionView(frame: view.frame, collectionViewLayout: createLayout())
+        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        collectionView.backgroundColor = .systemBackground
+        collectionView.delegate = self
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        view.addSubview(collectionView)
+
+        dataSource = UICollectionViewDiffableDataSource<Section, Int>(collectionView: collectionView, cellProvider: { collectionView, indexPath, i -> UICollectionViewCell? in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+            cell.setBackground(to:self.quoteController.backgrounds[indexPath.item + 1])
+            cell.layer.cornerRadius = 3
+            cell.contentView.layer.cornerRadius = 3
+            return cell
+        })
+
+        var snapShot = NSDiffableDataSourceSnapshot<Section, Int>()
+        snapShot.appendSections([.background])
+        snapShot.appendItems(Array(0..<quoteController.backgrounds.count - 1), toSection: .background)
+        dataSource.apply(snapShot)
     }
 
     private func createLayout() -> UICollectionViewLayout {
@@ -41,26 +67,20 @@ class ThemeViewController: UIViewController {
         return layout
     }
 
-    private func createCollectionView() {
-        collectionView = UICollectionView(frame: view.frame, collectionViewLayout: createLayout())
-        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.backgroundColor = .systemBackground
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
-        view.addSubview(collectionView)
-
-        dataSource = UICollectionViewDiffableDataSource<Section, Int>(collectionView: collectionView, cellProvider: { collectionView, indexPath, i -> UICollectionViewCell? in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
-            cell.setBackground(to:self.quoteController.backgrounds[indexPath.item + 1])
-            return cell
-        })
-
-        var snapShot = NSDiffableDataSourceSnapshot<Section, Int>()
-        snapShot.appendSections([.background])
-        snapShot.appendItems(Array(0..<quoteController.backgrounds.count - 1), toSection: .background)
-        dataSource.apply(snapShot)
-    }
 
 
 }
 
+extension ThemeViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) else { return }
 
+        if let selectedCell = selectedCell {
+            selectedCell.layer.borderColor = UIColor.white.cgColor
+        }
+
+        cell.layer.borderWidth = 3
+        cell.layer.borderColor = UIColor.black.cgColor
+        selectedCell = cell
+    }
+}
