@@ -23,9 +23,26 @@ class ThemeViewController: UIViewController {
 
     var selectedCell: UICollectionViewCell?
 
+    var selectedIndex = UserDefaults.standard.integer(forKey: "ThemeViewController.selectedIndex")
+
     override func viewDidLoad() {
         super.viewDidLoad()
         createCollectionView()
+        setSelectedCell()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        UserDefaults.standard.set(selectedIndex, forKey: "ThemeViewController.selectedIndex")
+    }
+
+    private func setSelectedCell() {
+        guard let cell = collectionView.cellForItem(at: IndexPath(item: selectedIndex, section: 0)) else { return }
+        cell.layer.borderWidth = 3
+        cell.layer.borderColor = UIColor.black.cgColor
+        selectedCell = cell
+
     }
 }
 
@@ -33,14 +50,14 @@ extension ThemeViewController {
     private func createCollectionView() {
         collectionView = UICollectionView(frame: view.frame, collectionViewLayout: createLayout())
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.backgroundColor = .systemGray4
+        collectionView.backgroundColor = .systemGray6
         collectionView.delegate = self
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         view.addSubview(collectionView)
 
         dataSource = UICollectionViewDiffableDataSource<Section, Int>(collectionView: collectionView, cellProvider: { collectionView, indexPath, i -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
-            cell.setBackground(to:self.quoteController.backgrounds[indexPath.item + 1])
+            cell.setBackground(to:self.quoteController.backgrounds[indexPath.item])
             cell.layer.borderColor = UIColor.white.cgColor
             cell.layer.borderWidth = 3
             cell.layer.cornerRadius = 3
@@ -50,7 +67,7 @@ extension ThemeViewController {
 
         var snapShot = NSDiffableDataSourceSnapshot<Section, Int>()
         snapShot.appendSections([.background])
-        snapShot.appendItems(Array(0..<quoteController.backgrounds.count - 1), toSection: .background)
+        snapShot.appendItems(Array(0..<quoteController.backgrounds.count), toSection: .background)
         dataSource.apply(snapShot)
     }
 
@@ -84,5 +101,6 @@ extension ThemeViewController: UICollectionViewDelegate {
         cell.layer.borderWidth = 3
         cell.layer.borderColor = UIColor.black.cgColor
         selectedCell = cell
+        selectedIndex = indexPath.item
     }
 }
