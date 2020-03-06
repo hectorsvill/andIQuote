@@ -34,8 +34,8 @@ extension MainContainerViewController {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.8))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.6))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 1)
 
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .paging
@@ -47,10 +47,13 @@ extension MainContainerViewController {
     }
     // MARK: configureHomeController
     func configureHomeController() {
-        let homeController = QuoteCollectionViewController(collectionViewLayout: createLayout())
+        let homeController = QuotesViewController()
         homeController.quoteController = quoteController
-        homeController.userNotificationCenter = userNotificationCenter
-        homeController.delegate = self
+
+        //QuoteCollectionViewController(collectionViewLayout: createLayout())
+//        homeController.quoteController = quoteController
+//        homeController.userNotificationCenter = userNotificationCenter
+//        homeController.delegate = self
         let navigationController = UINavigationController(rootViewController: homeController)
         centerNavViewController = navigationController
         view.addSubview(centerNavViewController.view)

@@ -23,6 +23,7 @@
 		12A2B64723FBA0310086F585 /* ThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A2B64623FBA0310086F585 /* ThemeViewController.swift */; };
 		12A76B5E23DD40B800026C28 /* DailyReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A76B5D23DD40B800026C28 /* DailyReminderViewController.swift */; };
 		12A76B6023DD4A9500026C28 /* NSAttributeString+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A76B5F23DD4A9500026C28 /* NSAttributeString+Strings.swift */; };
+		12AF1003241308170025B134 /* QuotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AF1002241308170025B134 /* QuotesViewController.swift */; };
 		12D72AAC23CD41C4000BECDC /* Quote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AAA23CD41C4000BECDC /* Quote.xcdatamodeld */; };
 		12D72AAF23CD42F7000BECDC /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AAE23CD42F7000BECDC /* Quote.swift */; };
 		12D72AB123CD4554000BECDC /* Quote+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AB023CD4554000BECDC /* Quote+Convenience.swift */; };
@@ -75,6 +76,7 @@
 		12A2B64623FBA0310086F585 /* ThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewController.swift; sourceTree = "<group>"; };
 		12A76B5D23DD40B800026C28 /* DailyReminderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyReminderViewController.swift; sourceTree = "<group>"; };
 		12A76B5F23DD4A9500026C28 /* NSAttributeString+Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributeString+Strings.swift"; sourceTree = "<group>"; };
+		12AF1002241308170025B134 /* QuotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesViewController.swift; sourceTree = "<group>"; };
 		12D72AAB23CD41C4000BECDC /* Quote.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Quote.xcdatamodel; sourceTree = "<group>"; };
 		12D72AAE23CD42F7000BECDC /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		12D72AB023CD4554000BECDC /* Quote+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Quote+Convenience.swift"; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				C43D446623A47138005B2458 /* QuoteCollectionViewController.swift */,
+				12AF1002241308170025B134 /* QuotesViewController.swift */,
 				12525E3823E2488B0010A663 /* QuoteCollectionViewController+Gestures.swift */,
 				12A76B5D23DD40B800026C28 /* DailyReminderViewController.swift */,
 				12A2B64623FBA0310086F585 /* ThemeViewController.swift */,
@@ -422,6 +425,7 @@
 				C42EE0F423BEC6230045DF02 /* BackgroundCell.swift in Sources */,
 				C43D445423A47018005B2458 /* SceneDelegate.swift in Sources */,
 				C4FB3EFF23BAE4A70041B1BD /* ThemeSettingsCollectionViewController.swift in Sources */,
+				12AF1003241308170025B134 /* QuotesViewController.swift in Sources */,
 				121B5F2823DE977E00569569 /* DailyReminderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
