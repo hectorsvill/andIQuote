@@ -105,7 +105,7 @@ extension QuoteController {
     }
     
     // MARK: fetchQuotesFromCoreData
-    func fetchQuotesFromCoreData(completion: @escaping ([Quote]?, Error?) -> ()){
+    private func fetchQuotesFromCoreData(completion: @escaping ([Quote]?, Error?) -> ()){
         let moc = CoreDataStack.shared.mainContext
         moc.performAndWait {
             let quoteFetch: NSFetchRequest<Quote> = Quote.fetchRequest()
