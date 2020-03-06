@@ -104,11 +104,6 @@ final class QuoteCollectionViewController: UICollectionViewController {
 }
 // MARK: UICollectionViewDelegateFlowLayout
 extension QuoteCollectionViewController: UICollectionViewDelegateFlowLayout {
-    // MARK: collectionViewLayout
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return CGSize(width: view.frame.width, height: view.frame.height)
-//    }
-
     // MARK: scrollViewWillEndDragging
     override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let currentIndex = Int(targetContentOffset.pointee.x / view.frame.width)
