@@ -28,10 +28,12 @@ class QuotesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        createCollectionView()
+
+        self.createCollectionView()
+        self.configureDataSource()
 
         activityIndicator.color = .black
-        activityIndicator.center = collectioView.center
+        activityIndicator.center = view.center
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
         fetchQotes()
@@ -46,9 +48,9 @@ class QuotesViewController: UIViewController {
             guard let quotes = quotes else { return }
             DispatchQueue.main.async {
                 self.quotes = quotes
+                self.loadData(items: quotes)
                 self.collectioView.reloadData()
                 self.activityIndicator.stopAnimating()
-                self.configureDataSource(items: quotes)
             }
 
         }
@@ -86,8 +88,7 @@ class QuotesViewController: UIViewController {
         ])
     }
 
-    private func configureDataSource(items: [Quote]) {
-
+    private func configureDataSource() {
         dataSource = DataSource(collectionView: collectioView) {
             collectioView, indexPath, quote -> UICollectionViewCell? in
             guard let cell = collectioView.dequeueReusableCell(withReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier, for: indexPath) as? QuoteCollectionViewCell else { return UICollectionViewCell() }
@@ -99,7 +100,9 @@ class QuotesViewController: UIViewController {
             cell.layer.cornerRadius = 12
             return cell
         }
+    }
 
+    func loadData(items: [Quote]) {
         var snapShot = SnapShot()
         snapShot.appendSections([.main])
         snapShot.appendItems(items)
@@ -107,6 +110,7 @@ class QuotesViewController: UIViewController {
         dataSource.apply(snapShot, animatingDifferences: true)
         activityIndicator.stopAnimating()
     }
+
 }
 
 //extension QuotesViewController: UICollectionViewDataSource {
