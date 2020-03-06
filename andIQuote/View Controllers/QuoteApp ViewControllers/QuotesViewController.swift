@@ -22,7 +22,7 @@ class QuotesViewController: UIViewController {
     let activityIndicator = UIActivityIndicatorView(style: .large)
 
     var collectioView: UICollectionView! = nil
-//    var dataSource: DataSource! = nil
+    var dataSource: DataSource! = nil
 
     var quotes: [Quote] = []
 
@@ -48,7 +48,7 @@ class QuotesViewController: UIViewController {
                 self.quotes = quotes
                 self.collectioView.reloadData()
                 self.activityIndicator.stopAnimating()
-//                self.configureDataSource(items: quotes)
+                self.configureDataSource(items: quotes)
             }
 
         }
@@ -59,12 +59,13 @@ class QuotesViewController: UIViewController {
     private func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)//UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
 
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.6))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 1)
 
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .paging
+
 
         return UICollectionViewCompositionalLayout(section: section)
     }
@@ -74,7 +75,7 @@ class QuotesViewController: UIViewController {
         collectioView.translatesAutoresizingMaskIntoConstraints = false
         collectioView.setBackground(to: quoteController.background)
         collectioView.register(QuoteCollectionViewCell.self, forCellWithReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier)
-        collectioView.dataSource = self
+//        collectioView.dataSource = self
         view.addSubview(collectioView)
 
         NSLayoutConstraint.activate([
@@ -85,36 +86,40 @@ class QuotesViewController: UIViewController {
         ])
     }
 
-//    private func configureDataSource(items: [Quote]) {
-//
-//        dataSource = DataSource(collectionView: collectioView) {
-//            collectioView, indexPath, quote -> UICollectionViewCell? in
-//            guard let cell = collectioView.dequeueReusableCell(withReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier, for: indexPath) as? QuoteCollectionViewCell else { return UICollectionViewCell() }
-//            cell.quote = quote
-//            cell.quoteController = self.quoteController
-//            return cell
-//        }
-//
-//        var snapShot = SnapShot()
-//        snapShot.appendSections([.main])
-//        snapShot.appendItems(items)
-//
-//        dataSource.apply(snapShot, animatingDifferences: true)
-//        activityIndicator.stopAnimating()
+    private func configureDataSource(items: [Quote]) {
+
+        dataSource = DataSource(collectionView: collectioView) {
+            collectioView, indexPath, quote -> UICollectionViewCell? in
+            guard let cell = collectioView.dequeueReusableCell(withReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier, for: indexPath) as? QuoteCollectionViewCell else { return UICollectionViewCell() }
+            cell.quote = quote
+            cell.quoteController = self.quoteController
+
+            cell.layer.borderWidth = 3
+            cell.layer.borderColor = UIColor.white.cgColor
+            cell.layer.cornerRadius = 12
+            return cell
+        }
+
+        var snapShot = SnapShot()
+        snapShot.appendSections([.main])
+        snapShot.appendItems(items)
+
+        dataSource.apply(snapShot, animatingDifferences: true)
+        activityIndicator.stopAnimating()
+    }
+}
+
+//extension QuotesViewController: UICollectionViewDataSource {
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return quotes.count
 //    }
-}
-
-extension QuotesViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return quotes.count
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier, for: indexPath) as? QuoteCollectionViewCell else { return UICollectionViewCell() }
-        cell.quote = quotes[indexPath.item]
-        cell.quoteController = quoteController
-        return cell
-    }
-
-
-}
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier, for: indexPath) as? QuoteCollectionViewCell else { return UICollectionViewCell() }
+//        cell.quote = quotes[indexPath.item]
+//        cell.quoteController = quoteController
+//        return cell
+//    }
+//
+//
+//}
