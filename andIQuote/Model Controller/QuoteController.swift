@@ -110,7 +110,7 @@ extension QuoteController {
         moc.performAndWait {
             let quoteFetch: NSFetchRequest<Quote> = Quote.fetchRequest()
             quoteFetch.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
-            quoteFetch.fetchLimit = 100
+
                     
             do {
                 _ = try moc.fetch(quoteFetch)

@@ -80,7 +80,7 @@ class QuotesViewController: UIViewController {
 
         NSLayoutConstraint.activate([
             collectioView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectioView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            collectioView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             collectioView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             collectioView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
         ])
@@ -91,10 +91,9 @@ class QuotesViewController: UIViewController {
             collectioView, indexPath, quote -> UICollectionViewCell? in
             guard let cell = collectioView.dequeueReusableCell(withReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier, for: indexPath) as? QuoteCollectionViewCell else { return UICollectionViewCell() }
 
-            cell.quote = quote
             cell.quoteController = self.quoteController
-            print(quote.body!)
-            cell.layer.borderWidth = 3
+            cell.quote = quote
+            cell.layer.borderWidth = 0.25
             cell.layer.borderColor = UIColor.black.cgColor
             cell.layer.cornerRadius = 12
             cell.backgroundColor = .clear
@@ -119,10 +118,6 @@ class QuotesViewController: UIViewController {
 
 extension QuotesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("didSelectItemAt: \(indexPath)")
-    }
-
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-
+//        print("didSelectItemAt: \(indexPath)")
     }
 }
