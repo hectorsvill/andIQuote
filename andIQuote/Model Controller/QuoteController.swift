@@ -34,6 +34,7 @@ class QuoteController {
         }
     }
 }
+
 extension QuoteController {
     // MARK: background
     var background: String {

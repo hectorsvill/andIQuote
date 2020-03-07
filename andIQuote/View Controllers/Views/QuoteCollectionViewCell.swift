@@ -25,17 +25,54 @@ class QuoteCollectionViewCell: UICollectionViewCell, SelfConfiguringCell {
         return textview
     }()
 
+
+    var bookmarkButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        let symbolicConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .light, scale: .large)
+        let image = UIImage(systemName: "bookmark", withConfiguration: symbolicConfig)
+        button.setImage(image, for: .normal)
+        return button
+    }()
+
+    var shareButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        let symbolicConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .light, scale: .large)
+        let image = UIImage(systemName: "square.and.arrow.up", withConfiguration: symbolicConfig)
+        button.setImage(image, for: .normal)
+        return button
+    }()
+
     private func setupView() {
         guard let quote = quote, let quoteController = quoteController else { return }
         quoteTextView.attributedText = quoteController.attributedString(quote)
 
-        addSubview(quoteTextView)
+//        quoteTextView.layer.borderWidth = 0.24
+//        quoteTextView.layer.borderColor = UIColor.black.cgColor
+
+        bookmarkButton.tintColor = .black
+        shareButton.tintColor = .black
+
+        [shareButton,quoteTextView, bookmarkButton]
+            .forEach { addSubview($0) }
+
+
+        let inset: CGFloat = 8
 
         NSLayoutConstraint.activate([
             quoteTextView.centerYAnchor.constraint(equalTo: centerYAnchor),
             quoteTextView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            quoteTextView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 8),
-            quoteTextView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -8),
+            quoteTextView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: inset),
+            quoteTextView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -inset),
+
+            bookmarkButton.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -inset),
+            bookmarkButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -inset),
+
+            shareButton.rightAnchor.constraint(equalTo: bookmarkButton.safeAreaLayoutGuide.leftAnchor, constant: -inset*2),
+            shareButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -inset),
+
+
         ])
     }
 }
