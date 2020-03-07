@@ -105,11 +105,12 @@ extension QuoteController {
     }
     
     // MARK: fetchQuotesFromCoreData
-    private func fetchQuotesFromCoreData(completion: @escaping ([Quote]?, Error?) -> ()){
+    func fetchQuotesFromCoreData(completion: @escaping ([Quote]?, Error?) -> ()){
         let moc = CoreDataStack.shared.mainContext
         moc.performAndWait {
             let quoteFetch: NSFetchRequest<Quote> = Quote.fetchRequest()
             quoteFetch.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
+            quoteFetch.fetchLimit = 100
                     
             do {
                 _ = try moc.fetch(quoteFetch)

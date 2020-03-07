@@ -6,6 +6,7 @@
 //  Copyright © 2020 Hector. All rights reserved.
 //
 
+import CoreData
 import UIKit
 
 extension QuotesViewController {
@@ -24,19 +25,18 @@ class QuotesViewController: UIViewController {
     var collectioView: UICollectionView! = nil
     var dataSource: DataSource! = nil
 
-    var quotes: [Quote] = []
+//    var quotes: [Quote] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.createCollectionView()
-        self.configureDataSource()
 
         activityIndicator.color = .black
         activityIndicator.center = view.center
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
         fetchQotes()
+        self.createCollectionView()
+        self.configureDataSource()
     }
 
     private func fetchQotes() {
@@ -47,15 +47,11 @@ class QuotesViewController: UIViewController {
 
             guard let quotes = quotes else { return }
             DispatchQueue.main.async {
-                self.quotes = quotes
                 self.loadData(items: quotes)
-                self.collectioView.reloadData()
                 self.activityIndicator.stopAnimating()
             }
 
         }
-
-
     }
 
     private func createLayout() -> UICollectionViewLayout {
@@ -75,9 +71,11 @@ class QuotesViewController: UIViewController {
     func createCollectionView() {
         collectioView = UICollectionView(frame: view.frame, collectionViewLayout: createLayout())
         collectioView.translatesAutoresizingMaskIntoConstraints = false
+        collectioView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+        collectioView.delegate = self
         collectioView.setBackground(to: quoteController.background)
         collectioView.register(QuoteCollectionViewCell.self, forCellWithReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier)
-//        collectioView.dataSource = self
         view.addSubview(collectioView)
 
         NSLayoutConstraint.activate([
@@ -92,12 +90,14 @@ class QuotesViewController: UIViewController {
         dataSource = DataSource(collectionView: collectioView) {
             collectioView, indexPath, quote -> UICollectionViewCell? in
             guard let cell = collectioView.dequeueReusableCell(withReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier, for: indexPath) as? QuoteCollectionViewCell else { return UICollectionViewCell() }
+
             cell.quote = quote
             cell.quoteController = self.quoteController
-
+            print(quote.body!)
             cell.layer.borderWidth = 3
-            cell.layer.borderColor = UIColor.white.cgColor
+            cell.layer.borderColor = UIColor.black.cgColor
             cell.layer.cornerRadius = 12
+            cell.backgroundColor = .clear
             return cell
         }
     }
@@ -107,23 +107,22 @@ class QuotesViewController: UIViewController {
         snapShot.appendSections([.main])
         snapShot.appendItems(items)
 
-        dataSource.apply(snapShot, animatingDifferences: true)
-        activityIndicator.stopAnimating()
+        DispatchQueue.main.async {
+            self.dataSource.apply(snapShot, animatingDifferences: true) {
+                self.collectioView.reloadData()
+
+            }
+        }
     }
 
 }
 
-//extension QuotesViewController: UICollectionViewDataSource {
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return quotes.count
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier, for: indexPath) as? QuoteCollectionViewCell else { return UICollectionViewCell() }
-//        cell.quote = quotes[indexPath.item]
-//        cell.quoteController = quoteController
-//        return cell
-//    }
-//
-//
-//}
+extension QuotesViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("didSelectItemAt: \(indexPath)")
+    }
+
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+
+    }
+}

@@ -28,7 +28,9 @@ class QuoteCollectionViewCell: UICollectionViewCell, SelfConfiguringCell {
     private func setupView() {
         guard let quote = quote, let quoteController = quoteController else { return }
         quoteTextView.attributedText = quoteController.attributedString(quote)
+
         addSubview(quoteTextView)
+
         NSLayoutConstraint.activate([
             quoteTextView.centerYAnchor.constraint(equalTo: centerYAnchor),
             quoteTextView.centerXAnchor.constraint(equalTo: centerXAnchor),
