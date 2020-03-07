@@ -21,15 +21,14 @@ extension QuotesViewController {
 class QuotesViewController: UIViewController {
     var quoteController: QuoteController! = nil
     let activityIndicator = UIActivityIndicatorView(style: .large)
-
-    var collectioView: UICollectionView! = nil
+    var collectionView: UICollectionView! = nil
     var dataSource: DataSource! = nil
-
+    var delegate: HomeControllerViewDelegate? = nil
 }
 
 extension QuotesViewController {
 
-    // MARK: viewDidLoad=
+    // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,46 +37,59 @@ extension QuotesViewController {
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
         fetchQotes()
-        self.createCollectionView()
-        self.configureDataSource()
+        createCollectionView()
+        configureDataSource()
+        configureNavigationButton()
     }
 
+
+    private func configureNavigationButton() {
+        navigationController?.navigationBar.barTintColor = collectionView.backgroundColor
+        navigationController?.navigationBar.barStyle = .default
+        let menuImage = UIImage(systemName: "line.horizontal.3", withConfiguration: UIImage().mainViewSymbolConfig())
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: menuImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(slideMenuButtonTapped))
+        navigationItem.leftBarButtonItem?.tintColor = .label
+    }
+
+    @objc func slideMenuButtonTapped() {
+        delegate?.handleMenuToggle(index: 0)
+        collectionView.isScrollEnabled.toggle()
+    }
 
 
     private func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)//UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
 
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.6))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 1)
 
         let section = NSCollectionLayoutSection(group: group)
 
-
         return UICollectionViewCompositionalLayout(section: section)
     }
 
     func createCollectionView() {
-        collectioView = UICollectionView(frame: view.frame, collectionViewLayout: createLayout())
-        collectioView.translatesAutoresizingMaskIntoConstraints = false
-        collectioView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        collectionView = UICollectionView(frame: view.frame, collectionViewLayout: createLayout())
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
-        collectioView.delegate = self
-        collectioView.setBackground(to: quoteController.background)
-        collectioView.register(QuoteCollectionViewCell.self, forCellWithReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier)
-        view.addSubview(collectioView)
+        collectionView.delegate = self
+        collectionView.setBackground(to: quoteController.background)
+        collectionView.register(QuoteCollectionViewCell.self, forCellWithReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier)
+        view.addSubview(collectionView)
 
         NSLayoutConstraint.activate([
-            collectioView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectioView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            collectioView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
-            collectioView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collectionView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            collectionView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
         ])
     }
 
     private func configureDataSource() {
-        dataSource = DataSource(collectionView: collectioView) {
+        dataSource = DataSource(collectionView: collectionView) {
             collectioView, indexPath, quote -> UICollectionViewCell? in
             guard let cell = collectioView.dequeueReusableCell(withReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier, for: indexPath) as? QuoteCollectionViewCell else { return UICollectionViewCell() }
 

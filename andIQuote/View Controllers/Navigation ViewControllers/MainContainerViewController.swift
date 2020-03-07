@@ -49,6 +49,7 @@ extension MainContainerViewController {
     func configureHomeController() {
         let homeController = QuotesViewController()
         homeController.quoteController = quoteController
+        homeController.delegate = self
 
         //QuoteCollectionViewController(collectionViewLayout: createLayout())
 //        homeController.quoteController = quoteController
