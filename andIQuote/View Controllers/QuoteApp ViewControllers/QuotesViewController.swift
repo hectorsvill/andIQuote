@@ -25,8 +25,11 @@ class QuotesViewController: UIViewController {
     var collectioView: UICollectionView! = nil
     var dataSource: DataSource! = nil
 
-//    var quotes: [Quote] = []
+}
 
+extension QuotesViewController {
+
+    // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -39,20 +42,7 @@ class QuotesViewController: UIViewController {
         self.configureDataSource()
     }
 
-    private func fetchQotes() {
-        quoteController.fetchQuotes { quotes, error in
-            if let error = error {
-                NSLog("Error: \(error)")
-            }
 
-            guard let quotes = quotes else { return }
-            DispatchQueue.main.async {
-                self.loadData(items: quotes)
-                self.activityIndicator.stopAnimating()
-            }
-
-        }
-    }
 
     private func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
@@ -93,6 +83,7 @@ class QuotesViewController: UIViewController {
 
             cell.quoteController = self.quoteController
             cell.quote = quote
+
             cell.layer.borderWidth = 0.25
             cell.layer.borderColor = UIColor.black.cgColor
             cell.layer.cornerRadius = 12
@@ -101,23 +92,31 @@ class QuotesViewController: UIViewController {
         }
     }
 
+    private func fetchQotes() {
+        quoteController.fetchQuotes { quotes, error in
+            if let error = error {
+                NSLog("Error: \(error)")
+            }
+
+            guard let quotes = quotes else { return }
+            DispatchQueue.main.async {
+                self.loadData(items: quotes)
+                self.activityIndicator.stopAnimating()
+            }
+
+        }
+    }
+
     func loadData(items: [Quote]) {
         var snapShot = SnapShot()
         snapShot.appendSections([.main])
         snapShot.appendItems(items)
 
-        DispatchQueue.main.async {
-            self.dataSource.apply(snapShot, animatingDifferences: true) {
-                self.collectioView.reloadData()
-
-            }
-        }
+        self.dataSource.apply(snapShot, animatingDifferences: true)
     }
-
 }
-
+// MARK: UICollectionViewDelegate
 extension QuotesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        print("didSelectItemAt: \(indexPath)")
     }
 }
