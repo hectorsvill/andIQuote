@@ -132,11 +132,16 @@ extension QuotesViewController: UICollectionViewDelegate {
 }
 
 extension QuotesViewController: QuoteCollectionViewCellDelegate {
-    func shareButtonPressed(_ view: UITextView) {
-        print("share")
+    func shareButtonPressed(_ view: UIView) {
+        guard quoteController.quoteThemeIsActive != true else { return }
+        view.impactGesture(style: .rigid)
+        let activityVC = UIActivityViewController(activityItems: [quoteController.attributedString, view.screenShot()], applicationActivities: [])
+        present(activityVC, animated: true)
+
     }
 
     func bookmarkButtonPressed() {
+        view.impactGesture(style: .rigid)
         print("bookmarkButtonPressed")
     }
 }

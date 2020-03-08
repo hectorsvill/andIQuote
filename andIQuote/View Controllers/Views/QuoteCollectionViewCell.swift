@@ -10,7 +10,7 @@ import UIKit
 
 protocol QuoteCollectionViewCellDelegate: AnyObject {
     func bookmarkButtonPressed()
-    func shareButtonPressed(_ view: UITextView)
+    func shareButtonPressed(_ view: UIView)
 }
 
 class QuoteCollectionViewCell: UICollectionViewCell, SelfConfiguringCell {
@@ -93,6 +93,10 @@ class QuoteCollectionViewCell: UICollectionViewCell, SelfConfiguringCell {
     }
 
     @objc func shareButtonPressed() {
-        delegate?.shareButtonPressed(quoteTextView)
+        shareButton.isHidden = true
+        bookmarkButton.isHidden = true
+        delegate?.shareButtonPressed(self)
+        shareButton.isHidden = false
+        bookmarkButton.isHidden = false
     }
 }
