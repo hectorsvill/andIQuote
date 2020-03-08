@@ -30,10 +30,12 @@ extension QuotesViewController {
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        activityIndicator.color = .black
+
+        activityIndicator.color = .red
         activityIndicator.center = view.center
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
+
         fetchQotes()
         createCollectionView()
         configureDataSource()

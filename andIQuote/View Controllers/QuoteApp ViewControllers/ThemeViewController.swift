@@ -89,7 +89,7 @@ extension ThemeViewController: UICollectionViewDelegate {
         guard let cell = collectionView.cellForItem(at: indexPath) else { return }
 
         if let selectedCell = selectedCell {
-            selectedCell.layer.borderColor = UIColor.white.cgColor
+            selectedCell.layer.borderColor = UIColor.label.cgColor
         }
 
         cell.layer.borderWidth = 3

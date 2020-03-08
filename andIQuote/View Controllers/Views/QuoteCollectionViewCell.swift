@@ -51,19 +51,21 @@ extension QuoteCollectionViewCell {
         guard let quote = quote, let quoteController = quoteController else { return }
         quoteTextView.attributedText = quoteController.attributedString(quote)
 
+        setBackground(to: quoteController.background)
+
         let borderWidth: CGFloat = 0.25
         let cornerRadius: CGFloat = 18
 
         layer.cornerRadius = cornerRadius
         contentView.layer.cornerRadius = cornerRadius
 
-        if quoteController.background == "white" {
+        if quoteController.background == "systemBackground" {
             layer.borderWidth = borderWidth
-            contentView.layer.borderWidth = borderWidth
             layer.borderColor = UIColor.systemGray.cgColor
+            contentView.layer.borderWidth = borderWidth
+            contentView.layer.borderColor = UIColor.systemGray.cgColor
         }
 
-        setBackground(to: quoteController.background)
         bookmarkButton.addTarget(self, action: #selector(bookmarkButtonPressed), for: .touchUpInside)
 
         let tintColor = quoteController.background == "white" ? UIColor.black : UIColor.white
