@@ -18,6 +18,7 @@ class QuoteCollectionViewCell: UICollectionViewCell, SelfConfiguringCell {
     var delegate: QuoteCollectionViewCellDelegate?
     var quoteController: QuoteController?
     var quote: Quote? { didSet { setupView()} }
+    var isBookmark = false
     
     var quoteTextView: UITextView = {
         let textview = UITextView()
@@ -30,13 +31,9 @@ class QuoteCollectionViewCell: UICollectionViewCell, SelfConfiguringCell {
         return textview
     }()
 
-
     var bookmarkButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        let symbolicConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .light, scale: .large)
-        let image = UIImage(systemName: "bookmark", withConfiguration: symbolicConfig)
-        button.setImage(image, for: .normal)
         return button
     }()
 
@@ -50,19 +47,17 @@ class QuoteCollectionViewCell: UICollectionViewCell, SelfConfiguringCell {
     }()
 
     private func setupView() {
+        guard let quote = quote, let quoteController = quoteController else { return }
+        quoteTextView.attributedText = quoteController.attributedString(quote)
+
         layer.borderWidth = 0.25
         layer.borderColor = UIColor.black.cgColor
         layer.cornerRadius = 12
         backgroundColor = .clear
 
-        guard let quote = quote, let quoteController = quoteController else { return }
-        quoteTextView.attributedText = quoteController.attributedString(quote)
-
-//        quoteTextView.layer.borderWidth = 0.24
-//        quoteTextView.layer.borderColor = UIColor.black.cgColor
-
         bookmarkButton.tintColor = .black
         bookmarkButton.addTarget(self, action: #selector(bookmarkButtonPressed), for: .touchUpInside)
+
         shareButton.tintColor = .black
         shareButton.addTarget(self, action: #selector(shareButtonPressed), for: .touchUpInside)
 
@@ -89,6 +84,17 @@ class QuoteCollectionViewCell: UICollectionViewCell, SelfConfiguringCell {
     @objc func bookmarkButtonPressed() {
         guard let quote = quote else { return }
         delegate?.bookmarkButtonPressed(quote.id!)
+        let symbolicConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .light, scale: .large)
+        let imageName = isBookmark ? "bookmark" : "bookmark.fill"
+        let image = UIImage(systemName: imageName, withConfiguration: symbolicConfig)!
+        bookmarkButton.setImage(image, for: .normal)
+        isBookmark.toggle()
+        quote.like.toggle()
+        
+        let moc = CoreDataStack.shared.mainContext
+        do { try moc.save() } catch {
+            NSLog("\(error)")
+        }
     }
 
     @objc func shareButtonPressed() {

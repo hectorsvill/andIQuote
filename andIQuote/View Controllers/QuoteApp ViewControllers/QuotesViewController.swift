@@ -64,17 +64,23 @@ extension QuotesViewController {
     }
 
     private func configureDataSource() {
-        dataSource = DataSource(collectionView: collectionView) {
-            collectioView, indexPath, quote -> UICollectionViewCell? in
+        dataSource = DataSource(collectionView: collectionView) { collectioView, indexPath, quote -> UICollectionViewCell? in
             guard let cell = collectioView.dequeueReusableCell(withReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier, for: indexPath) as? QuoteCollectionViewCell else { return UICollectionViewCell() }
-
             cell.quoteController = self.quoteController
             cell.quote = quote
             cell.delegate = self
+
+            cell.isBookmark = quote.like//self.quoteController.bookmarked.contains(quote.id!)
+            let symbolicConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .light, scale: .large)
+            let imageName = cell.isBookmark ? "bookmark.fill" : "bookmark"
+            let image = UIImage(systemName: imageName, withConfiguration: symbolicConfig)!
+            cell.bookmarkButton.setImage(image, for: .normal)
+
             return cell
         }
     }
 }
+
 extension QuotesViewController {
     private func configureNavigationButton() {
         navigationController?.navigationBar.barTintColor = collectionView.backgroundColor
@@ -125,12 +131,14 @@ extension QuotesViewController {
         self.dataSource.apply(snapShot, animatingDifferences: true)
     }
 }
+
 // MARK: UICollectionViewDelegate
 extension QuotesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     }
 }
 
+// MARK: QuoteCollectionViewCellDelegate
 extension QuotesViewController: QuoteCollectionViewCellDelegate {
     func bookmarkButtonPressed(_ id: String) {
         view.impactGesture(style: .rigid)
