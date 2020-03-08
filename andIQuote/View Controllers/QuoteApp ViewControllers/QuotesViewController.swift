@@ -51,7 +51,7 @@ extension QuotesViewController {
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
         collectionView.delegate = self
-        collectionView.setBackground(to: quoteController.background)
+        collectionView.backgroundColor = .systemBackground
         collectionView.register(QuoteCollectionViewCell.self, forCellWithReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier)
         view.addSubview(collectionView)
 
@@ -66,6 +66,7 @@ extension QuotesViewController {
     private func configureDataSource() {
         dataSource = DataSource(collectionView: collectionView) { collectioView, indexPath, quote -> UICollectionViewCell? in
             guard let cell = collectioView.dequeueReusableCell(withReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier, for: indexPath) as? QuoteCollectionViewCell else { return UICollectionViewCell() }
+            cell.backgroundColor = .systemBlue
             cell.quoteController = self.quoteController
             cell.quote = quote
             cell.delegate = self
@@ -126,6 +127,13 @@ extension QuotesViewController {
 
         self.dataSource.apply(snapShot, animatingDifferences: true)
     }
+
+    func presentThemeView() {
+        let vc = ThemeViewController()
+        vc.delegate = self
+        vc.quoteController = quoteController
+        present(vc, animated: true)
+    }
 }
 
 // MARK: UICollectionViewDelegate
@@ -154,4 +162,13 @@ extension QuotesViewController: QuoteCollectionViewCellDelegate {
         let activityVC = UIActivityViewController(activityItems: [quoteController.attributedString, view.screenShot()], applicationActivities: [])
         present(activityVC, animated: true)
     }
+}
+
+extension QuotesViewController: ThemeViewControllerDelegate {
+    func makeBackgroundChange(_ selectedItem: Int) {
+        quoteController.setBackgroundIndex(selectedItem)
+        collectionView.reloadData()
+    }
+
+
 }

@@ -52,17 +52,21 @@ extension QuoteCollectionViewCell {
         quoteTextView.attributedText = quoteController.attributedString(quote)
 
         layer.borderWidth = 0.25
-        layer.borderColor = UIColor.black.cgColor
-        layer.cornerRadius = 12
-        backgroundColor = .clear
+        layer.cornerRadius = 18
+        
+        if quoteController.background == "white" {
+            layer.borderColor = UIColor.systemGray.cgColor
+        }
 
-        bookmarkButton.tintColor = .black
+        setBackground(to: quoteController.background)
         bookmarkButton.addTarget(self, action: #selector(bookmarkButtonPressed), for: .touchUpInside)
 
-        shareButton.tintColor = .black
+        let tintColor = quoteController.background == "white" ? UIColor.black : UIColor.white
+        bookmarkButton.tintColor = tintColor
+        shareButton.tintColor = tintColor
         shareButton.addTarget(self, action: #selector(shareButtonPressed), for: .touchUpInside)
 
-        [shareButton,quoteTextView, bookmarkButton].forEach { addSubview($0) }
+        [shareButton, quoteTextView, bookmarkButton].forEach { addSubview($0) }
 
         let inset: CGFloat = 8
 
@@ -72,7 +76,7 @@ extension QuoteCollectionViewCell {
             quoteTextView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: inset),
             quoteTextView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -inset),
 
-            bookmarkButton.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -inset),
+            bookmarkButton.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -inset*2),
             bookmarkButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -inset),
 
             shareButton.rightAnchor.constraint(equalTo: bookmarkButton.safeAreaLayoutGuide.leftAnchor, constant: -inset*2),

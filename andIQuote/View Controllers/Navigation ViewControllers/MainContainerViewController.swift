@@ -13,7 +13,7 @@ final class MainContainerViewController: UIViewController {
     let userNotificationCenter = UNUserNotificationCenter.current()
     var menuViewController: SlideMenuViewController!
     var centerNavViewController: UINavigationController!
-    var quoteCollectionViewController: QuoteCollectionViewController?
+    var quotesViewController = QuotesViewController()
 
     // MARK: viewDidLoad
     override func viewDidLoad() {
@@ -23,39 +23,16 @@ final class MainContainerViewController: UIViewController {
 }
 
 extension MainContainerViewController {
-    // MARK: createFlowLayout
-    func createFlowLayout() -> UICollectionViewFlowLayout {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .horizontal
-        return flowLayout
-    }
-
-    private func createLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.6))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 1)
-
-        let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .paging
-
-        let flowLayout = UICollectionViewCompositionalLayoutConfiguration()
-        flowLayout.interSectionSpacing = 0
-        
-        return UICollectionViewCompositionalLayout(section: section, configuration: flowLayout)
-    }
     // MARK: configureHomeController
     func configureHomeController() {
-        let homeController = QuotesViewController()
-        homeController.quoteController = quoteController
-        homeController.delegate = self
+        quotesViewController.quoteController = quoteController
+        quotesViewController.delegate = self
 
         //QuoteCollectionViewController(collectionViewLayout: createLayout())
 //        homeController.quoteController = quoteController
 //        homeController.userNotificationCenter = userNotificationCenter
 //        homeController.delegate = self
-        let navigationController = UINavigationController(rootViewController: homeController)
+        let navigationController = UINavigationController(rootViewController: quotesViewController)
         centerNavViewController = navigationController
         view.addSubview(centerNavViewController.view)
         addChild(centerNavViewController)
@@ -72,10 +49,7 @@ extension MainContainerViewController {
             menuViewController.didMove(toParent: self)
         }
     }
-
 }
-
-
 // MARK: HomeControllerViewDelegate
 extension MainContainerViewController: HomeControllerViewDelegate {
     func handleMenuToggle(index: Int = 0) {
@@ -102,19 +76,14 @@ extension MainContainerViewController: HomeControllerViewDelegate {
     }
 
     private func createView(with index: Int) {
-//        impactGesture(style: .medium)
+        view.impactGesture(style: .medium)
         switch index {
         case 2:
             print("favorites")
         case 3:
-            print("theme")
+            quotesViewController.presentThemeView()
         case 4:
-            quoteCollectionViewController?.shareButtonTapped()
-            let dailyReminderVC = DailyReminderViewController()
-            dailyReminderVC.userNotificationCenter = userNotificationCenter
-            dailyReminderVC.quoteController = quoteController
-            dailyReminderVC.view.setBackground(to: quoteController.background)
-            present(dailyReminderVC, animated: true)
+            print("reminder")
         case 5:
             print("create")
 //            let vc = UIViewController()
