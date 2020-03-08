@@ -98,6 +98,7 @@ extension ThemeViewController: UICollectionViewDelegate {
         selectedIndex = indexPath.item
         UserDefaults.standard.set(selectedIndex, forKey: "ThemeViewController.selectedIndex")
         delegate?.makeBackgroundChange(selectedIndex)
+        dismiss(animated: true, completion: nil)
     }
 }
 

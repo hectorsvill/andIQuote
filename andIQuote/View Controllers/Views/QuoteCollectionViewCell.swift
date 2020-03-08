@@ -51,10 +51,15 @@ extension QuoteCollectionViewCell {
         guard let quote = quote, let quoteController = quoteController else { return }
         quoteTextView.attributedText = quoteController.attributedString(quote)
 
-        layer.borderWidth = 0.25
-        layer.cornerRadius = 18
-        
+        let borderWidth: CGFloat = 0.25
+        let cornerRadius: CGFloat = 18
+
+        layer.cornerRadius = cornerRadius
+        contentView.layer.cornerRadius = cornerRadius
+
         if quoteController.background == "white" {
+            layer.borderWidth = borderWidth
+            contentView.layer.borderWidth = borderWidth
             layer.borderColor = UIColor.systemGray.cgColor
         }
 

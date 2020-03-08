@@ -89,7 +89,7 @@ extension QuotesViewController {
 
     @objc func slideMenuButtonTapped() {
         delegate?.handleMenuToggle(index: 0)
-        collectionView.isScrollEnabled.toggle()
+//        collectionView.isScrollEnabled.toggle()
     }
 
     private func createLayout() -> UICollectionViewLayout {
