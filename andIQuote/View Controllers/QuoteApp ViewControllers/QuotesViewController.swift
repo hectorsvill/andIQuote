@@ -132,16 +132,22 @@ extension QuotesViewController: UICollectionViewDelegate {
 }
 
 extension QuotesViewController: QuoteCollectionViewCellDelegate {
+    func bookmarkButtonPressed(_ id: String) {
+        view.impactGesture(style: .rigid)
+
+        if quoteController.bookmarked.contains(id) {
+            if let index = quoteController.bookmarked.firstIndex(of: id) {
+                quoteController.bookmarked.remove(at: index)
+            }
+        } else {
+            quoteController.bookmarked.append(id)
+        }
+    }
+
     func shareButtonPressed(_ view: UIView) {
         guard quoteController.quoteThemeIsActive != true else { return }
         view.impactGesture(style: .rigid)
         let activityVC = UIActivityViewController(activityItems: [quoteController.attributedString, view.screenShot()], applicationActivities: [])
         present(activityVC, animated: true)
-
-    }
-
-    func bookmarkButtonPressed() {
-        view.impactGesture(style: .rigid)
-        print("bookmarkButtonPressed")
     }
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol QuoteCollectionViewCellDelegate: AnyObject {
-    func bookmarkButtonPressed()
+    func bookmarkButtonPressed(_ id: String)
     func shareButtonPressed(_ view: UIView)
 }
 
@@ -83,13 +83,12 @@ class QuoteCollectionViewCell: UICollectionViewCell, SelfConfiguringCell {
 
             shareButton.rightAnchor.constraint(equalTo: bookmarkButton.safeAreaLayoutGuide.leftAnchor, constant: -inset*2),
             shareButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -inset),
-
-
         ])
     }
 
     @objc func bookmarkButtonPressed() {
-        delegate?.bookmarkButtonPressed()
+        guard let quote = quote else { return }
+        delegate?.bookmarkButtonPressed(quote.id!)
     }
 
     @objc func shareButtonPressed() {

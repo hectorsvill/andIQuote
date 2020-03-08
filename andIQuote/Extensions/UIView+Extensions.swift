@@ -9,7 +9,6 @@
 import UIKit
 
 extension UIView {
-    
     func screenShot() -> UIImage {
         let render = UIGraphicsImageRenderer(size: bounds.size)
         
@@ -42,5 +41,10 @@ extension UIView {
         } else if backgroundString ==  "purple" {
             backgroundColor = .systemPurple
         }
+    }
+
+    func impactGesture(style: UIImpactFeedbackGenerator.FeedbackStyle = .light) {
+        let impactFeedback = UIImpactFeedbackGenerator(style: style)
+        impactFeedback.impactOccurred()
     }
 }
