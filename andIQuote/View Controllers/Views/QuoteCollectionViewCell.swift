@@ -40,12 +40,13 @@ class QuoteCollectionViewCell: UICollectionViewCell, SelfConfiguringCell {
     var shareButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        let symbolicConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .light, scale: .large)
-        let image = UIImage(systemName: "square.and.arrow.up", withConfiguration: symbolicConfig)
+        let image = UIImage(systemName: "square.and.arrow.up", withConfiguration: UIImage().mainViewSymbolConfig())
         button.setImage(image, for: .normal)
         return button
     }()
+}
 
+extension QuoteCollectionViewCell {
     private func setupView() {
         guard let quote = quote, let quoteController = quoteController else { return }
         quoteTextView.attributedText = quoteController.attributedString(quote)
@@ -61,9 +62,7 @@ class QuoteCollectionViewCell: UICollectionViewCell, SelfConfiguringCell {
         shareButton.tintColor = .black
         shareButton.addTarget(self, action: #selector(shareButtonPressed), for: .touchUpInside)
 
-        [shareButton,quoteTextView, bookmarkButton]
-            .forEach { addSubview($0) }
-
+        [shareButton,quoteTextView, bookmarkButton].forEach { addSubview($0) }
 
         let inset: CGFloat = 8
 
@@ -84,13 +83,13 @@ class QuoteCollectionViewCell: UICollectionViewCell, SelfConfiguringCell {
     @objc func bookmarkButtonPressed() {
         guard let quote = quote else { return }
         delegate?.bookmarkButtonPressed(quote.id!)
-        let symbolicConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .light, scale: .large)
+
         let imageName = isBookmark ? "bookmark" : "bookmark.fill"
-        let image = UIImage(systemName: imageName, withConfiguration: symbolicConfig)!
+        let image = UIImage(systemName: imageName, withConfiguration: UIImage().mainViewSymbolConfig())!
         bookmarkButton.setImage(image, for: .normal)
         isBookmark.toggle()
         quote.like.toggle()
-        
+
         let moc = CoreDataStack.shared.mainContext
         do { try moc.save() } catch {
             NSLog("\(error)")

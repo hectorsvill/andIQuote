@@ -18,7 +18,7 @@ extension QuotesViewController {
     typealias SnapShot = NSDiffableDataSourceSnapshot<Section, Quote>
 }
 
-class QuotesViewController: UIViewController {
+final class QuotesViewController: UIViewController {
     var quoteController: QuoteController! = nil
     let activityIndicator = UIActivityIndicatorView(style: .large)
     var collectionView: UICollectionView! = nil
@@ -45,7 +45,7 @@ extension QuotesViewController {
         collectionView.isScrollEnabled = true
     }
 
-    func createCollectionView() {
+    private func createCollectionView() {
         collectionView = UICollectionView(frame: view.frame, collectionViewLayout: createLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -69,13 +69,9 @@ extension QuotesViewController {
             cell.quoteController = self.quoteController
             cell.quote = quote
             cell.delegate = self
-
-            cell.isBookmark = quote.like//self.quoteController.bookmarked.contains(quote.id!)
-            let symbolicConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .light, scale: .large)
-            let imageName = cell.isBookmark ? "bookmark.fill" : "bookmark"
-            let image = UIImage(systemName: imageName, withConfiguration: symbolicConfig)!
+            cell.isBookmark = quote.like
+            let image = UIImage(systemName: cell.isBookmark ? "bookmark.fill" : "bookmark", withConfiguration: UIImage().mainViewSymbolConfig())!
             cell.bookmarkButton.setImage(image, for: .normal)
-
             return cell
         }
     }
