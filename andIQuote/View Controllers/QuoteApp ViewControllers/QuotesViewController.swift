@@ -27,11 +27,9 @@ class QuotesViewController: UIViewController {
 }
 
 extension QuotesViewController {
-
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-
         activityIndicator.color = .black
         activityIndicator.center = view.center
         view.addSubview(activityIndicator)
@@ -42,32 +40,9 @@ extension QuotesViewController {
         configureNavigationButton()
     }
 
-
-    private func configureNavigationButton() {
-        navigationController?.navigationBar.barTintColor = collectionView.backgroundColor
-        navigationController?.navigationBar.barStyle = .default
-        let menuImage = UIImage(systemName: "line.horizontal.3", withConfiguration: UIImage().mainViewSymbolConfig())
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: menuImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(slideMenuButtonTapped))
-        navigationItem.leftBarButtonItem?.tintColor = .label
-    }
-
-    @objc func slideMenuButtonTapped() {
-        delegate?.handleMenuToggle(index: 0)
-        collectionView.isScrollEnabled.toggle()
-    }
-
-
-    private func createLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
-
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.6))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 1)
-
-        let section = NSCollectionLayoutSection(group: group)
-
-        return UICollectionViewCompositionalLayout(section: section)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.isScrollEnabled = true
     }
 
     func createCollectionView() {
@@ -95,13 +70,36 @@ extension QuotesViewController {
 
             cell.quoteController = self.quoteController
             cell.quote = quote
-
-            cell.layer.borderWidth = 0.25
-            cell.layer.borderColor = UIColor.black.cgColor
-            cell.layer.cornerRadius = 12
-            cell.backgroundColor = .clear
+            cell.delegate = self
             return cell
         }
+    }
+}
+extension QuotesViewController {
+    private func configureNavigationButton() {
+        navigationController?.navigationBar.barTintColor = collectionView.backgroundColor
+        navigationController?.navigationBar.barStyle = .default
+        let menuImage = UIImage(systemName: "line.horizontal.3", withConfiguration: UIImage().mainViewSymbolConfig())
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: menuImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(slideMenuButtonTapped))
+        navigationItem.leftBarButtonItem?.tintColor = .label
+    }
+
+    @objc func slideMenuButtonTapped() {
+        delegate?.handleMenuToggle(index: 0)
+        collectionView.isScrollEnabled.toggle()
+    }
+
+    private func createLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.8))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 1)
+
+        let section = NSCollectionLayoutSection(group: group)
+
+        return UICollectionViewCompositionalLayout(section: section)
     }
 
     private func fetchQotes() {
@@ -111,11 +109,11 @@ extension QuotesViewController {
             }
 
             guard let quotes = quotes else { return }
+
             DispatchQueue.main.async {
                 self.loadData(items: quotes)
                 self.activityIndicator.stopAnimating()
             }
-
         }
     }
 
@@ -130,5 +128,15 @@ extension QuotesViewController {
 // MARK: UICollectionViewDelegate
 extension QuotesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    }
+}
+
+extension QuotesViewController: QuoteCollectionViewCellDelegate {
+    func shareButtonPressed(_ view: UITextView) {
+        print("share")
+    }
+
+    func bookmarkButtonPressed() {
+        print("bookmarkButtonPressed")
     }
 }

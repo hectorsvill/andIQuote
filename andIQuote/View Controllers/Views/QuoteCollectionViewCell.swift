@@ -8,13 +8,18 @@
 
 import UIKit
 
+protocol QuoteCollectionViewCellDelegate: AnyObject {
+    func bookmarkButtonPressed()
+    func shareButtonPressed(_ view: UITextView)
+}
+
 class QuoteCollectionViewCell: UICollectionViewCell, SelfConfiguringCell {
     static var reuseIdentifier = "QuoteCell"
-
+    var delegate: QuoteCollectionViewCellDelegate?
     var quoteController: QuoteController?
     var quote: Quote? { didSet { setupView()} }
     
-    let quoteTextView: UITextView = {
+    var quoteTextView: UITextView = {
         let textview = UITextView()
         textview.translatesAutoresizingMaskIntoConstraints = false
         textview.textAlignment = .justified
@@ -45,6 +50,11 @@ class QuoteCollectionViewCell: UICollectionViewCell, SelfConfiguringCell {
     }()
 
     private func setupView() {
+        layer.borderWidth = 0.25
+        layer.borderColor = UIColor.black.cgColor
+        layer.cornerRadius = 12
+        backgroundColor = .clear
+
         guard let quote = quote, let quoteController = quoteController else { return }
         quoteTextView.attributedText = quoteController.attributedString(quote)
 
@@ -52,7 +62,9 @@ class QuoteCollectionViewCell: UICollectionViewCell, SelfConfiguringCell {
 //        quoteTextView.layer.borderColor = UIColor.black.cgColor
 
         bookmarkButton.tintColor = .black
+        bookmarkButton.addTarget(self, action: #selector(bookmarkButtonPressed), for: .touchUpInside)
         shareButton.tintColor = .black
+        shareButton.addTarget(self, action: #selector(shareButtonPressed), for: .touchUpInside)
 
         [shareButton,quoteTextView, bookmarkButton]
             .forEach { addSubview($0) }
@@ -74,5 +86,13 @@ class QuoteCollectionViewCell: UICollectionViewCell, SelfConfiguringCell {
 
 
         ])
+    }
+
+    @objc func bookmarkButtonPressed() {
+        delegate?.bookmarkButtonPressed()
+    }
+
+    @objc func shareButtonPressed() {
+        delegate?.shareButtonPressed(quoteTextView)
     }
 }
