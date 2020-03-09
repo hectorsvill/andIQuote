@@ -60,7 +60,7 @@ extension QuoteCollectionViewController {
         collectionView.setBackground(to: quoteController.background)
         collectionView.reloadData()
         navigationController?.navigationBar.barTintColor = collectionView.backgroundColor
-//        impactGesture(style: .rigid)
+        view.impactGesture(style: .rigid)
 
     }
 }

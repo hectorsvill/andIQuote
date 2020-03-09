@@ -18,7 +18,7 @@ extension SlideMenuViewController {
         _ = [
         SlideMenuItem(sfSymbol: "", displayText: ""),
         SlideMenuItem(sfSymbol: "house.fill", displayText: "andIQuote"),
-        SlideMenuItem(sfSymbol: "hand.thumbsup.fill", displayText: "Favorites"),
+        SlideMenuItem(sfSymbol: "bookmark.fill", displayText: "Bookmarked"),
         SlideMenuItem(sfSymbol: "paintbrush.fill", displayText: "Theme"),
         SlideMenuItem(sfSymbol: "bell.fill", displayText: "Reminder"),
         SlideMenuItem(sfSymbol: "plus", displayText: "Create"),

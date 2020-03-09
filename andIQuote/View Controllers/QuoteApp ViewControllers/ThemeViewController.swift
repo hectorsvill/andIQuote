@@ -28,7 +28,7 @@ class ThemeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Theme"
-        
+
         createCollectionView()
         setSelectedCell()
     }
@@ -81,9 +81,6 @@ extension ThemeViewController {
 
         return layout
     }
-
-
-
 }
 
 extension ThemeViewController: UICollectionViewDelegate {
@@ -105,3 +102,18 @@ extension ThemeViewController: UICollectionViewDelegate {
 }
 
 
+class ThemeCollectionViewCell: UICollectionViewCell {
+
+    var item: Int? {didSet {  } }
+
+
+
+    private func setupView() {
+        guard let item = item else { return }
+
+
+
+
+    }
+
+}
