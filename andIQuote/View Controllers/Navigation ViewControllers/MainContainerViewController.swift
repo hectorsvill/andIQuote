@@ -80,6 +80,7 @@ extension MainContainerViewController: HomeControllerViewDelegate {
         switch index {
         case 2:
             print("favorites")
+            quotesViewController.fetchBookmarked()
         case 3:
             quotesViewController.presentThemeView()
         case 4:
@@ -94,7 +95,7 @@ extension MainContainerViewController: HomeControllerViewDelegate {
         case 7:
             print("search")
         default:
-            print("default")
+            quotesViewController.fetchAllQuotes()
         }
 
     }

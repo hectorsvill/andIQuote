@@ -128,7 +128,6 @@
 			isa = PBXGroup;
 			children = (
 				12AF1002241308170025B134 /* QuotesViewController.swift */,
-				12525E3823E2488B0010A663 /* QuoteCollectionViewController+Gestures.swift */,
 				12A76B5D23DD40B800026C28 /* DailyReminderViewController.swift */,
 				12A2B64623FBA0310086F585 /* ThemeViewController.swift */,
 			);
@@ -165,6 +164,7 @@
 		C42EE0F523BECD780045DF02 /* Trash */ = {
 			isa = PBXGroup;
 			children = (
+				12525E3823E2488B0010A663 /* QuoteCollectionViewController+Gestures.swift */,
 				C43D446623A47138005B2458 /* QuoteCollectionViewController.swift */,
 				0788B03D23C569C2001D00E3 /* OffLineQuotes.json */,
 				C42EE0F323BEC6230045DF02 /* BackgroundCell.swift */,

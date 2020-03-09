@@ -132,6 +132,18 @@ extension QuotesViewController {
         self.dataSource.apply(snapShot, animatingDifferences: true)
     }
 
+    func fetchAllQuotes() {
+        loadData(items: quoteController.quotes)
+        collectionView.reloadData()
+    }
+
+    func fetchBookmarked() {
+        let bookmarkedQuotes = quoteController.quotes.filter { $0.like == true }
+
+        loadData(items: bookmarkedQuotes)
+        collectionView.reloadData()
+    }
+
     func presentThemeView() {
         let vc = ThemeViewController()
         vc.delegate = self
