@@ -27,6 +27,8 @@ class ThemeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Theme"
+        
         createCollectionView()
         setSelectedCell()
     }
@@ -34,7 +36,7 @@ class ThemeViewController: UIViewController {
     private func setSelectedCell() {
         guard let cell = collectionView.cellForItem(at: IndexPath(item: selectedIndex, section: 0)) else { return }
         cell.layer.borderWidth = 3
-        cell.layer.borderColor = UIColor.black.cgColor
+        cell.layer.borderColor = UIColor.label.cgColor
         selectedCell = cell
 
     }
@@ -54,7 +56,7 @@ extension ThemeViewController {
             cell.setBackground(to:self.quoteController.backgrounds[indexPath.item])
             cell.layer.borderColor = UIColor.white.cgColor
             cell.layer.borderWidth = 3
-            cell.layer.cornerRadius = 3
+            cell.layer.cornerRadius = 23
             cell.contentView.layer.cornerRadius = 3
             return cell
         })
@@ -93,7 +95,7 @@ extension ThemeViewController: UICollectionViewDelegate {
         }
 
         cell.layer.borderWidth = 3
-        cell.layer.borderColor = UIColor.black.cgColor
+        cell.layer.borderColor = UIColor.white.cgColor
         selectedCell = cell
         selectedIndex = indexPath.item
         UserDefaults.standard.set(selectedIndex, forKey: "ThemeViewController.selectedIndex")

@@ -31,13 +31,15 @@ extension QuotesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        activityIndicator.color = .red
-        activityIndicator.center = view.center
-        view.addSubview(activityIndicator)
-        activityIndicator.startAnimating()
-
         fetchQotes()
         createCollectionView()
+
+        collectionView.addSubview(activityIndicator)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.tintColor = .red
+        activityIndicator.center = collectionView.center
+        activityIndicator.startAnimating()
+
         configureDataSource()
         configureNavigationButton()
     }
@@ -134,7 +136,8 @@ extension QuotesViewController {
         let vc = ThemeViewController()
         vc.delegate = self
         vc.quoteController = quoteController
-        present(vc, animated: true)
+        let navigationController = UINavigationController(rootViewController: vc)
+        present(navigationController, animated: true)
     }
 }
 
@@ -171,6 +174,4 @@ extension QuotesViewController: ThemeViewControllerDelegate {
         quoteController.setBackgroundIndex(selectedItem)
         collectionView.reloadData()
     }
-
-
 }
