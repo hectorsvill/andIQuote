@@ -31,7 +31,7 @@ extension QuotesViewController {
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        view.backgroundColor = .systemBackground
         fetchQotes()
         createCollectionView()
 
@@ -43,10 +43,6 @@ extension QuotesViewController {
 
         configureDataSource()
         configureNavigationButton()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
     }
 
     private func createCollectionView() {
@@ -61,7 +57,7 @@ extension QuotesViewController {
 
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             collectionView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             collectionView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
         ])
@@ -93,7 +89,6 @@ extension QuotesViewController {
 
     @objc func slideMenuButtonTapped() {
         delegate?.handleMenuToggle(index: 0)
-//        collectionView.isScrollEnabled.toggle()
     }
 
     private func createLayout() -> UICollectionViewLayout {
@@ -101,10 +96,11 @@ extension QuotesViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
 
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.8))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 1)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.85), heightDimension: .fractionalHeight(1))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
 
         let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .groupPagingCentered
 
         return UICollectionViewCompositionalLayout(section: section)
     }
@@ -123,7 +119,56 @@ extension QuotesViewController {
             }
         }
     }
+}
 
+// MARK: UICollectionViewDelegate
+extension QuotesViewController: UICollectionViewDelegate {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if quoteController.menuNavigationIsExpanded {
+            delegate?.handleMenuToggle(index: 0)
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+           return 0
+       }
+
+
+}
+
+// MARK: QuoteCollectionViewCellDelegate
+extension QuotesViewController: QuoteCollectionViewCellDelegate {
+    func bookmarkButtonPressed(_ id: String) {
+        view.impactGesture(style: .rigid)
+
+        if quoteController.bookmarked.contains(id) {
+            if let index = quoteController.bookmarked.firstIndex(of: id) {
+                quoteController.bookmarked.remove(at: index)
+                if self.quoteController.bookmarkViewIsActive == true {
+                    self.fetchBookmarked()
+                }
+            }
+        } else {
+            quoteController.bookmarked.append(id)
+        }
+    }
+
+    func shareButtonPressed(_ view: UIView) {
+        guard quoteController.quoteThemeIsActive != true else { return }
+        view.impactGesture(style: .rigid)
+        let activityVC = UIActivityViewController(activityItems: [quoteController.attributedString, view.screenShot()], applicationActivities: [])
+        present(activityVC, animated: true)
+    }
+}
+
+extension QuotesViewController: ThemeViewControllerDelegate {
+    func makeBackgroundChange(_ selectedItem: Int) {
+        quoteController.setBackgroundIndex(selectedItem)
+        collectionView.reloadData()
+    }
+}
+
+extension QuotesViewController {
     func loadData(items: [Quote]) {
         var snapShot = SnapShot()
         snapShot.appendSections([.main])
@@ -175,48 +220,5 @@ extension QuotesViewController {
         let navigationController = UINavigationController(rootViewController: vc)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
-    }
-}
-
-//extension QuotesViewController: Dail
-
-// MARK: UICollectionViewDelegate
-extension QuotesViewController: UICollectionViewDelegate {
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        if quoteController.menuNavigationIsExpanded {
-            delegate?.handleMenuToggle(index: 0)
-        }
-    }
-}
-
-// MARK: QuoteCollectionViewCellDelegate
-extension QuotesViewController: QuoteCollectionViewCellDelegate {
-    func bookmarkButtonPressed(_ id: String) {
-        view.impactGesture(style: .rigid)
-
-        if quoteController.bookmarked.contains(id) {
-            if let index = quoteController.bookmarked.firstIndex(of: id) {
-                quoteController.bookmarked.remove(at: index)
-                if self.quoteController.bookmarkViewIsActive == true {
-                    self.fetchBookmarked()
-                }
-            }
-        } else {
-            quoteController.bookmarked.append(id)
-        }
-    }
-
-    func shareButtonPressed(_ view: UIView) {
-        guard quoteController.quoteThemeIsActive != true else { return }
-        view.impactGesture(style: .rigid)
-        let activityVC = UIActivityViewController(activityItems: [quoteController.attributedString, view.screenShot()], applicationActivities: [])
-        present(activityVC, animated: true)
-    }
-}
-
-extension QuotesViewController: ThemeViewControllerDelegate {
-    func makeBackgroundChange(_ selectedItem: Int) {
-        quoteController.setBackgroundIndex(selectedItem)
-        collectionView.reloadData()
     }
 }
