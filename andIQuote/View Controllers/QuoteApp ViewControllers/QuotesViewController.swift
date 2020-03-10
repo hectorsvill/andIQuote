@@ -19,6 +19,7 @@ extension QuotesViewController {
 }
 
 final class QuotesViewController: UIViewController {
+    var userNotificationCenter: UNUserNotificationCenter?
     var quoteController: QuoteController! = nil
     let activityIndicator = UIActivityIndicatorView(style: .large)
     var collectionView: UICollectionView! = nil
@@ -151,7 +152,18 @@ extension QuotesViewController {
         let navigationController = UINavigationController(rootViewController: vc)
         present(navigationController, animated: true)
     }
+
+    func pressentReminderView() {
+        let vc = DailyReminderViewController()
+        vc.quoteController = quoteController
+        vc.userNotificationCenter = userNotificationCenter
+
+        present(vc, animated: true)
+
+    }
 }
+
+//extension QuotesViewController: Dail
 
 // MARK: UICollectionViewDelegate
 extension QuotesViewController: UICollectionViewDelegate {

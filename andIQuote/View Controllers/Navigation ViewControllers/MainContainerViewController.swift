@@ -27,7 +27,7 @@ extension MainContainerViewController {
     func configureHomeController() {
         quotesViewController.quoteController = quoteController
         quotesViewController.delegate = self
-
+        quotesViewController.userNotificationCenter = userNotificationCenter
         centerNavViewController = UINavigationController(rootViewController: quotesViewController)
         view.addSubview(centerNavViewController.view)
         addChild(centerNavViewController)
@@ -80,7 +80,8 @@ extension MainContainerViewController: HomeControllerViewDelegate {
             quoteController.bookmarkViewIsActive = false
             quotesViewController.presentThemeView()
         case 4:
-            print("reminder")
+            quoteController.bookmarkViewIsActive = false
+            quotesViewController.pressentReminderView()
         case 5:
             print("create")
         case 6:
