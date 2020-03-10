@@ -10,7 +10,7 @@ import CoreData
 import UIKit
 import Firebase
 
-class QuoteController {
+final class QuoteController {
     let firestore = FirestoreController()
     var quotes = [Quote]() { didSet { initializeBookmarks() } }
 

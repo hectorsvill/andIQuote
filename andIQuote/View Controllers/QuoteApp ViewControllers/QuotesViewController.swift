@@ -228,11 +228,7 @@ extension QuotesViewController {
 
     func presentSearchView() {
         let vc = SearchViewController()
-        vc.searchData = quoteController.quotesDict.keys.map {
-            return String($0)
-        }
-        print(vc.searchData)
-
+        vc.searchData = quoteController.quotesDict.keys.map { return String($0) }
         present(UINavigationController(rootViewController: vc), animated: true)
     }
 }
