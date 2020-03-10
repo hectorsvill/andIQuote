@@ -12,21 +12,22 @@ import Firebase
 
 class QuoteController {
     let firestore = FirestoreController()
-    var quotes = [Quote]()
+    var quotes = [Quote]() { didSet { initializeBookmarks() } }
 
-    var quoteThemeIsActive = false // theme selecting state
-    var menuNavigationIsExpanded = false // menu navigations state
+
+    var quoteThemeIsActive = false
+    var menuNavigationIsExpanded = false
+    var bookmarkViewIsActive = false
 
     private (set) var _quoteIndex = UserDefaults.standard.integer(forKey: "QIndex") // current index of quote
 
     let backgrounds = ["systemBackground", "green", "blue", "gray", "pink", "red", "teal", "indigo", "orange", "yellow", "purple",]
     private (set) var _backgroundIndex = UserDefaults.standard.integer(forKey: "QuoteController.setBackgroundIndex") // current index of background
-
     private (set) var quoteUser: QuoteUser?
 
     var remindersCount = UserDefaults.standard.integer(forKey: "DailyReminderViewController.reminderNotificationData" + "Reminders:")
     var remindersStartTime = UserDefaults.standard.integer(forKey: "DailyReminderViewController.reminderNotificationData" + "Time:")
-    var reminderTimeIntervalSeconds: Double = 3600 // 1 hour 
+    var reminderTimeIntervalSeconds: Double = 3600 // 1 hour
     var bookmarked: [String] = []
 
     init() {
@@ -67,6 +68,14 @@ extension QuoteController {
         let attributedString = NSMutableAttributedString(string: quote.body!, attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 24), NSAttributedString.Key.foregroundColor: quoteForegroundColor])
         attributedString.append(NSAttributedString(string: "\n\n\(quote.author!)", attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: quoteForegroundColor]))
         return attributedString
+    }
+    // MARK: initializeBookmarks
+    private func initializeBookmarks() {
+        self.quotes.forEach {
+            if $0.like == true {
+                self.bookmarked.append($0.id!)
+            }
+        }
     }
     // MARK: fetchResultController
     var fetchResultController: NSFetchedResultsController<Quote> {

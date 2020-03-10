@@ -138,7 +138,7 @@ extension QuotesViewController {
     }
 
     func fetchBookmarked() {
-        let bookmarkedQuotes = quoteController.quotes.filter { $0.like == true }
+        let bookmarkedQuotes = quoteController.quotes.filter { $0.like == true && quoteController.bookmarked.contains($0.id!) }
 
         loadData(items: bookmarkedQuotes)
         collectionView.reloadData()
@@ -167,6 +167,11 @@ extension QuotesViewController: QuoteCollectionViewCellDelegate {
         if quoteController.bookmarked.contains(id) {
             if let index = quoteController.bookmarked.firstIndex(of: id) {
                 quoteController.bookmarked.remove(at: index)
+
+                if self.quoteController.bookmarkViewIsActive == true {
+
+                    self.fetchBookmarked()
+                }
             }
         } else {
             quoteController.bookmarked.append(id)

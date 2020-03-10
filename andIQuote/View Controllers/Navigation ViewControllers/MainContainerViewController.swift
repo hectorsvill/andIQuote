@@ -28,12 +28,7 @@ extension MainContainerViewController {
         quotesViewController.quoteController = quoteController
         quotesViewController.delegate = self
 
-        //QuoteCollectionViewController(collectionViewLayout: createLayout())
-//        homeController.quoteController = quoteController
-//        homeController.userNotificationCenter = userNotificationCenter
-//        homeController.delegate = self
-        let navigationController = UINavigationController(rootViewController: quotesViewController)
-        centerNavViewController = navigationController
+        centerNavViewController = UINavigationController(rootViewController: quotesViewController)
         view.addSubview(centerNavViewController.view)
         addChild(centerNavViewController)
         centerNavViewController.didMove(toParent: self)
@@ -79,22 +74,21 @@ extension MainContainerViewController: HomeControllerViewDelegate {
         view.impactGesture(style: .medium)
         switch index {
         case 2:
-            print("favorites")
+            quotesViewController.quoteController.bookmarkViewIsActive = true
             quotesViewController.fetchBookmarked()
         case 3:
+            quoteController.bookmarkViewIsActive = false
             quotesViewController.presentThemeView()
         case 4:
             print("reminder")
         case 5:
             print("create")
-//            let vc = UIViewController()
-//            vc.view.backgroundColor = .red
-//            present(vc, animated: true, completion: nil)
         case 6:
             print("my quotes")
         case 7:
             print("search")
         default:
+            quoteController.bookmarkViewIsActive = false
             quotesViewController.fetchAllQuotes()
         }
 
