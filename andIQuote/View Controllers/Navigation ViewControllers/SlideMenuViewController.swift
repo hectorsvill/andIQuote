@@ -31,6 +31,7 @@ final class SlideMenuViewController: UIViewController {
         configureDataSouce()
     }
 }
+
 extension SlideMenuViewController {
     //MARK: createMainLayout
     private func createMainLayout() -> UICollectionViewLayout {
@@ -77,6 +78,7 @@ extension SlideMenuViewController {
         dataSource.apply(snapShot, animatingDifferences: false)
     }
 }
+
 extension SlideMenuViewController: UICollectionViewDelegate {
     // MARK: didSelectItemAt
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

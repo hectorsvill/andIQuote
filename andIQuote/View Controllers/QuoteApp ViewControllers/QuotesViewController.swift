@@ -20,11 +20,13 @@ extension QuotesViewController {
 
 final class QuotesViewController: UIViewController {
     var userNotificationCenter: UNUserNotificationCenter?
+    let defaults = UserDefaults.standard
     var quoteController: QuoteController! = nil
     let activityIndicator = UIActivityIndicatorView(style: .large)
     var collectionView: UICollectionView! = nil
     var dataSource: DataSource! = nil
     var delegate: HomeControllerViewDelegate? = nil
+    var lastIndex = UserDefaults().integer(forKey: "QuotesViewController.lastIndex")
 }
 
 extension QuotesViewController {
@@ -43,13 +45,18 @@ extension QuotesViewController {
 
         configureDataSource()
         configureNavigationButton()
+
+        DispatchQueue.main.async {
+            print(self.lastIndex)
+            self.collectionView.scrollToItem(at: IndexPath(item: self.lastIndex, section: 0), at: .left, animated: true)
+        }
     }
 
     private func createCollectionView() {
         collectionView = UICollectionView(frame: view.frame, collectionViewLayout: createLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.clipsToBounds = true
+
         collectionView.delegate = self
         collectionView.backgroundColor = .systemBackground
         collectionView.register(QuoteCollectionViewCell.self, forCellWithReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier)
@@ -96,7 +103,7 @@ extension QuotesViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
 
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.85), heightDimension: .fractionalHeight(1))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.93), heightDimension: .fractionalHeight(1))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
 
         let section = NSCollectionLayoutSection(group: group)
@@ -123,17 +130,14 @@ extension QuotesViewController {
 
 // MARK: UICollectionViewDelegate
 extension QuotesViewController: UICollectionViewDelegate {
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if quoteController.menuNavigationIsExpanded {
             delegate?.handleMenuToggle(index: 0)
         }
+
+        lastIndex = indexPath.item
+        UserDefaults.standard.set(self.lastIndex, forKey: "QuotesViewController.lastIndex")
     }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-           return 0
-       }
-
-
 }
 
 // MARK: QuoteCollectionViewCellDelegate
