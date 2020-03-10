@@ -90,7 +90,7 @@ extension MainContainerViewController: HomeControllerViewDelegate {
             print("my quotes")
         case 7:
             quotesViewController.quoteController.bookmarkViewIsActive = false
-            print("search")
+            quotesViewController.presentSearchView()
         default:
             quotesViewController.quoteController.bookmarkViewIsActive = false
             quotesViewController.fetchAllQuotes()

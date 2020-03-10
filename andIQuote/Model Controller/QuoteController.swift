@@ -38,7 +38,14 @@ class QuoteController {
 }
 
 extension QuoteController {
-    // MARK: background
+    var quotesDict: [String: [String]] {
+        var dict: [String: [String]] = [:]
+
+        quotes.forEach { dict[$0.author!, default: []].append($0.id!) }
+
+        return dict
+    }
+
     var background: String {
         backgrounds[_backgroundIndex]
     }
