@@ -167,7 +167,10 @@ extension QuotesViewController {
 
 // MARK: UICollectionViewDelegate
 extension QuotesViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if quoteController.menuNavigationIsExpanded {
+            delegate?.handleMenuToggle(index: 0)
+        }
     }
 }
 
