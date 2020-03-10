@@ -77,19 +77,22 @@ extension MainContainerViewController: HomeControllerViewDelegate {
             quotesViewController.quoteController.bookmarkViewIsActive = true
             quotesViewController.fetchBookmarked()
         case 3:
-            quoteController.bookmarkViewIsActive = false
+            quotesViewController.quoteController.bookmarkViewIsActive = false
             quotesViewController.presentThemeView()
         case 4:
-            quoteController.bookmarkViewIsActive = false
+            quotesViewController.quoteController.bookmarkViewIsActive = false
             quotesViewController.pressentReminderView()
         case 5:
-            print("create")
+            quotesViewController.quoteController.bookmarkViewIsActive = false
+            quotesViewController.presentCreateQuoteView()
         case 6:
+            quotesViewController.quoteController.bookmarkViewIsActive = false
             print("my quotes")
         case 7:
+            quotesViewController.quoteController.bookmarkViewIsActive = false
             print("search")
         default:
-            quoteController.bookmarkViewIsActive = false
+            quotesViewController.quoteController.bookmarkViewIsActive = false
             quotesViewController.fetchAllQuotes()
         }
 

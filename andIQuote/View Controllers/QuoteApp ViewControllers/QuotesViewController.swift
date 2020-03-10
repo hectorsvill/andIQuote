@@ -35,11 +35,11 @@ extension QuotesViewController {
         fetchQotes()
         createCollectionView()
 
-        collectionView.addSubview(activityIndicator)
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.tintColor = .red
         activityIndicator.center = collectionView.center
         activityIndicator.startAnimating()
+        collectionView.addSubview(activityIndicator)
 
         configureDataSource()
         configureNavigationButton()
@@ -47,14 +47,13 @@ extension QuotesViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        collectionView.isScrollEnabled = true
     }
 
     private func createCollectionView() {
         collectionView = UICollectionView(frame: view.frame, collectionViewLayout: createLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-
+        collectionView.clipsToBounds = true
         collectionView.delegate = self
         collectionView.backgroundColor = .systemBackground
         collectionView.register(QuoteCollectionViewCell.self, forCellWithReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier)
@@ -168,9 +167,14 @@ extension QuotesViewController {
         let vc = DailyReminderViewController()
         vc.quoteController = quoteController
         vc.userNotificationCenter = userNotificationCenter
-
         present(vc, animated: true)
+    }
 
+    func presentCreateQuoteView() {
+        let vc = CreateQuoteViewController()
+        let navigationController = UINavigationController(rootViewController: vc)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
     }
 }
 

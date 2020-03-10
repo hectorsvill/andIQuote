@@ -15,7 +15,7 @@ extension ThemeViewController {
     }
 }
 
-class ThemeViewController: UIViewController {
+final class ThemeViewController: UIViewController {
     var quoteController: QuoteController!
     var delegate: ThemeViewControllerDelegate?
     var collectionView: UICollectionView! = nil
@@ -107,18 +107,18 @@ extension ThemeViewController: UICollectionViewDelegate {
 }
 
 
-class ThemeCollectionViewCell: UICollectionViewCell {
-
-    var item: Int? {didSet {  } }
-
-
-
-    private func setupView() {
-        guard let item = item else { return }
-
-
-
-
-    }
-
-}
+//class ThemeCollectionViewCell: UICollectionViewCell {
+//
+//    var item: Int? {didSet {  } }
+//
+//
+//
+//    private func setupView() {
+//        guard let item = item else { return }
+//
+//
+//
+//
+//    }
+//
+//}
