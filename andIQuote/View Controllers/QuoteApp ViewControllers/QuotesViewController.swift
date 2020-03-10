@@ -143,6 +143,17 @@ extension QuotesViewController {
 
         loadData(items: bookmarkedQuotes)
         collectionView.reloadData()
+
+        if bookmarkedQuotes.count == 0 {
+            let alertController = UIAlertController(title: "andIQuote", message: "Bookmarks are empty!", preferredStyle: .actionSheet)
+
+            alertController.addAction(UIAlertAction(title: "OK", style: .default){ _ in
+                self.quoteController.bookmarkViewIsActive = false
+                self.loadData(items: self.quoteController.quotes)
+            })
+
+            present(alertController, animated:  true)
+        }
     }
 
     func presentThemeView() {

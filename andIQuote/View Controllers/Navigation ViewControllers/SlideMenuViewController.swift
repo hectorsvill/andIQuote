@@ -68,7 +68,6 @@ extension SlideMenuViewController {
         dataSource = SlideMenuDataSouce(collectionView: collectionView, cellProvider: { collectionView, indexPath, slideMenuItem -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.reuseIdentifier, for: indexPath) as! MenuCollectionViewCell
             cell.slideMenuItem = slideMenuItem
-            cell.layer.borderWidth = 2
             return cell
         })
         
