@@ -172,6 +172,13 @@ extension QuotesViewController: ThemeViewControllerDelegate {
     }
 }
 
+extension QuotesViewController: SearchViewControllerDelegate {
+    func loadSearchData(_ author: String) {
+        let author_quotes = quoteController.quotesDict[author]!
+        loadData(items: author_quotes)
+    }
+}
+
 extension QuotesViewController {
     func loadData(items: [Quote]) {
         var snapShot = SnapShot()
@@ -231,6 +238,7 @@ extension QuotesViewController {
         vc.searchData = quoteController.quotesDict.keys.map { return String($0) }
         vc.searchData.sort()
         vc.searchData.removeFirst()
+        vc.delegate = self
         present(UINavigationController(rootViewController: vc), animated: true)
     }
 }

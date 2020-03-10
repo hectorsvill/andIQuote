@@ -14,7 +14,6 @@ final class QuoteController {
     let firestore = FirestoreController()
     var quotes = [Quote]() { didSet { initializeBookmarks() } }
 
-
     var quoteThemeIsActive = false
     var menuNavigationIsExpanded = false
     var bookmarkViewIsActive = false
@@ -38,11 +37,9 @@ final class QuoteController {
 }
 
 extension QuoteController {
-    var quotesDict: [String: [String]] {
-        var dict: [String: [String]] = [:]
-
-        quotes.forEach { dict[$0.author!, default: []].append($0.id!) }
-
+    var quotesDict: [String: [Quote]] {
+        var dict: [String: [Quote]] = [:]
+        quotes.forEach { dict[$0.author!, default: []].append($0) }
         return dict
     }
 
