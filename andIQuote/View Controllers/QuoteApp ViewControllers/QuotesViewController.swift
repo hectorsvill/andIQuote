@@ -193,9 +193,7 @@ extension QuotesViewController: QuoteCollectionViewCellDelegate {
         if quoteController.bookmarked.contains(id) {
             if let index = quoteController.bookmarked.firstIndex(of: id) {
                 quoteController.bookmarked.remove(at: index)
-
                 if self.quoteController.bookmarkViewIsActive == true {
-
                     self.fetchBookmarked()
                 }
             }

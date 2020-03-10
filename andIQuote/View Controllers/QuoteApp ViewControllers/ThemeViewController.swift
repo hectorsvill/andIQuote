@@ -31,6 +31,8 @@ class ThemeViewController: UIViewController {
 
         createCollectionView()
         setSelectedCell()
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Exit", style: .done, target: self, action: #selector(exitView))
+        navigationItem.leftBarButtonItem?.tintColor = .label
     }
 
     private func setSelectedCell() {
@@ -38,7 +40,10 @@ class ThemeViewController: UIViewController {
         cell.layer.borderWidth = 3
         cell.layer.borderColor = UIColor.label.cgColor
         selectedCell = cell
+    }
 
+    @objc func exitView() {
+        navigationController?.dismiss(animated: true, completion: nil)
     }
 }
 
