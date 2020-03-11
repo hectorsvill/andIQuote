@@ -12,7 +12,7 @@ import Firebase
 
 final class QuoteController {
     let firestore = FirestoreController()
-    var quotes = [Quote]() { didSet { initializeBookmarks() } }
+    var quotes = [Quote]() { didSet { initializeBookmarks(); deleteDuplicatesFromFireStore() } }
 
     var quoteThemeIsActive = false
     var menuNavigationIsExpanded = false
@@ -46,7 +46,7 @@ extension QuoteController {
     var background: String {
         backgrounds[_backgroundIndex]
     }
-    // MARK: trademarkAttributedString
+    // MARK: trademarkAttributedString=
     var trademarkAttributedString: NSAttributedString {
         let attributedString = NSMutableAttributedString(string: "and", attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 13), NSAttributedString.Key.foregroundColor: UIColor.label])
         attributedString.append(NSAttributedString(string: "I", attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: UIColor.label]))
@@ -135,4 +135,39 @@ extension QuoteController {
             }
         }
     }
+
+//    private func deleteDuplicatesFromFireStore() {
+//        var deleteList: [String] = []
+//
+//        for key in quotesDict.keys.sorted() {
+//            var checkDict: [String: [String]] = [:]
+//
+//            for item in quotesDict[key]! {
+//                let body = item.body!
+//                let id = item.id!
+//
+//                checkDict[body, default: []].append(id)
+//            }
+//
+//            for values in checkDict.values {
+//                print("count: ", values.count)
+//                if values.count > 1 {
+//                    for i in 1..<values.count {
+//                        deleteList.append(values[i])
+//                    }
+//                }
+//            }
+//        }
+//
+//        for item in deleteList {
+//            firestore.db.collection("quotes").document(String(item)).delete { error in
+//                if let error = error {
+//                    NSLog("\(error)")
+//                } else {
+//                    print("delete")
+//                }
+//            }
+//        }
+//
+//    }
 }

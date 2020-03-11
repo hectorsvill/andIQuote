@@ -47,8 +47,7 @@ extension QuotesViewController {
         configureNavigationButton()
 
         DispatchQueue.main.async {
-            print(self.lastIndex)
-            self.collectionView.scrollToItem(at: IndexPath(item: self.lastIndex, section: 0), at: .left, animated: true)
+            self.collectionView.scrollToItem(at: IndexPath(item: self.lastIndex, section: 0), at: .right, animated: true)
         }
     }
 
@@ -176,6 +175,9 @@ extension QuotesViewController: SearchViewControllerDelegate {
     func loadSearchData(_ author: String) {
         let author_quotes = quoteController.quotesDict[author]!
         loadData(items: author_quotes)
+        DispatchQueue.main.async {
+            self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .left, animated: true)
+        }
     }
 }
 
