@@ -21,11 +21,13 @@ final class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Search by Author"
         view.backgroundColor = .systemBackground
 
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Exit", style: .done, target: self, action: #selector(exitView))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Exit", style: .done, target: self, action: #selector(exitView))
         navigationItem.leftBarButtonItem?.tintColor = .label
+        navigationItem.rightBarButtonItem?.tintColor = .label
+        navigationController?.navigationBar.prefersLargeTitles = true
+//        navigationController?.navigationBar.isTranslucent = false
 
         createViews()
     }
@@ -38,9 +40,11 @@ final class SearchViewController: UIViewController {
         //  searchBar
         searchbar = UISearchBar()
         searchbar.translatesAutoresizingMaskIntoConstraints = false
-        searchbar.placeholder = "Search"
-        searchbar.isTranslucent = false
+        searchbar.sizeToFit()
+        searchbar.placeholder = "Search by Autho"
+        searchbar.barTintColor = .label
         searchbar.delegate = self
+        navigationItem.titleView = searchbar
         // tableView
         tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -48,17 +52,11 @@ final class SearchViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = 70
-        //        tableView.delegate = self
 
-        [searchbar, tableView].forEach { view.addSubview($0) }
+        view.addSubview(tableView)
 
         NSLayoutConstraint.activate([
-            searchbar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//            searchbar.bottomAnchor.constraint(equalTo: tableView.safeAreaLayoutGuide.topAnchor),
-            searchbar.leftAnchor.constraint(equalTo: searchbar.safeAreaLayoutGuide.leftAnchor),
-            searchbar.rightAnchor.constraint(equalTo: searchbar.safeAreaLayoutGuide.rightAnchor),
-
-            tableView.topAnchor.constraint(equalTo: searchbar.safeAreaLayoutGuide.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
@@ -76,7 +74,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let text = searchData[indexPath.row]
+        let text = indexPath.row == 0 ? "Anonymous" : searchData[indexPath.row]
         cell.textLabel?.text = text
         cell.accessoryType = .disclosureIndicator
         cell.textLabel?.font = UIFont.systemFont(ofSize: 24)
@@ -91,6 +89,9 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension SearchViewController: UISearchBarDelegate {
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let text = searchBar.text!
+        let data = searchData.filter { $0.contains(text) }
+
     }
 }

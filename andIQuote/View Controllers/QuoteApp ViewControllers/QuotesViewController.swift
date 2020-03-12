@@ -237,9 +237,9 @@ extension QuotesViewController {
 
     func presentSearchView() {
         let vc = SearchViewController()
-        vc.searchData = quoteController.quotesDict.keys.map { return String($0) }
-        vc.searchData.sort()
-        vc.searchData.removeFirst()
+        vc.data = quoteController.quotesDict.keys.map { return String($0) }
+        vc.data.sort()
+//        vc.searchData.removeFirst()
         vc.delegate = self
         present(UINavigationController(rootViewController: vc), animated: true)
     }

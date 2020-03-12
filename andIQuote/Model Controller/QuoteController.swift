@@ -12,7 +12,7 @@ import Firebase
 
 final class QuoteController {
     let firestore = FirestoreController()
-    var quotes = [Quote]() { didSet { initializeBookmarks(); deleteDuplicatesFromFireStore() } }
+    var quotes = [Quote]() { didSet { initializeBookmarks() } }
 
     var quoteThemeIsActive = false
     var menuNavigationIsExpanded = false
@@ -135,6 +135,7 @@ extension QuoteController {
             }
         }
     }
+}
 
 //    private func deleteDuplicatesFromFireStore() {
 //        var deleteList: [String] = []
@@ -170,4 +171,4 @@ extension QuoteController {
 //        }
 //
 //    }
-}
+
