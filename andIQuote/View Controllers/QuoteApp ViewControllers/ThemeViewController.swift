@@ -8,14 +8,8 @@
 
 import UIKit
 
-extension ThemeViewController {
-    enum Section {
-        case background
-        case text
-    }
-}
-
 final class ThemeViewController: UIViewController {
+    enum Section { case background, text }
     var quoteController: QuoteController!
     var delegate: ThemeViewControllerDelegate?
     var collectionView: UICollectionView! = nil

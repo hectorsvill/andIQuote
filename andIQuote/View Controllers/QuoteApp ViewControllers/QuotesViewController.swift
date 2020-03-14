@@ -10,10 +10,7 @@ import CoreData
 import UIKit
 
 extension QuotesViewController {
-    enum Section {
-        case main
-    }
-
+    enum Section { case main }
     typealias DataSource = UICollectionViewDiffableDataSource<Section, Quote>
     typealias SnapShot = NSDiffableDataSourceSnapshot<Section, Quote>
 }

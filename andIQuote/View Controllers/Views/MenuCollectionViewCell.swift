@@ -33,16 +33,28 @@ class MenuCollectionViewCell: UICollectionViewCell, SelfConfiguringCell {
         imageView.tintColor = .label
         addSubview(imageView)
         addSubview(labelText)
+
+        let bottomLineView = UIView()
+        bottomLineView.translatesAutoresizingMaskIntoConstraints = false
+        bottomLineView.backgroundColor = .label
+        addSubview(bottomLineView)
         
         NSLayoutConstraint.activate([
+
             imageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             imageView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor),
             imageView.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
             imageView.heightAnchor.constraint(equalToConstant: 40),
             imageView.widthAnchor.constraint(equalToConstant: 40),
+
             labelText.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 8),
             labelText.centerYAnchor.constraint(equalTo: centerYAnchor),
             labelText.centerXAnchor.constraint(equalTo: centerXAnchor),
+
+            bottomLineView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor),
+            bottomLineView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor),
+            bottomLineView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            bottomLineView.heightAnchor.constraint(equalToConstant: 1)
         ])
     }
 }

@@ -13,10 +13,7 @@ protocol SearchViewControllerDelegate {
 }
 
 final class SearchViewController: UIViewController {
-    enum Section{
-        case main
-    }
-
+    enum Section{ case main }
     var dataSource: UITableViewDiffableDataSource<Section, String>! = nil
     var delegate: SearchViewControllerDelegate?
     var searchData: [String] = []
