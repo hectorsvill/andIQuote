@@ -13,6 +13,11 @@ protocol SearchViewControllerDelegate {
 }
 
 final class SearchViewController: UIViewController {
+    enum Section{
+        case main
+    }
+
+    var dataSource: UITableViewDiffableDataSource<Section, Int>! = nil
     var delegate: SearchViewControllerDelegate?
     var searchData: [String] = []
     var tableView: UITableView! = nil
@@ -49,7 +54,6 @@ final class SearchViewController: UIViewController {
         tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = 70
 
@@ -62,26 +66,24 @@ final class SearchViewController: UIViewController {
             tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
         ])
     }
+
+    private func configureDatasource() {
+        dataSource = UITableViewDiffableDataSource<Section, Int>(tableView: tableView, cellProvider: { tableView, indexPath, i -> UITableViewCell? in
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            let text = indexPath.row  == 0 ? "Anonymous" : self.searchData[indexPath.row]
+            cell.textLabel?.text = text
+            cell.accessoryType = .disclosureIndicator
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 24)
+            cell.textLabel?.textAlignment = .center
+            return cell
+        })
+
+
+
+    }
 }
 
-
-extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
-
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchData.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let text = indexPath.row == 0 ? "Anonymous" : searchData[indexPath.row]
-        cell.textLabel?.text = text
-        cell.accessoryType = .disclosureIndicator
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 24)
-        cell.textLabel?.textAlignment = .center
-        return cell
-    }
-
+extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.loadSearchData(searchData[indexPath.row])
         navigationController?.dismiss(animated: true, completion: nil)
