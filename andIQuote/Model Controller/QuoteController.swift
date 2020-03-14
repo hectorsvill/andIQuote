@@ -104,7 +104,7 @@ extension QuoteController {
                 
                 guard let quotes = quotes else { return }
                 completion(quotes, nil)
-                
+                self.quotes = quotes
                 UserDefaults().set(true, forKey: "Startup")
             }
         } else {

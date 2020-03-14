@@ -19,7 +19,7 @@ final class QuotesViewController: UIViewController {
     var userNotificationCenter: UNUserNotificationCenter?
     let defaults = UserDefaults.standard
     var quoteController: QuoteController! = nil
-    let activityIndicator = UIActivityIndicatorView(style: .large)
+    var activityIndicator: UIActivityIndicatorView! = nil
     var collectionView: UICollectionView! = nil
     var dataSource: DataSource! = nil
     var delegate: HomeControllerViewDelegate? = nil
@@ -33,19 +33,23 @@ extension QuotesViewController {
         view.backgroundColor = .systemBackground
         fetchQotes()
         createCollectionView()
-
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        activityIndicator.tintColor = .red
-        activityIndicator.center = collectionView.center
-        activityIndicator.startAnimating()
-        collectionView.addSubview(activityIndicator)
-
+        createActivityIndicator()
         configureDataSource()
         configureNavigationButton()
 
         DispatchQueue.main.async {
             self.collectionView.scrollToItem(at: IndexPath(item: self.lastIndex, section: 0), at: .right, animated: true)
         }
+    }
+
+    private func createActivityIndicator() {
+        activityIndicator = UIActivityIndicatorView()
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.style = .large
+        activityIndicator.tintColor = .label
+        activityIndicator.startAnimating()
+        collectionView.addSubview(activityIndicator)
+        activityIndicator.center = view.center
     }
 
     private func createCollectionView() {
