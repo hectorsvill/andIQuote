@@ -49,7 +49,7 @@ final class DailyReminderViewController: UIViewController {
         view.backgroundColor = .systemGray6
         setupLayouts()
         requestNotificationAuthorization()
-        view.setBackground(to: quoteController.background)
+        view.backgroundColor = .systemBackground
     }
     // MARK:viewWillDisappear
     override func viewWillDisappear(_ animated: Bool) {
@@ -84,9 +84,11 @@ final class DailyReminderViewController: UIViewController {
         startView = createReminderView(1)
         //let stopView = createReminderView(1)
         soundSelectView = createReminderView(3)
+
         let views = [finishButton, titleLabel, descriptionLabel, remindersView, splitView1,startView, splitView2, soundSelectView]
-        
+
         let mainStackView = UIStackView(arrangedSubviews: views as! [UIView])
+
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         mainStackView.axis = .vertical
         mainStackView.alignment = .top
