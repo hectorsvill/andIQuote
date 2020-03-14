@@ -92,6 +92,7 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let text = searchBar.text!
         let data = searchData.filter { $0.contains(text) }
+        print(data)
 
     }
 }

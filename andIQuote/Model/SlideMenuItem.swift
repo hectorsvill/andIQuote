@@ -21,8 +21,8 @@ extension SlideMenuViewController {
             SlideMenuItem(sfSymbol: "bookmark", displayText: "Bookmarked"),
             SlideMenuItem(sfSymbol: "paintbrush", displayText: "Theme"),
             SlideMenuItem(sfSymbol: "bell", displayText: "Reminder"),
-            SlideMenuItem(sfSymbol: "plus", displayText: "Create"),
-            SlideMenuItem(sfSymbol: "book", displayText: "I Quote"),
+//            SlideMenuItem(sfSymbol: "plus", displayText: "Create"),
+//            SlideMenuItem(sfSymbol: "book", displayText: "I Quote"),
             SlideMenuItem(sfSymbol: "magnifyingglass", displayText: "Serach")
         ]
 

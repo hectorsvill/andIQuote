@@ -82,13 +82,13 @@ extension MainContainerViewController: HomeControllerViewDelegate {
         case 4:
             quotesViewController.quoteController.bookmarkViewIsActive = false
             quotesViewController.pressentReminderView()
+//        case 5:
+//            quotesViewController.quoteController.bookmarkViewIsActive = false
+//            quotesViewController.presentCreateQuoteView()
+//        case 6:
+//            quotesViewController.quoteController.bookmarkViewIsActive = false
+//            print("my quotes")
         case 5:
-            quotesViewController.quoteController.bookmarkViewIsActive = false
-            quotesViewController.presentCreateQuoteView()
-        case 6:
-            quotesViewController.quoteController.bookmarkViewIsActive = false
-            print("my quotes")
-        case 7:
             quotesViewController.quoteController.bookmarkViewIsActive = false
             quotesViewController.presentSearchView()
         default:
