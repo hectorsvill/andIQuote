@@ -17,7 +17,7 @@ final class SearchViewController: UIViewController {
         case main
     }
 
-    var dataSource: UITableViewDiffableDataSource<Section, Int>! = nil
+    var dataSource: UITableViewDiffableDataSource<Section, String>! = nil
     var delegate: SearchViewControllerDelegate?
     var searchData: [String] = []
     var tableView: UITableView! = nil
@@ -27,14 +27,12 @@ final class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Exit", style: .done, target: self, action: #selector(exitView))
         navigationItem.leftBarButtonItem?.tintColor = .label
         navigationItem.rightBarButtonItem?.tintColor = .label
-        navigationController?.navigationBar.prefersLargeTitles = true
-//        navigationController?.navigationBar.isTranslucent = false
 
         createViews()
+        configureDatasource()
     }
 
     @objc func exitView() {
@@ -68,9 +66,9 @@ final class SearchViewController: UIViewController {
     }
 
     private func configureDatasource() {
-        dataSource = UITableViewDiffableDataSource<Section, Int>(tableView: tableView, cellProvider: { tableView, indexPath, i -> UITableViewCell? in
+        dataSource = UITableViewDiffableDataSource<Section, String>(tableView: tableView, cellProvider: { tableView, indexPath, str -> UITableViewCell? in
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-            let text = indexPath.row  == 0 ? "Anonymous" : self.searchData[indexPath.row]
+            let text = indexPath.row  == 0 ? "Anonymous" : str
             cell.textLabel?.text = text
             cell.accessoryType = .disclosureIndicator
             cell.textLabel?.font = UIFont.systemFont(ofSize: 24)
@@ -78,8 +76,14 @@ final class SearchViewController: UIViewController {
             return cell
         })
 
+        reloadData(searchData)
+    }
 
-
+    private func reloadData(_ data: [String]) {
+        var snapShot = NSDiffableDataSourceSnapshot<Section, String>()
+        snapShot.appendSections([.main])
+        snapShot.appendItems(data)
+        dataSource.apply(snapShot, animatingDifferences: true, completion: nil)
     }
 }
 
@@ -94,7 +98,6 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let text = searchBar.text!
         let data = searchData.filter { $0.contains(text) }
-        print(data)
-
+        data == [] ? reloadData(searchData) : reloadData(data)
     }
 }
