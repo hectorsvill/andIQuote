@@ -70,7 +70,7 @@ extension QuoteCollectionViewCell {
 
         bookmarkButton.addTarget(self, action: #selector(bookmarkButtonPressed), for: .touchUpInside)
 
-        let tintColor = quoteController.background == quoteController.backgrounds[0] ? UIColor.black : UIColor.white
+        let tintColor = quoteController.background == quoteController.backgrounds[0] ? .label : UIColor.white
         bookmarkButton.tintColor = tintColor
         shareButton.tintColor = tintColor
         shareButton.addTarget(self, action: #selector(shareButtonPressed), for: .touchUpInside)
@@ -128,27 +128,5 @@ extension QuoteCollectionViewCell {
         let doubleTapSwipeGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(bookmarkButtonPressed))
         doubleTapSwipeGestureRecognizer.numberOfTapsRequired = 2
         addGestureRecognizer(doubleTapSwipeGestureRecognizer)
-
-    }
-
-    @objc private func handleSwipeAction(_ sender: UISwipeGestureRecognizer) {
-
-        print(sender.direction)
-//        if sender.direction == .up {
-//            shareButtonTapped()
-//        }else if sender.direction == .down {
-//            reminderButtonTapped()
-//        }else if sender.direction == .left {
-//            if quoteController.quoteThemeIsActive {
-//                quoteController.setBackgroundIndex(1)
-//                handleThemeSelect()
-//            } else {
-//                handleSlideMenuToggle()
-//                leftSwipeGestureRecognizer.isEnabled = false
-//            }
-//        }else if sender.direction == .right {
-//            quoteController.setBackgroundIndex(-1)
-//            handleThemeSelect()
-//        }
     }
 }
