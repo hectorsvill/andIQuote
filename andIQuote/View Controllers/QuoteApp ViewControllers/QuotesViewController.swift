@@ -30,6 +30,7 @@ extension QuotesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        userNotificationCenter?.delegate = self
         fetchQotes()
         createCollectionView()
         configureDataSource()
@@ -246,4 +247,56 @@ extension QuotesViewController {
         present(UINavigationController(rootViewController: vc), animated: true)
     }
 }
+// MARK: - UNUserNotificationCenterDelegate
+extension QuotesViewController: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound])
+    }
 
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let notification = response.notification
+        let id = notification.request.identifier
+        let index = fetchQuoteIndex(id)
+
+        DispatchQueue.main.async {
+            let index = IndexPath(item: index, section: 0)
+            self.collectionView.scrollToItem(at: index, at: .left, animated: false)
+            self.collectionView.reloadData()
+//            self.shareButtonTapped()
+            self.addNextNotification(with: notification.request.content)
+        }
+
+        completionHandler()
+    }
+    // MARK: addNextNotification
+    private func addNextNotification(with content: UNNotificationContent) {
+        let badge = content.badge as! Int
+
+        if badge <= quoteController.remindersCount {
+            let quote = dataSource.snapshot().itemIdentifiers.randomElement()!
+            let notificationContent = UNMutableNotificationContent()
+            notificationContent.title = quote.author!
+            notificationContent.body = quote.body!
+            notificationContent.badge = NSNumber(integerLiteral: badge + 1)
+            notificationContent.sound = content.sound
+            let timeIntervalTrigger = UNTimeIntervalNotificationTrigger(timeInterval: quoteController.reminderTimeIntervalSeconds, repeats: false)
+            let request = UNNotificationRequest(identifier: quote.id!, content: notificationContent, trigger: timeIntervalTrigger)
+            userNotificationCenter?.add(request) { error in
+                if let error = error {
+                    // TODO: create uialert with error
+                    NSLog("Error: \(error)")
+                }
+            }
+        }
+    }
+    // MARK: fetchQuoteIndex
+    private func fetchQuoteIndex(_ id: String) -> Int {
+        let items = dataSource.snapshot().itemIdentifiers
+
+        for (i, item) in items.enumerated() {
+            if item.id == id { return i }
+        }
+
+        return 0
+    }
+}
