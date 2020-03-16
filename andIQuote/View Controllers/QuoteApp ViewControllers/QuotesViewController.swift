@@ -23,7 +23,6 @@ final class QuotesViewController: UIViewController {
     var collectionView: UICollectionView! = nil
     var dataSource: DataSource! = nil
     var delegate: HomeControllerViewDelegate? = nil
-    var lastIndex = UserDefaults().integer(forKey: "QuotesViewController.lastIndex")
 }
 
 extension QuotesViewController {
@@ -36,9 +35,13 @@ extension QuotesViewController {
         configureDataSource()
         configureNavigationButton()
         createActivityIndicator()
+        loadLastIndex()
+    }
 
+    func loadLastIndex() {
         DispatchQueue.main.async {
-            self.collectionView.scrollToItem(at: IndexPath(item: self.lastIndex, section: 0), at: .right, animated: true)
+            print(self.quoteController._quoteIndex)
+            self.collectionView.scrollToItem(at: IndexPath(item: self.quoteController._quoteIndex, section: 0), at: .left, animated: true)
         }
     }
 
@@ -134,9 +137,8 @@ extension QuotesViewController: UICollectionViewDelegate {
         if quoteController.menuNavigationIsExpanded {
             delegate?.handleMenuToggle(index: 0)
         }
-
-        lastIndex = indexPath.item
-        UserDefaults.standard.set(self.lastIndex, forKey: "QuotesViewController.lastIndex")
+        print(indexPath.item)
+        quoteController.setQuoteIndex(indexPath.item)
     }
 }
 

@@ -18,7 +18,7 @@ final class QuoteController {
     var menuNavigationIsExpanded = false
     var bookmarkViewIsActive = false
 
-    private (set) var _quoteIndex = UserDefaults.standard.integer(forKey: "QIndex") // current index of quote
+    private (set) var _quoteIndex = UserDefaults.standard.integer(forKey: "QuoteController._quoteIndex") // current index of quote
 
     let backgrounds = ["systemBackground", "green", "blue", "gray", "pink", "red", "teal", "indigo", "orange", "yellow", "purple",]
     private (set) var _backgroundIndex = UserDefaults.standard.integer(forKey: "QuoteController.setBackgroundIndex") // current index of background
@@ -63,9 +63,9 @@ extension QuoteController {
         background == "systemBackground" ? UIColor.label : UIColor.white
     }
     // MARK: setIndex
-    func setIndex(_ index: Int) {
+    func setQuoteIndex(_ index: Int) {
         _quoteIndex = index
-        UserDefaults.standard.set(index, forKey: "QIndex")
+        UserDefaults.standard.set(index, forKey: "QuoteController._quoteIndex")
     }
     // MARK: attributedString
     func attributedString(_ quote: Quote) -> NSMutableAttributedString {

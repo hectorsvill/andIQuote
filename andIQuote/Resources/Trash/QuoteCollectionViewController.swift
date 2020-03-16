@@ -107,7 +107,7 @@ extension QuoteCollectionViewController: UICollectionViewDelegateFlowLayout {
     // MARK: scrollViewWillEndDragging
     override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let currentIndex = Int(targetContentOffset.pointee.x / view.frame.width)
-        quoteController.setIndex(currentIndex)
+        quoteController.setQuoteIndex(currentIndex)
     }
 
     // MARK: minimumLineSpacingForSectionAt

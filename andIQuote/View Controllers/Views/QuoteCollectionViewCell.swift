@@ -70,7 +70,7 @@ extension QuoteCollectionViewCell {
 
         bookmarkButton.addTarget(self, action: #selector(bookmarkButtonPressed), for: .touchUpInside)
 
-        let tintColor = quoteController.background == quoteController.backgrounds[0] ? .label : UIColor.white
+        let tintColor = quoteController.quoteForegroundColor//quoteController.background == quoteController.backgrounds[0] ? .label : UIColor.white
         bookmarkButton.tintColor = tintColor
         shareButton.tintColor = tintColor
         shareButton.addTarget(self, action: #selector(shareButtonPressed), for: .touchUpInside)
