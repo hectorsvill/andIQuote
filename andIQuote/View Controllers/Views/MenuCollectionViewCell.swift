@@ -40,7 +40,6 @@ class MenuCollectionViewCell: UICollectionViewCell, SelfConfiguringCell {
         addSubview(bottomLineView)
         
         NSLayoutConstraint.activate([
-
             imageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             imageView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor),
             imageView.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
@@ -54,7 +53,7 @@ class MenuCollectionViewCell: UICollectionViewCell, SelfConfiguringCell {
             bottomLineView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor),
             bottomLineView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor),
             bottomLineView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            bottomLineView.heightAnchor.constraint(equalToConstant: 1)
+            bottomLineView.heightAnchor.constraint(equalToConstant: 0.3)
         ])
     }
 }

@@ -33,9 +33,9 @@ extension QuotesViewController {
         view.backgroundColor = .systemBackground
         fetchQotes()
         createCollectionView()
-        createActivityIndicator()
         configureDataSource()
         configureNavigationButton()
+        createActivityIndicator()
 
         DispatchQueue.main.async {
             self.collectionView.scrollToItem(at: IndexPath(item: self.lastIndex, section: 0), at: .right, animated: true)
@@ -47,9 +47,9 @@ extension QuotesViewController {
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.style = .large
         activityIndicator.tintColor = .label
-        activityIndicator.startAnimating()
         collectionView.addSubview(activityIndicator)
-        activityIndicator.center = view.center
+        activityIndicator.startAnimating()
+        activityIndicator.center = collectionView.center
     }
 
     private func createCollectionView() {
@@ -244,3 +244,4 @@ extension QuotesViewController {
         present(UINavigationController(rootViewController: vc), animated: true)
     }
 }
+

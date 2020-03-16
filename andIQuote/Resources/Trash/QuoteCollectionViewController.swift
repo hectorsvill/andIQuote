@@ -128,7 +128,7 @@ extension QuoteCollectionViewController {
     private func createActivityIndicator() {
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
-        activityIndicator.style = UIActivityIndicatorView.Style.medium
+        activityIndicator.style = .medium
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
     }

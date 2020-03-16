@@ -59,6 +59,8 @@ extension QuoteCollectionViewCell {
         layer.cornerRadius = cornerRadius
         contentView.layer.cornerRadius = cornerRadius
 
+        setupSwipeGestureRecognizer()
+
         if quoteController.background == "systemBackground" {
             layer.borderWidth = borderWidth
             layer.borderColor = UIColor.systemGray.cgColor
@@ -113,5 +115,40 @@ extension QuoteCollectionViewCell {
         delegate?.shareButtonPressed(self)
         shareButton.isHidden = false
         bookmarkButton.isHidden = false
+    }
+}
+
+// MARK: - GestureRecognizer
+extension QuoteCollectionViewCell {
+    func setupSwipeGestureRecognizer() {
+        let upSwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(shareButtonPressed))
+        upSwipeGestureRecognizer.direction = .up
+        addGestureRecognizer(upSwipeGestureRecognizer)
+
+        let doubleTapSwipeGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(bookmarkButtonPressed))
+        doubleTapSwipeGestureRecognizer.numberOfTapsRequired = 2
+        addGestureRecognizer(doubleTapSwipeGestureRecognizer)
+
+    }
+
+    @objc private func handleSwipeAction(_ sender: UISwipeGestureRecognizer) {
+
+        print(sender.direction)
+//        if sender.direction == .up {
+//            shareButtonTapped()
+//        }else if sender.direction == .down {
+//            reminderButtonTapped()
+//        }else if sender.direction == .left {
+//            if quoteController.quoteThemeIsActive {
+//                quoteController.setBackgroundIndex(1)
+//                handleThemeSelect()
+//            } else {
+//                handleSlideMenuToggle()
+//                leftSwipeGestureRecognizer.isEnabled = false
+//            }
+//        }else if sender.direction == .right {
+//            quoteController.setBackgroundIndex(-1)
+//            handleThemeSelect()
+//        }
     }
 }
