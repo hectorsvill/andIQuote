@@ -9,11 +9,12 @@
 import UIKit
 
 class SubmitViewController: UIViewController {
+    enum Section{ case main }
     var authors: [String] = []
     var quoteMaxLength = 130
     var tableView: UITableView! = nil
-    var dataSource: UITableViewDiffableDataSource<Int, String>! = nil
-
+    var dataSource: UITableViewDiffableDataSource<Section, String>! = nil
+    let cellId = "SubmitViewControllerCell"
 
     var submitLabel: UILabel = {
         let label = UILabel()
@@ -92,18 +93,21 @@ class SubmitViewController: UIViewController {
 
         setupTableView()
         setupViews()
+
     }
 
 
     private func setupTableView() {
         tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         tableView.rowHeight = 50
+        view.addSubview(tableView)
 
-        dataSource = UITableViewDiffableDataSource<Int, String>(tableView: tableView) { tableView, indexPath, i -> UITableViewCell? in
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-            cell.textLabel?.text = "\(indexPath)"
+        dataSource = UITableViewDiffableDataSource<Section, String>(tableView: tableView) { tableView, indexPath, author -> UITableViewCell? in
+            let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId, for: indexPath)
+            cell.textLabel?.text = author
+            cell.textLabel?.textColor = .label
             cell.textLabel?.textAlignment = .center
             cell.accessoryType = .disclosureIndicator
             return cell
@@ -115,9 +119,10 @@ class SubmitViewController: UIViewController {
 
     private func setupViews() {
         bodyTextCountLabel.text = "0/\(quoteMaxLength)"
-
         bodyTextView.delegate = self
-        [submitLabel, bodyTextView, bodyTextCountLabel, authorLabel, authorTextField, tableView].forEach{view.addSubview($0)}
+        authorTextField.delegate = self
+
+        [submitLabel, bodyTextView, bodyTextCountLabel, authorLabel, authorTextField].forEach{view.addSubview($0)}
 
         let inset: CGFloat = 8
 
@@ -154,9 +159,9 @@ class SubmitViewController: UIViewController {
     }
 
     func reLoadData(_ data: [String]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Int, String>()
-        snapshot.appendSections([0])
-        snapshot.appendSections([])
+        var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(data)
         dataSource.apply(snapshot, animatingDifferences: true)
     }
 }
@@ -164,8 +169,22 @@ class SubmitViewController: UIViewController {
 extension SubmitViewController: UITextViewDelegate {
 
     func textViewDidChange(_ textView: UITextView) {
-        bodyTextCountLabel.text = "\(bodyTextView.text.count)/\(quoteMaxLength)"
+        let text = bodyTextView.text!
+        bodyTextCountLabel.text = "\(text.count)/\(quoteMaxLength)"
 
     }
 
+}
+
+extension SubmitViewController: UITextFieldDelegate {
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        print(textField.text!)
+//    }
+//
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//
+//        let text = textField.text!
+//        let filter_authors = authors.filter{ $0.contains(text) }
+//        reLoadData(filter_authors)
+//    }
 }
