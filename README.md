@@ -10,10 +10,10 @@ V2(1.1) - Free download from the [App Store](https://itunes.apple.com/WebObjects
 - All users are automatically signed in anonymously.
 #
 - This app will allow a user to browse quotes, share the text or image, and set reminders. 
-- Use swipe gesture to activate the share feature and Reminder settings.
+- Use swipe gesture to activate the share and bookmark feature
 - Share either the text or the image of the current quote.
-- The brush button will allow you to change the background color.
+
 #
 
-![img](https://github.com/hectorsvill/hectorsvill.github.io/blob/master/images/andIQuote_app_store_preview_1.png)
+![img](https://raw.githubusercontent.com/hectorsvill/hectorsvill.github.io/master/images/andiQuote%20v1.1%20app%20photos/main.png)
 #
