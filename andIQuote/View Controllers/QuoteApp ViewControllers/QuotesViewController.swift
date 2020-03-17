@@ -252,9 +252,8 @@ extension QuotesViewController {
 
     func presentSubmitView() {
         let vc = SubmitViewController()
-
-
-
+        vc.quoteController = quoteController
+        
         present(UINavigationController(rootViewController: vc), animated: true)
 
     }
