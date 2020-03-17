@@ -1,7 +1,7 @@
 # andIQuote App
 Discover mindful quotes and share them with your friends.
 #
-V2(1.1) - Free download from the [App Store](https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1493892128)
+V4(1.2) - Free download from the [App Store](https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1493892128)
 #
 - I wrote a web scraper to scrape thousands of quotes.  Check out my [quote dictionary creator](https://github.com/hectorsvill/QuotesDictionaryCreator)
 - Utilizes Firestore for storing data.
