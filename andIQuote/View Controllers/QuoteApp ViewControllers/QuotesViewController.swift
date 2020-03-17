@@ -41,8 +41,7 @@ extension QuotesViewController {
 
     func loadLastIndex() {
         DispatchQueue.main.async {
-            print(self.quoteController._quoteIndex)
-            self.collectionView.scrollToItem(at: IndexPath(item: self.quoteController._quoteIndex, section: 0), at: .left, animated: true)
+            self.collectionView.scrollToItem(at: IndexPath(item: self.quoteController._quoteIndex, section: 0), at: .left, animated: false)
         }
     }
 
@@ -138,8 +137,10 @@ extension QuotesViewController: UICollectionViewDelegate {
         if quoteController.menuNavigationIsExpanded {
             delegate?.handleMenuToggle(index: 0)
         }
-        print(indexPath.item)
-        quoteController.setQuoteIndex(indexPath.item)
+
+        DispatchQueue.main.async {
+            self.quoteController.setQuoteIndex(indexPath.item)
+        }
     }
 }
 
