@@ -9,7 +9,11 @@
 import UIKit
 
 class SubmitViewController: UIViewController {
-    var  quoteController: QuoteController!
+    var  quoteController: QuoteController! = nil
+    var quoteMaxLength = 130
+    var tableView: UITableView! = nil
+    var dataSource: UITableViewDiffableDataSource<Int, Int>! = nil
+
 
     var submitLabel: UILabel = {
         let label = UILabel()
@@ -26,7 +30,7 @@ class SubmitViewController: UIViewController {
         ]
 
         let attributedString = NSMutableAttributedString(string: "Submit ", attributes: attributes_a)
-        attributedString.append(NSMutableAttributedString(string: "a quote for review!", attributes: attributes_b))
+        attributedString.append(NSMutableAttributedString(string: "a quote!", attributes: attributes_b))
 //        attributedString.append(NSMutableAttributedString(string: "\nquote: ", attributes: attributes_b))
 
         label.attributedText = attributedString
@@ -39,8 +43,8 @@ class SubmitViewController: UIViewController {
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.layer.borderColor = UIColor.label.cgColor
         textView.layer.borderWidth = 0.4
-        textView.layer.cornerRadius = 8
-        textView.font = .systemFont(ofSize: 19)
+        textView.layer.cornerRadius = 4.5
+        textView.font = .systemFont(ofSize: 16)
         return textView
     }()
 
@@ -49,7 +53,6 @@ class SubmitViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .italicSystemFont(ofSize: 14)
         label.textAlignment = .right
-        label.text = "0/150"
         return label
     }()
 
@@ -62,6 +65,25 @@ class SubmitViewController: UIViewController {
         return button
     }()
 
+    var authorLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: 24)
+        label.textColor = .label
+        label.text = "author:"
+        return label
+    }()
+
+    var authorTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+//        textField.font = .systemFont(ofSize: 16)
+        textField.layer.borderWidth = 0.4
+        textField.layer.borderColor = UIColor.label.cgColor
+
+        return textField
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -72,10 +94,25 @@ class SubmitViewController: UIViewController {
     }
 
 
+    private func setupTableView() {
+        tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+
+
+
+
+
+
+
+    }
+
+
     private func setupViews() {
+        bodyTextCountLabel.text = "0/\(quoteMaxLength)"
 
         bodyTextView.delegate = self
-        [submitLabel, bodyTextView, bodyTextCountLabel].forEach{view.addSubview($0)}
+        [submitLabel, bodyTextView, bodyTextCountLabel, authorLabel, authorTextField].forEach{view.addSubview($0)}
 
         let inset: CGFloat = 8
 
@@ -88,12 +125,27 @@ class SubmitViewController: UIViewController {
             bodyTextView.topAnchor.constraint(equalTo: submitLabel.safeAreaLayoutGuide.bottomAnchor, constant: inset),
             bodyTextView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: inset),
             bodyTextView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -inset),
-            bodyTextView.heightAnchor.constraint(equalToConstant: 120),
+            bodyTextView.heightAnchor.constraint(equalToConstant: 140),
 
             bodyTextCountLabel.topAnchor.constraint(equalTo: bodyTextView.safeAreaLayoutGuide.bottomAnchor, constant: inset),
+            bodyTextView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: inset),
             bodyTextCountLabel.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -inset),
+
+            authorLabel.topAnchor.constraint(equalTo: bodyTextView.safeAreaLayoutGuide.bottomAnchor, constant: inset),
+            authorLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: inset),
+            authorLabel.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -inset),
+
+            authorTextField.topAnchor.constraint(equalTo: authorLabel.safeAreaLayoutGuide.bottomAnchor, constant: inset),
+            authorTextField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: inset),
+            authorTextField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -inset),
+            authorTextField.heightAnchor.constraint(lessThanOrEqualToConstant: 40),
+
+
         ])
     }
+
+
+
 }
 
 
@@ -101,7 +153,7 @@ class SubmitViewController: UIViewController {
 extension SubmitViewController: UITextViewDelegate {
 
     func textViewDidChange(_ textView: UITextView) {
-        bodyTextCountLabel.text = "\(bodyTextView.text.count)/150"
+        bodyTextCountLabel.text = "\(bodyTextView.text.count)/\(quoteMaxLength)"
 
     }
 
