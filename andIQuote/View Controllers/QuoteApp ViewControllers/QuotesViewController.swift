@@ -252,7 +252,7 @@ extension QuotesViewController {
 
     func presentSubmitView() {
         let vc = SubmitViewController()
-        vc.quoteController = quoteController
+        vc.authors = quoteController.authors
         
         present(UINavigationController(rootViewController: vc), animated: true)
 

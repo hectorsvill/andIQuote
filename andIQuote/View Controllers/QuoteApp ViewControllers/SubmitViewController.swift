@@ -9,10 +9,10 @@
 import UIKit
 
 class SubmitViewController: UIViewController {
-    var  quoteController: QuoteController! = nil
+    var authors: [String] = []
     var quoteMaxLength = 130
     var tableView: UITableView! = nil
-    var dataSource: UITableViewDiffableDataSource<Int, Int>! = nil
+    var dataSource: UITableViewDiffableDataSource<Int, String>! = nil
 
 
     var submitLabel: UILabel = {
@@ -90,6 +90,7 @@ class SubmitViewController: UIViewController {
         view.backgroundColor = .systemBackground
         title  = "Submit"
 
+        setupTableView()
         setupViews()
     }
 
@@ -98,13 +99,17 @@ class SubmitViewController: UIViewController {
         tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.rowHeight = 50
 
+        dataSource = UITableViewDiffableDataSource<Int, String>(tableView: tableView) { tableView, indexPath, i -> UITableViewCell? in
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            cell.textLabel?.text = "\(indexPath)"
+            cell.textLabel?.textAlignment = .center
+            cell.accessoryType = .disclosureIndicator
+            return cell
+        }
 
-
-
-
-
-
+        reLoadData(authors)
     }
 
 
@@ -112,7 +117,7 @@ class SubmitViewController: UIViewController {
         bodyTextCountLabel.text = "0/\(quoteMaxLength)"
 
         bodyTextView.delegate = self
-        [submitLabel, bodyTextView, bodyTextCountLabel, authorLabel, authorTextField].forEach{view.addSubview($0)}
+        [submitLabel, bodyTextView, bodyTextCountLabel, authorLabel, authorTextField, tableView].forEach{view.addSubview($0)}
 
         let inset: CGFloat = 8
 
@@ -140,15 +145,21 @@ class SubmitViewController: UIViewController {
             authorTextField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -inset),
             authorTextField.heightAnchor.constraint(lessThanOrEqualToConstant: 40),
 
+            tableView.topAnchor.constraint(equalTo: authorTextField.safeAreaLayoutGuide.bottomAnchor, constant: inset),
+            tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: inset),
+            tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -inset),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: inset)
 
         ])
     }
 
-
-
+    func reLoadData(_ data: [String]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Int, String>()
+        snapshot.appendSections([0])
+        snapshot.appendSections([])
+        dataSource.apply(snapshot, animatingDifferences: true)
+    }
 }
-
-
 
 extension SubmitViewController: UITextViewDelegate {
 

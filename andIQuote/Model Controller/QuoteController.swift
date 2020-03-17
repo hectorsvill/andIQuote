@@ -43,6 +43,10 @@ extension QuoteController {
         return dict
     }
 
+    var authors: [String] {
+        quotes.map {return String($0.author!) }
+    }
+
     var background: String {
         backgrounds[_backgroundIndex]
     }
