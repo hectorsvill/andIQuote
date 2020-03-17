@@ -20,6 +20,7 @@
 		124EAFBE23DF95CF00047558 /* ReminderCellButtonPressedDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124EAFBD23DF95CF00047558 /* ReminderCellButtonPressedDelegate.swift */; };
 		12870F052417F30800EF5DAE /* CreateQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12870F042417F30800EF5DAE /* CreateQuoteViewController.swift */; };
 		12870F07241841D100EF5DAE /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12870F06241841D100EF5DAE /* SearchViewController.swift */; };
+		129A61902421672700812ACF /* SubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129A618F2421672700812ACF /* SubmitViewController.swift */; };
 		12A2B64723FBA0310086F585 /* ThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A2B64623FBA0310086F585 /* ThemeViewController.swift */; };
 		12A76B5E23DD40B800026C28 /* DailyReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A76B5D23DD40B800026C28 /* DailyReminderViewController.swift */; };
 		12A76B6023DD4A9500026C28 /* NSAttributeString+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A76B5F23DD4A9500026C28 /* NSAttributeString+Strings.swift */; };
@@ -70,6 +71,7 @@
 		12525E3A23E275B00010A663 /* andIQuote.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = andIQuote.entitlements; sourceTree = "<group>"; };
 		12870F042417F30800EF5DAE /* CreateQuoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateQuoteViewController.swift; sourceTree = "<group>"; };
 		12870F06241841D100EF5DAE /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		129A618F2421672700812ACF /* SubmitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitViewController.swift; sourceTree = "<group>"; };
 		12A2B64623FBA0310086F585 /* ThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewController.swift; sourceTree = "<group>"; };
 		12A76B5D23DD40B800026C28 /* DailyReminderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyReminderViewController.swift; sourceTree = "<group>"; };
 		12A76B5F23DD4A9500026C28 /* NSAttributeString+Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributeString+Strings.swift"; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				12A2B64623FBA0310086F585 /* ThemeViewController.swift */,
 				12870F042417F30800EF5DAE /* CreateQuoteViewController.swift */,
 				12870F06241841D100EF5DAE /* SearchViewController.swift */,
+				129A618F2421672700812ACF /* SubmitViewController.swift */,
 			);
 			path = "QuoteApp ViewControllers";
 			sourceTree = "<group>";
@@ -402,6 +405,7 @@
 				C4FB3F0523BBC37C0041B1BD /* UIImage+mainViewSymbolConfig.swift in Sources */,
 				122C915B23D6926F002045CE /* HomeControllerViewDelegate.swift in Sources */,
 				12D72AAF23CD42F7000BECDC /* Quote.swift in Sources */,
+				129A61902421672700812ACF /* SubmitViewController.swift in Sources */,
 				12D72AB123CD4554000BECDC /* Quote+Convenience.swift in Sources */,
 				122F4B8123D3EF36004C2F34 /* SlideMenuViewController.swift in Sources */,
 				122F4B7D23D3EDC5004C2F34 /* MainContainerViewController.swift in Sources */,

@@ -72,27 +72,21 @@ extension MainContainerViewController: HomeControllerViewDelegate {
 
     private func createView(with index: Int) {
         view.impactGesture(style: .medium)
+        quotesViewController.quoteController.bookmarkViewIsActive = false
+
         switch index {
         case 2:
             quotesViewController.quoteController.bookmarkViewIsActive = true
             quotesViewController.fetchBookmarked()
         case 3:
-            quotesViewController.quoteController.bookmarkViewIsActive = false
             quotesViewController.presentThemeView()
         case 4:
-            quotesViewController.quoteController.bookmarkViewIsActive = false
             quotesViewController.pressentReminderView()
-//        case 5:
-//            quotesViewController.quoteController.bookmarkViewIsActive = false
-//            quotesViewController.presentCreateQuoteView()
-//        case 6:
-//            quotesViewController.quoteController.bookmarkViewIsActive = false
-//            print("my quotes")
         case 5:
-            quotesViewController.quoteController.bookmarkViewIsActive = false
             quotesViewController.presentSearchView()
+        case 6:
+            quotesViewController.presentSubmitView()
         default:
-            quotesViewController.quoteController.bookmarkViewIsActive = false
             quotesViewController.fetchAllQuotes()
         }
 

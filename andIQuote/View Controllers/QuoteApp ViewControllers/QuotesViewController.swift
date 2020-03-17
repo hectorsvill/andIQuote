@@ -218,6 +218,8 @@ extension QuotesViewController {
         }
     }
 
+    // MARK: - PERESNTVIEWS
+
     func presentThemeView() {
         let vc = ThemeViewController()
         vc.delegate = self
@@ -246,6 +248,15 @@ extension QuotesViewController {
         vc.searchData.sort()
         vc.delegate = self
         present(UINavigationController(rootViewController: vc), animated: true)
+    }
+
+    func presentSubmitView() {
+        let vc = SubmitViewController()
+
+
+
+        present(UINavigationController(rootViewController: vc), animated: true)
+
     }
 }
 // MARK: - UNUserNotificationCenterDelegate

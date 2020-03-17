@@ -13,19 +13,3 @@ struct SlideMenuItem: Hashable {
     let displayText: String
 }
 
-extension SlideMenuViewController {
-    func createSlideMenuData() {
-        let list = [
-            SlideMenuItem(sfSymbol: "", displayText: ""),
-            SlideMenuItem(sfSymbol: "house", displayText: "andIQuote"),
-            SlideMenuItem(sfSymbol: "bookmark", displayText: "Bookmarked"),
-            SlideMenuItem(sfSymbol: "paintbrush", displayText: "Theme"),
-            SlideMenuItem(sfSymbol: "bell", displayText: "Reminder"),
-//            SlideMenuItem(sfSymbol: "plus", displayText: "Create"),
-//            SlideMenuItem(sfSymbol: "book", displayText: "I Quote"),
-            SlideMenuItem(sfSymbol: "magnifyingglass", displayText: "Serach")
-        ]
-
-        list.forEach {slideMenuItems.append($0)}
-    }
-}
