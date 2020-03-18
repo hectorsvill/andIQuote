@@ -15,6 +15,10 @@ class FirestoreController {
     var quoteQuery: Query {
         db.collectionGroup("quotes")
     }
+
+    var submitQuery: Query {
+        db.collectionGroup("submit")
+    }
 }
 extension FirestoreController {
     // MARK: fetchQuotesFromFireStore
@@ -54,5 +58,14 @@ extension FirestoreController {
         }
 
         return quotes
+    }
+
+    func sendQuoteForSubmit(_ quote: Quote) {
+        let id = UUID().uuidString
+        db.collection("submit").document(id).setData([
+            "body" : quote.body!,
+            "author" : quote.author!,
+            "id" : id,
+        ])
     }
 }

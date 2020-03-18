@@ -102,11 +102,7 @@ extension SubmitViewController {
         setupViews()
     }
 
-    @objc func submitQuote() {
-        print("submit")
 
-
-    }
 
     private func setupTableView() {
         tableView = UITableView()
@@ -176,6 +172,14 @@ extension SubmitViewController {
         snapshot.appendSections([.main])
         snapshot.appendItems(data)
         dataSource.apply(snapshot, animatingDifferences: true)
+    }
+
+    @objc func submitQuote() {
+        let body = bodyTextView.text!
+        let author = authorTextField.text!
+        let quote = Quote(body: body, author: author, id: "", like: false)
+
+        FirestoreController().sendQuoteForSubmit(quote)
     }
 }
 
