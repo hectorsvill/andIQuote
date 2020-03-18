@@ -96,9 +96,16 @@ extension SubmitViewController {
 
         view.backgroundColor = .systemBackground
         title  = "Submit"
-
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Submit", style: .done, target: self, action: #selector(submitQuote))
+        navigationItem.rightBarButtonItem?.tintColor = .label
         setupTableView()
         setupViews()
+    }
+
+    @objc func submitQuote() {
+        print("submit")
+
+
     }
 
     private func setupTableView() {
