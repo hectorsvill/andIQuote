@@ -179,7 +179,10 @@ extension SubmitViewController {
         let author = authorTextField.text!
         let quote = Quote(body: body, author: author, id: "", like: false)
 
-        FirestoreController().sendQuoteForSubmit(quote)
+//        FirestoreController().sendQuoteForSubmit(quote)
+
+        // mark perfrom check here
+
 
         let alertController = UIAlertController(title: "andIQuote", message: "Thank You for your submission!", preferredStyle: .actionSheet)
 

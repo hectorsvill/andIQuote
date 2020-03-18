@@ -11,7 +11,7 @@ import UIKit
 import Firebase
 
 final class QuoteController {
-    let firestore = FirestoreController()
+    let firestore = FirestoreController(db: Firestore.firestore())
     var quotes = [Quote]() { didSet { initializeBookmarks() } }
 
     var quoteThemeIsActive = false
