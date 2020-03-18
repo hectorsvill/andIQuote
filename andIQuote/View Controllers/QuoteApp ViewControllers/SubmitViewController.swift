@@ -180,6 +180,14 @@ extension SubmitViewController {
         let quote = Quote(body: body, author: author, id: "", like: false)
 
         FirestoreController().sendQuoteForSubmit(quote)
+
+        let alertController = UIAlertController(title: "andIQuote", message: "Thank You for your submission!", preferredStyle: .actionSheet)
+
+          alertController.addAction(UIAlertAction(title: "OK", style: .default) {  _ in
+              self.navigationController?.dismiss(animated: true, completion: nil)
+          })
+
+        present(alertController, animated: true)
     }
 }
 
