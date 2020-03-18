@@ -44,7 +44,7 @@ extension QuoteController {
     }
 
     var authors: [String] {
-        quotes.map {return String($0.author!) }
+        quotesDict.keys.map { return String($0) }
     }
 
     var background: String {

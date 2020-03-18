@@ -106,7 +106,8 @@ class SubmitViewController: UIViewController {
 
         dataSource = UITableViewDiffableDataSource<Section, String>(tableView: tableView) { tableView, indexPath, author -> UITableViewCell? in
             let cell = tableView.dequeueReusableCell(withIdentifier: self.cellId, for: indexPath)
-            cell.textLabel?.text = author
+            let text = indexPath.row  == 0 ? "Anonymous" : author
+            cell.textLabel?.text = text
             cell.textLabel?.textColor = .label
             cell.textLabel?.textAlignment = .center
             cell.accessoryType = .disclosureIndicator
@@ -161,7 +162,11 @@ class SubmitViewController: UIViewController {
     func reLoadData(_ data: [String]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(data)
+
+        var d = data
+        d.remove(at: 0)
+
+        snapshot.appendItems(d)
         dataSource.apply(snapshot, animatingDifferences: true)
     }
 }
