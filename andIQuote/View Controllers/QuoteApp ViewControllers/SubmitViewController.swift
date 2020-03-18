@@ -11,6 +11,7 @@ import UIKit
 class SubmitViewController: UIViewController {
     enum Section{ case main }
     var authors: [String] = []
+    var quoteController: QuoteController!
     var quoteMaxLength = 130
     var tableView: UITableView! = nil
     var dataSource: UITableViewDiffableDataSource<Section, String>! = nil
@@ -20,6 +21,7 @@ class SubmitViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
+
         let attributes_a = [
             NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 34),
             NSAttributedString.Key.foregroundColor: UIColor.label,
@@ -93,7 +95,7 @@ class SubmitViewController: UIViewController {
 extension SubmitViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        authors = quoteController.authors
         view.backgroundColor = .systemBackground
         title  = "Submit"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Submit", style: .done, target: self, action: #selector(submitQuote))
@@ -101,8 +103,6 @@ extension SubmitViewController {
         setupTableView()
         setupViews()
     }
-
-
 
     private func setupTableView() {
         tableView = UITableView()
@@ -124,7 +124,6 @@ extension SubmitViewController {
 
         reLoadData(authors)
     }
-
 
     private func setupViews() {
         bodyTextCountLabel.text = "0/\(quoteMaxLength)"
@@ -175,20 +174,27 @@ extension SubmitViewController {
     }
 
     @objc func submitQuote() {
-        let body = bodyTextView.text!
-        let author = authorTextField.text!
+        guard let body = bodyTextView.text, let author = authorTextField.text else { return }
         let quote = Quote(body: body, author: author, id: "", like: false)
-
-//        FirestoreController().sendQuoteForSubmit(quote)
+        var message = ""
 
         // mark perfrom check here
+        if body.count > 300 {
+            message = "Please use \(quoteMaxLength) characters max!"
+        }else if body.count < 5 {
+            message = "Your quote is short!"
+        } else if body.isEmpty && author.isEmpty {
+            message = "Quote/Author is empty!"
+        } else {
+            message = "Thank You for your submission!"
+            quoteController.firestore.sendQuoteForSubmit(quote)
+        }
 
+        let alertController = UIAlertController(title: "andIQuote", message: message, preferredStyle: .actionSheet)
 
-        let alertController = UIAlertController(title: "andIQuote", message: "Thank You for your submission!", preferredStyle: .actionSheet)
-
-          alertController.addAction(UIAlertAction(title: "OK", style: .default) {  _ in
-              self.navigationController?.dismiss(animated: true, completion: nil)
-          })
+        alertController.addAction(UIAlertAction(title: "OK", style: .default) {  _ in
+            self.navigationController?.dismiss(animated: true, completion: nil)
+        })
 
         present(alertController, animated: true)
     }
@@ -199,7 +205,6 @@ extension SubmitViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         let text = bodyTextView.text!
         bodyTextCountLabel.text = "\(text.count)/\(quoteMaxLength)"
-
     }
 
 }

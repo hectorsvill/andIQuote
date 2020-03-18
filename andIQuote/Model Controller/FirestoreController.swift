@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 
 class FirestoreController {
-    var db: Firestore
+    var db: Firestore!
     var lastQueryDocumentSnapshot: QueryDocumentSnapshot?
     var quoteQuery: Query {
         db.collectionGroup("quotes")
@@ -22,25 +22,6 @@ class FirestoreController {
 
     init(db: Firestore) {
         self.db = db
-    }
-
-    private func addSnapShot() {
-        submitQuery.addSnapshotListener(includeMetadataChanges: true) { snapshot, error in
-            if let error = error {
-                NSLog("\(error)")
-            }
-
-            guard let snapshot = snapshot else { return }
-            let documents = snapshot.documents
-
-            documents.forEach {
-                let data = $0.data()
-                print(data)
-
-            }
-
-        }
-
     }
 }
 extension FirestoreController {
