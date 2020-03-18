@@ -72,19 +72,25 @@ class SubmitViewController: UIViewController {
         label.font = .systemFont(ofSize: 24)
         label.textColor = .label
         label.text = "author:"
+        label.textAlignment = .center
         return label
     }()
 
     var authorTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-//        textField.font = .systemFont(ofSize: 16)
+        textField.font = .systemFont(ofSize: 16)
+        textField.layer.cornerRadius = 4.5
         textField.layer.borderWidth = 0.4
         textField.layer.borderColor = UIColor.label.cgColor
+        textField.textAlignment = .center
 
         return textField
     }()
 
+}
+
+extension SubmitViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -93,15 +99,14 @@ class SubmitViewController: UIViewController {
 
         setupTableView()
         setupViews()
-
     }
-
 
     private func setupTableView() {
         tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         tableView.rowHeight = 50
+        tableView.delegate = self
         view.addSubview(tableView)
 
         dataSource = UITableViewDiffableDataSource<Section, String>(tableView: tableView) { tableView, indexPath, author -> UITableViewCell? in
@@ -162,11 +167,7 @@ class SubmitViewController: UIViewController {
     func reLoadData(_ data: [String]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
         snapshot.appendSections([.main])
-
-        var d = data
-        d.remove(at: 0)
-
-        snapshot.appendItems(d)
+        snapshot.appendItems(data)
         dataSource.apply(snapshot, animatingDifferences: true)
     }
 }
@@ -182,14 +183,22 @@ extension SubmitViewController: UITextViewDelegate {
 }
 
 extension SubmitViewController: UITextFieldDelegate {
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//        print(textField.text!)
-//    }
-//
-//    func textFieldDidBeginEditing(_ textField: UITextField) {
-//
-//        let text = textField.text!
-//        let filter_authors = authors.filter{ $0.contains(text) }
-//        reLoadData(filter_authors)
-//    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let text = textField.text!
+        let filter_authors = authors.filter{ $0.lowercased().contains(text.lowercased()) }
+        reLoadData(filter_authors == [] ? authors : filter_authors)
+        return true
+    }
+}
+
+extension SubmitViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        authorTextField.text = authors[indexPath.row]
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        authorTextField.resignFirstResponder()
+        bodyTextView.resignFirstResponder()
+    }
+
 }
