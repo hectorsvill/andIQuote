@@ -32,11 +32,7 @@ extension QuotesViewController {
         view.backgroundColor = .systemBackground
         userNotificationCenter?.delegate = self
         createActivityIndicator()
-//        fetchQotes()
-//        createCollectionView()
-//        configureDataSource()
-//        configureNavigationButton()
-//        loadLastIndex()
+        fetchQotes()
     }
 
     func loadLastIndex() {
@@ -123,10 +119,18 @@ extension QuotesViewController {
             guard let quotes = quotes else { return }
 
             DispatchQueue.main.async {
-                self.loadData(items: quotes)
-                self.activityIndicator.stopAnimating()
+                self.setupViews(quotes)
             }
         }
+    }
+
+    private func setupViews(_ quotes: [Quote] = []) {
+        self.createCollectionView()
+        self.configureDataSource()
+        self.configureNavigationButton()
+        self.loadLastIndex()
+        self.loadData(items: quotes)
+        self.activityIndicator.stopAnimating()
     }
 }
 
