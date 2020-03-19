@@ -11,7 +11,7 @@ import UIKit
 import Firebase
 
 final class QuoteController {
-    let firestore = FirestoreController()
+    let firestore = FirestoreController(db: Firestore.firestore())
     var quotes = [Quote]() { didSet { initializeBookmarks() } }
 
     var quoteThemeIsActive = false
@@ -33,6 +33,8 @@ final class QuoteController {
         if let user = Auth.auth().currentUser {
             self.quoteUser = QuoteUser(id: user.uid)
         }
+
+        addSnapshotListener()
     }
 }
 
@@ -41,6 +43,10 @@ extension QuoteController {
         var dict: [String: [Quote]] = [:]
         quotes.forEach { dict[$0.author!, default: []].append($0) }
         return dict
+    }
+
+    var authors: [String] {
+        quotesDict.keys.map { return String($0) }
     }
 
     var background: String {
@@ -133,6 +139,36 @@ extension QuoteController {
             }catch {
                 completion(nil, error)
             }
+        }
+    }
+
+    private func addSnapshotListener() {
+        firestore.quoteQuery.addSnapshotListener(includeMetadataChanges: true) { snapshot, error in
+            if let error = error {
+                NSLog("\(error)")
+            }
+
+            guard let snapshot = snapshot else { return }
+            let documents = snapshot.documents
+
+            documents.forEach {
+                let data = $0.data()
+                let body = data["body"] as! String
+                let author = data["author"] as! String
+                let id = data["id"] as! String
+
+                if let _ = self.quotesDict[id] {
+                }else {
+                    let quote = Quote(body: body, author: author, id: id, like: false)
+                    self.quotes.append(quote)
+                }
+            }
+        }
+
+        do {
+            try CoreDataStack.shared.save()
+        } catch {
+            NSLog("error: \(error)")
         }
     }
 }

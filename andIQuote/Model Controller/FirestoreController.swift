@@ -10,10 +10,18 @@ import Foundation
 import Firebase
 
 class FirestoreController {
+    var db: Firestore!
     var lastQueryDocumentSnapshot: QueryDocumentSnapshot?
-    let db = Firestore.firestore()
     var quoteQuery: Query {
         db.collectionGroup("quotes")
+    }
+
+    var submitQuery: Query {
+        db.collectionGroup("submit")
+    }
+
+    init(db: Firestore) {
+        self.db = db
     }
 }
 extension FirestoreController {
@@ -54,5 +62,14 @@ extension FirestoreController {
         }
 
         return quotes
+    }
+
+    func sendQuoteForSubmit(_ quote: Quote) {
+        let id = UUID().uuidString
+        db.collection("submit").document(id).setData([
+            "body" : quote.body!,
+            "author" : quote.author!,
+            "id" : id,
+        ])
     }
 }

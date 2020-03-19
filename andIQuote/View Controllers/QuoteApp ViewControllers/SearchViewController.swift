@@ -94,7 +94,7 @@ extension SearchViewController: UITableViewDelegate {
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let text = searchBar.text!
-        let data = searchData.filter { $0.contains(text) }
+        let data = searchData.filter { $0.lowercased().contains(text.lowercased()) }
         data == [] ? reloadData(searchData) : reloadData(data)
     }
 }

@@ -54,15 +54,6 @@ extension SlideMenuViewController {
         collectionView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.reuseIdentifier)
         view.addSubview((collectionView))
         collectionView.delegate = self
-
-//        NSLayoutConstraint.activate([
-//            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-//            collectionView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
-//            collectionView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
-//
-//        ])
-
     }
     // MARK: configureDataSouce
     private func configureDataSouce() {
@@ -84,5 +75,21 @@ extension SlideMenuViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard indexPath.item != 0 else { return }
         delegateHomeControllerView?.handleMenuToggle(index: indexPath.item)
+    }
+}
+
+extension SlideMenuViewController {
+    func createSlideMenuData() {
+        let list = [
+            SlideMenuItem(sfSymbol: "", displayText: ""),
+            SlideMenuItem(sfSymbol: "house", displayText: "andIQuote"),
+            SlideMenuItem(sfSymbol: "bookmark", displayText: "Bookmarked"),
+            SlideMenuItem(sfSymbol: "paintbrush", displayText: "Theme"),
+            SlideMenuItem(sfSymbol: "bell", displayText: "Reminder"),
+            SlideMenuItem(sfSymbol: "magnifyingglass", displayText: "Serach"),
+            SlideMenuItem(sfSymbol: "tray.and.arrow.up", displayText: "Submit"),
+        ]
+
+        list.forEach {slideMenuItems.append($0)}
     }
 }

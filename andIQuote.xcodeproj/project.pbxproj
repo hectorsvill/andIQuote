@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0788B03A23C56820001D00E3 /* FirestoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0788B03923C56820001D00E3 /* FirestoreController.swift */; };
-		0788B03E23C569C2001D00E3 /* OffLineQuotes.json in Resources */ = {isa = PBXBuildFile; fileRef = 0788B03D23C569C2001D00E3 /* OffLineQuotes.json */; };
 		12033B3123DA709800987E8E /* SlideMenuEventsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12033B3023DA709800987E8E /* SlideMenuEventsDelegate.swift */; };
 		121B5F2823DE977E00569569 /* DailyReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121B5F2723DE977E00569569 /* DailyReminderView.swift */; };
 		122C915B23D6926F002045CE /* HomeControllerViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122C915A23D6926F002045CE /* HomeControllerViewDelegate.swift */; };
@@ -19,9 +18,9 @@
 		122F4B8323D5320D004C2F34 /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122F4B8223D5320C004C2F34 /* MenuCollectionViewCell.swift */; };
 		124BDA6524020A1900BC1E9B /* ThemeViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124BDA6424020A1900BC1E9B /* ThemeViewControllerDelegate.swift */; };
 		124EAFBE23DF95CF00047558 /* ReminderCellButtonPressedDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124EAFBD23DF95CF00047558 /* ReminderCellButtonPressedDelegate.swift */; };
-		12525E3923E2488B0010A663 /* QuoteCollectionViewController+Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12525E3823E2488B0010A663 /* QuoteCollectionViewController+Gestures.swift */; };
 		12870F052417F30800EF5DAE /* CreateQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12870F042417F30800EF5DAE /* CreateQuoteViewController.swift */; };
 		12870F07241841D100EF5DAE /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12870F06241841D100EF5DAE /* SearchViewController.swift */; };
+		129A61902421672700812ACF /* SubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129A618F2421672700812ACF /* SubmitViewController.swift */; };
 		12A2B64723FBA0310086F585 /* ThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A2B64623FBA0310086F585 /* ThemeViewController.swift */; };
 		12A76B5E23DD40B800026C28 /* DailyReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A76B5D23DD40B800026C28 /* DailyReminderViewController.swift */; };
 		12A76B6023DD4A9500026C28 /* NSAttributeString+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A76B5F23DD4A9500026C28 /* NSAttributeString+Strings.swift */; };
@@ -30,18 +29,15 @@
 		12D72AAF23CD42F7000BECDC /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AAE23CD42F7000BECDC /* Quote.swift */; };
 		12D72AB123CD4554000BECDC /* Quote+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AB023CD4554000BECDC /* Quote+Convenience.swift */; };
 		12F85FE023CFD34300BC74B0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12F85FDF23CFD34300BC74B0 /* GoogleService-Info.plist */; };
-		C42EE0F423BEC6230045DF02 /* BackgroundCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0F323BEC6230045DF02 /* BackgroundCell.swift */; };
 		C42EE0F923C285C50045DF02 /* QuoteUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0F823C285C50045DF02 /* QuoteUser.swift */; };
 		C42EE0FB23C2E1D00045DF02 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0FA23C2E1D00045DF02 /* UIView+Extensions.swift */; };
 		C43D445223A47018005B2458 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D445123A47018005B2458 /* AppDelegate.swift */; };
 		C43D445423A47018005B2458 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D445323A47018005B2458 /* SceneDelegate.swift */; };
 		C43D445B23A4701C005B2458 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C43D445A23A4701C005B2458 /* Assets.xcassets */; };
 		C43D445E23A4701C005B2458 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C43D445C23A4701C005B2458 /* LaunchScreen.storyboard */; };
-		C43D446723A47138005B2458 /* QuoteCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D446623A47138005B2458 /* QuoteCollectionViewController.swift */; };
 		C43D446D23A48677005B2458 /* QuoteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D446C23A48677005B2458 /* QuoteCollectionViewCell.swift */; };
 		C4F0E90E23AB3297005917A8 /* QuoteLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F0E90D23AB3297005917A8 /* QuoteLibrary.swift */; };
 		C4F0E91023AB330D005917A8 /* QuoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F0E90F23AB330D005917A8 /* QuoteController.swift */; };
-		C4FB3EFF23BAE4A70041B1BD /* ThemeSettingsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FB3EFE23BAE4A70041B1BD /* ThemeSettingsCollectionViewController.swift */; };
 		C4FB3F0123BBA8300041B1BD /* UIButton+SimpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FB3F0023BBA8300041B1BD /* UIButton+SimpleButton.swift */; };
 		C4FB3F0523BBC37C0041B1BD /* UIImage+mainViewSymbolConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FB3F0423BBC37C0041B1BD /* UIImage+mainViewSymbolConfig.swift */; };
 /* End PBXBuildFile section */
@@ -61,7 +57,6 @@
 
 /* Begin PBXFileReference section */
 		0788B03923C56820001D00E3 /* FirestoreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreController.swift; sourceTree = "<group>"; };
-		0788B03D23C569C2001D00E3 /* OffLineQuotes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = OffLineQuotes.json; sourceTree = "<group>"; };
 		12033B3023DA709800987E8E /* SlideMenuEventsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideMenuEventsDelegate.swift; sourceTree = "<group>"; };
 		121B5F2723DE977E00569569 /* DailyReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyReminderView.swift; sourceTree = "<group>"; };
 		122C915A23D6926F002045CE /* HomeControllerViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeControllerViewDelegate.swift; sourceTree = "<group>"; };
@@ -73,10 +68,10 @@
 		1231707023D1402700EBF261 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		124BDA6424020A1900BC1E9B /* ThemeViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewControllerDelegate.swift; sourceTree = "<group>"; };
 		124EAFBD23DF95CF00047558 /* ReminderCellButtonPressedDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderCellButtonPressedDelegate.swift; sourceTree = "<group>"; };
-		12525E3823E2488B0010A663 /* QuoteCollectionViewController+Gestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuoteCollectionViewController+Gestures.swift"; sourceTree = "<group>"; };
 		12525E3A23E275B00010A663 /* andIQuote.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = andIQuote.entitlements; sourceTree = "<group>"; };
 		12870F042417F30800EF5DAE /* CreateQuoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateQuoteViewController.swift; sourceTree = "<group>"; };
 		12870F06241841D100EF5DAE /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		129A618F2421672700812ACF /* SubmitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitViewController.swift; sourceTree = "<group>"; };
 		12A2B64623FBA0310086F585 /* ThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewController.swift; sourceTree = "<group>"; };
 		12A76B5D23DD40B800026C28 /* DailyReminderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyReminderViewController.swift; sourceTree = "<group>"; };
 		12A76B5F23DD4A9500026C28 /* NSAttributeString+Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributeString+Strings.swift"; sourceTree = "<group>"; };
@@ -87,7 +82,6 @@
 		12F85FDF23CFD34300BC74B0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1BB3DABBB0667D35BF858725 /* Pods-andIQuote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-andIQuote.release.xcconfig"; path = "Target Support Files/Pods-andIQuote/Pods-andIQuote.release.xcconfig"; sourceTree = "<group>"; };
 		410A8ADF26336FBEB51DA16B /* Pods-andIQuote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-andIQuote.debug.xcconfig"; path = "Target Support Files/Pods-andIQuote/Pods-andIQuote.debug.xcconfig"; sourceTree = "<group>"; };
-		C42EE0F323BEC6230045DF02 /* BackgroundCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCell.swift; sourceTree = "<group>"; };
 		C42EE0F823C285C50045DF02 /* QuoteUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteUser.swift; sourceTree = "<group>"; };
 		C42EE0FA23C2E1D00045DF02 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		C43D444E23A47018005B2458 /* andIQuote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = andIQuote.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,11 +90,9 @@
 		C43D445A23A4701C005B2458 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C43D445D23A4701C005B2458 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C43D445F23A4701C005B2458 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C43D446623A47138005B2458 /* QuoteCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteCollectionViewController.swift; sourceTree = "<group>"; };
 		C43D446C23A48677005B2458 /* QuoteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteCollectionViewCell.swift; sourceTree = "<group>"; };
 		C4F0E90D23AB3297005917A8 /* QuoteLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteLibrary.swift; sourceTree = "<group>"; };
 		C4F0E90F23AB330D005917A8 /* QuoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteController.swift; sourceTree = "<group>"; };
-		C4FB3EFE23BAE4A70041B1BD /* ThemeSettingsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSettingsCollectionViewController.swift; sourceTree = "<group>"; };
 		C4FB3F0023BBA8300041B1BD /* UIButton+SimpleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+SimpleButton.swift"; sourceTree = "<group>"; };
 		C4FB3F0423BBC37C0041B1BD /* UIImage+mainViewSymbolConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+mainViewSymbolConfig.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -136,6 +128,7 @@
 				12A2B64623FBA0310086F585 /* ThemeViewController.swift */,
 				12870F042417F30800EF5DAE /* CreateQuoteViewController.swift */,
 				12870F06241841D100EF5DAE /* SearchViewController.swift */,
+				129A618F2421672700812ACF /* SubmitViewController.swift */,
 			);
 			path = "QuoteApp ViewControllers";
 			sourceTree = "<group>";
@@ -170,11 +163,6 @@
 		C42EE0F523BECD780045DF02 /* Trash */ = {
 			isa = PBXGroup;
 			children = (
-				12525E3823E2488B0010A663 /* QuoteCollectionViewController+Gestures.swift */,
-				C43D446623A47138005B2458 /* QuoteCollectionViewController.swift */,
-				0788B03D23C569C2001D00E3 /* OffLineQuotes.json */,
-				C42EE0F323BEC6230045DF02 /* BackgroundCell.swift */,
-				C4FB3EFE23BAE4A70041B1BD /* ThemeSettingsCollectionViewController.swift */,
 			);
 			path = Trash;
 			sourceTree = "<group>";
@@ -349,7 +337,6 @@
 				C43D445E23A4701C005B2458 /* LaunchScreen.storyboard in Resources */,
 				C43D445B23A4701C005B2458 /* Assets.xcassets in Resources */,
 				12F85FE023CFD34300BC74B0 /* GoogleService-Info.plist in Resources */,
-				0788B03E23C569C2001D00E3 /* OffLineQuotes.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,10 +393,8 @@
 				124BDA6524020A1900BC1E9B /* ThemeViewControllerDelegate.swift in Sources */,
 				C4F0E91023AB330D005917A8 /* QuoteController.swift in Sources */,
 				12033B3123DA709800987E8E /* SlideMenuEventsDelegate.swift in Sources */,
-				C43D446723A47138005B2458 /* QuoteCollectionViewController.swift in Sources */,
 				122C918623D775E7002045CE /* SelfConfiguringCell.swift in Sources */,
 				122C919B23D90FFD002045CE /* SlideMenuItem.swift in Sources */,
-				12525E3923E2488B0010A663 /* QuoteCollectionViewController+Gestures.swift in Sources */,
 				12D72AAC23CD41C4000BECDC /* Quote.xcdatamodeld in Sources */,
 				C43D446D23A48677005B2458 /* QuoteCollectionViewCell.swift in Sources */,
 				122F4B8323D5320D004C2F34 /* MenuCollectionViewCell.swift in Sources */,
@@ -420,6 +405,7 @@
 				C4FB3F0523BBC37C0041B1BD /* UIImage+mainViewSymbolConfig.swift in Sources */,
 				122C915B23D6926F002045CE /* HomeControllerViewDelegate.swift in Sources */,
 				12D72AAF23CD42F7000BECDC /* Quote.swift in Sources */,
+				129A61902421672700812ACF /* SubmitViewController.swift in Sources */,
 				12D72AB123CD4554000BECDC /* Quote+Convenience.swift in Sources */,
 				122F4B8123D3EF36004C2F34 /* SlideMenuViewController.swift in Sources */,
 				122F4B7D23D3EDC5004C2F34 /* MainContainerViewController.swift in Sources */,
@@ -429,10 +415,8 @@
 				C4F0E90E23AB3297005917A8 /* QuoteLibrary.swift in Sources */,
 				12A2B64723FBA0310086F585 /* ThemeViewController.swift in Sources */,
 				12A76B6023DD4A9500026C28 /* NSAttributeString+Strings.swift in Sources */,
-				C42EE0F423BEC6230045DF02 /* BackgroundCell.swift in Sources */,
 				12870F052417F30800EF5DAE /* CreateQuoteViewController.swift in Sources */,
 				C43D445423A47018005B2458 /* SceneDelegate.swift in Sources */,
-				C4FB3EFF23BAE4A70041B1BD /* ThemeSettingsCollectionViewController.swift in Sources */,
 				12AF1003241308170025B134 /* QuotesViewController.swift in Sources */,
 				121B5F2823DE977E00569569 /* DailyReminderView.swift in Sources */,
 			);
