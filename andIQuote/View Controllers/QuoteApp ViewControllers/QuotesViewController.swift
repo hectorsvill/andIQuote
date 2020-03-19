@@ -31,12 +31,8 @@ extension QuotesViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         userNotificationCenter?.delegate = self
-        fetchQotes()
-        createCollectionView()
-        configureDataSource()
-        configureNavigationButton()
         createActivityIndicator()
-        loadLastIndex()
+        fetchQotes()
     }
 
     func loadLastIndex() {
@@ -47,12 +43,11 @@ extension QuotesViewController {
 
     private func createActivityIndicator() {
         activityIndicator = UIActivityIndicatorView()
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.style = .large
         activityIndicator.tintColor = .label
-        collectionView.addSubview(activityIndicator)
+        view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
-        activityIndicator.center = collectionView.center
+        activityIndicator.center = view.center
     }
 
     private func createCollectionView() {
@@ -124,10 +119,18 @@ extension QuotesViewController {
             guard let quotes = quotes else { return }
 
             DispatchQueue.main.async {
-                self.loadData(items: quotes)
-                self.activityIndicator.stopAnimating()
+                self.setupViews(quotes)
             }
         }
+    }
+
+    private func setupViews(_ quotes: [Quote] = []) {
+        self.createCollectionView()
+        self.configureDataSource()
+        self.configureNavigationButton()
+        self.loadLastIndex()
+        self.loadData(items: quotes)
+        self.activityIndicator.stopAnimating()
     }
 }
 
