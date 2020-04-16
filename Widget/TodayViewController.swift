@@ -27,10 +27,22 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
         return container
     }()
-
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("here")
+
+        fetchQuotesFromCoreData { quotes, error in
+            if let error = error {
+
+                NSLog("error fetching from core Data: %@", error.localizedDescription)
+            }
+
+            guard let quotes = quotes else { return }
+
+            self.quotes = quotes.shuffled()
+            print(quotes.count)
+        }
         
     }
         
@@ -39,8 +51,19 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
 
 
-    func fetchQuotes() {
+    func fetchQuotesFromCoreData(completion: @escaping ([Quote]?, Error?) -> ()){
         
+        container.viewContext.performAndWait {
+            let quoteFetch: NSFetchRequest<Quote> = Quote.fetchRequest()
+            quoteFetch.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
+
+            do {
+                _ = try container.viewContext.fetch(quoteFetch)
+                let quotes = try quoteFetch.execute()
+                completion(quotes, nil)
+            }catch {
+                completion(nil, error)
+            }
+        }
     }
-    
 }
