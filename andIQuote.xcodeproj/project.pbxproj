@@ -86,6 +86,7 @@
 		122F4B8023D3EF36004C2F34 /* SlideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideMenuViewController.swift; sourceTree = "<group>"; };
 		122F4B8223D5320C004C2F34 /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		1231707023D1402700EBF261 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		1243C0472448C8440072A4AA /* Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Widget.entitlements; sourceTree = "<group>"; };
 		124BDA6424020A1900BC1E9B /* ThemeViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewControllerDelegate.swift; sourceTree = "<group>"; };
 		124EAFBD23DF95CF00047558 /* ReminderCellButtonPressedDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderCellButtonPressedDelegate.swift; sourceTree = "<group>"; };
 		12525E3823E2488B0010A663 /* QuoteCollectionViewController+Gestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuoteCollectionViewController+Gestures.swift"; sourceTree = "<group>"; };
@@ -179,6 +180,7 @@
 		126EE90524437F0B002C2506 /* Widget */ = {
 			isa = PBXGroup;
 			children = (
+				1243C0472448C8440072A4AA /* Widget.entitlements */,
 				126EE90624437F0B002C2506 /* TodayViewController.swift */,
 				126EE90824437F0B002C2506 /* MainInterface.storyboard */,
 				126EE90B24437F0B002C2506 /* Info.plist */,
@@ -548,6 +550,7 @@
 		126EE90F24437F0B002C2506 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Widget/Widget.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 97AS6JS382;
 				INFOPLIST_FILE = Widget/Info.plist;
@@ -568,6 +571,7 @@
 		126EE91024437F0B002C2506 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Widget/Widget.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 97AS6JS382;
 				INFOPLIST_FILE = Widget/Info.plist;
