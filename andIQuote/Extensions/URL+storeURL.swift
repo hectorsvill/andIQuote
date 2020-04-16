@@ -9,7 +9,7 @@
 import UIKit
 
 
-extension URL {
+public extension URL {
     static func storeURL(for appGroup: String = "group.com.hectorstevenvillasano.andIQuote.LocalCache", dataBaseName: String) -> URL {
         guard let fileContainer = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroup) else {
             fatalError("storeURL error")
