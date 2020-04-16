@@ -31,7 +31,7 @@
 		12A76B6023DD4A9500026C28 /* NSAttributeString+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A76B5F23DD4A9500026C28 /* NSAttributeString+Strings.swift */; };
 		12AF1003241308170025B134 /* QuotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AF1002241308170025B134 /* QuotesViewController.swift */; };
 		12D72AAC23CD41C4000BECDC /* Quote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AAA23CD41C4000BECDC /* Quote.xcdatamodeld */; };
-		12D72AAF23CD42F7000BECDC /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AAE23CD42F7000BECDC /* Quote.swift */; };
+		12D72AAF23CD42F7000BECDC /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AAE23CD42F7000BECDC /* CoreDataStack.swift */; };
 		12D72AB123CD4554000BECDC /* Quote+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AB023CD4554000BECDC /* Quote+Convenience.swift */; };
 		12F85FE023CFD34300BC74B0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12F85FDF23CFD34300BC74B0 /* GoogleService-Info.plist */; };
 		C42EE0F423BEC6230045DF02 /* BackgroundCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0F323BEC6230045DF02 /* BackgroundCell.swift */; };
@@ -102,7 +102,7 @@
 		12A76B5F23DD4A9500026C28 /* NSAttributeString+Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributeString+Strings.swift"; sourceTree = "<group>"; };
 		12AF1002241308170025B134 /* QuotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesViewController.swift; sourceTree = "<group>"; };
 		12D72AAB23CD41C4000BECDC /* Quote.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Quote.xcdatamodel; sourceTree = "<group>"; };
-		12D72AAE23CD42F7000BECDC /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
+		12D72AAE23CD42F7000BECDC /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		12D72AB023CD4554000BECDC /* Quote+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Quote+Convenience.swift"; sourceTree = "<group>"; };
 		12F85FDF23CFD34300BC74B0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1BB3DABBB0667D35BF858725 /* Pods-andIQuote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-andIQuote.release.xcconfig"; path = "Target Support Files/Pods-andIQuote/Pods-andIQuote.release.xcconfig"; sourceTree = "<group>"; };
@@ -192,7 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				12D72AAA23CD41C4000BECDC /* Quote.xcdatamodeld */,
-				12D72AAE23CD42F7000BECDC /* Quote.swift */,
+				12D72AAE23CD42F7000BECDC /* CoreDataStack.swift */,
 				12D72AB023CD4554000BECDC /* Quote+Convenience.swift */,
 			);
 			path = "Core Data";
@@ -498,7 +498,7 @@
 				C4FB3F0123BBA8300041B1BD /* UIButton+SimpleButton.swift in Sources */,
 				C4FB3F0523BBC37C0041B1BD /* UIImage+mainViewSymbolConfig.swift in Sources */,
 				122C915B23D6926F002045CE /* HomeControllerViewDelegate.swift in Sources */,
-				12D72AAF23CD42F7000BECDC /* Quote.swift in Sources */,
+				12D72AAF23CD42F7000BECDC /* CoreDataStack.swift in Sources */,
 				12D72AB123CD4554000BECDC /* Quote+Convenience.swift in Sources */,
 				122F4B8123D3EF36004C2F34 /* SlideMenuViewController.swift in Sources */,
 				122F4B7D23D3EDC5004C2F34 /* MainContainerViewController.swift in Sources */,
