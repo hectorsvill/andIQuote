@@ -28,7 +28,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
         return container
     }()
-        
+}
+
+extension TodayViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -40,6 +42,25 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         setQuoteLabel()
     }
 
+    func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
+        completionHandler(NCUpdateResult.newData)
+    }
+
+    func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
+        switch activeDisplayMode {
+        case .expanded:
+            preferredContentSize = CGSize(width: 0, height: 550)
+            setQuoteLabel(font: 22)
+        case .compact:
+            preferredContentSize = CGSize(width: 0, height: 400)
+            setQuoteLabel()
+        @unknown default:
+            fatalError()
+        }
+    }
+}
+
+extension TodayViewController {
     func setupViews() {
         extensionContext?.widgetLargestAvailableDisplayMode = .expanded
         preferredContentSize = CGSize(width: 0, height: 400)
@@ -70,10 +91,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
     }
 
-    func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
-        completionHandler(NCUpdateResult.newData)
-    }
-
     func fetchQuotesFromCoreData(completion: @escaping ([Quote]?, Error?) -> ()){
         container.viewContext.performAndWait {
             let quoteFetch: NSFetchRequest<Quote> = Quote.fetchRequest()
@@ -86,19 +103,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             }catch {
                 completion(nil, error)
             }
-        }
-    }
-
-    func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
-        switch activeDisplayMode {
-        case .expanded:
-            preferredContentSize = CGSize(width: 0, height: 550)
-            setQuoteLabel(font: 22)
-        case .compact:
-            preferredContentSize = CGSize(width: 0, height: 400)
-            setQuoteLabel()
-        @unknown default:
-            fatalError()
         }
     }
 }
