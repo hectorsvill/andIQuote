@@ -67,12 +67,14 @@ extension QuoteController {
         _quoteIndex = index
         UserDefaults.standard.set(index, forKey: "QuoteController._quoteIndex")
     }
+
+
     // MARK: attributedString
     func attributedString(_ quote: Quote) -> NSMutableAttributedString {
-        let attributedString = NSMutableAttributedString(string: quote.body!, attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 24), NSAttributedString.Key.foregroundColor: quoteForegroundColor])
-        attributedString.append(NSAttributedString(string: "\n\n\(quote.author!)", attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: quoteForegroundColor]))
-        return attributedString
+        return NSMutableAttributedString.attributedString(quote, font: 24, quoteForegroundColor: quoteForegroundColor)
     }
+
+
     // MARK: initializeBookmarks
     private func initializeBookmarks() {
         self.quotes.forEach {

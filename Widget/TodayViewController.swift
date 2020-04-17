@@ -31,7 +31,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.rowHeight = 120
+
         extensionContext?.widgetLargestAvailableDisplayMode = .expanded
         preferredContentSize = CGSize(width: 0, height: 400)
 
@@ -89,7 +89,7 @@ extension TodayViewController: UITableViewDataSource, UITableViewDelegate {
 
 //        cell.textLabel?.textAlignment = .center
         let quote = quotes[indexPath.row]
-        cell.textLabel?.text = "\(quote.body!)\n\n- \(quote.author!)"
+        cell.textLabel?.attributedText = NSMutableAttributedString.attributedString(quote, font: 16, quoteForegroundColor: UIColor.label)
         cell.textLabel?.numberOfLines = 0
         return cell
     }

@@ -21,6 +21,8 @@
 		1243C04A2448CC430072A4AA /* Quote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AAA23CD41C4000BECDC /* Quote.xcdatamodeld */; };
 		1243C04B2448CD920072A4AA /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AAE23CD42F7000BECDC /* CoreDataStack.swift */; };
 		1243C04C2448CE750072A4AA /* URL+storeURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1243C0482448CA580072A4AA /* URL+storeURL.swift */; };
+		1243C04E244A1DDF0072A4AA /* NSMutableAttributedString+attributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1243C04D244A1DDF0072A4AA /* NSMutableAttributedString+attributedString.swift */; };
+		1243C04F244A1F020072A4AA /* NSMutableAttributedString+attributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1243C04D244A1DDF0072A4AA /* NSMutableAttributedString+attributedString.swift */; };
 		124BDA6524020A1900BC1E9B /* ThemeViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124BDA6424020A1900BC1E9B /* ThemeViewControllerDelegate.swift */; };
 		124EAFBE23DF95CF00047558 /* ReminderCellButtonPressedDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124EAFBD23DF95CF00047558 /* ReminderCellButtonPressedDelegate.swift */; };
 		12525E3923E2488B0010A663 /* QuoteCollectionViewController+Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12525E3823E2488B0010A663 /* QuoteCollectionViewController+Gestures.swift */; };
@@ -92,6 +94,7 @@
 		1231707023D1402700EBF261 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		1243C0472448C8440072A4AA /* Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Widget.entitlements; sourceTree = "<group>"; };
 		1243C0482448CA580072A4AA /* URL+storeURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+storeURL.swift"; sourceTree = "<group>"; };
+		1243C04D244A1DDF0072A4AA /* NSMutableAttributedString+attributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+attributedString.swift"; sourceTree = "<group>"; };
 		124BDA6424020A1900BC1E9B /* ThemeViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewControllerDelegate.swift; sourceTree = "<group>"; };
 		124EAFBD23DF95CF00047558 /* ReminderCellButtonPressedDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderCellButtonPressedDelegate.swift; sourceTree = "<group>"; };
 		12525E3823E2488B0010A663 /* QuoteCollectionViewController+Gestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuoteCollectionViewController+Gestures.swift"; sourceTree = "<group>"; };
@@ -319,6 +322,7 @@
 				C42EE0FA23C2E1D00045DF02 /* UIView+Extensions.swift */,
 				12A76B5F23DD4A9500026C28 /* NSAttributeString+Strings.swift */,
 				1243C0482448CA580072A4AA /* URL+storeURL.swift */,
+				1243C04D244A1DDF0072A4AA /* NSMutableAttributedString+attributedString.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -481,6 +485,7 @@
 			files = (
 				1243C04B2448CD920072A4AA /* CoreDataStack.swift in Sources */,
 				1243C04A2448CC430072A4AA /* Quote.xcdatamodeld in Sources */,
+				1243C04F244A1F020072A4AA /* NSMutableAttributedString+attributedString.swift in Sources */,
 				126EE90724437F0B002C2506 /* TodayViewController.swift in Sources */,
 				1243C04C2448CE750072A4AA /* URL+storeURL.swift in Sources */,
 			);
@@ -502,6 +507,7 @@
 				12D72AAC23CD41C4000BECDC /* Quote.xcdatamodeld in Sources */,
 				C43D446D23A48677005B2458 /* QuoteCollectionViewCell.swift in Sources */,
 				122F4B8323D5320D004C2F34 /* MenuCollectionViewCell.swift in Sources */,
+				1243C04E244A1DDF0072A4AA /* NSMutableAttributedString+attributedString.swift in Sources */,
 				C42EE0F923C285C50045DF02 /* QuoteUser.swift in Sources */,
 				12870F07241841D100EF5DAE /* SearchViewController.swift in Sources */,
 				C42EE0FB23C2E1D00045DF02 /* UIView+Extensions.swift in Sources */,
