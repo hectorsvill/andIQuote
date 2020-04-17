@@ -11,8 +11,8 @@ import UIKit
 import NotificationCenter
 
 class TodayViewController: UIViewController, NCWidgetProviding {
+    @IBOutlet weak var quoteLabel: UILabel!
 
-    @IBOutlet weak var tableView: UITableView!
     var quotes = [Quote]()
 
     lazy var container: NSPersistentContainer = {
@@ -31,11 +31,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupViews()
+    }
 
+    func setupViews() {
         extensionContext?.widgetLargestAvailableDisplayMode = .expanded
         preferredContentSize = CGSize(width: 0, height: 400)
 
-        fetchQuotesFromCoreData { quotes, error in
+        fetchQuotesFromCoreData { [unowned self] quotes, error in
             if let error = error {
 
                 NSLog("error fetching from core Data: %@", error.localizedDescription)
@@ -43,8 +46,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
             guard let quotes = quotes else { return }
             self.quotes = quotes.shuffled()
+
+            DispatchQueue.main.async {
+                self.quoteLabel.attributedText = NSMutableAttributedString.attributedString(quotes[0], font: 16, quoteForegroundColor: UIColor.label)
+            }
         }
-        
     }
         
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
@@ -77,26 +83,4 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             fatalError()
         }
     }
-}
-
-extension TodayViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return quotes.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-
-//        cell.textLabel?.textAlignment = .center
-        let quote = quotes[indexPath.row]
-        cell.textLabel?.attributedText = NSMutableAttributedString.attributedString(quote, font: 16, quoteForegroundColor: UIColor.label)
-        cell.textLabel?.numberOfLines = 0
-        return cell
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-
-
 }
