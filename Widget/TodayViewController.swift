@@ -12,8 +12,8 @@ import NotificationCenter
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var quoteLabel: UILabel!
-
     var quotes = [Quote]()
+    var quoteIndex = 0
 
     lazy var container: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Quote")
@@ -34,10 +34,27 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         setupViews()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setIndex()
+        setQuoteLabel()
+    }
+
     func setupViews() {
         extensionContext?.widgetLargestAvailableDisplayMode = .expanded
         preferredContentSize = CGSize(width: 0, height: 400)
+        fetchQuotes()
+    }
 
+    private func setIndex() {
+        quoteIndex = quoteIndex == quotes.count - 1 ? 0 : (quoteIndex + 1)
+    }
+
+    func setQuoteLabel(font: CGFloat = 16) {
+        self.quoteLabel.attributedText = NSMutableAttributedString.attributedString(quotes[self.quoteIndex], font: font, quoteForegroundColor: UIColor.label)
+    }
+
+    func fetchQuotes() {
         fetchQuotesFromCoreData { [unowned self] quotes, error in
             if let error = error {
 
@@ -48,15 +65,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             self.quotes = quotes.shuffled()
 
             DispatchQueue.main.async {
-                self.quoteLabel.attributedText = NSMutableAttributedString.attributedString(quotes[0], font: 16, quoteForegroundColor: UIColor.label)
+                self.setQuoteLabel()
             }
         }
     }
-        
+
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
         completionHandler(NCUpdateResult.newData)
     }
-
 
     func fetchQuotesFromCoreData(completion: @escaping ([Quote]?, Error?) -> ()){
         container.viewContext.performAndWait {
@@ -77,8 +93,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         switch activeDisplayMode {
         case .expanded:
             preferredContentSize = CGSize(width: 0, height: 550)
+            setQuoteLabel(font: 22)
         case .compact:
             preferredContentSize = CGSize(width: 0, height: 400)
+            setQuoteLabel()
         @unknown default:
             fatalError()
         }
