@@ -50,7 +50,7 @@ extension TodayViewController {
         switch activeDisplayMode {
         case .expanded:
             preferredContentSize = CGSize(width: 0, height: 550)
-            setQuoteLabel(font: 22)
+            setQuoteLabel()
         case .compact:
             preferredContentSize = CGSize(width: 0, height: 400)
             setQuoteLabel()
@@ -71,7 +71,8 @@ extension TodayViewController {
         quoteIndex = quoteIndex == quotes.count - 1 ? 0 : (quoteIndex + 1)
     }
 
-    func setQuoteLabel(font: CGFloat = 16) {
+    func setQuoteLabel() {
+        let font: CGFloat = self.extensionContext?.widgetActiveDisplayMode == .some(.expanded) ? 20 : 16
         self.quoteLabel.attributedText = NSMutableAttributedString.attributedString(quotes[self.quoteIndex], font: font, quoteForegroundColor: UIColor.label)
     }
 
