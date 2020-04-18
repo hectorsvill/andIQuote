@@ -11,7 +11,7 @@ import UIKit
 import Firebase
 
 final class QuoteController {
-    let firestore = FirestoreController()
+    let firestore: FirestoreController
     var quotes = [Quote]() { didSet { initializeBookmarks() } }
 
     var quoteThemeIsActive = false
@@ -29,10 +29,14 @@ final class QuoteController {
     var reminderTimeIntervalSeconds: Double = 3600 // 1 hour
     var bookmarked: [String] = []
 
-    init() {
+    init(firestore: FirestoreController = FirestoreController()) {
         if let user = Auth.auth().currentUser {
             self.quoteUser = QuoteUser(id: user.uid)
         }
+
+        self.firestore = firestore
+        let storeDescriptore = NSPersistentStoreDescription(url: URL.storeURL(dataBaseName: "Quote"))
+        CoreDataStack.shared.container.persistentStoreDescriptions = [storeDescriptore]
     }
 }
 
