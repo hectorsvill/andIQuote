@@ -10,7 +10,7 @@ import CoreData
 import UIKit
 import NotificationCenter
 
-class TodayViewController: UIViewController, NCWidgetProviding {
+final class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var quoteLabel: UILabel!
     var quotes = [Quote]()
     var quoteIndex = 0
@@ -61,7 +61,7 @@ extension TodayViewController {
 }
 
 extension TodayViewController {
-    func setupViews() {
+    private func setupViews() {
         extensionContext?.widgetLargestAvailableDisplayMode = .expanded
         preferredContentSize = CGSize(width: 0, height: 400)
         fetchQuotes()
@@ -71,12 +71,12 @@ extension TodayViewController {
         quoteIndex = quoteIndex == quotes.count - 1 ? 0 : (quoteIndex + 1)
     }
 
-    func setQuoteLabel() {
-        let font: CGFloat = self.extensionContext?.widgetActiveDisplayMode == .some(.expanded) ? 20 : 16
-        self.quoteLabel.attributedText = NSMutableAttributedString.attributedString(quotes[self.quoteIndex], font: font, quoteForegroundColor: UIColor.label)
+    private func setQuoteLabel() {
+        let font: CGFloat = extensionContext?.widgetActiveDisplayMode == .some(.expanded) ? 20 : 16
+        self.quoteLabel.attributedText = NSMutableAttributedString.attributedString(quotes[quoteIndex], font: font, quoteForegroundColor: UIColor.label)
     }
 
-    func fetchQuotes() {
+    private func fetchQuotes() {
         fetchQuotesFromCoreData { [unowned self] quotes, error in
             if let error = error {
 
@@ -92,7 +92,7 @@ extension TodayViewController {
         }
     }
 
-    func fetchQuotesFromCoreData(completion: @escaping ([Quote]?, Error?) -> ()){
+    private func fetchQuotesFromCoreData(completion: @escaping ([Quote]?, Error?) -> ()){
         container.viewContext.performAndWait {
             let quoteFetch: NSFetchRequest<Quote> = Quote.fetchRequest()
             quoteFetch.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
