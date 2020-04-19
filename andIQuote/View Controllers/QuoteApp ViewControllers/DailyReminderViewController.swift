@@ -188,7 +188,7 @@ extension DailyReminderViewController {
 
         userNotificationCenter.add(request) { error in
             if let error = error {
-                NSLog("Error: \(error)")
+                NSLog("Error: %@", error.localizedDescription)
             }
         }
     }
