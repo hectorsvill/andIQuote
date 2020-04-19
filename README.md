@@ -1,4 +1,7 @@
-# andIQuote App
+#
+# `DEPRECATED`
+
+##### andIQuote App
 Discover mindful quotes and share them with your friends.
 #
 V4(1.2) - Free download from the [App Store](https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1493892128)
