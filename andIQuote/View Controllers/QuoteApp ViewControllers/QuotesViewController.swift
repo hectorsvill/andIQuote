@@ -111,7 +111,7 @@ extension QuotesViewController {
     }
 
     private func fetchQotes() {
-        quoteController.fetchQuotes { quotes, error in
+        quoteController.fetchQuotes { [unowned self] quotes, error in
             if let error = error {
                 NSLog("Error: \(error)")
             }
@@ -212,7 +212,7 @@ extension QuotesViewController {
         if bookmarkedQuotes.count == 0 {
             let alertController = UIAlertController(title: "andIQuote", message: "Bookmarks are empty!", preferredStyle: .actionSheet)
 
-            alertController.addAction(UIAlertAction(title: "OK", style: .default){ _ in
+            alertController.addAction(UIAlertAction(title: "OK", style: .default){ [unowned self] _ in
                 self.quoteController.bookmarkViewIsActive = false
                 self.loadData(items: self.quoteController.quotes)
             })

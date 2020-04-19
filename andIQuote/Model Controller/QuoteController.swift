@@ -11,7 +11,7 @@ import UIKit
 import Firebase
 
 final class QuoteController {
-    let firestore = FirestoreController()
+    let firestore: FirestoreController
     var quotes = [Quote]() { didSet { initializeBookmarks() } }
 
     var quoteThemeIsActive = false
@@ -29,10 +29,12 @@ final class QuoteController {
     var reminderTimeIntervalSeconds: Double = 3600 // 1 hour
     var bookmarked: [String] = []
 
-    init() {
+    init(firestore: FirestoreController = FirestoreController()) {
         if let user = Auth.auth().currentUser {
             self.quoteUser = QuoteUser(id: user.uid)
         }
+
+        self.firestore = firestore
     }
 }
 
@@ -69,9 +71,7 @@ extension QuoteController {
     }
     // MARK: attributedString
     func attributedString(_ quote: Quote) -> NSMutableAttributedString {
-        let attributedString = NSMutableAttributedString(string: quote.body!, attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 24), NSAttributedString.Key.foregroundColor: quoteForegroundColor])
-        attributedString.append(NSAttributedString(string: "\n\n\(quote.author!)", attributes: [NSAttributedString.Key.font: UIFont.italicSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: quoteForegroundColor]))
-        return attributedString
+        return NSMutableAttributedString.attributedString(quote, font: 24, quoteForegroundColor: quoteForegroundColor)
     }
     // MARK: initializeBookmarks
     private func initializeBookmarks() {
@@ -137,38 +137,5 @@ extension QuoteController {
     }
 }
 
-//    private func deleteDuplicatesFromFireStore() {
-//        var deleteList: [String] = []
-//
-//        for key in quotesDict.keys.sorted() {
-//            var checkDict: [String: [String]] = [:]
-//
-//            for item in quotesDict[key]! {
-//                let body = item.body!
-//                let id = item.id!
-//
-//                checkDict[body, default: []].append(id)
-//            }
-//
-//            for values in checkDict.values {
-//                print("count: ", values.count)
-//                if values.count > 1 {
-//                    for i in 1..<values.count {
-//                        deleteList.append(values[i])
-//                    }
-//                }
-//            }
-//        }
-//
-//        for item in deleteList {
-//            firestore.db.collection("quotes").document(String(item)).delete { error in
-//                if let error = error {
-//                    NSLog("\(error)")
-//                } else {
-//                    print("delete")
-//                }
-//            }
-//        }
-//
-//    }
+
 

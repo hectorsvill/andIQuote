@@ -50,9 +50,9 @@ extension ThemeViewController {
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         view.addSubview(collectionView)
 
-        dataSource = UICollectionViewDiffableDataSource<Section, Int>(collectionView: collectionView, cellProvider: { collectionView, indexPath, i -> UICollectionViewCell? in
+        dataSource = UICollectionViewDiffableDataSource<Section, Int>(collectionView: collectionView, cellProvider: {[unowned self] collectionView, indexPath, i -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
-            cell.setBackground(to:self.quoteController.backgrounds[indexPath.item])
+            cell.setBackground(to: self.quoteController.backgrounds[indexPath.item])
             cell.layer.borderColor = UIColor.white.cgColor
             cell.layer.borderWidth = 3
             cell.layer.cornerRadius = 23
@@ -99,20 +99,3 @@ extension ThemeViewController: UICollectionViewDelegate {
         dismiss(animated: true, completion: nil)
     }
 }
-
-
-//class ThemeCollectionViewCell: UICollectionViewCell {
-//
-//    var item: Int? {didSet {  } }
-//
-//
-//
-//    private func setupView() {
-//        guard let item = item else { return }
-//
-//
-//
-//
-//    }
-//
-//}
