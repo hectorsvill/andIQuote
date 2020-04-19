@@ -72,8 +72,9 @@ extension TodayViewController {
     }
 
     private func setQuoteLabel() {
-        let font: CGFloat = extensionContext?.widgetActiveDisplayMode == .some(.expanded) ? 20 : 16
+        let font: CGFloat = extensionContext?.widgetActiveDisplayMode == .some(.expanded) ? 18 : 14
         self.quoteLabel.attributedText = NSMutableAttributedString.attributedString(quotes[quoteIndex], font: font, quoteForegroundColor: UIColor.label)
+        
     }
 
     private func fetchQuotes() {

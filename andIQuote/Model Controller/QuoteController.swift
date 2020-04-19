@@ -35,8 +35,6 @@ final class QuoteController {
         }
 
         self.firestore = firestore
-        let storeDescriptore = NSPersistentStoreDescription(url: URL.storeURL(dataBaseName: "Quote"))
-        CoreDataStack.shared.container.persistentStoreDescriptions = [storeDescriptore]
     }
 }
 
@@ -139,38 +137,5 @@ extension QuoteController {
     }
 }
 
-//    private func deleteDuplicatesFromFireStore() {
-//        var deleteList: [String] = []
-//
-//        for key in quotesDict.keys.sorted() {
-//            var checkDict: [String: [String]] = [:]
-//
-//            for item in quotesDict[key]! {
-//                let body = item.body!
-//                let id = item.id!
-//
-//                checkDict[body, default: []].append(id)
-//            }
-//
-//            for values in checkDict.values {
-//                print("count: ", values.count)
-//                if values.count > 1 {
-//                    for i in 1..<values.count {
-//                        deleteList.append(values[i])
-//                    }
-//                }
-//            }
-//        }
-//
-//        for item in deleteList {
-//            firestore.db.collection("quotes").document(String(item)).delete { error in
-//                if let error = error {
-//                    NSLog("\(error)")
-//                } else {
-//                    print("delete")
-//                }
-//            }
-//        }
-//
-//    }
+
 
