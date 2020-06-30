@@ -168,7 +168,10 @@ extension QuotesViewController: QuoteCollectionViewCellDelegate {
         guard quoteController.quoteThemeIsActive != true else { return }
         view.impactGesture(style: .rigid)
         let activityVC = UIActivityViewController(activityItems: [quoteController.attributedString, view.screenShot()], applicationActivities: [])
+        
         present(activityVC, animated: true)
+        activityVC.popoverPresentationController?.sourceView = view
+        
     }
 }
 
