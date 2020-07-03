@@ -5,9 +5,9 @@ target 'andIQuote' do
   
   # Pods for andIQuote
   pod 'Firebase/Auth'
-  pod 'Firebase/Analytics'
+#  pod 'Firebase/Analytics'
   pod 'Firebase/Database'
-  pod 'Firebase/Core'
+#  pod 'Firebase/Core'
   pod 'Firebase/Firestore'
   
 end
