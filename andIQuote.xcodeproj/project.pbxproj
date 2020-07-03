@@ -135,8 +135,8 @@
 			isa = PBXGroup;
 			children = (
 				12AF1002241308170025B134 /* QuotesViewController.swift */,
-				12A76B5D23DD40B800026C28 /* DailyReminderViewController.swift */,
 				12A2B64623FBA0310086F585 /* ThemeViewController.swift */,
+				12A76B5D23DD40B800026C28 /* DailyReminderViewController.swift */,
 				12870F042417F30800EF5DAE /* CreateQuoteViewController.swift */,
 				12870F06241841D100EF5DAE /* SearchViewController.swift */,
 			);
@@ -578,7 +578,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = andIQuote/andIQuote.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.8;
+				CURRENT_PROJECT_VERSION = 1.9;
 				DEVELOPMENT_TEAM = 97AS6JS382;
 				INFOPLIST_FILE = andIQuote/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -602,7 +602,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = andIQuote/andIQuote.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.8;
+				CURRENT_PROJECT_VERSION = 1.9;
 				DEVELOPMENT_TEAM = 97AS6JS382;
 				INFOPLIST_FILE = andIQuote/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -26,6 +26,7 @@ final class SlideMenuViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         createSlideMenuData()
         configureHierarchy()
         configureDataSouce()
@@ -54,15 +55,6 @@ extension SlideMenuViewController {
         collectionView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.reuseIdentifier)
         view.addSubview((collectionView))
         collectionView.delegate = self
-
-//        NSLayoutConstraint.activate([
-//            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-//            collectionView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
-//            collectionView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
-//
-//        ])
-
     }
     // MARK: configureDataSouce
     private func configureDataSouce() {

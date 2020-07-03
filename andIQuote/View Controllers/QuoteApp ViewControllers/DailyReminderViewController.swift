@@ -23,6 +23,8 @@ final class DailyReminderViewController: UIViewController {
         button.setTitleColor(.label, for: .normal)
         button.setTitle("Finish", for: .normal)
         button.addTarget(self, action: #selector(finishButtonPressed), for: .touchUpInside)
+        button.accessibilityLabel = "Exit"
+        button.accessibilityHint = "Close Current View."
         return button
     }()
     // MARK: titleLabel
@@ -31,6 +33,7 @@ final class DailyReminderViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .label
         label.font = UIFont.boldSystemFont(ofSize: 28)
+        
         return label
     }()
     // MARK: descriptionLabel

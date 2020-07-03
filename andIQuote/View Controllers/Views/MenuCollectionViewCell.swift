@@ -28,11 +28,20 @@ class MenuCollectionViewCell: UICollectionViewCell, SelfConfiguringCell {
     }()
     
     private func setupViews() {
+        isAccessibilityElement = true
+        accessibilityLabel = slideMenuItem?.displayText
+        
+        
         labelText.text = slideMenuItem?.displayText
+        labelText.isAccessibilityElement = true
+        
         imageView.image = UIImage(systemName: slideMenuItem!.sfSymbol, withConfiguration: UIImage().mainViewSymbolConfig())
+        imageView.isAccessibilityElement = true
+        
         imageView.tintColor = .label
-        addSubview(imageView)
+        
         addSubview(labelText)
+        addSubview(imageView)
 
         let bottomLineView = UIView()
         bottomLineView.translatesAutoresizingMaskIntoConstraints = false

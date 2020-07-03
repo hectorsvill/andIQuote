@@ -29,6 +29,7 @@ class DailyReminderView: UIView {
         label.textColor = .label
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 22)
+        
         return label
     }()
     // MARK: minusButton
@@ -53,6 +54,7 @@ class DailyReminderView: UIView {
         timepicker.datePickerMode = .time
         timepicker.layer.cornerRadius = 4
         timepicker.addTarget(self, action: #selector(timePickerValueChanged), for: .valueChanged)
+        timepicker.isAccessibilityElement = true
         return timepicker
     }()
     // MARK: setupViews

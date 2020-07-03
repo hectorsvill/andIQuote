@@ -41,7 +41,7 @@ final class SearchViewController: UIViewController {
         searchbar = UISearchBar()
         searchbar.translatesAutoresizingMaskIntoConstraints = false
         searchbar.sizeToFit()
-        searchbar.placeholder = "Search by Autho"
+        searchbar.placeholder = "Search by Author"
         searchbar.barTintColor = .label
         searchbar.delegate = self
         navigationItem.titleView = searchbar

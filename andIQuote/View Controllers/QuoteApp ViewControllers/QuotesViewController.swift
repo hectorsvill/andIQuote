@@ -66,6 +66,11 @@ extension QuotesViewController {
             collectionView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             collectionView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
         ])
+        
+        
+        collectionView.isAccessibilityElement = true
+        collectionView.accessibilityLabel = "Quotes collections. Find quotes in the middle of screen ,swipe left or right."
+        collectionView.accessibilityHint = "find quotes in the middle of screen, author will be right bellow the left sid of text"
     }
 
     private func configureDataSource() {
@@ -90,6 +95,9 @@ extension QuotesViewController {
         let menuImage = UIImage(systemName: "line.horizontal.3", withConfiguration: UIImage().mainViewSymbolConfig())
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: menuImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(slideMenuButtonTapped))
         navigationItem.leftBarButtonItem?.tintColor = .label
+        navigationItem.leftBarButtonItem?.accessibilityLabel = "left slide out menu."
+        navigationItem.leftBarButtonItem?.accessibilityHint = "A list of buttons animate from the left."
+        navigationItem.leftBarButtonItem?.accessibilityIdentifier = "leftSlideOutMenuBarButtonItem"
     }
 
     @objc func slideMenuButtonTapped() {
