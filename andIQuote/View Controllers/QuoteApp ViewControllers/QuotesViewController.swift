@@ -29,7 +29,6 @@ extension QuotesViewController {
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = .systemBackground
         userNotificationCenter?.delegate = self
         createActivityIndicator()
@@ -67,6 +66,11 @@ extension QuotesViewController {
             collectionView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             collectionView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
         ])
+        
+        
+        collectionView.isAccessibilityElement = true
+        collectionView.accessibilityLabel = "Quotes collections. Find quotes in the middle of screen ,swipe left or right."
+        collectionView.accessibilityHint = "find quotes in the middle of screen, author will be right bellow the left sid of text"
     }
 
     private func configureDataSource() {
