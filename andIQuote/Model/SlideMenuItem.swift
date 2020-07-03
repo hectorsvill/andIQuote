@@ -17,13 +17,13 @@ extension SlideMenuViewController {
     func createSlideMenuData() {
         let list = [
             SlideMenuItem(sfSymbol: "", displayText: ""),
-            SlideMenuItem(sfSymbol: "house", displayText: "andIQuote"),
+            SlideMenuItem(sfSymbol: "house", displayText: "Home"),
             SlideMenuItem(sfSymbol: "bookmark", displayText: "Bookmarked"),
             SlideMenuItem(sfSymbol: "paintbrush", displayText: "Theme"),
             SlideMenuItem(sfSymbol: "bell", displayText: "Reminder"),
 //            SlideMenuItem(sfSymbol: "plus", displayText: "Create"),
 //            SlideMenuItem(sfSymbol: "book", displayText: "I Quote"),
-            SlideMenuItem(sfSymbol: "magnifyingglass", displayText: "Serach")
+            SlideMenuItem(sfSymbol: "magnifyingglass", displayText: "Search")
         ]
 
         list.forEach {slideMenuItems.append($0)}

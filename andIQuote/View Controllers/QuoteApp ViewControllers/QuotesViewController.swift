@@ -29,6 +29,7 @@ extension QuotesViewController {
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+
         view.backgroundColor = .systemBackground
         userNotificationCenter?.delegate = self
         createActivityIndicator()
@@ -90,6 +91,9 @@ extension QuotesViewController {
         let menuImage = UIImage(systemName: "line.horizontal.3", withConfiguration: UIImage().mainViewSymbolConfig())
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: menuImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(slideMenuButtonTapped))
         navigationItem.leftBarButtonItem?.tintColor = .label
+        navigationItem.leftBarButtonItem?.accessibilityLabel = "left slide out menu."
+        navigationItem.leftBarButtonItem?.accessibilityHint = "A list of buttons animate from the left."
+        navigationItem.leftBarButtonItem?.accessibilityIdentifier = "leftSlideOutMenuBarButtonItem"
     }
 
     @objc func slideMenuButtonTapped() {
