@@ -22,6 +22,8 @@ final class ThemeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Theme"
+        accessibilityLabel = "theme. Color collection."
+        accessibilityHint = "Pick a color to set your background theme."
 
         createCollectionView()
         setSelectedCell()
@@ -49,9 +51,12 @@ extension ThemeViewController {
         collectionView.delegate = self
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         view.addSubview(collectionView)
+        
 
         dataSource = UICollectionViewDiffableDataSource<Section, Int>(collectionView: collectionView, cellProvider: { collectionView, indexPath, i -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+            cell.isAccessibilityElement = true
+            cell.accessibilityLabel = self.quoteController.backgrounds[indexPath.item]
             cell.setBackground(to:self.quoteController.backgrounds[indexPath.item])
             cell.layer.borderColor = UIColor.white.cgColor
             cell.layer.borderWidth = 3
@@ -99,20 +104,3 @@ extension ThemeViewController: UICollectionViewDelegate {
         dismiss(animated: true, completion: nil)
     }
 }
-
-
-//class ThemeCollectionViewCell: UICollectionViewCell {
-//
-//    var item: Int? {didSet {  } }
-//
-//
-//
-//    private func setupView() {
-//        guard let item = item else { return }
-//
-//
-//
-//
-//    }
-//
-//}
