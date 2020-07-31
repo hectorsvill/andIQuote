@@ -9,9 +9,15 @@
 import XCTest
 
 extension andIQuoteUITests {
-    
-    var quotesViewController: XCUIElement {
+    var quotesCollectionViewController: XCUIElement {
         app.collectionViews["QuotesViewController"]
     }
     
+    var appNavigationBar: XCUIElement {
+        app.navigationBars["andIQuote.QuotesView"]
+    }
+    
+    var leftSlideoutmenubarbuttonitemButton: XCUIElement {
+        appNavigationBar.buttons["leftSlideOutMenuBarButtonItem"]
+    }
 }

@@ -56,8 +56,10 @@ extension QuotesViewController {
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.delegate = self
         collectionView.backgroundColor = .systemBackground
-        collectionView.isAccessibilityElement = true
         collectionView.accessibilityIdentifier = "QuotesViewController"
+        collectionView.isAccessibilityElement = true
+        collectionView.accessibilityLabel = "Quotes collections. Find quotes in the middle of screen ,swipe left or right."
+        collectionView.accessibilityHint = "find quotes in the middle of screen, author will be right bellow the left sid of text"
         collectionView.register(QuoteCollectionViewCell.self, forCellWithReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier)
         
         view.addSubview(collectionView)
@@ -68,10 +70,6 @@ extension QuotesViewController {
             collectionView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             collectionView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
         ])
-        
-        collectionView.isAccessibilityElement = true
-        collectionView.accessibilityLabel = "Quotes collections. Find quotes in the middle of screen ,swipe left or right."
-        collectionView.accessibilityHint = "find quotes in the middle of screen, author will be right bellow the left sid of text"
     }
 
     private func configureDataSource() {
@@ -95,6 +93,7 @@ extension QuotesViewController {
     private func configureNavigationButton() {
         navigationController?.navigationBar.barTintColor = collectionView.backgroundColor
         navigationController?.navigationBar.barStyle = .default
+        
         let menuImage = UIImage(systemName: "line.horizontal.3", withConfiguration: UIImage().mainViewSymbolConfig())
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: menuImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(slideMenuButtonTapped))
         navigationItem.leftBarButtonItem?.tintColor = .label
