@@ -57,6 +57,8 @@ extension QuotesViewController {
 
         collectionView.delegate = self
         collectionView.backgroundColor = .systemBackground
+        collectionView.isAccessibilityElement = true
+        collectionView.accessibilityIdentifier = "QuotesViewController"
         collectionView.register(QuoteCollectionViewCell.self, forCellWithReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier)
         view.addSubview(collectionView)
 

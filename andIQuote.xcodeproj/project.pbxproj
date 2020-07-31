@@ -97,7 +97,7 @@
 		12D72AAE23CD42F7000BECDC /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		12D72AB023CD4554000BECDC /* Quote+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Quote+Convenience.swift"; sourceTree = "<group>"; };
 		1BB3DABBB0667D35BF858725 /* Pods-andIQuote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-andIQuote.release.xcconfig"; path = "Target Support Files/Pods-andIQuote/Pods-andIQuote.release.xcconfig"; sourceTree = "<group>"; };
-		3B5A273524ABBF630031809B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3B5A273524ABBF630031809B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Documents/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3B778ACB24D49EAD000731B1 /* andIQuoteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = andIQuoteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B778ACD24D49EAD000731B1 /* andIQuoteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = andIQuoteUITests.swift; sourceTree = "<group>"; };
 		3B778ACF24D49EAD000731B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
