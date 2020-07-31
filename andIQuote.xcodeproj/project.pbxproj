@@ -101,6 +101,7 @@
 		3B778ACB24D49EAD000731B1 /* andIQuoteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = andIQuoteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B778ACD24D49EAD000731B1 /* andIQuoteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = andIQuoteUITests.swift; sourceTree = "<group>"; };
 		3B778ACF24D49EAD000731B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3B83815F24D4B18A0026962D /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
 		410A8ADF26336FBEB51DA16B /* Pods-andIQuote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-andIQuote.debug.xcconfig"; path = "Target Support Files/Pods-andIQuote/Pods-andIQuote.debug.xcconfig"; sourceTree = "<group>"; };
 		C42EE0F323BEC6230045DF02 /* BackgroundCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCell.swift; sourceTree = "<group>"; };
 		C42EE0F823C285C50045DF02 /* QuoteUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteUser.swift; sourceTree = "<group>"; };
@@ -188,6 +189,7 @@
 			children = (
 				3B778ACD24D49EAD000731B1 /* andIQuoteUITests.swift */,
 				3B778ACF24D49EAD000731B1 /* Info.plist */,
+				3B83815F24D4B18A0026962D /* TestPlan.xctestplan */,
 			);
 			path = andIQuoteUITests;
 			sourceTree = "<group>";
