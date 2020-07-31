@@ -9,9 +9,15 @@
 import XCTest
 
 extension andIQuoteUITests {
-    
-    
     func testQuoteViewControllerIsHittable() throws {
-        XCTAssert(quotesViewController.isHittable)
+        XCTAssert(quotesCollectionViewController.isHittable)
+    }
+    
+    func testAppNavigationBar() throws {
+        XCTAssert(appNavigationBar.isHittable)
+    }
+    
+    func testLeftslideoutmenubarbuttonitemButton() throws {
+        XCTAssert(leftSlideoutmenubarbuttonitemButton.isHittable)
     }
 }
