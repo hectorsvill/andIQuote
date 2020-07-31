@@ -9,19 +9,17 @@
 import XCTest
 
 class andIQuoteUITests: XCTestCase {
-    let app = XCUIApplication()
+    var app:  XCUIApplication! = nil
 
-    var quotesViewController: XCUIElement {
-        app.collectionViews["QuotesViewController"]
-    }
-    
     override func setUpWithError() throws {
+        app = XCUIApplication()
         app.launch()
         continueAfterFailure = false
     }
 
     override func tearDownWithError() throws {
         app.terminate()
+        app = nil
     }
 
     func testLaunchPerformance() throws {
