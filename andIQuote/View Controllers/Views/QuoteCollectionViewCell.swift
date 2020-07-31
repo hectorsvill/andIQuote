@@ -103,8 +103,7 @@ extension QuoteCollectionViewCell {
         isBookmark.toggle()
         quote.like.toggle()
 
-        let moc = CoreDataStack.shared.mainContext
-        do { try moc.save() } catch {
+        do { try CoreDataStack.shared.mainContext.save() } catch {
             NSLog("\(error)")
         }
     }
