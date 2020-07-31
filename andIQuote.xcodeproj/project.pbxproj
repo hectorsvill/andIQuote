@@ -31,6 +31,7 @@
 		12D72AAF23CD42F7000BECDC /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AAE23CD42F7000BECDC /* Quote.swift */; };
 		12D72AB123CD4554000BECDC /* Quote+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AB023CD4554000BECDC /* Quote+Convenience.swift */; };
 		3B5A273624ABBF630031809B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B5A273524ABBF630031809B /* GoogleService-Info.plist */; };
+		3B778ACE24D49EAD000731B1 /* andIQuoteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B778ACD24D49EAD000731B1 /* andIQuoteUITests.swift */; };
 		C42EE0F423BEC6230045DF02 /* BackgroundCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0F323BEC6230045DF02 /* BackgroundCell.swift */; };
 		C42EE0F923C285C50045DF02 /* QuoteUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0F823C285C50045DF02 /* QuoteUser.swift */; };
 		C42EE0FB23C2E1D00045DF02 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0FA23C2E1D00045DF02 /* UIView+Extensions.swift */; };
@@ -46,6 +47,16 @@
 		C4FB3F0123BBA8300041B1BD /* UIButton+SimpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FB3F0023BBA8300041B1BD /* UIButton+SimpleButton.swift */; };
 		C4FB3F0523BBC37C0041B1BD /* UIImage+mainViewSymbolConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FB3F0423BBC37C0041B1BD /* UIImage+mainViewSymbolConfig.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3B778AD024D49EAD000731B1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C43D444623A47018005B2458 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C43D444D23A47018005B2458;
+			remoteInfo = andIQuote;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		1231707F23D1402700EBF261 /* Embed App Extensions */ = {
@@ -87,6 +98,9 @@
 		12D72AB023CD4554000BECDC /* Quote+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Quote+Convenience.swift"; sourceTree = "<group>"; };
 		1BB3DABBB0667D35BF858725 /* Pods-andIQuote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-andIQuote.release.xcconfig"; path = "Target Support Files/Pods-andIQuote/Pods-andIQuote.release.xcconfig"; sourceTree = "<group>"; };
 		3B5A273524ABBF630031809B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3B778ACB24D49EAD000731B1 /* andIQuoteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = andIQuoteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B778ACD24D49EAD000731B1 /* andIQuoteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = andIQuoteUITests.swift; sourceTree = "<group>"; };
+		3B778ACF24D49EAD000731B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		410A8ADF26336FBEB51DA16B /* Pods-andIQuote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-andIQuote.debug.xcconfig"; path = "Target Support Files/Pods-andIQuote/Pods-andIQuote.debug.xcconfig"; sourceTree = "<group>"; };
 		C42EE0F323BEC6230045DF02 /* BackgroundCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCell.swift; sourceTree = "<group>"; };
 		C42EE0F823C285C50045DF02 /* QuoteUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteUser.swift; sourceTree = "<group>"; };
@@ -108,6 +122,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3B778AC824D49EAD000731B1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C43D444B23A47018005B2458 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -162,6 +183,15 @@
 			path = "Core Data";
 			sourceTree = "<group>";
 		};
+		3B778ACC24D49EAD000731B1 /* andIQuoteUITests */ = {
+			isa = PBXGroup;
+			children = (
+				3B778ACD24D49EAD000731B1 /* andIQuoteUITests.swift */,
+				3B778ACF24D49EAD000731B1 /* Info.plist */,
+			);
+			path = andIQuoteUITests;
+			sourceTree = "<group>";
+		};
 		3D858A6172EAE387DF38FA05 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				C43D445023A47018005B2458 /* andIQuote */,
+				3B778ACC24D49EAD000731B1 /* andIQuoteUITests */,
 				C43D444F23A47018005B2458 /* Products */,
 				FC694681BB32D3EB48BEEEB9 /* Pods */,
 				3D858A6172EAE387DF38FA05 /* Frameworks */,
@@ -197,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				C43D444E23A47018005B2458 /* andIQuote.app */,
+				3B778ACB24D49EAD000731B1 /* andIQuoteUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -292,6 +324,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		3B778ACA24D49EAD000731B1 /* andIQuoteUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3B778AD424D49EAD000731B1 /* Build configuration list for PBXNativeTarget "andIQuoteUITests" */;
+			buildPhases = (
+				3B778AC724D49EAD000731B1 /* Sources */,
+				3B778AC824D49EAD000731B1 /* Frameworks */,
+				3B778AC924D49EAD000731B1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3B778AD124D49EAD000731B1 /* PBXTargetDependency */,
+			);
+			name = andIQuoteUITests;
+			productName = andIQuoteUITests;
+			productReference = 3B778ACB24D49EAD000731B1 /* andIQuoteUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		C43D444D23A47018005B2458 /* andIQuote */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C43D446223A4701C005B2458 /* Build configuration list for PBXNativeTarget "andIQuote" */;
@@ -318,10 +368,14 @@
 		C43D444623A47018005B2458 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1130;
+				LastSwiftUpdateCheck = 1160;
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = Hector;
 				TargetAttributes = {
+					3B778ACA24D49EAD000731B1 = {
+						CreatedOnToolsVersion = 11.6;
+						TestTargetID = C43D444D23A47018005B2458;
+					};
 					C43D444D23A47018005B2458 = {
 						CreatedOnToolsVersion = 11.3;
 					};
@@ -341,11 +395,19 @@
 			projectRoot = "";
 			targets = (
 				C43D444D23A47018005B2458 /* andIQuote */,
+				3B778ACA24D49EAD000731B1 /* andIQuoteUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3B778AC924D49EAD000731B1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C43D444C23A47018005B2458 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -402,6 +464,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3B778AC724D49EAD000731B1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3B778ACE24D49EAD000731B1 /* andIQuoteUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C43D444A23A47018005B2458 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -444,6 +514,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		3B778AD124D49EAD000731B1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C43D444D23A47018005B2458 /* andIQuote */;
+			targetProxy = 3B778AD024D49EAD000731B1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		C43D445C23A4701C005B2458 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -456,6 +534,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		3B778AD224D49EAD000731B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 97AS6JS382;
+				INFOPLIST_FILE = andIQuoteUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.hectorstevenvillasano.andIQuoteUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = andIQuote;
+			};
+			name = Debug;
+		};
+		3B778AD324D49EAD000731B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 97AS6JS382;
+				INFOPLIST_FILE = andIQuoteUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.hectorstevenvillasano.andIQuoteUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = andIQuote;
+			};
+			name = Release;
+		};
 		C43D446023A4701C005B2458 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -621,6 +739,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3B778AD424D49EAD000731B1 /* Build configuration list for PBXNativeTarget "andIQuoteUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3B778AD224D49EAD000731B1 /* Debug */,
+				3B778AD324D49EAD000731B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C43D444923A47018005B2458 /* Build configuration list for PBXProject "andIQuote" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
