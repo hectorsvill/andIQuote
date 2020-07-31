@@ -2,6 +2,7 @@
 Discover mindful quotes and share them with your friends.
 #
 Available on [TestFlight](https://testflight.apple.com/join/jwXR2eDd)
+#
 Free download from the [App Store](https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1493892128)
 #
 ![img](https://github.com/hectorsvill/hectorsvill.github.io/blob/master/images/andIQuote%20App%20store%20image.png)
