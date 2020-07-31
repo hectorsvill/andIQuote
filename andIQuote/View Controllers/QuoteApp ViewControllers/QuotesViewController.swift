@@ -54,12 +54,12 @@ extension QuotesViewController {
         collectionView = UICollectionView(frame: view.frame, collectionViewLayout: createLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-
         collectionView.delegate = self
         collectionView.backgroundColor = .systemBackground
         collectionView.isAccessibilityElement = true
         collectionView.accessibilityIdentifier = "QuotesViewController"
         collectionView.register(QuoteCollectionViewCell.self, forCellWithReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier)
+        
         view.addSubview(collectionView)
 
         NSLayoutConstraint.activate([

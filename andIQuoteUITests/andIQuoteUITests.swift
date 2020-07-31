@@ -24,10 +24,6 @@ class andIQuoteUITests: XCTestCase {
         app.terminate()
     }
 
-    func testQuoteViewControllerIsHittable() throws {
-        XCTAssert(quotesViewController.isHittable)
-    }
-    
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
             // This measures how long it takes to launch your application.

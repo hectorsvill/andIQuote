@@ -32,6 +32,7 @@
 		12D72AB123CD4554000BECDC /* Quote+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AB023CD4554000BECDC /* Quote+Convenience.swift */; };
 		3B5A273624ABBF630031809B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B5A273524ABBF630031809B /* GoogleService-Info.plist */; };
 		3B778ACE24D49EAD000731B1 /* andIQuoteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B778ACD24D49EAD000731B1 /* andIQuoteUITests.swift */; };
+		3B83816124D4D9C80026962D /* andIQuoteUITests+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B83816024D4D9C80026962D /* andIQuoteUITests+Test.swift */; };
 		C42EE0F423BEC6230045DF02 /* BackgroundCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0F323BEC6230045DF02 /* BackgroundCell.swift */; };
 		C42EE0F923C285C50045DF02 /* QuoteUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0F823C285C50045DF02 /* QuoteUser.swift */; };
 		C42EE0FB23C2E1D00045DF02 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE0FA23C2E1D00045DF02 /* UIView+Extensions.swift */; };
@@ -102,6 +103,7 @@
 		3B778ACD24D49EAD000731B1 /* andIQuoteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = andIQuoteUITests.swift; sourceTree = "<group>"; };
 		3B778ACF24D49EAD000731B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B83815F24D4B18A0026962D /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
+		3B83816024D4D9C80026962D /* andIQuoteUITests+Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "andIQuoteUITests+Test.swift"; sourceTree = "<group>"; };
 		410A8ADF26336FBEB51DA16B /* Pods-andIQuote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-andIQuote.debug.xcconfig"; path = "Target Support Files/Pods-andIQuote/Pods-andIQuote.debug.xcconfig"; sourceTree = "<group>"; };
 		C42EE0F323BEC6230045DF02 /* BackgroundCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCell.swift; sourceTree = "<group>"; };
 		C42EE0F823C285C50045DF02 /* QuoteUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteUser.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				3B778ACD24D49EAD000731B1 /* andIQuoteUITests.swift */,
+				3B83816024D4D9C80026962D /* andIQuoteUITests+Test.swift */,
 				3B778ACF24D49EAD000731B1 /* Info.plist */,
 				3B83815F24D4B18A0026962D /* TestPlan.xctestplan */,
 			);
@@ -470,6 +473,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B83816124D4D9C80026962D /* andIQuoteUITests+Test.swift in Sources */,
 				3B778ACE24D49EAD000731B1 /* andIQuoteUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
