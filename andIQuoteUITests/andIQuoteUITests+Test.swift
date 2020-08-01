@@ -40,26 +40,36 @@ extension andIQuoteUITests {
         XCTAssert(quotesCollectionViewControllerCellBookmark.isHittable)
     }
 
-    func testQuotesCollectionViewControllerCellBookmarkFillIsHittable() {
+    func testQuotesCollectionViewControllerCellBookmarkFillIsHittable() throws {
         quotesCollectionViewControllerCellBookmark.tap()
         XCTAssert(quotesCollectionViewControllerCellBookmarkFill.isHittable)
         quotesCollectionViewControllerCellBookmarkFill.tap()
         XCTAssert(quotesCollectionViewControllerCellBookmark.isHittable)
     }
     
-    func testLeftRightSwipes() {
+    func testLeftRightSwipes() throws {
         app.swipeLeft()
         XCTAssert(quotesCollectionViewControllerCell.isHittable)
         app.swipeRight()
         XCTAssert(quotesCollectionViewControllerCell.isHittable)
     }
     
-
-    func testUIActivityContentViewIsHittable() {
+    func testUIActivityContentViewIsHittable() throws {
         quotesCollectionViewControllerCellShareButton.tap()
+        try uiActivityContentViewIsHittableFlow()
+    }
+    
+    func testSwipeUPresentsUIActivityContentViewIsHittable() throws {
+        app.swipeUp()
+        try uiActivityContentViewIsHittableFlow()
+        
+    }
+}
+
+extension andIQuoteUITests {
+    private func uiActivityContentViewIsHittableFlow() throws {
         XCTAssert(activityContentViewNavigationBar.isHittable)
         XCTAssert(activityContentViewNavigationBarCloseButton.isHittable)
         activityContentViewNavigationBarCloseButton.tap()
-                
     }
 }
