@@ -65,18 +65,25 @@ extension andIQuoteUITests {
     }
     
     func testSlideOutMenuCollectionViewAniamation() throws {
-        try navigateToSlideOutManue()
+        try navigateToSlideOutManu()
         leftSlideoutmenubarbuttonitemButton.tap()
         XCTAssertFalse(slideOutMenuCollectionView.isHittable)
     }
     
     func testSlideMenuCollectionViewCellsIsHittable() throws {
-        try navigateToSlideOutManue()
+        try navigateToSlideOutManu()
         XCTAssert(slideOutMenuCollectionViewHomeCell.isHittable)
         XCTAssert(slideOutMenuCollectionBookmarkedViewCell.isHittable)
         XCTAssert(slideOutMenuCollectionThemeViewCell.isHittable)
         XCTAssert(slideOutMenuCollectionReminderViewCell.isHittable)
         XCTAssert(slideOutMenuCollectionSearchViewCell.isHittable)
+    }
+    
+    func testNavigateToHome() throws {
+        try navigateToSlideOutManu()
+        XCTAssert(slideOutMenuCollectionViewHomeCell.isHittable)
+        slideOutMenuCollectionViewHomeCell.tap()
+        XCTAssert(quotesCollectionViewController.isHittable)
     }
 }
 
@@ -93,7 +100,7 @@ extension andIQuoteUITests {
         }
     }
     
-    private func navigateToSlideOutManue() throws {
+    private func navigateToSlideOutManu() throws {
         try testLeftslideoutmenubarbuttonitemButton()
         leftSlideoutmenubarbuttonitemButton.tap()
         XCTAssert(slideOutMenuCollectionView.isHittable)
