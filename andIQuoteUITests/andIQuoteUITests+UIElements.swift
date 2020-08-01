@@ -10,7 +10,7 @@ import XCTest
 
 extension andIQuoteUITests {
     var isiPad: Bool {
-        app.windows.element(boundBy: 0).horizontalSizeClass == .regular && app.windows.element(boundBy: 0).verticalSizeClass == .regular
+        UIDevice.current.userInterfaceIdiom == .pad
     }
     
     var quotesCollectionViewController: XCUIElement {
