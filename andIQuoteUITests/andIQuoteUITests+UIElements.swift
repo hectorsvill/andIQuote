@@ -48,4 +48,8 @@ extension andIQuoteUITests {
     var activityContentViewNavigationBarCloseButton: XCUIElement {
         activityContentViewNavigationBar.buttons["Close"]
     }
+    
+    var slideMenuCollectionView: XCUIElement {
+        app.collectionViews["SlideMenuCollectionView"]
+    }
 }
