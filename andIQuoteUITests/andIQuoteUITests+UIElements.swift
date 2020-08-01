@@ -9,6 +9,10 @@
 import XCTest
 
 extension andIQuoteUITests {
+    var isiPad: Bool {
+        app.windows.element(boundBy: 0).horizontalSizeClass == .regular && app.windows.element(boundBy: 0).verticalSizeClass == .regular
+    }
+    
     var quotesCollectionViewController: XCUIElement {
         app.collectionViews["QuotesViewController"]
     }
