@@ -36,4 +36,12 @@ extension andIQuoteUITests {
     var quotesCollectionViewControllerCellBookmarkFill: XCUIElement {
         quotesCollectionViewControllerCell.buttons["bookmark.fill"]
     }
+    
+    var activityContentViewNavigationBar: XCUIElement {
+        app.navigationBars["UIActivityContentView"]
+    }
+    
+    var activityContentViewNavigationBarCloseButton: XCUIElement {
+        activityContentViewNavigationBar.buttons["Close"]
+    }
 }
