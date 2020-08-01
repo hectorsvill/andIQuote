@@ -32,4 +32,9 @@ extension andIQuoteUITests {
         }
     }
     
+    func testQuotesCollectionViewControllerCellShareButton() throws {
+        XCTAssert(quotesCollectionViewControllerCellShareButton.isHittable)
+    }
+    
+    
 }
