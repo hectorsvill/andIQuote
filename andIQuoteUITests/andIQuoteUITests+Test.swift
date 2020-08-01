@@ -53,4 +53,13 @@ extension andIQuoteUITests {
         app.swipeRight()
         XCTAssert(quotesCollectionViewControllerCell.isHittable)
     }
+    
+
+    func testUIActivityContentViewIsHittable() {
+        quotesCollectionViewControllerCellShareButton.tap()
+        XCTAssert(activityContentViewNavigationBar.isHittable)
+        XCTAssert(activityContentViewNavigationBarCloseButton.isHittable)
+        activityContentViewNavigationBarCloseButton.tap()
+                
+    }
 }
