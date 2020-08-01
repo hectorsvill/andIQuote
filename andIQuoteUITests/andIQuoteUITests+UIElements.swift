@@ -20,4 +20,8 @@ extension andIQuoteUITests {
     var leftSlideoutmenubarbuttonitemButton: XCUIElement {
         appNavigationBar.buttons["leftSlideOutMenuBarButtonItem"]
     }
+    
+    var quotesCollectionViewControllerCell: XCUIElement {
+        quotesCollectionViewController.scrollViews.children(matching: .cell).matching(identifier: "QuotesViewControllerCell").element(boundBy: 1)
+    }
 }
