@@ -69,7 +69,13 @@ extension andIQuoteUITests {
 extension andIQuoteUITests {
     private func uiActivityContentViewIsHittableFlow() throws {
         XCTAssert(activityContentViewNavigationBar.isHittable)
-        XCTAssert(activityContentViewNavigationBarCloseButton.isHittable)
-        activityContentViewNavigationBarCloseButton.tap()
+        
+        if isiPad {
+            app.tap()
+            XCTAssertFalse(activityContentViewNavigationBar.waitForExistence(timeout: 1))
+        } else {
+            XCTAssert(activityContentViewNavigationBarCloseButton.isHittable)
+            activityContentViewNavigationBarCloseButton.tap()
+        }
     }
 }
