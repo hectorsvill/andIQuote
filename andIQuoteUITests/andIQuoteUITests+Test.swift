@@ -62,7 +62,14 @@ extension andIQuoteUITests {
     func testSwipeUPresentsUIActivityContentViewIsHittable() throws {
         app.swipeUp()
         try uiActivityContentViewIsHittableFlow()
-        
+    }
+    
+    func testSlideMenuCollectionViewAniamation() throws {
+        try testLeftslideoutmenubarbuttonitemButton()
+        leftSlideoutmenubarbuttonitemButton.tap()
+        XCTAssert(slideMenuCollectionView.isHittable)
+        leftSlideoutmenubarbuttonitemButton.tap()
+        XCTAssertFalse(slideMenuCollectionView.isHittable)
     }
 }
 
