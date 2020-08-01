@@ -25,5 +25,8 @@ extension andIQuoteUITests {
         quotesCollectionViewController.scrollViews.children(matching: .cell).matching(identifier: "QuotesViewControllerCell").element(boundBy: 1)
     }
     
-
+    var quotesCollectionViewControllerCellShareButton: XCUIElement {
+        quotesCollectionViewControllerCell.buttons["Share"]        
+    }
+    
 }
