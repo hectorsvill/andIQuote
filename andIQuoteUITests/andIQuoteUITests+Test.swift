@@ -24,4 +24,12 @@ extension andIQuoteUITests {
     func testQuotesCollectionViewControllerCellIsHittable() throws {
         XCTAssert(quotesCollectionViewControllerCell.isHittable)
     }
+    
+    func testView100QuotesAutomation() {
+        for _ in 1...100 {
+            XCTAssert(quotesCollectionViewControllerCell.isHittable)
+            app.swipeLeft()
+        }
+    }
+    
 }

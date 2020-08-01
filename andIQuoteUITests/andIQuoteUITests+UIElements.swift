@@ -24,4 +24,6 @@ extension andIQuoteUITests {
     var quotesCollectionViewControllerCell: XCUIElement {
         quotesCollectionViewController.scrollViews.children(matching: .cell).matching(identifier: "QuotesViewControllerCell").element(boundBy: 1)
     }
+    
+
 }
