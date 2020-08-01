@@ -85,6 +85,24 @@ extension andIQuoteUITests {
         slideOutMenuCollectionViewHomeCell.tap()
         XCTAssert(quotesCollectionViewController.isHittable)
     }
+    
+    func testNavigateToBookMarksWithZeroBookmarks() throws {
+        let sheet = app.sheets["andIQuote"]
+        let sheetOKButton = sheet.buttons["OK"]
+        
+        try  navigateToSlideOutManu()
+        
+        XCTAssert(slideOutMenuCollectionBookmarkedViewCell.isHittable)
+        
+        slideOutMenuCollectionBookmarkedViewCell.tap()
+        
+        XCTAssert(sheet.isHittable)
+        XCTAssert(sheetOKButton.isHittable)
+        
+        sheetOKButton.tap()
+        
+        XCTAssert(quotesCollectionViewControllerCell.waitForExistence(timeout: 1))
+    }
 }
 
 extension andIQuoteUITests {
@@ -105,5 +123,6 @@ extension andIQuoteUITests {
         leftSlideoutmenubarbuttonitemButton.tap()
         XCTAssert(slideOutMenuCollectionView.isHittable)
     }
+    
     
 }
