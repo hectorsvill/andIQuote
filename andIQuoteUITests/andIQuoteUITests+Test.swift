@@ -37,7 +37,13 @@ extension andIQuoteUITests {
     }
     
     func testQuotesCollectionViewControllerCellBookmarkIsHittable() throws {
-        XCTAssert(quotesCollectionViewControllerCellBookmarkFill.isHittable || quotesCollectionViewControllerCellBookmark.isHittable)
+        XCTAssert(quotesCollectionViewControllerCellBookmark.isHittable)
     }
 
+    func testQuotesCollectionViewControllerCellBookmarkFillIsHittable() {
+        quotesCollectionViewControllerCellBookmark.tap()
+        XCTAssert(quotesCollectionViewControllerCellBookmarkFill.isHittable)
+        quotesCollectionViewControllerCellBookmarkFill.tap()
+        XCTAssert(quotesCollectionViewControllerCellBookmark.isHittable)
+    }
 }
