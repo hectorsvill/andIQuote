@@ -49,7 +49,27 @@ extension andIQuoteUITests {
         activityContentViewNavigationBar.buttons["Close"]
     }
     
-    var slideMenuCollectionView: XCUIElement {
+    var slideOutMenuCollectionView: XCUIElement {
         app.collectionViews["SlideMenuCollectionView"]
+    }
+    
+    var slideOutMenuCollectionViewHomeCell: XCUIElement {
+        slideOutMenuCollectionView.cells["Home"]
+    }
+    
+    var slideOutMenuCollectionBookmarkedViewCell: XCUIElement {
+        slideOutMenuCollectionView.cells["Bookmarked"]
+    }
+    
+    var slideOutMenuCollectionThemeViewCell: XCUIElement {
+        slideOutMenuCollectionView.cells["Theme"]
+    }
+    
+    var slideOutMenuCollectionReminderViewCell: XCUIElement {
+        slideOutMenuCollectionView.cells["Reminder"]
+    }
+    
+    var slideOutMenuCollectionSearchViewCell: XCUIElement {
+        slideOutMenuCollectionView.cells["Search"]
     }
 }
