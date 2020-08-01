@@ -45,11 +45,14 @@ extension SlideMenuViewController {
 
         let section = NSCollectionLayoutSection(group: group)
         let layout = UICollectionViewCompositionalLayout(section: section)
+        
         return layout
     }
     // MARK: configureHierarchy
     private func configureHierarchy() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createMainLayout())
+        collectionView.isAccessibilityElement = true
+        collectionView.accessibilityIdentifier = "SlideMenuCollectionView"
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = .systemGray6
         collectionView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.reuseIdentifier)
