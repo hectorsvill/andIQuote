@@ -46,4 +46,11 @@ extension andIQuoteUITests {
         quotesCollectionViewControllerCellBookmarkFill.tap()
         XCTAssert(quotesCollectionViewControllerCellBookmark.isHittable)
     }
+    
+    func testLeftRightSwipes() {
+        app.swipeLeft()
+        XCTAssert(quotesCollectionViewControllerCell.isHittable)
+        app.swipeRight()
+        XCTAssert(quotesCollectionViewControllerCell.isHittable)
+    }
 }
