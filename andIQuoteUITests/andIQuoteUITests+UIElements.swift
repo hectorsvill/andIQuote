@@ -29,4 +29,11 @@ extension andIQuoteUITests {
         quotesCollectionViewControllerCell.buttons["Share"]        
     }
     
+    var quotesCollectionViewControllerCellBookmark: XCUIElement {
+        quotesCollectionViewControllerCell.buttons["bookmark"]
+    }
+    
+    var quotesCollectionViewControllerCellBookmarkFill: XCUIElement {
+        quotesCollectionViewControllerCell.buttons["bookmark.fill"]
+    }
 }
