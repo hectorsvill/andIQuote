@@ -99,12 +99,12 @@ extension QuoteCollectionViewCell {
 
         let imageName = isBookmark ? "bookmark" : "bookmark.fill"
         let image = UIImage(systemName: imageName, withConfiguration: UIImage().mainViewSymbolConfig())!
+        bookmarkButton.accessibilityIdentifier = imageName
         bookmarkButton.setImage(image, for: .normal)
         isBookmark.toggle()
         quote.like.toggle()
-
-        let moc = CoreDataStack.shared.mainContext
-        do { try moc.save() } catch {
+        
+        do { try CoreDataStack.shared.mainContext.save() } catch {
             NSLog("\(error)")
         }
     }

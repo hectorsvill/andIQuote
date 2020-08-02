@@ -1,0 +1,27 @@
+{
+  "configurations" : [
+    {
+      "id" : "591AF7CB-083C-467A-A65A-B82956F98AE4",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "skippedTests" : [
+        "andIQuoteUITests\/testView100QuotesAutomation()"
+      ],
+      "target" : {
+        "containerPath" : "container:andIQuote.xcodeproj",
+        "identifier" : "3B778ACA24D49EAD000731B1",
+        "name" : "andIQuoteUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

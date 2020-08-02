@@ -54,10 +54,14 @@ extension QuotesViewController {
         collectionView = UICollectionView(frame: view.frame, collectionViewLayout: createLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-
         collectionView.delegate = self
         collectionView.backgroundColor = .systemBackground
+        collectionView.accessibilityIdentifier = "QuotesViewController"
+        collectionView.isAccessibilityElement = true
+        collectionView.accessibilityLabel = "Quotes collections. Find quotes in the middle of screen ,swipe left or right."
+        collectionView.accessibilityHint = "find quotes in the middle of screen, author will be right bellow the left sid of text"
         collectionView.register(QuoteCollectionViewCell.self, forCellWithReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier)
+        
         view.addSubview(collectionView)
 
         NSLayoutConstraint.activate([
@@ -66,16 +70,13 @@ extension QuotesViewController {
             collectionView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             collectionView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
         ])
-        
-        
-        collectionView.isAccessibilityElement = true
-        collectionView.accessibilityLabel = "Quotes collections. Find quotes in the middle of screen ,swipe left or right."
-        collectionView.accessibilityHint = "find quotes in the middle of screen, author will be right bellow the left sid of text"
     }
 
     private func configureDataSource() {
         dataSource = DataSource(collectionView: collectionView) { collectioView, indexPath, quote -> UICollectionViewCell? in
             guard let cell = collectioView.dequeueReusableCell(withReuseIdentifier: QuoteCollectionViewCell.reuseIdentifier, for: indexPath) as? QuoteCollectionViewCell else { return UICollectionViewCell() }
+            cell.isAccessibilityElement = true
+            cell.accessibilityIdentifier = "QuotesViewControllerCell"
             cell.backgroundColor = .systemBlue
             cell.quoteController = self.quoteController
             cell.quote = quote
@@ -92,6 +93,7 @@ extension QuotesViewController {
     private func configureNavigationButton() {
         navigationController?.navigationBar.barTintColor = collectionView.backgroundColor
         navigationController?.navigationBar.barStyle = .default
+        
         let menuImage = UIImage(systemName: "line.horizontal.3", withConfiguration: UIImage().mainViewSymbolConfig())
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: menuImage, landscapeImagePhone: nil, style: .plain, target: self, action: #selector(slideMenuButtonTapped))
         navigationItem.leftBarButtonItem?.tintColor = .label

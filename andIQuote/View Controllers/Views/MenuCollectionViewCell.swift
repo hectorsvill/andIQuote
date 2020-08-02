@@ -29,6 +29,7 @@ class MenuCollectionViewCell: UICollectionViewCell, SelfConfiguringCell {
     
     private func setupViews() {
         isAccessibilityElement = true
+        accessibilityIdentifier = slideMenuItem?.displayText
         accessibilityLabel = slideMenuItem?.displayText
         
         labelText.text = slideMenuItem?.displayText
