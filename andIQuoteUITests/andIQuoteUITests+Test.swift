@@ -87,19 +87,19 @@ extension andIQuoteUITests {
     }
     
     func testNavigateToBookMarksWithZeroBookmarks() throws {
-        let sheet = app.sheets["andIQuote"]
-        let sheetOKButton = sheet.buttons["OK"]
-        
         try  navigateToSlideOutManu()
         
         XCTAssert(slideOutMenuCollectionBookmarkedViewCell.isHittable)
         
         slideOutMenuCollectionBookmarkedViewCell.tap()
         
-        XCTAssert(sheet.isHittable)
-        XCTAssert(sheetOKButton.isHittable)
+        let alert: XCUIElement =  isiPad ? app.alerts["andIQuote"] : app.sheets["andIQuote"]
+        let alertOKButton = alert.buttons["OK"]
         
-        sheetOKButton.tap()
+        XCTAssert(alert.isHittable)
+        XCTAssert(alertOKButton.isHittable)
+        
+        alertOKButton.tap()
         
         XCTAssert(quotesCollectionViewControllerCell.waitForExistence(timeout: 1))
     }
