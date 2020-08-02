@@ -223,7 +223,8 @@ extension QuotesViewController {
         collectionView.reloadData()
 
         if bookmarkedQuotes.count == 0 {
-            let alertController = UIAlertController(title: "andIQuote", message: "Bookmarks are empty!", preferredStyle: .actionSheet)
+            let isiPad = UIDevice.current.userInterfaceIdiom == .pad
+            let alertController = UIAlertController(title: "andIQuote", message: "Bookmarks are empty!", preferredStyle: isiPad ? .alert : .actionSheet)
 
             alertController.addAction(UIAlertAction(title: "OK", style: .default){ _ in
                 self.quoteController.bookmarkViewIsActive = false
