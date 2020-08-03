@@ -60,7 +60,7 @@ extension andIQuoteUITests {
     }
     
     func testSwipeUPresentsUIActivityContentViewIsHittable() throws {
-        app.swipeUp()
+        quotesCollectionViewControllerCell.swipeUp()
         try uiActivityContentViewIsHittableFlow()
     }
     
@@ -86,7 +86,6 @@ extension andIQuoteUITests {
     
     func testNavigateToBookMarksWithZeroBookmarks() throws {
         try navigateTo(slideOutMenuCell: slideOutMenuCollectionBookmarkedViewCell)
-        
         XCTAssert(alert.isHittable)
         XCTAssert(alertOKButton.isHittable)
         
