@@ -132,12 +132,22 @@ extension andIQuoteUITests {
         XCTAssert(quotesCollectionViewControllerCell.waitForExistence(timeout: 1))
     }
     
-    func testThemeCollectionViewGreenCellIsHitable() throws {
+    func testThemeCollectionViewCellColorsIsHitable() throws {
         try testNavigateToThemeView()
-        XCTAssert(themeCollectionViewGreenCell.isHittable)
         
-        themeCollectionViewGreenCell.tap()
+        for color in AppColors.allCases {
+            XCTAssert(themeCollectionViewCell(with: color).isHittable)
+        }
     }
+    
+    func testSetThemeColorToBlue() throws {
+        try setTheme(to: .Blue)
+    }
+    
+    func testSetThemeColorToSystem() throws {
+        try setTheme(to: .Systembackground)
+    }
+    
 }
 
 extension andIQuoteUITests {
@@ -172,5 +182,13 @@ extension andIQuoteUITests {
         slideOutMenuCell.tap()
     }
     
+    private func setTheme(to color: AppColors) throws {
+        try testNavigateToThemeView()
+        XCTAssert(themeCollectionViewCell(with: color).isHittable)
+        
+        themeCollectionViewCell(with: color).tap()
+        
+        XCTAssert(quotesCollectionViewControllerCell.waitForExistence(timeout: 1))
+    }
    
 }
