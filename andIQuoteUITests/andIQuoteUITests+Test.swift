@@ -139,14 +139,51 @@ extension andIQuoteUITests {
             XCTAssert(themeCollectionViewCell(with: color).isHittable)
         }
     }
+        
+    func testSetThemeColorToSystem() throws {
+        try setTheme(to: .Systembackground)
+    }
+    
+    func testSetThemeColorToGreen() throws {
+        try setTheme(to: .Green)
+    }
     
     func testSetThemeColorToBlue() throws {
         try setTheme(to: .Blue)
     }
     
-    func testSetThemeColorToSystem() throws {
-        try setTheme(to: .Systembackground)
+    func testSetThemeColorToGray() throws {
+        try setTheme(to: .Gray)
     }
+    
+    func testSetThemeColorToPink() throws {
+        try setTheme(to: .Pink)
+    }
+    
+    func testSetThemeColorToRed() throws {
+        try setTheme(to: .Red)
+    }
+    
+    func testSetThemeColorToTeal() throws {
+        try setTheme(to: .Teal)
+    }
+    
+    func testSetThemeColorToIndigo() throws {
+        try setTheme(to: .Indigo)
+    }
+    
+    func testSetThemeColorToOrange() throws {
+        try setTheme(to: .Orange)
+    }
+    
+    func testSetThemeColorToYellow() throws {
+        try setTheme(to: .Yellow)
+    }
+    
+    func testSetThemeColorToPurple() throws {
+        try setTheme(to: .Purple)
+    }
+    
     
 }
 
