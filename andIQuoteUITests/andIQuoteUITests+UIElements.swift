@@ -9,8 +9,16 @@
 import XCTest
 
 extension andIQuoteUITests {
+    var keyboardIsHitable: Bool {
+        app.keyboards.element.isHittable
+    }
+    
     var isiPad: Bool {
         UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
+    var exitButton: XCUIElement {
+        app.buttons["Exit"]
     }
     
     var alert: XCUIElement {
@@ -101,8 +109,12 @@ extension andIQuoteUITests {
         dailyReminderViewControllerStackView.buttons["DailyReminderViewControllerFinishButton"]
     }
     
-    var SearchTableView: XCUIElement {
-        app.otherElements.children(matching: .table).matching(identifier: "SearchTableView").element
+    var searchTableView: XCUIElement {
+        app.tables["SearchTableView"]
+    }
+    
+    var searchViewSearchField: XCUIElement {
+        app.searchFields["SearchViewSearchBar"]
     }
 }
 
