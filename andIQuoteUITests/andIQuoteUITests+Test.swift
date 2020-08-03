@@ -89,12 +89,12 @@ extension andIQuoteUITests {
     }
     
     func testNavigateToHome() throws {
-        try navigateTo(slideOutMenuCell: slideOutMenuCollectionViewHomeCell)
+        try navigate(to: slideOutMenuCollectionViewHomeCell)
         XCTAssert(quotesCollectionViewController.isHittable)
     }
     
     func testNavigateToBookMarksWithZeroBookmarks() throws {
-        try navigateTo(slideOutMenuCell: slideOutMenuCollectionBookmarkedViewCell)
+        try navigate(to: slideOutMenuCollectionBookmarkedViewCell)
         try alertFlow()
         XCTAssert(quotesCollectionViewControllerCell.waitForExistence(timeout: 1))
     }
@@ -105,7 +105,7 @@ extension andIQuoteUITests {
         
         quotesCollectionViewControllerCellBookmark.tap()
         
-        try navigateTo(slideOutMenuCell: slideOutMenuCollectionBookmarkedViewCell)
+        try navigate(to: slideOutMenuCollectionBookmarkedViewCell)
         XCTAssert(bookmarkedQuoteCollectionViewCell.waitForExistence(timeout: 1))
         XCTAssert(bookMarkFillButton.isHittable)
         
@@ -142,7 +142,7 @@ extension andIQuoteUITests {
         XCTAssert(slideOutMenuCollectionView.isHittable)
     }
     
-    private func navigateTo(slideOutMenuCell: XCUIElement) throws {
+    private func navigate(to slideOutMenuCell: XCUIElement) throws {
         try navigateToSlideOutManu()
         XCTAssert(slideOutMenuCell.isHittable)
         slideOutMenuCell.tap()
