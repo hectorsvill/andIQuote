@@ -191,11 +191,27 @@ extension andIQuoteUITests {
     
     func testRemindersViewsFinishButton() throws {
         try testNavigateToRemindersView()
-        XCTAssert(dailyReminderViewControllerStackViewFinishButton.isHittable)
+        XCTAssert(dailyReminderStackViewFinishButton.isHittable)
         
-        dailyReminderViewControllerStackViewFinishButton.tap()
+        dailyReminderStackViewFinishButton.tap()
         
         XCTAssertFalse(dailyReminderViewControllerStackView.waitForExistence(timeout: 1))
+    }
+    
+    func testNavigateToSearchView() throws {
+        try navigate(to: slideOutMenuCollectionSearchViewCell)
+        XCTAssert(SearchTableView.isHittable)
+    }
+    
+    func testSearchViewExitButton() throws {
+        let exitButton = app.buttons["Exit"]
+
+        try testNavigateToSearchView()
+        XCTAssert(exitButton.isHittable)
+        
+        exitButton.tap()
+        
+        XCTAssertFalse(SearchTableView.waitForExistence(timeout: 1))
     }
 }
 
