@@ -122,8 +122,6 @@ extension andIQuoteUITests {
     }
     
     func testThemeViewExitButton() throws {
-        let exitButton = app.buttons["Exit"]
-        
         try testNavigateToThemeView()
         XCTAssert(exitButton.isHittable)
         
@@ -200,18 +198,31 @@ extension andIQuoteUITests {
     
     func testNavigateToSearchView() throws {
         try navigate(to: slideOutMenuCollectionSearchViewCell)
-        XCTAssert(SearchTableView.isHittable)
+        XCTAssert(searchTableView.isHittable)
     }
     
     func testSearchViewExitButton() throws {
-        let exitButton = app.buttons["Exit"]
-
         try testNavigateToSearchView()
         XCTAssert(exitButton.isHittable)
         
         exitButton.tap()
         
-        XCTAssertFalse(SearchTableView.waitForExistence(timeout: 1))
+        XCTAssertFalse(searchTableView.waitForExistence(timeout: 1))
+    }
+    
+    func testSearchViewSearhFieldIsHittable() throws {
+        try testNavigateToSearchView()
+        XCTAssert(searchViewSearchField.isHittable)
+        
+        searchViewSearchField.tap()
+    }
+    
+    func testSearchViewTapSearchFieldKeyboardIsHitable() throws {
+        try testSearchViewSearhFieldIsHittable()
+        
+        searchViewSearchField.tap()
+        
+        XCTAssert(keyboardIsHitable)
     }
 }
 
@@ -261,4 +272,5 @@ extension andIQuoteUITests {
         
         XCTAssert(quotesCollectionViewControllerCell.waitForExistence(timeout: 1))
     }
+    
 }
