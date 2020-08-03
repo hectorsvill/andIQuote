@@ -23,11 +23,16 @@ final class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureViews()
+    }
+    
+    private func configureViews() {
         view.backgroundColor = .systemBackground
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Exit", style: .done, target: self, action: #selector(exitView))
         navigationItem.leftBarButtonItem?.tintColor = .label
         navigationItem.rightBarButtonItem?.tintColor = .label
-
+        
         createViews()
         configureDatasource()
     }
@@ -47,6 +52,7 @@ final class SearchViewController: UIViewController {
         navigationItem.titleView = searchbar
         // tableView
         tableView = UITableView()
+        tableView.accessibilityIdentifier = "SearchTableView"
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.delegate = self
