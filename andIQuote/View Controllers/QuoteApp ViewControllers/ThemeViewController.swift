@@ -46,6 +46,8 @@ final class ThemeViewController: UIViewController {
 extension ThemeViewController {
     private func createCollectionView() {
         collectionView = UICollectionView(frame: view.frame, collectionViewLayout: createLayout())
+        collectionView.isAccessibilityElement = true
+        collectionView.accessibilityIdentifier = "ThemeCollectionView"
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = .systemGray6
         collectionView.delegate = self
