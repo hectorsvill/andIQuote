@@ -292,11 +292,10 @@ extension andIQuoteUITests {
     private func keyboardHandler(_ string: String) throws {
         for character in string.capitalized {
             let character = String(character)
-            
             let key = character == " " ? app.keys["space"] : app.keys[character]
             
             if !key.waitForExistence(timeout: 1) {
-                app.keys["shift"].tap()
+                isiPad ? (app.keys["shift"].tap()) : (app.buttons["shift"].tap())
             }
             
             XCTAssert(key.isHittable)
