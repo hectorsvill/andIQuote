@@ -114,6 +114,11 @@ extension andIQuoteUITests {
         try alertFlow()
         XCTAssert(quotesCollectionViewControllerCell.waitForExistence(timeout: 1))
     }
+    
+    func testNavigateToThemeView() throws {
+        try navigate(to: slideOutMenuCollectionThemeViewCell)
+        XCTAssert(themeCollectionView.isHittable)
+    }
 }
 
 extension andIQuoteUITests {
