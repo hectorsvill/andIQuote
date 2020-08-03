@@ -46,6 +46,8 @@ final class ThemeViewController: UIViewController {
 extension ThemeViewController {
     private func createCollectionView() {
         collectionView = UICollectionView(frame: view.frame, collectionViewLayout: createLayout())
+        collectionView.isAccessibilityElement = false
+        collectionView.accessibilityIdentifier = "ThemeCollectionView"
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = .systemGray6
         collectionView.delegate = self
@@ -55,9 +57,11 @@ extension ThemeViewController {
 
         dataSource = UICollectionViewDiffableDataSource<Section, Int>(collectionView: collectionView, cellProvider: { collectionView, indexPath, i -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+            let backgroundString = self.quoteController.backgrounds[indexPath.item]
             cell.isAccessibilityElement = true
-            cell.accessibilityLabel = self.quoteController.backgrounds[indexPath.item]
-            cell.setBackground(to:self.quoteController.backgrounds[indexPath.item])
+            cell.accessibilityIdentifier = "ThemeCollectionViewCell\(backgroundString.capitalized)"
+            cell.accessibilityLabel = backgroundString
+            cell.setBackground(to:backgroundString)
             cell.layer.borderColor = UIColor.white.cgColor
             cell.layer.borderWidth = 3
             cell.layer.cornerRadius = 23

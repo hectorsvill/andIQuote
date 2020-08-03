@@ -23,11 +23,16 @@ final class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureViews()
+    }
+    
+    private func configureViews() {
         view.backgroundColor = .systemBackground
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Exit", style: .done, target: self, action: #selector(exitView))
         navigationItem.leftBarButtonItem?.tintColor = .label
         navigationItem.rightBarButtonItem?.tintColor = .label
-
+        
         createViews()
         configureDatasource()
     }
@@ -40,6 +45,8 @@ final class SearchViewController: UIViewController {
         //  searchBar
         searchbar = UISearchBar()
         searchbar.translatesAutoresizingMaskIntoConstraints = false
+        searchbar.searchTextField.isAccessibilityElement = true
+        searchbar.searchTextField.accessibilityIdentifier = "SearchViewSearchBar"
         searchbar.sizeToFit()
         searchbar.placeholder = "Search by Author"
         searchbar.barTintColor = .label
@@ -47,6 +54,8 @@ final class SearchViewController: UIViewController {
         navigationItem.titleView = searchbar
         // tableView
         tableView = UITableView()
+        tableView.isAccessibilityElement = true
+        tableView.accessibilityIdentifier = "SearchTableView"
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.delegate = self
@@ -65,6 +74,8 @@ final class SearchViewController: UIViewController {
     private func configureDatasource() {
         dataSource = UITableViewDiffableDataSource<Section, String>(tableView: tableView, cellProvider: { tableView, indexPath, str -> UITableViewCell? in
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            cell.isAccessibilityElement = true
+            cell.accessibilityIdentifier = "SearchTableViewCell"
             let text = indexPath.row  == 0 ? "Anonymous" : str
             cell.textLabel?.text = text
             cell.accessoryType = .disclosureIndicator

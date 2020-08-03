@@ -13,9 +13,7 @@
   },
   "testTargets" : [
     {
-      "skippedTests" : [
-        "andIQuoteUITests\/testView100QuotesAutomation()"
-      ],
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:andIQuote.xcodeproj",
         "identifier" : "3B778ACA24D49EAD000731B1",

@@ -9,8 +9,24 @@
 import XCTest
 
 extension andIQuoteUITests {
+    var keyboardIsHitable: Bool {
+        app.keyboards.element.isHittable
+    }
+    
     var isiPad: Bool {
         UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
+    var exitButton: XCUIElement {
+        app.buttons["Exit"]
+    }
+    
+    var alert: XCUIElement {
+        isiPad ? app.alerts["andIQuote"] : app.sheets["andIQuote"]
+    }
+    
+    var alertOKButton: XCUIElement {
+        alert.buttons["OK"]
     }
     
     var quotesCollectionViewController: XCUIElement {
@@ -72,4 +88,37 @@ extension andIQuoteUITests {
     var slideOutMenuCollectionSearchViewCell: XCUIElement {
         slideOutMenuCollectionView.cells["Search"]
     }
+    
+    var bookmarkedQuoteCollectionViewCell: XCUIElement {
+        quotesCollectionViewController.cells["QuotesViewControllerCell"]
+    }
+    
+    var themeCollectionView: XCUIElement {
+        app.collectionViews["ThemeCollectionView"]
+    }
+    
+    func themeCollectionViewCell(with color: AppColors) -> XCUIElement {
+        themeCollectionView.cells["ThemeCollectionViewCell\(color.rawValue)"]
+    }
+    
+    var dailyReminderViewControllerStackView: XCUIElement {
+        app.otherElements.matching(identifier: "DailyReminderViewControllerStackView").element
+    }
+    
+    var dailyReminderStackViewFinishButton: XCUIElement {
+        dailyReminderViewControllerStackView.buttons["DailyReminderViewControllerFinishButton"]
+    }
+    
+    var searchTableView: XCUIElement {
+        app.tables["SearchTableView"]
+    }
+    
+    var searchTableViewCell: XCUIElement {
+        searchTableView.cells.matching(identifier: "SearchTableViewCell").element
+    }
+    
+    var searchViewSearchField: XCUIElement {
+        app.searchFields["SearchViewSearchBar"]
+    }
 }
+

@@ -35,7 +35,7 @@ extension QuotesViewController {
         fetchQotes()
     }
 
-    func loadLastIndex() {
+    private func loadLastIndex() {
         DispatchQueue.main.async {
             self.collectionView.scrollToItem(at: IndexPath(item: self.quoteController._quoteIndex, section: 0), at: .left, animated: false)
         }

@@ -20,17 +20,19 @@ final class DailyReminderViewController: UIViewController {
     var finishButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.accessibilityIdentifier = "DailyReminderViewControllerFinishButton"
+        button.accessibilityLabel = "Finish Button"
+        button.accessibilityHint = "Close Current View"
         button.setTitleColor(.label, for: .normal)
         button.setTitle("Finish", for: .normal)
         button.addTarget(self, action: #selector(finishButtonPressed), for: .touchUpInside)
-        button.accessibilityLabel = "Exit"
-        button.accessibilityHint = "Close Current View."
         return button
     }()
     // MARK: titleLabel
     var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.accessibilityIdentifier = "DailyReminderViewControllerTitleLabel"
         label.textColor = .label
         label.font = UIFont.boldSystemFont(ofSize: 28)
         
@@ -40,6 +42,7 @@ final class DailyReminderViewController: UIViewController {
     var descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.accessibilityIdentifier = "DailyReminderViewControllerDescriptionLabel"
         label.textColor = .label
         label.numberOfLines = 0
         label.font = UIFont.boldSystemFont(ofSize: 10)
@@ -80,6 +83,7 @@ final class DailyReminderViewController: UIViewController {
     // MARK: setupLayouts
     func setupLayouts() {
         titleLabel.text = "Daily Reminders"
+        view.isAccessibilityElement = false
         
         let splitView1 = createSplitView()
         let splitView2 = createSplitView()
@@ -91,8 +95,9 @@ final class DailyReminderViewController: UIViewController {
         let views = [finishButton, titleLabel, descriptionLabel, remindersView, splitView1,startView, splitView2, soundSelectView]
 
         let mainStackView = UIStackView(arrangedSubviews: views as! [UIView])
-
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
+//        mainStackView.isAccessibilityElement = true
+        mainStackView.accessibilityIdentifier = "DailyReminderViewControllerStackView"
         mainStackView.axis = .vertical
         mainStackView.alignment = .top
         mainStackView.spacing = 8
