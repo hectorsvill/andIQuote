@@ -184,7 +184,19 @@ extension andIQuoteUITests {
         try setTheme(to: .Purple)
     }
     
+    func testNavigateToRemindersView() throws {
+        try navigate(to: slideOutMenuCollectionReminderViewCell)
+        XCTAssert(dailyReminderViewControllerStackView.isHittable)
+    }
     
+    func testRemindersViewsFinishButton() throws {
+        try testNavigateToRemindersView()
+        XCTAssert(dailyReminderViewControllerStackViewFinishButton.isHittable)
+        
+        dailyReminderViewControllerStackViewFinishButton.tap()
+        
+        XCTAssertFalse(dailyReminderViewControllerStackView.waitForExistence(timeout: 1))
+    }
 }
 
 extension andIQuoteUITests {
@@ -200,32 +212,37 @@ extension andIQuoteUITests {
         
         if isiPad {
             app.tap()
+            
             XCTAssertFalse(activityContentViewNavigationBar.waitForExistence(timeout: 1))
         } else {
             XCTAssert(activityContentViewNavigationBarCloseButton.isHittable)
+            
             activityContentViewNavigationBarCloseButton.tap()
         }
     }
     
     private func navigateToSlideOutManu() throws {
         try testLeftslideoutmenubarbuttonitemButton()
+        
         leftSlideoutmenubarbuttonitemButton.tap()
+        
         XCTAssert(slideOutMenuCollectionView.isHittable)
     }
     
     private func navigate(to slideOutMenuCell: XCUIElement) throws {
         try navigateToSlideOutManu()
         XCTAssert(slideOutMenuCell.isHittable)
+        
         slideOutMenuCell.tap()
     }
     
     private func setTheme(to color: AppColors) throws {
+        let themeCollectionViewCellColor = themeCollectionViewCell(with: color)
         try testNavigateToThemeView()
-        XCTAssert(themeCollectionViewCell(with: color).isHittable)
+        XCTAssert(themeCollectionViewCellColor.isHittable)
         
-        themeCollectionViewCell(with: color).tap()
+        themeCollectionViewCellColor.tap()
         
         XCTAssert(quotesCollectionViewControllerCell.waitForExistence(timeout: 1))
     }
-   
 }
