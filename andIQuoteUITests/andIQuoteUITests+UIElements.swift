@@ -113,6 +113,10 @@ extension andIQuoteUITests {
         app.tables["SearchTableView"]
     }
     
+    var searchTableViewCell: XCUIElement {
+        searchTableView.cells.matching(identifier: "SearchTableViewCell").element
+    }
+    
     var searchViewSearchField: XCUIElement {
         app.searchFields["SearchViewSearchBar"]
     }

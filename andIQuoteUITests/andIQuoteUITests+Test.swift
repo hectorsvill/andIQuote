@@ -279,13 +279,10 @@ extension andIQuoteUITests {
     
     private func searchViewSearchField(search string: String) throws {
         try testSearchViewSearhFieldIsHittable()
-        
         try keyboardHandler(string)
         
-        let tableViewCell  = searchTableView.cells.matching(identifier: "SearchTableViewCell").element
-        
-        if tableViewCell.waitForExistence(timeout: 1) {
-            tableViewCell.tap()
+        if searchTableViewCell.waitForExistence(timeout: 1) {
+            searchTableViewCell.tap()
         }
     }
     
