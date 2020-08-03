@@ -13,6 +13,14 @@ extension andIQuoteUITests {
         UIDevice.current.userInterfaceIdiom == .pad
     }
     
+    var alert: XCUIElement {
+        isiPad ? app.alerts["andIQuote"] : app.sheets["andIQuote"]
+    }
+    
+    var alertOKButton: XCUIElement {
+        alert.buttons["OK"]
+    }
+    
     var quotesCollectionViewController: XCUIElement {
         app.collectionViews["QuotesViewController"]
     }

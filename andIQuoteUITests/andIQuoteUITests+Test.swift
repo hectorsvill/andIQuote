@@ -82,19 +82,16 @@ extension andIQuoteUITests {
     func testNavigateToHome() throws {
         try navigateToSlideOutManu()
         XCTAssert(slideOutMenuCollectionViewHomeCell.isHittable)
+        
         slideOutMenuCollectionViewHomeCell.tap()
+        
         XCTAssert(quotesCollectionViewController.isHittable)
     }
     
     func testNavigateToBookMarksWithZeroBookmarks() throws {
         try  navigateToSlideOutManu()
-        
         XCTAssert(slideOutMenuCollectionBookmarkedViewCell.isHittable)
-        
         slideOutMenuCollectionBookmarkedViewCell.tap()
-        
-        let alert: XCUIElement =  isiPad ? app.alerts["andIQuote"] : app.sheets["andIQuote"]
-        let alertOKButton = alert.buttons["OK"]
         
         XCTAssert(alert.isHittable)
         XCTAssert(alertOKButton.isHittable)
@@ -123,6 +120,7 @@ extension andIQuoteUITests {
         leftSlideoutmenubarbuttonitemButton.tap()
         XCTAssert(slideOutMenuCollectionView.isHittable)
     }
+    
     
     
 }
