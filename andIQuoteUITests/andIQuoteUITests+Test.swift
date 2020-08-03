@@ -101,6 +101,7 @@ extension andIQuoteUITests {
     
     func testNavigateToBookmarksWithOneBookmark() throws {
         let bookMarkFillButton = bookmarkedQuoteCollectionViewCell.buttons["bookmark.fill"]
+        
         XCTAssert(quotesCollectionViewControllerCellBookmark.isHittable)
         
         quotesCollectionViewControllerCellBookmark.tap()
@@ -118,6 +119,17 @@ extension andIQuoteUITests {
     func testNavigateToThemeView() throws {
         try navigate(to: slideOutMenuCollectionThemeViewCell)
         XCTAssert(themeCollectionView.isHittable)
+    }
+    
+    func testThemeViewExitButton() throws {
+        let exitButton = app.buttons["Exit"]
+        
+        try testNavigateToThemeView()
+        XCTAssert(exitButton.isHittable)
+        
+        exitButton.tap()
+        
+        XCTAssert(quotesCollectionViewControllerCell.waitForExistence(timeout: 1))
     }
 }
 
