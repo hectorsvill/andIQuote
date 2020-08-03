@@ -92,5 +92,9 @@ extension andIQuoteUITests {
     func themeCollectionViewCell(with color: AppColors) -> XCUIElement {
         themeCollectionView.cells["ThemeCollectionViewCell\(color.rawValue)"]
     }
+    
+    var dailyReminderViewControllerStackView: XCUIElement {
+        app.otherElements.matching(identifier: "DailyReminderViewControllerStackView").element
+    }
 }
 
