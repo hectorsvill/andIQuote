@@ -42,15 +42,21 @@ extension andIQuoteUITests {
 
     func testQuotesCollectionViewControllerCellBookmarkFillIsHittable() throws {
         quotesCollectionViewControllerCellBookmark.tap()
+        
         XCTAssert(quotesCollectionViewControllerCellBookmarkFill.isHittable)
+        
         quotesCollectionViewControllerCellBookmarkFill.tap()
+        
         XCTAssert(quotesCollectionViewControllerCellBookmark.isHittable)
     }
     
     func testLeftRightSwipes() throws {
         app.swipeLeft()
+        
         XCTAssert(quotesCollectionViewControllerCell.isHittable)
+        
         app.swipeRight()
+        
         XCTAssert(quotesCollectionViewControllerCell.isHittable)
     }
     
@@ -61,12 +67,15 @@ extension andIQuoteUITests {
     
     func testSwipeUPresentsUIActivityContentViewIsHittable() throws {
         quotesCollectionViewControllerCell.swipeUp()
+        
         try uiActivityContentViewIsHittableFlow()
     }
     
     func testSlideOutMenuCollectionViewAniamation() throws {
         try navigateToSlideOutManu()
+        
         leftSlideoutmenubarbuttonitemButton.tap()
+        
         XCTAssertFalse(slideOutMenuCollectionView.isHittable)
     }
     
@@ -86,16 +95,35 @@ extension andIQuoteUITests {
     
     func testNavigateToBookMarksWithZeroBookmarks() throws {
         try navigateTo(slideOutMenuCell: slideOutMenuCollectionBookmarkedViewCell)
-        XCTAssert(alert.isHittable)
-        XCTAssert(alertOKButton.isHittable)
+        try alertFlow()
+        XCTAssert(quotesCollectionViewControllerCell.waitForExistence(timeout: 1))
+    }
+    
+    func testNavigateToBookmarksWithOneBookmark() throws {
+        let bookMarkFillButton = bookmarkedQuoteCollectionViewCell.buttons["bookmark.fill"]
+        XCTAssert(quotesCollectionViewControllerCellBookmark.isHittable)
         
-        alertOKButton.tap()
+        quotesCollectionViewControllerCellBookmark.tap()
         
+        try navigateTo(slideOutMenuCell: slideOutMenuCollectionBookmarkedViewCell)
+        XCTAssert(bookmarkedQuoteCollectionViewCell.waitForExistence(timeout: 1))
+        XCTAssert(bookMarkFillButton.isHittable)
+        
+        bookMarkFillButton.tap()
+
+        try alertFlow()
         XCTAssert(quotesCollectionViewControllerCell.waitForExistence(timeout: 1))
     }
 }
 
 extension andIQuoteUITests {
+    private func alertFlow() throws {
+        XCTAssert(alert.isHittable)
+        XCTAssert(alertOKButton.isHittable)
+        
+        alertOKButton.tap()
+    }
+    
     private func uiActivityContentViewIsHittableFlow() throws {
         XCTAssert(activityContentViewNavigationBar.isHittable)
         
