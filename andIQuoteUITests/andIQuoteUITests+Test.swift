@@ -224,6 +224,10 @@ extension andIQuoteUITests {
         
         XCTAssert(keyboardIsHitable)
     }
+    
+    func testSearchViewSearch() throws {
+        try searchViewSearchField(search: "Bruce Lee")
+    }
 }
 
 extension andIQuoteUITests {
@@ -271,6 +275,35 @@ extension andIQuoteUITests {
         themeCollectionViewCellColor.tap()
         
         XCTAssert(quotesCollectionViewControllerCell.waitForExistence(timeout: 1))
+    }
+    
+    private func searchViewSearchField(search string: String) throws {
+        try testSearchViewSearhFieldIsHittable()
+        
+        try keyboardHandler(string)
+        
+        let tableViewCell  = searchTableView.cells.matching(identifier: "SearchTableViewCell").element
+        
+        if tableViewCell.waitForExistence(timeout: 1) {
+            tableViewCell.tap()
+        }
+    }
+    
+    private func keyboardHandler(_ string: String) throws {
+        for character in string.capitalized {
+            let character = String(character)
+            
+            let key = character == " " ? app.keys["space"] : app.keys[character]
+            
+            if !key.waitForExistence(timeout: 1) {
+                app.keys["shift"].tap()
+            }
+            
+            XCTAssert(key.isHittable)
+            
+            key.tap()
+        }
+        
     }
     
 }

@@ -14,28 +14,6 @@
   "testTargets" : [
     {
       "parallelizable" : true,
-      "skippedTests" : [
-        "andIQuoteUITests\/testAppNavigationBar()",
-        "andIQuoteUITests\/testLaunchPerformance()",
-        "andIQuoteUITests\/testLeftRightSwipes()",
-        "andIQuoteUITests\/testLeftslideoutmenubarbuttonitemButton()",
-        "andIQuoteUITests\/testNavigateToBookMarksWithZeroBookmarks()",
-        "andIQuoteUITests\/testNavigateToBookmarksWithOneBookmark()",
-        "andIQuoteUITests\/testNavigateToHome()",
-        "andIQuoteUITests\/testNavigateToThemeView()",
-        "andIQuoteUITests\/testQuoteViewControllerIsHittable()",
-        "andIQuoteUITests\/testQuotesCollectionViewControllerCellBookmarkFillIsHittable()",
-        "andIQuoteUITests\/testQuotesCollectionViewControllerCellBookmarkIsHittable()",
-        "andIQuoteUITests\/testQuotesCollectionViewControllerCellIsHittable()",
-        "andIQuoteUITests\/testQuotesCollectionViewControllerCellShareButtonIsHittable()",
-        "andIQuoteUITests\/testSlideMenuCollectionViewCellsIsHittable()",
-        "andIQuoteUITests\/testSlideOutMenuCollectionViewAniamation()",
-        "andIQuoteUITests\/testSwipeUPresentsUIActivityContentViewIsHittable()",
-        "andIQuoteUITests\/testThemeCollectionViewCellColorsIsHitable()",
-        "andIQuoteUITests\/testThemeViewExitButton()",
-        "andIQuoteUITests\/testUIActivityContentViewIsHittable()",
-        "andIQuoteUITests\/testView100QuotesAutomation()"
-      ],
       "target" : {
         "containerPath" : "container:andIQuote.xcodeproj",
         "identifier" : "3B778ACA24D49EAD000731B1",
