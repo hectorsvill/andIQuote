@@ -84,4 +84,8 @@ extension andIQuoteUITests {
     var slideOutMenuCollectionSearchViewCell: XCUIElement {
         slideOutMenuCollectionView.cells["Search"]
     }
+    
+    var themeCollectionView: XCUIElement {
+        app.collectionViews["ThemeCollectionView"]
+    }
 }
