@@ -89,5 +89,14 @@ extension andIQuoteUITests {
         app.collectionViews["ThemeCollectionView"]
     }
     
+    var themeCollectionViewGreenCell: XCUIElement {
+        themeCollectionViewCell(with: .Green)
+    }
     
+}
+
+private extension andIQuoteUITests {
+    func themeCollectionViewCell(with color: AppColors) -> XCUIElement {
+        themeCollectionView.cells["ThemeCollectionViewCell\(color.rawValue)"]
+    }
 }
