@@ -97,8 +97,12 @@ extension andIQuoteUITests {
         app.otherElements.matching(identifier: "DailyReminderViewControllerStackView").element
     }
     
-    var dailyReminderViewControllerStackViewFinishButton: XCUIElement {
+    var dailyReminderStackViewFinishButton: XCUIElement {
         dailyReminderViewControllerStackView.buttons["DailyReminderViewControllerFinishButton"]
+    }
+    
+    var SearchTableView: XCUIElement {
+        app.otherElements.children(matching: .table).matching(identifier: "SearchTableView").element
     }
 }
 
