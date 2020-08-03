@@ -131,6 +131,13 @@ extension andIQuoteUITests {
         
         XCTAssert(quotesCollectionViewControllerCell.waitForExistence(timeout: 1))
     }
+    
+    func testThemeCollectionViewGreenCellIsHitable() throws {
+        try testNavigateToThemeView()
+        XCTAssert(themeCollectionViewGreenCell.isHittable)
+        
+        themeCollectionViewGreenCell.tap()
+    }
 }
 
 extension andIQuoteUITests {
@@ -164,4 +171,6 @@ extension andIQuoteUITests {
         XCTAssert(slideOutMenuCell.isHittable)
         slideOutMenuCell.tap()
     }
+    
+   
 }
