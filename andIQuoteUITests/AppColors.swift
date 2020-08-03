@@ -7,9 +7,9 @@
 //
 
 import Foundation
-
+//["systemBackground", "green", "blue", "gray", "pink", "red", "teal", "indigo", "orange", "yellow", "purple",]
 enum AppColors: String, CaseIterable {
-    case systemBackground = "SystemBackground"
+    case Systembackground = "Systembackground"
     case Green = "Green"
     case Blue = "Blue"
     case Gray = "Gray"
