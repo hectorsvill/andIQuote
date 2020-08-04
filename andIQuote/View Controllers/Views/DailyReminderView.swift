@@ -99,9 +99,9 @@ class DailyReminderView: UIView {
         let _ = descriptionLabelText.popLast()
         let dailyReminderString = "DailyReminderView\(descriptionLabelText)Stack"
         stackView.accessibilityIdentifier = dailyReminderString
-        minusButton.accessibilityIdentifier = "\(dailyReminderString)MinusButton"
-        plussButton.accessibilityIdentifier = "\(dailyReminderString)PlussButton"
-        timePicker.accessibilityIdentifier = "\(dailyReminderString)TimePicker"
+        minusButton.accessibilityIdentifier = "MinusButton"
+        plussButton.accessibilityIdentifier = "PlussButton"
+        timePicker.accessibilityIdentifier = "TimePicker"
     }
     
     // MARK: setupDescriptionLabel
