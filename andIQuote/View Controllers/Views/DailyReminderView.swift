@@ -1,5 +1,5 @@
 //
-//  DailyReminderTableViewCell.swift
+//  DailyReminderView.swift
 //  andIQuote
 //
 //  Created by s on 1/26/20.
