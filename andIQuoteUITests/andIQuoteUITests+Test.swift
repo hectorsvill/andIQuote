@@ -194,6 +194,22 @@ extension andIQuoteUITests {
         XCTAssert(dailyReminderViewControllerStackView.staticTexts["Sound:"].isHittable)
     }
     
+    func testReminderViewReminderStackIsHittable() throws {
+        try testNavigateToRemindersView()
+        XCTAssert(dailyReminderViewRemindersStack.isHittable)
+        XCTAssert(dailyReminderViewRemindersStackMinusButton.isHittable)
+        XCTAssert(dailyReminderViewRemindersStackPlussButton.isHittable)
+    }
+    
+    func testReminderViewTimeStackIsHittable() throws {
+        try testNavigateToRemindersView()
+        XCTAssert(dailyReminderViewTimeStack.isHittable)
+        XCTAssert(dailyReminderViewTimeStackTimePicker.isHittable)
+        XCTAssert(dailyReminderViewTimeStackTimePickerHourWheel.isHittable)
+        XCTAssert(dailyReminderViewTimeStackTimePickerMinuteWheel.isHittable)
+        XCTAssert(dailyReminderViewTimeStackTimePickerTimeConventionWheel.isHittable)
+    }
+    
     func testRemindersViewsFinishButton() throws {
         try testNavigateToRemindersView()
         XCTAssert(dailyReminderStackViewFinishButton.isHittable)
