@@ -109,6 +109,18 @@ extension andIQuoteUITests {
         dailyReminderViewControllerStackView.buttons["DailyReminderViewControllerFinishButton"]
     }
     
+    var dailyReminderViewRemindersStack: XCUIElement {
+        app.otherElements.matching(identifier: "DailyReminderViewRemindersStack").element
+    }
+    
+    var dailyReminderViewRemindersStackMinusButton: XCUIElement {
+        dailyReminderViewRemindersStack.buttons["DailyReminderViewRemindersStackMinusButton"]
+    }
+    
+    var dailyReminderViewRemindersStackPlussButton: XCUIElement {
+        dailyReminderViewRemindersStack.buttons["DailyReminderViewRemindersStackPlussButton"]
+    }
+    
     var searchTableView: XCUIElement {
         app.tables["SearchTableView"]
     }
