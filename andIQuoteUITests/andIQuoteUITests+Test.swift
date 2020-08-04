@@ -185,8 +185,7 @@ extension andIQuoteUITests {
     func testNavigateToRemindersView() throws {
         try navigate(to: slideOutMenuCollectionReminderViewCell)
         XCTAssert(dailyReminderViewControllerStackView.isHittable)
-        // TODO: Find a way to acces springboard to handle Notification request
-        
+        app.tap() // to handle interruption monitor 
     }
     
     func testRemindersViewStackStaticTextIsHittable() throws {

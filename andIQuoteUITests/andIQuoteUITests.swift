@@ -15,6 +15,11 @@ class andIQuoteUITests: XCTestCase {
         app = XCUIApplication()
         app.launch()
         continueAfterFailure = false
+        
+        addUIInterruptionMonitor(withDescription: "andIQuote") { alert in
+            alert.buttons["Allow"].tap()
+            return true
+        }
     }
 
     override func tearDownWithError() throws {
