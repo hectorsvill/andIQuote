@@ -114,11 +114,31 @@ extension andIQuoteUITests {
     }
     
     var dailyReminderViewRemindersStackMinusButton: XCUIElement {
-        dailyReminderViewRemindersStack.buttons["DailyReminderViewRemindersStackMinusButton"]
+        dailyReminderViewRemindersStack.buttons["MinusButton"]
     }
     
     var dailyReminderViewRemindersStackPlussButton: XCUIElement {
-        dailyReminderViewRemindersStack.buttons["DailyReminderViewRemindersStackPlussButton"]
+        dailyReminderViewRemindersStack.buttons["PlussButton"]
+    }
+    
+    var dailyReminderViewTimeStack: XCUIElement {
+        app.otherElements.matching(identifier: "DailyReminderViewTimeStack").element
+    }
+    
+    var dailyReminderViewTimeStackTimePicker: XCUIElement {
+        dailyReminderViewTimeStack.pickers.element
+    }
+    
+    var dailyReminderViewTimeStackTimePickerHourWheel: XCUIElement {
+        dailyReminderViewTimeStackTimePicker.pickerWheels.element(boundBy: 0)
+    }
+    
+    var dailyReminderViewTimeStackTimePickerMinuteWheel: XCUIElement {
+        dailyReminderViewTimeStackTimePicker.pickerWheels.element(boundBy: 1)
+    }
+    
+    var dailyReminderViewTimeStackTimePickerTimeConventionWheel: XCUIElement {
+        dailyReminderViewTimeStackTimePicker.pickerWheels.element(boundBy: 2)
     }
     
     var searchTableView: XCUIElement {
