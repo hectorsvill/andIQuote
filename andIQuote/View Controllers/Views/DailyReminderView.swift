@@ -13,7 +13,7 @@ class DailyReminderView: UIView {
     var config: Int! { didSet { setupViews() } }
     var value = 0
     let _dailyReminderKey = "DailyReminderViewController.reminderNotificationData"
-    
+    var stackView: UIStackView! = nil
     // MARK: descriptionLabel
     var descriptionLabel: UILabel = {
         let label = UILabel()
@@ -62,8 +62,10 @@ class DailyReminderView: UIView {
         setupDescriptionLabel()
         setupSteperDescriptionText()
 
-        let stackView = UIStackView(arrangedSubviews: [descriptionLabel])
-
+        stackView = UIStackView(arrangedSubviews: [descriptionLabel])
+        
+        configureAccessibilityID()
+        
         if config == 1 {
             stackView.addArrangedSubview(timePicker)
         } else {
@@ -81,6 +83,7 @@ class DailyReminderView: UIView {
         
         addSubview(stackView)
         
+        
         NSLayoutConstraint.activate([
             timePicker.widthAnchor.constraint(equalToConstant: 175),
             steperDescriptionLabel.widthAnchor.constraint(equalToConstant: 80),
@@ -90,6 +93,17 @@ class DailyReminderView: UIView {
             stackView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -8),
         ])
     }
+    
+    private func configureAccessibilityID() {
+        var descriptionLabelText = descriptionLabel.text!
+        let _ = descriptionLabelText.popLast()
+        let dailyReminderString = "DailyReminderView\(descriptionLabelText)Stack"
+        stackView.accessibilityIdentifier = dailyReminderString
+        minusButton.accessibilityIdentifier = "\(dailyReminderString)MinusButton"
+        plussButton.accessibilityIdentifier = "\(dailyReminderString)PlussButton"
+        timePicker.accessibilityIdentifier = "\(dailyReminderString)TimePicker"
+    }
+    
     // MARK: setupDescriptionLabel
     private func setupDescriptionLabel() {
         guard let config = config else { return }
