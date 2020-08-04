@@ -141,6 +141,18 @@ extension andIQuoteUITests {
         dailyReminderViewTimeStackTimePicker.pickerWheels.element(boundBy: 2)
     }
     
+    var dailyReminderViewSoundStack: XCUIElement {
+        app.otherElements.matching(identifier: "DailyReminderViewSoundStack").element
+    }
+    
+    var dailyReminderViewSoundStackMinusButton: XCUIElement {
+        dailyReminderViewSoundStack.buttons["MinusButton"]
+    }
+    
+    var dailyReminderViewSoundStackPlusButton: XCUIElement {
+        dailyReminderViewSoundStack.buttons["PlussButton"]
+    }
+    
     var searchTableView: XCUIElement {
         app.tables["SearchTableView"]
     }
