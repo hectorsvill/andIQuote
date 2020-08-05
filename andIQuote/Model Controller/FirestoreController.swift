@@ -9,6 +9,8 @@
 import Foundation
 import Firebase
 
+fileprivate let debugLimit = 100
+
 class FirestoreController {
     var lastQueryDocumentSnapshot: QueryDocumentSnapshot?
     let db = Firestore.firestore()
@@ -19,7 +21,8 @@ class FirestoreController {
 extension FirestoreController {
     // MARK: fetchQuotesFromFireStore
     func fetchFirstQuotes(completion: @escaping ([Quote]?, Error?) -> ()) {
-        quoteQuery.getDocuments { snapShot, error in
+        #if DEBUG
+        quoteQuery.limit(to: debugLimit).getDocuments { snapShot, error in
             if let error = error {
                 completion(nil, error)
             }
@@ -28,6 +31,21 @@ extension FirestoreController {
             
             let quotes = self.fetchQuotesFromSnapShot(snapShot.documents)
 
+            if let last = snapShot.documents.last {
+                self.lastQueryDocumentSnapshot = last
+            }
+            
+            completion(quotes, nil)
+        }
+        #else
+        quoteQuery.getDocuments { snapShot, error in
+            if let error = error {
+                completion(nil, error)
+            }
+            
+            guard let snapShot = snapShot else { return }
+            
+            let quotes = self.fetchQuotesFromSnapShot(snapShot.documents)
             
             if let last = snapShot.documents.last {
                 self.lastQueryDocumentSnapshot = last
@@ -35,6 +53,7 @@ extension FirestoreController {
             
             completion(quotes, nil)
         }
+        #endif
     }
     // MARK: fetchQuotesFromSnapShotSaveToCoreData
     @discardableResult
