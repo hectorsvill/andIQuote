@@ -26,13 +26,6 @@ extension andIQuoteUITests {
         XCTAssert(quotesCollectionViewControllerCell.isHittable)
     }
     
-    func testView100QuotesAutomation() {
-        for _ in 0..<100 {
-            XCTAssert(quotesCollectionViewControllerCell.isHittable)
-            app.swipeLeft()
-        }
-    }
-    
     func testQuotesCollectionViewControllerCellShareButtonIsHittable() throws {
         XCTAssert(quotesCollectionViewControllerCellShareButton.isHittable)
     }
@@ -258,7 +251,7 @@ extension andIQuoteUITests {
     }
     
     func testSearchViewSearch() throws {
-        try searchViewSearchField(search: "Bruce Lee")
+        try searchViewSearchField(search: .Buddha)
     }
 }
 
@@ -309,9 +302,9 @@ extension andIQuoteUITests {
         XCTAssert(quotesCollectionViewControllerCell.waitForExistence(timeout: 1))
     }
     
-    private func searchViewSearchField(search string: String) throws {
+    private func searchViewSearchField(search searchName: SearchNames) throws {
         try testSearchViewSearhFieldIsHittable()
-        try keyboardHandler(string)
+        try keyboardHandler(searchName.rawValue)
         
         if searchTableViewCell.waitForExistence(timeout: 1) {
             searchTableViewCell.tap()
