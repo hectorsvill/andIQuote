@@ -222,20 +222,13 @@ extension andIQuoteUITests {
     }
     
     func testReminderViewSetReminderTo60SecondsFromNow() throws {
-        let notificationDate = Date(timeIntervalSince1970: Date().timeIntervalSince1970 + 60)
+        let timeInSeconds: Double = 60
         
         try testNavigateToRemindersView()
-        dailyReminderViewRemindersStackPlussButton.tap()
+        try remindersViewSetReminder(to: timeInSeconds)
+        try navigateToHomeScreen()
         
-        try dailyReminderViewTimeStackTimePickerAdjust(with: notificationDate)
-
-        dailyReminderViewSoundStackPlusButton.tap()
-        dailyReminderViewSoundStackPlusButton.tap()
-        dailyReminderStackViewFinishButton.tap()
-        
-        navigateToHomeScreen()
-        
-        XCTAssert(springboard.notificationShortLookView.waitForExistence(timeout: 70))
+        XCTAssert(springboard.notificationShortLookView.waitForExistence(timeout: timeInSeconds + 10))
         
         springboard.notificationShortLookView.tap()
         
@@ -277,7 +270,7 @@ extension andIQuoteUITests {
 }
 
 extension andIQuoteUITests {
-    private func navigateToHomeScreen() {
+    private func navigateToHomeScreen() throws {
         XCUIDevice.shared.press(XCUIDevice.Button.home)
     }
     
@@ -349,6 +342,17 @@ extension andIQuoteUITests {
             
             key.tap()
         }
+    }
+    
+    private func remindersViewSetReminder(to timeInSeconds: Double) throws  {
+        let notificationDate = Date(timeIntervalSince1970: Date().timeIntervalSince1970 + timeInSeconds)
+        
+        dailyReminderViewRemindersStackPlussButton.tap()
+    
+        try dailyReminderViewTimeStackTimePickerAdjust(with: notificationDate)
+        
+        dailyReminderViewSoundStackPlusButton.tap()
+        dailyReminderStackViewFinishButton.tap()
     }
     
     private func dailyReminderViewTimeStackTimePickerAdjust(with date: Date) throws {
