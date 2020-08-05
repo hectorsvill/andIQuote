@@ -11,6 +11,7 @@ import XCTest
 extension andIQuoteUITests {
     func testAppNavigationBar() throws {
         XCTAssert(appNavigationBar.isHittable)
+        XCTAssert(quotesCollectionViewController.waitForExistence(timeout: 2))
     }
     
     func testLeftslideoutmenubarbuttonitemButton() throws {
@@ -26,7 +27,7 @@ extension andIQuoteUITests {
     }
     
     func testView100QuotesAutomation() {
-        for _ in 1...100 {
+        for _ in 0..<100 {
             XCTAssert(quotesCollectionViewControllerCell.isHittable)
             app.swipeLeft()
         }
@@ -185,7 +186,7 @@ extension andIQuoteUITests {
     func testNavigateToRemindersView() throws {
         try navigate(to: slideOutMenuCollectionReminderViewCell)
         XCTAssert(dailyReminderViewControllerStackView.isHittable)
-        app.tap() // to handle interruption monitor 
+        app.tap() // to handle interruption monitor
     }
     
     func testRemindersViewStackStaticTextIsHittable() throws {
