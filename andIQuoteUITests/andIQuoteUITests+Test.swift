@@ -49,8 +49,11 @@ extension andIQuoteUITests {
         app.tap()
         
         try navigateToHomeScreen()
-        springboard.app.swipeRight()
-        XCTAssert(springboard.photosIcon.isHittable)
+        
+        if !springboard.photosIcon.isHittable {
+            springboard.app.swipeRight()
+        }
+        
         springboard.photosIcon.tap()
     }
     
