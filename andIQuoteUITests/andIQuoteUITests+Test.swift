@@ -39,22 +39,14 @@ extension andIQuoteUITests {
     
     func testQuotesCollectionViewControllerCellShareButtonShareImage() throws {
         let saveImageCell = app.cells["Save Image"]
-        
+
         quotesCollectionViewControllerCellShareButton.tap()
-        
+
         XCTAssert(activityContentViewNavigationBar.isHittable)
         XCTAssert(saveImageCell.isHittable)
-        
+
         saveImageCell.tap()
         app.tap()
-        
-        try navigateToHomeScreen()
-        
-        if !springboard.photosIcon.isHittable {
-            springboard.app.swipeRight()
-        }
-        
-        springboard.photosIcon.tap()
     }
     
     func testQuotesCollectionViewControllerCellShareButtonCopyImageToPastBoard() throws {
