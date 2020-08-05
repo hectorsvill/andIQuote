@@ -222,16 +222,12 @@ extension andIQuoteUITests {
     }
     
     func testReminderViewSetReminderTo60SecondsFromNow() throws {
+        let notificationDate = Date(timeIntervalSince1970: Date().timeIntervalSince1970 + 60)
+        
         try testNavigateToRemindersView()
         dailyReminderViewRemindersStackPlussButton.tap()
-
-        let date = Date(timeIntervalSince1970: Date().timeIntervalSince1970 + 60)
-        let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: date)
-        let minute = calendar.component(.minute, from: date)
-
-        dailyReminderViewTimeStackTimePickerHourWheel.adjust(toPickerWheelValue: String(hour))
-        dailyReminderViewTimeStackTimePickerMinuteWheel.adjust(toPickerWheelValue: String(minute))
+        
+        try dailyReminderViewTimeStackTimePickerAdjust(with: notificationDate)
 
         dailyReminderViewSoundStackPlusButton.tap()
         dailyReminderViewSoundStackPlusButton.tap()
@@ -239,7 +235,7 @@ extension andIQuoteUITests {
         
         navigateToHomeScreen()
         
-        XCTAssert(springboard.notificationShortLookView.waitForExistence(timeout: 60))
+        XCTAssert(springboard.notificationShortLookView.waitForExistence(timeout: 70))
         
         springboard.notificationShortLookView.tap()
         
@@ -355,4 +351,22 @@ extension andIQuoteUITests {
         }
     }
     
+    private func dailyReminderViewTimeStackTimePickerAdjust(with date: Date) throws {
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: date)
+        let hourString = hour <= 12 ? String(hour) : String(hour - 12)
+        
+        let minute = calendar.component(.minute, from: date)
+        let minuteString = minute <= 9 ? "0\(minute)" : "\(minute)"
+        let timeConvetionString = hour >= 12 ? "PM" : "AM"
+
+        XCTAssert(dailyReminderViewTimeStackTimePickerHourWheel.isHittable)
+        dailyReminderViewTimeStackTimePickerHourWheel.adjust(toPickerWheelValue: hourString)
+        
+        XCTAssert(dailyReminderViewTimeStackTimePickerMinuteWheel.isHittable)
+        dailyReminderViewTimeStackTimePickerMinuteWheel.adjust(toPickerWheelValue: minuteString)
+        
+        XCTAssert(dailyReminderViewTimeStackTimePickerTimeConventionWheel.isHittable)
+        dailyReminderViewTimeStackTimePickerTimeConventionWheel.adjust(toPickerWheelValue: timeConvetionString)
+    }
 }
