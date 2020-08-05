@@ -67,21 +67,4 @@ extension AppDelegate {
             }
         }
     }
-
-    private func setupNetworkMonitor() {
-        // note: read docs on on cashing data
-        let monitor = NWPathMonitor()
-        monitor.pathUpdateHandler =  { path in
-            if path.status == .satisfied {
-                print("internet connection 😀")
-            } else {
-                print("no internet 😳")
-            }
-            
-        }
-        
-        let queue = DispatchQueue(label: "Monitor")
-        monitor.start(queue: queue)
-    }
-    
 }
