@@ -18,4 +18,8 @@ class Springboard {
     var notificationShortLookView: XCUIElement {
         app.otherElements.matching(identifier: "NotificationShortLookView").element
     }
+    
+    var photosIcon: XCUIElement {
+        app.icons["Photos"]        
+    }
 }

@@ -16,9 +16,16 @@ class andIQuoteUITests: XCTestCase {
         app = XCUIApplication()
         app.launch()
         continueAfterFailure = false
-        
+        configureUIInterruptionMonitor()
+    }
+    
+    private func configureUIInterruptionMonitor() {
         addUIInterruptionMonitor(withDescription: "andIQuote") { alert in
-            alert.buttons["Allow"].tap()
+            if alert.buttons["Allow"].waitForExistence(timeout: 1) {
+                alert.buttons["Allow"].tap()
+            } else if alert.buttons["OK"].waitForExistence(timeout: 1){
+                alert.buttons["OK"].tap()
+            }
             return true
         }
     }
