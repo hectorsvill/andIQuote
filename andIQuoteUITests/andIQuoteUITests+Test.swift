@@ -221,6 +221,23 @@ extension andIQuoteUITests {
         XCTAssertFalse(dailyReminderViewControllerStackView.waitForExistence(timeout: 1))
     }
     
+    func testReminderViewSetReminderTo60SecondsFromNow() throws {
+        try testNavigateToRemindersView()
+        dailyReminderViewRemindersStackPlussButton.tap()
+        
+        let date = Date(timeIntervalSince1970: Date().timeIntervalSince1970 + 60)
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: date)
+        let minute = calendar.component(.minute, from: date)
+        
+        dailyReminderViewTimeStackTimePickerHourWheel.adjust(toPickerWheelValue: String(hour))
+        dailyReminderViewTimeStackTimePickerMinuteWheel.adjust(toPickerWheelValue: String(minute))
+        
+        dailyReminderViewSoundStackPlusButton.tap()
+        dailyReminderViewSoundStackPlusButton.tap()
+        dailyReminderStackViewFinishButton.tap()
+    }
+    
     func testNavigateToSearchView() throws {
         try navigate(to: slideOutMenuCollectionSearchViewCell)
         XCTAssert(searchTableView.isHittable)
