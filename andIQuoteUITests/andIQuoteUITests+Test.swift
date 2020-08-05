@@ -37,6 +37,23 @@ extension andIQuoteUITests {
         XCTAssert(quotesCollectionViewControllerCellShareButton.isHittable)
     }
     
+    func testQuotesCollectionViewControllerCellShareButtonShareImage() throws {
+        let saveImageCell = app.cells["Save Image"]
+        
+        quotesCollectionViewControllerCellShareButton.tap()
+        
+        XCTAssert(activityContentViewNavigationBar.isHittable)
+        XCTAssert(saveImageCell.isHittable)
+        
+        saveImageCell.tap()
+        app.tap()
+        
+        try navigateToHomeScreen()
+        springboard.app.swipeRight()
+        XCTAssert(springboard.photosIcon.isHittable)
+        springboard.photosIcon.tap()
+    }
+    
     func testQuotesCollectionViewControllerCellBookmarkIsHittable() throws {
         XCTAssert(quotesCollectionViewControllerCellBookmark.isHittable)
     }
