@@ -224,18 +224,26 @@ extension andIQuoteUITests {
     func testReminderViewSetReminderTo60SecondsFromNow() throws {
         try testNavigateToRemindersView()
         dailyReminderViewRemindersStackPlussButton.tap()
-        
+
         let date = Date(timeIntervalSince1970: Date().timeIntervalSince1970 + 60)
         let calendar = Calendar.current
         let hour = calendar.component(.hour, from: date)
         let minute = calendar.component(.minute, from: date)
-        
+
         dailyReminderViewTimeStackTimePickerHourWheel.adjust(toPickerWheelValue: String(hour))
         dailyReminderViewTimeStackTimePickerMinuteWheel.adjust(toPickerWheelValue: String(minute))
-        
+
         dailyReminderViewSoundStackPlusButton.tap()
         dailyReminderViewSoundStackPlusButton.tap()
         dailyReminderStackViewFinishButton.tap()
+        
+        navigateToHomeScreen()
+        
+        XCTAssert(springboard.notificationShortLookView.waitForExistence(timeout: 60))
+        
+        springboard.notificationShortLookView.tap()
+        
+        XCTAssert(quotesCollectionViewController.waitForExistence(timeout: 1))
     }
     
     func testNavigateToSearchView() throws {
@@ -273,6 +281,10 @@ extension andIQuoteUITests {
 }
 
 extension andIQuoteUITests {
+    private func navigateToHomeScreen() {
+        XCUIDevice.shared.press(XCUIDevice.Button.home)
+    }
+    
     private func alertFlow() throws {
         XCTAssert(alert.isHittable)
         XCTAssert(alertOKButton.isHittable)
