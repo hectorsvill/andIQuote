@@ -57,6 +57,20 @@ extension andIQuoteUITests {
         springboard.photosIcon.tap()
     }
     
+    func testQuotesCollectionViewControllerCellShareButtonCopyImageToPastBoard() throws {
+        let copyeCell = app.cells["Copy"]
+        
+        quotesCollectionViewControllerCellShareButton.tap()
+        
+        XCTAssert(activityContentViewNavigationBar.isHittable)
+        
+        XCTAssert(copyeCell.isHittable)
+        
+        copyeCell.tap()
+        
+        XCTAssertNotNil(UIPasteboard.general.hasImages)
+    }
+    
     func testQuotesCollectionViewControllerCellBookmarkIsHittable() throws {
         XCTAssert(quotesCollectionViewControllerCellBookmark.isHittable)
     }
