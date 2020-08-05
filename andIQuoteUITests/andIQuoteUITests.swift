@@ -9,7 +9,7 @@
 import XCTest
 
 class andIQuoteUITests: XCTestCase {
-    let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
+    let springboard = Springboard()
     var app:  XCUIApplication! = nil
 
     override func setUpWithError() throws {
