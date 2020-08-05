@@ -9,13 +9,6 @@
 import XCTest
 
 extension andIQuoteUITests {
-    func testandIQuoteIconIsHitable() throws {
-        try navigateToHomeScreen()
-        XCTAssert(springboard.andIQuoteIcon.isHittable)
-        springboard.andIQuoteIcon.tap()
-        XCTAssert(quotesCollectionViewController.waitForExistence(timeout: 1))
-    }
-    
     func testAppNavigationBar() throws {
         XCTAssert(appNavigationBar.isHittable)
         XCTAssert(quotesCollectionViewController.waitForExistence(timeout: 2))
