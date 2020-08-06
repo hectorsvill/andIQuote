@@ -2,12 +2,12 @@
 //  AppColors.swift
 //  andIQuoteUITests
 //
-//  Created by Hector Villasano on 8/3/20.
+//  Created by Hector Villasano on 8/6/20.
 //  Copyright © 2020 Hector. All rights reserved.
 //
 
 import Foundation
-//["systemBackground", "green", "blue", "gray", "pink", "red", "teal", "indigo", "orange", "yellow", "purple",]
+
 enum AppColors: String, CaseIterable {
     case Systembackground = "Systembackground"
     case Green = "Green"
@@ -21,4 +21,3 @@ enum AppColors: String, CaseIterable {
     case Yellow = "Yellow"
     case Purple = "Purple"
 }
-

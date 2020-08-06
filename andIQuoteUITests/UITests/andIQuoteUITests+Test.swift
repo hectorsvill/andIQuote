@@ -9,8 +9,17 @@
 import XCTest
 
 extension andIQuoteUITests {
+    func testLaunchPerformance() throws {
+        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
+            measure(metrics: [XCTOSSignpostMetric.applicationLaunch]) {
+                XCUIApplication().launch()
+            }
+        }
+    }
+    
     func testAppNavigationBar() throws {
         XCTAssert(appNavigationBar.isHittable)
+        XCTAssert(quotesCollectionViewController.waitForExistence(timeout: 2))
     }
     
     func testLeftslideoutmenubarbuttonitemButton() throws {
@@ -25,15 +34,16 @@ extension andIQuoteUITests {
         XCTAssert(quotesCollectionViewControllerCell.isHittable)
     }
     
-    func testView100QuotesAutomation() {
-        for _ in 1...100 {
-            XCTAssert(quotesCollectionViewControllerCell.isHittable)
-            app.swipeLeft()
-        }
-    }
-    
     func testQuotesCollectionViewControllerCellShareButtonIsHittable() throws {
         XCTAssert(quotesCollectionViewControllerCellShareButton.isHittable)
+    }
+    
+    func testQuotesCollectionViewControllerCellShareButtonSaveImage() throws {
+        try quotesCellShareButtonSaveImage()
+    }
+    
+    func testQuotesCollectionViewControllerCellShareButtonCopyImageToPasteBoard() throws {
+        try quotesCellShareButtonCopy()
     }
     
     func testQuotesCollectionViewControllerCellBookmarkIsHittable() throws {
@@ -185,6 +195,37 @@ extension andIQuoteUITests {
     func testNavigateToRemindersView() throws {
         try navigate(to: slideOutMenuCollectionReminderViewCell)
         XCTAssert(dailyReminderViewControllerStackView.isHittable)
+        app.tap() // to handle interruption monitor
+    }
+    
+    func testRemindersViewStackStaticTextIsHittable() throws {
+        try testNavigateToRemindersView()
+        XCTAssert(dailyReminderViewControllerStackView.staticTexts["Reminders:"].isHittable)
+        XCTAssert(dailyReminderViewControllerStackView.staticTexts["Time:"].isHittable)
+        XCTAssert(dailyReminderViewControllerStackView.staticTexts["Sound:"].isHittable)
+    }
+    
+    func testReminderViewReminderStackIsHittable() throws {
+        try testNavigateToRemindersView()
+        XCTAssert(dailyReminderViewRemindersStack.isHittable)
+        XCTAssert(dailyReminderViewRemindersStackMinusButton.isHittable)
+        XCTAssert(dailyReminderViewRemindersStackPlussButton.isHittable)
+    }
+    
+    func testReminderViewTimeStackIsHittable() throws {
+        try testNavigateToRemindersView()
+        XCTAssert(dailyReminderViewTimeStack.isHittable)
+        XCTAssert(dailyReminderViewTimeStackTimePicker.isHittable)
+        XCTAssert(dailyReminderViewTimeStackTimePickerHourWheel.isHittable)
+        XCTAssert(dailyReminderViewTimeStackTimePickerMinuteWheel.isHittable)
+        XCTAssert(dailyReminderViewTimeStackTimePickerTimeConventionWheel.isHittable)
+    }
+    
+    func testReminderViewSoundStackIsHittable() throws {
+        try testNavigateToRemindersView()
+        XCTAssert(dailyReminderViewSoundStack.isHittable)
+        XCTAssert(dailyReminderViewSoundStackMinusButton.isHittable)
+        XCTAssert(dailyReminderViewRemindersStackPlussButton.isHittable)
     }
     
     func testRemindersViewsFinishButton() throws {
@@ -194,6 +235,20 @@ extension andIQuoteUITests {
         dailyReminderStackViewFinishButton.tap()
         
         XCTAssertFalse(dailyReminderViewControllerStackView.waitForExistence(timeout: 1))
+    }
+    
+    func testReminderViewSetReminderTo60SecondsFromNow() throws {
+        let timeInSeconds: Double = 60
+        
+        try testNavigateToRemindersView()
+        try remindersViewSetReminder(to: timeInSeconds)
+        try navigateToHomeScreen()
+        
+        XCTAssert(springboard.notificationShortLookView.waitForExistence(timeout: timeInSeconds + 10))
+        
+        springboard.notificationShortLookView.tap()
+        
+        XCTAssert(quotesCollectionViewController.waitForExistence(timeout: 1))
     }
     
     func testNavigateToSearchView() throws {
@@ -226,11 +281,25 @@ extension andIQuoteUITests {
     }
     
     func testSearchViewSearch() throws {
-        try searchViewSearchField(search: "Bruce Lee")
+        try searchViewSearchField(search: .Buddha)
     }
 }
 
 extension andIQuoteUITests {
+    private func navigateQuotes(_ count: Int, direction: Direction) throws {
+        for _ in 0...count {
+            XCTAssert(quotesCollectionViewControllerCell.isHittable)
+            
+            direction == .left ?
+            quotesCollectionViewControllerCell.swipeLeft() :
+            quotesCollectionViewControllerCell.swipeRight()
+        }
+    }
+    
+    private func navigateToHomeScreen() throws {
+        XCUIDevice.shared.press(XCUIDevice.Button.home)
+    }
+    
     private func alertFlow() throws {
         XCTAssert(alert.isHittable)
         XCTAssert(alertOKButton.isHittable)
@@ -277,9 +346,9 @@ extension andIQuoteUITests {
         XCTAssert(quotesCollectionViewControllerCell.waitForExistence(timeout: 1))
     }
     
-    private func searchViewSearchField(search string: String) throws {
+    private func searchViewSearchField(search searchName: SearchNames) throws {
         try testSearchViewSearhFieldIsHittable()
-        try keyboardHandler(string)
+        try keyboardHandler(searchName.rawValue)
         
         if searchTableViewCell.waitForExistence(timeout: 1) {
             searchTableViewCell.tap()
@@ -299,7 +368,60 @@ extension andIQuoteUITests {
             
             key.tap()
         }
-        
     }
     
+    private func remindersViewSetReminder(to timeInSeconds: Double) throws  {
+        let notificationDate = Date(timeIntervalSince1970: Date().timeIntervalSince1970 + timeInSeconds)
+        
+        dailyReminderViewRemindersStackPlussButton.tap()
+    
+        try dailyReminderViewTimeStackTimePickerAdjust(with: notificationDate)
+        
+        dailyReminderViewSoundStackPlusButton.tap()
+        dailyReminderStackViewFinishButton.tap()
+    }
+    
+    private func dailyReminderViewTimeStackTimePickerAdjust(with date: Date) throws {
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: date)
+        let hourString = hour <= 12 ? String(hour) : String(hour - 12)
+        let minute = calendar.component(.minute, from: date)
+        let minuteString = minute <= 9 ? "0\(minute)" : "\(minute)"
+        let timeConvetionString = hour >= 12 ? "PM" : "AM"
+
+        XCTAssert(dailyReminderViewTimeStackTimePickerHourWheel.isHittable)
+        dailyReminderViewTimeStackTimePickerHourWheel.adjust(toPickerWheelValue: hourString)
+        
+        XCTAssert(dailyReminderViewTimeStackTimePickerMinuteWheel.isHittable)
+        dailyReminderViewTimeStackTimePickerMinuteWheel.adjust(toPickerWheelValue: minuteString)
+        
+        XCTAssert(dailyReminderViewTimeStackTimePickerTimeConventionWheel.isHittable)
+        dailyReminderViewTimeStackTimePickerTimeConventionWheel.adjust(toPickerWheelValue: timeConvetionString)
+    }
+    
+    private func quotesCellShareButtonSaveImage() throws {
+        let saveImageCell = app.cells["Save Image"]
+        
+        quotesCollectionViewControllerCellShareButton.tap()
+        
+        XCTAssert(activityContentViewNavigationBar.isHittable)
+        XCTAssert(saveImageCell.isHittable)
+        
+        saveImageCell.tap()
+        app.tap()
+    }
+    
+    private func quotesCellShareButtonCopy() throws {
+        let copyCell = app.cells["Copy"]
+        
+        quotesCollectionViewControllerCellShareButton.tap()
+        
+        XCTAssert(activityContentViewNavigationBar.isHittable)
+        
+        XCTAssert(copyCell.isHittable)
+        
+        copyCell.tap()
+        
+        XCTAssertNotNil(UIPasteboard.general.hasImages)
+    }
 }
