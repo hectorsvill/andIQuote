@@ -9,6 +9,14 @@
 import XCTest
 
 extension andIQuoteUITests {
+    func testLaunchPerformance() throws {
+        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
+            measure(metrics: [XCTOSSignpostMetric.applicationLaunch]) {
+                XCUIApplication().launch()
+            }
+        }
+    }
+    
     func testAppNavigationBar() throws {
         XCTAssert(appNavigationBar.isHittable)
         XCTAssert(quotesCollectionViewController.waitForExistence(timeout: 2))
@@ -30,30 +38,13 @@ extension andIQuoteUITests {
         XCTAssert(quotesCollectionViewControllerCellShareButton.isHittable)
     }
     
-    func testQuotesCollectionViewControllerCellShareButtonShareImage() throws {
-        let saveImageCell = app.cells["Save Image"]
-
-        quotesCollectionViewControllerCellShareButton.tap()
-
-        XCTAssert(activityContentViewNavigationBar.isHittable)
-        XCTAssert(saveImageCell.isHittable)
-
-        saveImageCell.tap()
-        app.tap()
+    
+    func testQuotesCollectionViewControllerCellShareButtonSaveImage() throws {
+        try quotesCellShareButtonSaveImage()
     }
     
-    func testQuotesCollectionViewControllerCellShareButtonCopyImageToPastBoard() throws {
-        let copyeCell = app.cells["Copy"]
-        
-        quotesCollectionViewControllerCellShareButton.tap()
-        
-        XCTAssert(activityContentViewNavigationBar.isHittable)
-        
-        XCTAssert(copyeCell.isHittable)
-        
-        copyeCell.tap()
-        
-        XCTAssertNotNil(UIPasteboard.general.hasImages)
+    func testQuotesCollectionViewControllerCellShareButtonCopyImageToPasteBoard() throws {
+        try quotesCellShareButtonCopy()
     }
     
     func testQuotesCollectionViewControllerCellBookmarkIsHittable() throws {
@@ -296,6 +287,16 @@ extension andIQuoteUITests {
 }
 
 extension andIQuoteUITests {
+    private func navigateQuotes(_ count: Int, direction: Direction) throws {
+        for _ in 0...count {
+            XCTAssert(quotesCollectionViewControllerCell.isHittable)
+            
+            direction == .left ?
+            quotesCollectionViewControllerCell.swipeLeft() :
+            quotesCollectionViewControllerCell.swipeRight()
+        }
+    }
+    
     private func navigateToHomeScreen() throws {
         XCUIDevice.shared.press(XCUIDevice.Button.home)
     }
@@ -385,7 +386,6 @@ extension andIQuoteUITests {
         let calendar = Calendar.current
         let hour = calendar.component(.hour, from: date)
         let hourString = hour <= 12 ? String(hour) : String(hour - 12)
-        
         let minute = calendar.component(.minute, from: date)
         let minuteString = minute <= 9 ? "0\(minute)" : "\(minute)"
         let timeConvetionString = hour >= 12 ? "PM" : "AM"
@@ -398,5 +398,31 @@ extension andIQuoteUITests {
         
         XCTAssert(dailyReminderViewTimeStackTimePickerTimeConventionWheel.isHittable)
         dailyReminderViewTimeStackTimePickerTimeConventionWheel.adjust(toPickerWheelValue: timeConvetionString)
+    }
+    
+    private func quotesCellShareButtonSaveImage() throws {
+        let saveImageCell = app.cells["Save Image"]
+        
+        quotesCollectionViewControllerCellShareButton.tap()
+        
+        XCTAssert(activityContentViewNavigationBar.isHittable)
+        XCTAssert(saveImageCell.isHittable)
+        
+        saveImageCell.tap()
+        app.tap()
+    }
+    
+    private func quotesCellShareButtonCopy() throws {
+        let copyCell = app.cells["Copy"]
+        
+        quotesCollectionViewControllerCellShareButton.tap()
+        
+        XCTAssert(activityContentViewNavigationBar.isHittable)
+        
+        XCTAssert(copyCell.isHittable)
+        
+        copyCell.tap()
+        
+        XCTAssertNotNil(UIPasteboard.general.hasImages)
     }
 }

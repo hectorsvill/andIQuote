@@ -19,6 +19,11 @@ class andIQuoteUITests: XCTestCase {
         configureUIInterruptionMonitor()
     }
     
+    override func tearDownWithError() throws {
+        app.terminate()
+        app = nil
+    }
+    
     private func configureUIInterruptionMonitor() {
         addUIInterruptionMonitor(withDescription: "andIQuote") { alert in
             if alert.buttons["Allow"].waitForExistence(timeout: 1) {
@@ -27,20 +32,6 @@ class andIQuoteUITests: XCTestCase {
                 alert.buttons["OK"].tap()
             }
             return true
-        }
-    }
-
-    override func tearDownWithError() throws {
-        app.terminate()
-        app = nil
-    }
-
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTOSSignpostMetric.applicationLaunch]) {
-                XCUIApplication().launch()
-            }
         }
     }
 }
