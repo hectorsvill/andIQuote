@@ -196,24 +196,24 @@
 			path = "Core Data";
 			sourceTree = "<group>";
 		};
-		3B2129C924DBCAEC00B9AEAD /* enums */ = {
+		3B2129C924DBCAEC00B9AEAD /* Enums */ = {
 			isa = PBXGroup;
 			children = (
 				3B2129C724DBCADA00B9AEAD /* Direction.swift */,
 				3B75577024D8895300261269 /* AppColors.swift */,
 				3B2129C324DB1DDB00B9AEAD /* SearchNames.swift */,
 			);
-			path = enums;
+			path = Enums;
 			sourceTree = "<group>";
 		};
-		3B2129CA24DBCB2000B9AEAD /* UiTests */ = {
+		3B2129CA24DBCB2000B9AEAD /* UITests */ = {
 			isa = PBXGroup;
 			children = (
 				3B778ACD24D49EAD000731B1 /* andIQuoteUITests.swift */,
 				3B83816024D4D9C80026962D /* andIQuoteUITests+Test.swift */,
 				3B83816424D4DA9B0026962D /* andIQuoteUITests+UIElements.swift */,
 			);
-			path = UiTests;
+			path = UITests;
 			sourceTree = "<group>";
 		};
 		3B2129CB24DBCB3600B9AEAD /* Models */ = {
@@ -227,8 +227,8 @@
 		3B778ACC24D49EAD000731B1 /* andIQuoteUITests */ = {
 			isa = PBXGroup;
 			children = (
-				3B2129CA24DBCB2000B9AEAD /* UiTests */,
-				3B2129C924DBCAEC00B9AEAD /* enums */,
+				3B2129CA24DBCB2000B9AEAD /* UITests */,
+				3B2129C924DBCAEC00B9AEAD /* Enums */,
 				3B2129CB24DBCB3600B9AEAD /* Models */,
 				3B778ACF24D49EAD000731B1 /* Info.plist */,
 				3B83815F24D4B18A0026962D /* TestPlan.xctestplan */,

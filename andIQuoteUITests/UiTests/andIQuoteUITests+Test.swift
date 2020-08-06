@@ -38,7 +38,6 @@ extension andIQuoteUITests {
         XCTAssert(quotesCollectionViewControllerCellShareButton.isHittable)
     }
     
-    
     func testQuotesCollectionViewControllerCellShareButtonSaveImage() throws {
         try quotesCellShareButtonSaveImage()
     }
