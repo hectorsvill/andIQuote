@@ -32,6 +32,7 @@
 		12D72AB123CD4554000BECDC /* Quote+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D72AB023CD4554000BECDC /* Quote+Convenience.swift */; };
 		3B2129C424DB1DDB00B9AEAD /* SearchNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2129C324DB1DDB00B9AEAD /* SearchNames.swift */; };
 		3B2129C624DB378500B9AEAD /* Springboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2129C524DB378500B9AEAD /* Springboard.swift */; };
+		3B2129C824DBCADA00B9AEAD /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2129C724DBCADA00B9AEAD /* Direction.swift */; };
 		3B5A273624ABBF630031809B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B5A273524ABBF630031809B /* GoogleService-Info.plist */; };
 		3B75577124D8895300261269 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B75577024D8895300261269 /* AppColors.swift */; };
 		3B778ACE24D49EAD000731B1 /* andIQuoteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B778ACD24D49EAD000731B1 /* andIQuoteUITests.swift */; };
@@ -104,6 +105,7 @@
 		1BB3DABBB0667D35BF858725 /* Pods-andIQuote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-andIQuote.release.xcconfig"; path = "Target Support Files/Pods-andIQuote/Pods-andIQuote.release.xcconfig"; sourceTree = "<group>"; };
 		3B2129C324DB1DDB00B9AEAD /* SearchNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNames.swift; sourceTree = "<group>"; };
 		3B2129C524DB378500B9AEAD /* Springboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Springboard.swift; sourceTree = "<group>"; };
+		3B2129C724DBCADA00B9AEAD /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		3B5A273524ABBF630031809B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Documents/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3B75577024D8895300261269 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		3B778ACB24D49EAD000731B1 /* andIQuoteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = andIQuoteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -194,17 +196,42 @@
 			path = "Core Data";
 			sourceTree = "<group>";
 		};
-		3B778ACC24D49EAD000731B1 /* andIQuoteUITests */ = {
+		3B2129C924DBCAEC00B9AEAD /* enums */ = {
+			isa = PBXGroup;
+			children = (
+				3B2129C724DBCADA00B9AEAD /* Direction.swift */,
+				3B75577024D8895300261269 /* AppColors.swift */,
+				3B2129C324DB1DDB00B9AEAD /* SearchNames.swift */,
+			);
+			path = enums;
+			sourceTree = "<group>";
+		};
+		3B2129CA24DBCB2000B9AEAD /* UiTests */ = {
 			isa = PBXGroup;
 			children = (
 				3B778ACD24D49EAD000731B1 /* andIQuoteUITests.swift */,
 				3B83816024D4D9C80026962D /* andIQuoteUITests+Test.swift */,
 				3B83816424D4DA9B0026962D /* andIQuoteUITests+UIElements.swift */,
+			);
+			path = UiTests;
+			sourceTree = "<group>";
+		};
+		3B2129CB24DBCB3600B9AEAD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3B2129C524DB378500B9AEAD /* Springboard.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3B778ACC24D49EAD000731B1 /* andIQuoteUITests */ = {
+			isa = PBXGroup;
+			children = (
+				3B2129CA24DBCB2000B9AEAD /* UiTests */,
+				3B2129C924DBCAEC00B9AEAD /* enums */,
+				3B2129CB24DBCB3600B9AEAD /* Models */,
 				3B778ACF24D49EAD000731B1 /* Info.plist */,
 				3B83815F24D4B18A0026962D /* TestPlan.xctestplan */,
-				3B75577024D8895300261269 /* AppColors.swift */,
-				3B2129C324DB1DDB00B9AEAD /* SearchNames.swift */,
-				3B2129C524DB378500B9AEAD /* Springboard.swift */,
 			);
 			path = andIQuoteUITests;
 			sourceTree = "<group>";
@@ -485,6 +512,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B2129C824DBCADA00B9AEAD /* Direction.swift in Sources */,
 				3B83816124D4D9C80026962D /* andIQuoteUITests+Test.swift in Sources */,
 				3B75577124D8895300261269 /* AppColors.swift in Sources */,
 				3B83816524D4DA9B0026962D /* andIQuoteUITests+UIElements.swift in Sources */,

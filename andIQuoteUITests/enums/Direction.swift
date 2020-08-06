@@ -1,5 +1,5 @@
 //
-//  SearchNames.swift
+//  Direction.swift
 //  andIQuoteUITests
 //
 //  Created by Hector Villasano on 8/5/20.
@@ -8,8 +8,6 @@
 
 import Foundation
 
-
-enum SearchNames: String, CaseIterable {
-    case Bruce_Lee = "Bruce Lee"
-    case Buddha = "Buddha"
+enum Direction {
+    case left, right
 }
