@@ -25,7 +25,7 @@ final class DailyReminderViewController: UIViewController {
         button.accessibilityHint = "Close Current View"
         button.setTitleColor(.label, for: .normal)
         button.setTitle("Finish", for: .normal)
-        button.addTarget(self, action: #selector(finishButtonPressed), for: .touchUpInside)
+        button.addTarget(DailyReminderViewController.self, action: #selector(finishButtonPressed), for: .touchUpInside)
         return button
     }()
     // MARK: titleLabel

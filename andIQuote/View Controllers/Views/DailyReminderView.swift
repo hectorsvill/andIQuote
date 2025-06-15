@@ -53,7 +53,7 @@ class DailyReminderView: UIView {
         timepicker.translatesAutoresizingMaskIntoConstraints = false
         timepicker.datePickerMode = .time
         timepicker.layer.cornerRadius = 4
-        timepicker.addTarget(self, action: #selector(timePickerValueChanged), for: .valueChanged)
+        timepicker.addTarget(DailyReminderView.self, action: #selector(timePickerValueChanged), for: .valueChanged)
         timepicker.isAccessibilityElement = true
         return timepicker
     }()
