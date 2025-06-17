@@ -10,9 +10,46 @@ import SwiftUI
 
 struct QuoteView: View {
     let quote = Quote(content: "Hello, World!", author: "Hector")
+    
     var body: some View {
-        QuoteCardView(quote: quote)
+        ScrollView(.horizontal, showsIndicators: false) {
+            LazyHStack(spacing: 0) {
+                ForEach(0..<110) { index in
+                    VStack {
+                        // MARK: card view with transition effect
+                        QuoteCardView(quote: quote)
+                            .scrollTransition { content, phase in
+                                content.scaleEffect(phase.isIdentity ? 1 : 0.8)
+                            }
+
+                    }
+                }
+            }
+            .scrollTargetLayout()
+        }
+        .scrollTargetBehavior(.viewAligned)
+        .contentMargins(.horizontal, (UIScreen.main.bounds.width - 300) / 2, for: .scrollContent)
+        
+        ScrollView(.horizontal, showsIndicators: false) {
+            LazyHStack(spacing: 0) {
+                ForEach(0..<110) { index in
+                    VStack {
+                        // MARK: card view with transition effect
+                        QuoteCardView(quote: quote)
+                            .scrollTransition { content, phase in
+                                content.scaleEffect(phase.isIdentity ? 1 : 0.8)
+                            }
+
+                    }
+                }
+            }
+            .scrollTargetLayout()
+        }
+        .scrollTargetBehavior(.viewAligned)	
+        .contentMargins(.horizontal, (UIScreen.main.bounds.width - 300) / 2, for: .scrollContent)
+        
     }
+        
 }
 
 #Preview {

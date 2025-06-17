@@ -59,7 +59,7 @@ struct QuoteCardView: View {
                 .frame(maxWidth: .infinity, alignment: .trailing)
             }
         }
-        .padding(30)
+        .padding(10)
     }
 }
 
