@@ -12,7 +12,7 @@ import SwiftUI
 struct andIQuoteAIApp: App {
     var body: some Scene {
         WindowGroup {
-            QuoteView().background(Color.gray.opacity(0.25))
+            QuoteView()
         }
     }
 }

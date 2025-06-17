@@ -8,11 +8,7 @@
 
 import SwiftUI
 
-struct Quote: Identifiable {
-    let id: UUID = UUID()
-    let content: String
-    let author: String
-}
+
 
 struct QuoteCardView: View {
     let quote: Quote
@@ -27,7 +23,7 @@ struct QuoteCardView: View {
                 Spacer()
                 
                 Text("\"\(quote.content)\"")
-                    .font(.system(size: 28, weight: .medium, design: .serif))
+                    .font(.system(size: 22, weight: .regular, design: .serif))
                     .multilineTextAlignment(.center)
                     .foregroundColor(.white)
                     .padding(.horizontal)
@@ -42,14 +38,14 @@ struct QuoteCardView: View {
                 HStack {
                     Button(action: { print("Share button tapped") }) {
                         Image(systemName: "square.and.arrow.up")
-                            .font(.title)
+                            .font(.title2)
                             .foregroundColor(.white)
                             .padding()
                     }
                     
                     Button(action: { print("Favorite button tapped") }) {
                         Image(systemName: "bookmark")
-                            .font(.title)
+                            .font(.title2)
                             .foregroundColor(.white)
                             .padding()
                     }
@@ -59,7 +55,7 @@ struct QuoteCardView: View {
                 .frame(maxWidth: .infinity, alignment: .trailing)
             }
         }
-        .padding(10)
+//        .padding(30)
     }
 }
 
