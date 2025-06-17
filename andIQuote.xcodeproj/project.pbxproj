@@ -135,8 +135,18 @@
 		E7BFE5C6BC44102ACCA820D8 /* Pods_andIQuote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_andIQuote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		170D000B2E00F01000483528 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				QuoteView.swift,
+			);
+			target = 170DFFFD2E00EF2500483528 /* andIQuoteAI */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		170DFFF02E00EE5100483528 /* andIQuoteAI */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = andIQuoteAI; sourceTree = "<group>"; };
+		170DFFF02E00EE5100483528 /* andIQuoteAI */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (170D000B2E00F01000483528 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = andIQuoteAI; sourceTree = "<group>"; };
 		170DFFFF2E00EF2500483528 /* andIQuoteAI */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = andIQuoteAI; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
