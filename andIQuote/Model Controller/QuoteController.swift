@@ -18,10 +18,12 @@ final class QuoteController {
     var menuNavigationIsExpanded = false
     var bookmarkViewIsActive = false
 
-    private(set) var _quoteIndex = UserDefaults.standard.integer(forKey: "QuoteController._quoteIndex") // current index of quote
+    // current index of quote
+    private(set) var _quoteIndex = UserDefaults.standard.integer(forKey: "QuoteController._quoteIndex")
 
     let backgrounds = ["systemBackground", "green", "blue", "gray", "pink", "red", "teal", "indigo", "orange", "yellow", "purple",]
-    private(set) var _backgroundIndex = UserDefaults.standard.integer(forKey: "QuoteController.setBackgroundIndex") // current index of background
+    // current index of background
+    private(set) var _backgroundIndex = UserDefaults.standard.integer(forKey: "QuoteController.setBackgroundIndex")
     private(set) var quoteUser: QuoteUser?
 
     var remindersCount = UserDefaults.standard.integer(forKey: "DailyReminderViewController.reminderNotificationData" + "Reminders:")

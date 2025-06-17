@@ -64,8 +64,10 @@ extension MainContainerViewController: HomeControllerViewDelegate {
         } else {
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
                 self.centerNavViewController.view.frame.origin.x = 0
+//                NSLog(String(describing: "[MainContainerViewController]centerNavViewController: \(self.centerNavViewController.view.frame.width)"))
             }){ _ in
                 self.createView(with: index)
+                NSLog(String(describing: "[MainContainerViewController]createView: \(index)"))
             }
         }
     }
