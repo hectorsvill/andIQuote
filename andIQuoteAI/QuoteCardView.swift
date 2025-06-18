@@ -8,35 +8,33 @@
 
 import SwiftUI
 
-
-
 struct QuoteCardView: View {
     let quote: Quote
     let index: Int
     let onLongPress: (Int) -> Void
-    
+
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 25.0, style: .continuous)
                 .fill(Color.green)
-            
+
             VStack(spacing: 20) {
-                
+
                 Spacer()
-                
+
                 Text("\"\(quote.content)\"")
                     .font(.system(size: 22, weight: .regular, design: .serif))
                     .multilineTextAlignment(.center)
                     .foregroundColor(.white)
                     .padding(.horizontal)
-                
+
                 Text("— \(quote.author)")
                     .font(.system(size: 20, weight: .light, design: .serif))
                     .italic()
                     .foregroundColor(.white.opacity(0.9))
-                
+
                 Spacer()
-                
+
                 HStack {
                     Button(action: { print("Share button tapped") }) {
                         Image(systemName: "square.and.arrow.up")
@@ -44,7 +42,7 @@ struct QuoteCardView: View {
                             .foregroundColor(.white)
                             .padding()
                     }
-                    
+
                     Button(action: { print("Favorite button tapped") }) {
                         Image(systemName: "bookmark")
                             .font(.title2)
@@ -53,7 +51,7 @@ struct QuoteCardView: View {
                     }
                 }
                 .padding(.leading)
-//                .background(.red)
+                //                .background(.red)
                 .frame(maxWidth: .infinity, alignment: .trailing)
             }
         }
