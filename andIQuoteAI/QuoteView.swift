@@ -9,11 +9,12 @@
 import SwiftUI
 
 struct QuoteView: View {
-    let quote = Quote(content: "Strive not to be a success, but rather to be of value.", author: "Albert Einstein")
+    private let quote = Quote(content: "Strive not to be a success, but rather to be of value.", author: "Albert Einstein")
+    private let cardWidth = UIScreen.main.bounds.width * 0.8 //80%
+    
+    
     
     var body: some View {
-        
-        
         VStack {
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: 0) {
@@ -21,38 +22,21 @@ struct QuoteView: View {
                         VStack {
                             // MARK: card view with transition effect
                             QuoteCardView(quote: quote)
-                                .frame(width: 300)
-                                .scrollTransition { content, phase in		
-                                    content.scaleEffect(phase.isIdentity ? 1 : 0.8)
+                                .frame(width: cardWidth, height: cardWidth * 1.2) // aspect ratio
+                                .containerRelativeFrame(.horizontal)
+                                .scrollTransition { content, phase in
+                                    content
+                                        .scaleEffect(phase.isIdentity ? 1 : 0)
+                                        .opacity( phase.isIdentity ? 1 : 0.6) // opacity effect
                                 }
-                            
                         }
                     }
                 }
                 .scrollTargetLayout()
             }
             .scrollTargetBehavior(.viewAligned)
-            .contentMargins(.horizontal, (UIScreen.main.bounds.width - 300) / 2, for: .scrollContent)
+            .contentMargins(.horizontal, (UIScreen.main.bounds.width - cardWidth) / 2, for: .scrollContent)
         }
-        
-        ScrollView(.horizontal, showsIndicators: false) {
-            LazyHStack(spacing: 0) {
-                ForEach(0..<110) { index in
-                    VStack {
-                        // MARK: card view with transition effect
-                        QuoteCardView(quote: quote)
-                            .frame(width: 300)
-                            .scrollTransition { content, phase in
-                                content.scaleEffect(phase.isIdentity ? 1 : 0.8)
-                            }
-                        
-                    }
-                }
-            }
-            .scrollTargetLayout()
-        }
-        .scrollTargetBehavior(.viewAligned)
-        .contentMargins(.horizontal, (UIScreen.main.bounds.width - 300) / 2, for: .scrollContent)
     }
 }
 
