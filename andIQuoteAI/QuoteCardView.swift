@@ -12,6 +12,8 @@ import SwiftUI
 
 struct QuoteCardView: View {
     let quote: Quote
+    let index: Int
+    let onLongPress: (Int) -> Void
     
     var body: some View {
         ZStack {
@@ -55,11 +57,14 @@ struct QuoteCardView: View {
                 .frame(maxWidth: .infinity, alignment: .trailing)
             }
         }
-//        .padding(30)
+        .clipped()
+        .onLongPressGesture {
+            onLongPress(index)
+        }
     }
 }
 
-#Preview {
-    let quote = Quote(content: "The future belongs to those who believe in the possibilities of tomorrow.", author: "Franklin D. Roosevelt")
-    QuoteCardView(quote: quote)
-}
+//#Preview {
+//    let quote = Quote(content: "The future belongs to those who believe in the possibilities of tomorrow.", author: "Franklin D. Roosevelt")
+//    QuoteCardView(quote: quote, index: 0, onLongPress: { _ in })
+//}
