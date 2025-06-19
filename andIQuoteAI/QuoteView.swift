@@ -9,7 +9,8 @@
 import SwiftUI
 
 struct QuoteView: View {
-    private let quote = Quote(
+    private let quote = QuoteDetail(
+        id: UUID(),
         content: "Strive not to be a success, but rather to be of value.",
         author: "Albert Einstein"
     )

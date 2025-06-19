@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct QuoteCardView: View {
-    let quote: Quote
+    let quote: QuoteDetail
     let index: Int
     let onLongPress: (Int) -> Void
 
