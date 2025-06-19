@@ -11,42 +11,15 @@ import SwiftUI
 struct QuoteView: View {
     @StateObject private var quoteController = QuoteController()
     @State private var currentQuote: QuoteDetail?
-    private let cardWidth = UIScreen.main.bounds.width * 0.8  //80%
+    private let cardWidth = UIScreen.main.bounds.width * 0.9  //80%
     @State private var fullScreenIndex: Int? = nil
-
+    
     var body: some View {
         ZStack {
             VStack {
-                ScrollViewReader { proxy in
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        LazyHStack(spacing: 0) {
-                            ForEach(Array(quoteController.quotes.enumerated()), id: \.element.id) { index, quote in
-                                // MARK: card view with transition effect
-                                QuoteCardView(quote: quote, index: index) { index in
-                                    self.fullScreenIndex = index
-                                    self.currentQuote = quote
-                                }
-                                .clipped()
-                                .frame(width: cardWidth, height: cardWidth * 1.2)  // aspect ratio
-                                .containerRelativeFrame(.horizontal)
-                                .scrollTransition { content, phase in
-                                    content
-                                        .scaleEffect(phase.isIdentity ? 1 : 0)
-                                        .opacity(phase.isIdentity ? 1 : 0.9)  // opacity effect
-                                }
-                                
-                            }
-                            .scrollTargetLayout()
-                        }
-                        .scrollTargetBehavior(.viewAligned)
-                        .contentMargins(
-                            .horizontal,
-                            (UIScreen.main.bounds.width - cardWidth) / 2,
-                            for: .scrollContent
-                        )
-                    }
-                    .ignoresSafeArea(.all)
-                }
+                
+                scrollViewReaderQuotes()
+                
                 if let fullScreenIndex = fullScreenIndex {
                     QuoteCardView(quote: currentQuote!, index: fullScreenIndex) { _ in
                         self.fullScreenIndex = nil
@@ -67,4 +40,39 @@ struct QuoteView: View {
             
         }
     }
+    
+    fileprivate func scrollViewReaderQuotes() -> ScrollViewReader<some View> {
+        return ScrollViewReader { proxy in
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack(spacing: 0) {
+                    ForEach(Array(quoteController.quotes.enumerated()), id: \.element.id) { index, quote in
+                        // MARK: card view with transition effect
+                        QuoteCardView(quote: quote, index: index) { index in
+                            self.fullScreenIndex = index
+                            self.currentQuote = quote
+                        }
+                        .ignoresSafeArea(.all)
+                        .frame(width: cardWidth, height: cardWidth * 1.2)  // aspect ratio
+                        .containerRelativeFrame(.horizontal)
+                        .scrollTransition { content, phase in
+                            content
+                                .scaleEffect(phase.isIdentity ? 1 : 0)
+                                .opacity(phase.isIdentity ? 1 : 0.9)  // opacity effect
+                        }
+                        
+                    }
+                    .scrollTargetLayout()
+                }
+                .ignoresSafeArea(.all)
+                .scrollTargetBehavior(.viewAligned)
+                .contentMargins(
+                    .horizontal,
+                    (UIScreen.main.bounds.width - cardWidth) / 2,for: .scrollContent
+                )
+            }
+            .clipped()
+            .ignoresSafeArea(.all)
+        }
+    }
+
 }
